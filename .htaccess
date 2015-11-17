@@ -7,6 +7,8 @@
 # Don't show directory listings for URLs which map to a directory.
 Options -Indexes
 
+Options -MultiViews
+
 # Follow symbolic links in this directory.
 Options +FollowSymLinks
 
@@ -92,7 +94,7 @@ DirectoryIndex index.php index.html index.htm
   #
   # If your site is running in a VirtualDocumentRoot at http://example.com/,
   # uncomment the following line:
-  RewriteBase /cpm/
+  #RewriteBase /cpm/
 
   # Pass all requests not referring directly to files in the filesystem to
   # index.php. Clean URLs are handled in drupal_environment_initialize().
@@ -127,6 +129,4 @@ DirectoryIndex index.php index.html index.htm
   </IfModule>
 </IfModule>
 
-php_value upload_max_filesize 500M
-php_value post_max_size 500M
 

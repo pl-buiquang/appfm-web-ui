@@ -96,7 +96,7 @@ class FormElement{
 
   public function __construct(&$formsection,$name,$title = "",$type ="",$values = array(),$default_value = NULL,$required = false,$classes = ""){
     $this->formsection = &$formsection;
-    $name = toMachineName($name);
+    $name = Utils::toMachineName($name);
     if(FALSE === array_search($name,$formsection->form->formitemnames)){
       $formsection->form->formitemnames[]=$name;
       $this->name = $name;
@@ -286,7 +286,7 @@ class Form{
   public $enctype=NULL;
 
   public function __construct($name="default"){
-    $name = toMachineName($name);
+    $name = Utils::toMachineName($name);
     if(FALSE === array_search($name,self::$forms)){
       self::$forms[]=$name;
       $this->name = $name;

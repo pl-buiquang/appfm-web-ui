@@ -3,8 +3,26 @@ body{
 }
 
 #demo-container{
-  margin: 200px auto;
+  margin: 80px auto;
 }
 
 .sentence{
+}
+
+.item-result-true{
+  background-image: url('../img/Accept-icon.png');
+  background-repeat:no-repeat; 
+  min-height: 96px;
+  min-width: 96px;
+  
+
+}
+
+.item-result-false{
+  background-image: url('../img/Error-icon.png');
+  background-repeat:no-repeat; 
+  min-height: 96px;
+  min-width: 96px;
+padding-left: 106px;
+vertical-align: middle;
 }

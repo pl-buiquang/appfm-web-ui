@@ -3,7 +3,6 @@
   class Utils{
 
     public static function validateMail($mail){
-      Logger::Log($mail);
       return (!filter_var($mail, FILTER_VALIDATE_EMAIL) === false);
     }
 

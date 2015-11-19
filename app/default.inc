@@ -23,7 +23,7 @@ function default_entry($args){
 function default_404($args){
   global $page;
 
-  $content = "shit";
+  $content = "404";
 
 
   $page->addToBody($content);

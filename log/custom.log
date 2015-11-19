@@ -377,3 +377,3875 @@
 [17/11/2015 - 17:43:45] (10.0.2.2|)  => demo
 [17/11/2015 - 17:43:54] (10.0.2.2|)  => demo/t1
 [17/11/2015 - 17:43:57] (10.0.2.2|)  => demo
+[18/11/2015 - 13:51:18] (::1|)  => demo
+[18/11/2015 - 13:51:19] (::1|)  => favicon.ico
+[18/11/2015 - 13:51:19] (::1|)  => favicon.ico
+[18/11/2015 - 13:51:23] (::1|)  => demo
+[18/11/2015 - 13:51:35] (::1|)  => demo
+[18/11/2015 - 13:51:38] (::1|)  => demo/t1
+[18/11/2015 - 13:51:38] (::1|)  => demo/favicon.ico
+[18/11/2015 - 13:51:38] (::1|)  => demo/favicon.ico
+[18/11/2015 - 13:51:44] (::1|)  => demo/t1
+[18/11/2015 - 13:52:40] (::1|)  => demo/t1
+[18/11/2015 - 13:52:43] (::1|)  => demo/t1
+[18/11/2015 - 13:52:49] (::1|)  => demo/t1
+[18/11/2015 - 13:52:53] (::1|)  => demo/t1
+[18/11/2015 - 13:58:9] (::1|)  => demo
+[18/11/2015 - 13:58:11] (::1|)  => demo/t3
+[18/11/2015 - 13:58:30] (::1|)  => demo/t3
+[18/11/2015 - 13:59:58] (::1|)  => demo/t3
+[18/11/2015 - 14:0:11] (::1|)  => demo/t3
+[18/11/2015 - 14:0:23] (::1|)  => demo/t3
+[18/11/2015 - 14:0:23] (::1|)  => 
+
+[18/11/2015 - 14:0:55] (::1|)  => demo/t3
+[18/11/2015 - 14:2:36] (::1|)  => demo/t3
+[18/11/2015 - 14:3:57] (::1|)  => demo/t3
+[18/11/2015 - 14:4:20] (::1|)  => demo/t3
+[18/11/2015 - 14:8:53] (::1|)  => demo/t3
+[18/11/2015 - 14:9:12] (::1|)  => demo/t3
+[18/11/2015 - 14:9:48] (::1|)  => demo/t3
+[18/11/2015 - 14:9:48] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/xml/POSITIF.xml
+[18/11/2015 - 14:13:7] (::1|)  => demo/t3
+[18/11/2015 - 14:13:7] (::1|)  => www-data
+
+[18/11/2015 - 14:13:21] (::1|)  => demo/t3
+[18/11/2015 - 14:13:21] (::1|)  => www-data
+
+[18/11/2015 - 14:15:10] (::1|)  => demo
+[18/11/2015 - 14:15:11] (::1|)  => favicon.ico
+[18/11/2015 - 14:15:11] (::1|)  => favicon.ico
+[18/11/2015 - 14:15:13] (::1|)  => demo/t3
+[18/11/2015 - 14:15:13] (::1|)  => 
+
+[18/11/2015 - 14:15:20] (::1|)  => demo/favicon.ico
+[18/11/2015 - 14:15:20] (::1|)  => demo/favicon.ico
+[18/11/2015 - 14:15:58] (::1|)  => demo
+[18/11/2015 - 14:15:58] (::1|)  => favicon.ico
+[18/11/2015 - 14:15:58] (::1|)  => favicon.ico
+[18/11/2015 - 14:15:59] (::1|)  => demo/t3
+[18/11/2015 - 14:15:59] (::1|)  => 
+
+[18/11/2015 - 14:15:59] (::1|)  => demo/favicon.ico
+[18/11/2015 - 14:15:59] (::1|)  => demo/favicon.ico
+[18/11/2015 - 14:28:35] (::1|)  => demo
+[18/11/2015 - 15:37:24] (::1|)  => demo
+[18/11/2015 - 15:40:16] (::1|)  => demo
+[18/11/2015 - 15:40:18] (::1|)  => demo/t3
+[18/11/2015 - 15:40:27] (::1|)  => demo
+[18/11/2015 - 15:40:28] (::1|)  => demo/t1
+[18/11/2015 - 15:41:18] (::1|)  => demo/%5B%5BBASE_URL%5D%5D
+[18/11/2015 - 15:41:19] (::1|)  => demo/t2
+[18/11/2015 - 15:50:29] (::1|)  => demo/t3
+[18/11/2015 - 15:50:59] (::1|)  => demo/t3
+[18/11/2015 - 16:29:55] (::1|)  => demo
+[18/11/2015 - 16:29:56] (::1|)  => demo/t2
+[18/11/2015 - 16:30:10] (::1|)  => demo/t2
+[18/11/2015 - 16:31:40] (::1|)  => demo/t2
+[18/11/2015 - 16:31:44] (::1|)  => demo/t2
+[18/11/2015 - 16:32:12] (::1|)  => demo/t2
+[18/11/2015 - 16:32:20] (::1|)  => demo/t2
+[18/11/2015 - 16:32:51] (::1|)  => demo/t2
+[18/11/2015 - 16:32:56] (::1|)  => demo/t2
+[18/11/2015 - 16:33:39] (::1|)  => demo/t2
+[18/11/2015 - 16:33:41] (::1|)  => demo/t2
+[18/11/2015 - 16:34:33] (::1|)  => 
+[18/11/2015 - 16:34:37] (::1|)  => demo
+[18/11/2015 - 16:34:39] (::1|)  => demo/t2
+[18/11/2015 - 16:34:41] (::1|)  => demo/t2
+[18/11/2015 - 17:19:52] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/ucomp_to_deft/ucomp_to_deft2015_task3 -i /tmp/demo_deft_hyp_passage -o /tmp/demo_deft_hyp; sed -e "s/.txt//gm" /tmp/demo_deft_hyp > /tmp/demo_deft_hyp_fixed
+[18/11/2015 - 17:43:0] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/ucomp_to_deft/ucomp_to_deft2015_task3 -i /tmp/demo_deft_hyp_passage -o /tmp/demo_deft_hyp; sed -e "s/.txt//gm" /tmp/demo_deft_hyp > /tmp/demo_deft_hyp_fixed
+[18/11/2015 - 17:44:17] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/ucomp_to_deft/ucomp_to_deft2015_task3 -i /tmp/demo_deft_hyp_passage -o /tmp/demo_deft_hyp; sed -e "s/.txt//gm" /tmp/demo_deft_hyp > /tmp/demo_deft_hyp_fixed
+[18/11/2015 - 20:2:1] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 13:5:46] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 13:10:27] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 13:14:20] (::1|)  => http://localhost:80/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 13:15:40] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 13:24:25] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 13:28:48] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 13:33:14] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 13:37:53] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 15:7:36] (::1|)  => NULL
+[19/11/2015 - 15:7:36] (::1|)  => 
+[19/11/2015 - 15:7:37] (::1|)  => NULL
+[19/11/2015 - 15:7:37] (::1|)  => 
+[19/11/2015 - 15:8:3] (::1|)  => array (
+  '' => NULL,
+)
+[19/11/2015 - 15:9:44] (::1|)  => array (
+  0 => 
+  array (
+    0 => 'POSITIF',
+    1 => 'NEGATIF',
+  ),
+  1 => 
+  array (
+    0 => 
+    array (
+      0 => 'POSITIF.xml',
+    ),
+    1 => 
+    array (
+      0 => 'NEGATIF.xml',
+    ),
+  ),
+  2 => false,
+)
+[19/11/2015 - 15:9:44] (::1|)  => array (
+  '' => NULL,
+)
+[19/11/2015 - 15:10:49] (::1|)  => 1
+[19/11/2015 - 15:10:49] (::1|)  => 0
+[19/11/2015 - 15:10:49] (::1|)  => array (
+  '' => NULL,
+)
+[19/11/2015 - 15:12:1] (::1|)  => array (
+  0 => 'POSITIF.xml',
+)
+[19/11/2015 - 15:12:1] (::1|)  => 0
+[19/11/2015 - 15:12:1] (::1|)  => NULL
+[19/11/2015 - 15:12:1] (::1|)  => array (
+  '' => NULL,
+)
+[19/11/2015 - 15:12:20] (::1|)  => array (
+  0 => 'POSITIF.xml',
+)
+[19/11/2015 - 15:12:20] (::1|)  => 0
+[19/11/2015 - 15:12:20] (::1|)  => NULL
+[19/11/2015 - 15:12:20] (::1|)  => array (
+  '' => NULL,
+)
+[19/11/2015 - 15:13:24] (::1|)  => array (
+  0 => 'POSITIF.xml',
+)
+[19/11/2015 - 15:13:24] (::1|)  => 0
+[19/11/2015 - 15:13:24] (::1|)  => 259 /home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/info_POSITIF.xml
+
+[19/11/2015 - 15:13:24] (::1|)  => array (
+  488941336218046464 => '#Pollution de l\'air: #Beijing se met à l\'énergie #solaire pour faire chuter ses émissions de #CO2 -
+',
+)
+[19/11/2015 - 15:14:31] (::1|)  => array (
+  0 => 'POSITIF.xml',
+)
+[19/11/2015 - 15:14:31] (::1|)  => 0
+[19/11/2015 - 15:14:31] (::1|)  => 259 /home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/info_POSITIF.xml
+
+[19/11/2015 - 15:14:31] (::1|)  => array (
+  487536648239190016 => 'Prévention des risques d’#inondation : présentation de la stratégie d\'@ecologiEnergie sur
+',
+)
+[19/11/2015 - 15:14:41] (::1|)  => array (
+  0 => 'POSITIF.xml',
+)
+[19/11/2015 - 15:14:41] (::1|)  => 0
+[19/11/2015 - 15:14:41] (::1|)  => 259 /home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/info_POSITIF.xml
+
+[19/11/2015 - 15:14:41] (::1|)  => array (
+  489321177576636416 => 'INRA La diversité des habitats non cultivés : un facteur clé pour préserver la biodiversi... | @scoopit via @Zehub
+',
+)
+[19/11/2015 - 15:15:10] (::1|)  => array (
+  0 => 'POSITIF.xml',
+)
+[19/11/2015 - 15:15:10] (::1|)  => 0
+[19/11/2015 - 15:15:10] (::1|)  => 259 /home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/info_POSITIF.xml
+
+[19/11/2015 - 15:15:10] (::1|)  => array (
+  506378634009907200 => 'Un modèle interactif pour comprendre les mécanismes du réchauffement climatique
+',
+)
+[19/11/2015 - 15:15:16] (::1|)  => array (
+  0 => 'POSITIF.xml',
+)
+[19/11/2015 - 15:15:16] (::1|)  => 0
+[19/11/2015 - 15:15:16] (::1|)  => 259 /home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/info_POSITIF.xml
+
+[19/11/2015 - 15:15:16] (::1|)  => array (
+  504693476920152065 => '@LePoint  Parce-que les Écologistes veulent une autres politique☺ Pour l\'instant ils l\'ont pas encore trouvé☺ Ils cherchent toujours ☺
+',
+)
+[19/11/2015 - 15:16:33] (::1|)  => array (
+  0 => 'POSITIF.xml',
+)
+[19/11/2015 - 15:16:33] (::1|)  => 0
+[19/11/2015 - 15:16:33] (::1|)  => 259 /home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/info_POSITIF.xml
+
+[19/11/2015 - 15:16:33] (::1|)  => array (
+  487900842738331648 => 'vers 1Europe de solidarité sociale, de développement durable,  et de promotion de la démocratie participative  @NewDeal4Europe @JEF_Europe
+',
+)
+[19/11/2015 - 15:17:6] (::1|)  => array (
+  0 => 'sid_1',
+)
+[19/11/2015 - 15:17:6] (::1|)  => sid_1
+[19/11/2015 - 15:17:6] (::1|)  => array (
+  490057153135116288 => '#ecologie Le TAFTA est déjà utilisé pour affaiblir la réglementation europénne sur l\'environnement
+',
+)
+[19/11/2015 - 15:18:14] (::1|)  => array (
+  489422642643210241 => '@Rouqui2 Enfin les touriste vont enrichir un écosystème !!!
+',
+)
+[19/11/2015 - 15:18:18] (::1|)  => array (
+  0 => 'sid',
+  1 => '1',
+)
+[19/11/2015 - 15:18:18] (::1|)  => sid_1
+[19/11/2015 - 15:18:18] (::1|)  => array (
+  488474312505294848 => 'Nouvelle information Les OGM et la panne de la biodiversité agricole
+',
+)
+[19/11/2015 - 15:18:23] (::1|)  => array (
+  0 => 'sid',
+  1 => '1',
+)
+[19/11/2015 - 15:18:23] (::1|)  => sid_1
+[19/11/2015 - 15:18:24] (::1|)  => array (
+  506747039703519232 => 'Les rues de Charm el-Cheikh éclairées par l’énergie solaire
+',
+)
+[19/11/2015 - 15:18:30] (::1|)  => array (
+  0 => 'sid',
+  1 => '1',
+)
+[19/11/2015 - 15:18:30] (::1|)  => sid_1
+[19/11/2015 - 15:18:31] (::1|)  => array (
+  487503760865128448 => 'Energie : la facture des villes s’envole malgré un recul de leur consommation | @scoopit
+',
+)
+[19/11/2015 - 15:18:37] (::1|)  => array (
+  489114633111109632 => '@Tsahal_IDF  Le plus gros degat est pour le moment une centrale electrique qui fournit gaza , suite a un tir foireux...
+',
+)
+[19/11/2015 - 15:18:45] (::1|)  => array (
+  489867045790822400 => '@Syrce37 cest de lamour ecologique ! 100% bio
+',
+)
+[19/11/2015 - 15:18:46] (::1|)  => array (
+  489138712732008448 => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+)
+[19/11/2015 - 15:18:46] (::1|)  => array (
+  507194988304674816 => '#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+',
+)
+[19/11/2015 - 15:18:52] (::1|)  => array (
+  489303425671516160 => 'On se plaint de l\'environnement et de l\'écologie et l\'économie etc mais y\'a pire en fait 😂😂
+',
+)
+[19/11/2015 - 15:19:18] (::1|)  => array (
+  0 => 'sid',
+  1 => '1',
+)
+[19/11/2015 - 15:19:18] (::1|)  => sid_1
+[19/11/2015 - 15:19:18] (::1|)  => array (
+  505059323647918080 => '@rivieresperdues @iciexplora Mobilisateur pour urbains qui aiment vivre en ville et qui veulent trouver solutions écologiques aux problèmes.
+',
+)
+[19/11/2015 - 15:19:27] (::1|)  => array (
+  0 => 'sid',
+  1 => '1',
+)
+[19/11/2015 - 15:19:27] (::1|)  => sid_1
+[19/11/2015 - 15:19:28] (::1|)  => array (
+  489508643008569344 => 'Déplacement du Costa Concordia: Madame Ségolène Royal, Ministre de l\'Écologie, du Développement durable et de ...
+',
+)
+[19/11/2015 - 15:19:33] (::1|)  => array (
+  0 => 'sid',
+  1 => '1',
+)
+[19/11/2015 - 15:19:33] (::1|)  => sid_1
+[19/11/2015 - 15:19:34] (::1|)  => array (
+  488374479215931392 => '@PierreMinnaert c est grave l\'incitation aux conflits  !! Oui a l écologie mais non aux écologistes !@JVPlace
+',
+)
+[19/11/2015 - 15:19:45] (::1|)  => array (
+  0 => 'sid',
+  1 => '1',
+)
+[19/11/2015 - 15:19:45] (::1|)  => sid_1
+[19/11/2015 - 15:19:45] (::1|)  => array (
+  489303425671516160 => 'On se plaint de l\'environnement et de l\'écologie et l\'économie etc mais y\'a pire en fait 😂😂
+',
+)
+[19/11/2015 - 15:20:44] (::1|)  => t2
+[19/11/2015 - 15:20:44] (::1|)  => array (
+  489046736284155904 => 'Bravo! RT @EspacePourLaVie: #MardiDD : le rapport de développement durable 2011-2013 est en ligne sur notre site web:
+',
+)
+[19/11/2015 - 15:21:18] (::1|)  => array (
+  489799664167055360 => '#Produits #BTP #Bâtiment Biodiversité : Sita et la LPO signe un partenariat
+',
+)
+[19/11/2015 - 15:22:24] (::1|)  => array (
+  489413802975563776 => 'Je ne trouve pas si vilaines que ça les éoliennes
+',
+  487955222745329665 => '@richie3366 j\'ai réglé le problème,c\'était tout simplement un chunk no loadé là où était 3 éoliennes,du coup j\'ai remis les panneaux solaire
+',
+  489138712732008448 => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+)
+[19/11/2015 - 15:22:35] (::1|)  => array (
+  488363578052071424 => 'RT@Denis_Baupin: Toute incitation à la haine est étrangère aux valeurs des écologistes @eelv @Loiselet @DinahZeghir @AlbertZennou @ECOLOdep
+',
+)
+[19/11/2015 - 15:23:19] (::1|)  => array (
+  488632972242063360 => 'Merci Pierre-Henri de maintenir en éveil permanent la menace OGM! L\'une des menaces ultimes pour l\'humanité!
+',
+  505224435763535872 => 'Impression 3D innovateurs invités à appliquer Visitez Start-Up de l\'écosystème de Chattanooga - Impression...
+',
+)
+[19/11/2015 - 15:23:33] (::1|)  => array (
+  489663018016722944 => 'Un domaine viticole bordelais bio devient Refuge LPO pour protéger la biodiversité | @scoopit via @Zehub
+',
+  489723108668887040 => '[blog] Google multiplie les erreurs pour le lancement de son écosystème Android Wear: Google a réussi à prendr...
+',
+)
+[19/11/2015 - 15:23:49] (::1|)  => array (
+  490016933262409728 => 'Le Centrale électrique solaire était déjà super, mais là, ilst encore mieux !
+',
+  490071686096912384 => '@afpfr il n\' y a rien d écologique à faire bruler des pneus
+',
+  487739543332741120 => '#ecologie La coopération dans le domaine du développement urbain durable
+',
+  489788132792221697 => 'C\'est là où tu t\'dis que le réchauffement climatique aurait au moins le bénéfice de nous apporter la mer.
+',
+)
+[19/11/2015 - 15:24:7] (::1|)  => array (
+  490040601984139264 => 'Chine :  des milliers de fossiles vivants ressortent à cause des pluies | @scoopit
+',
+  489406980662915072 => 'EDF reçoit l\'approbation du gouvernement pour la construction d\'une centrale électrique
+',
+  488048051798695936 => '" Je suis en train de tomber malade , changement climatique."
+',
+  489556779060461569 => '@L_Arcadia_ oui mais moi ce qui m\'étonne c\'est par ex pour le réchauffement climatique tout le monde voit bien qu\'il est là et tout le monde
+',
+)
+[19/11/2015 - 15:26:32] (::1|)  => array (
+  488732531416911872 => '@JusteReaction   Je suis pour une écologie éthylique. Fièrement.
+',
+  489750956297289728 => '@kevadamsss Le Lorax ? Je ne m\'en lasse pas, une vraie leçon écologique...
+',
+  488352128054722560 => 'Le Havre : éoliennes en mer, Areva signe une convention locale - via @Dailymotion
+',
+  490062104083582976 => '@RadioContact 10° à Werchter. 35° à Werchter. Le réchauffement climatique accélère. https://t.co/x1JS7Tox3C  Merci de RT.
+',
+)
+[19/11/2015 - 15:27:13] (::1|)  => NULL
+[19/11/2015 - 15:27:13] (::1|)  => array (
+  'sid_1' => '488732531416911872',
+  'valence_1' => '2',
+  'sid_2' => '489750956297289728',
+  'valence_2' => '1',
+  'sid_3' => '488352128054722560',
+  'valence_3' => '3',
+  'sid_4' => '490062104083582976',
+  'valence_4' => '4',
+  'sourcecat' => '[',
+  'submit' => 'Soumettre',
+)
+[19/11/2015 - 15:27:26] (::1|)  => NULL
+[19/11/2015 - 15:27:26] (::1|)  => array (
+  'sid_1' => '488732531416911872',
+  'valence_1' => '2',
+  'sid_2' => '489750956297289728',
+  'valence_2' => '1',
+  'sid_3' => '488352128054722560',
+  'valence_3' => '3',
+  'sid_4' => '490062104083582976',
+  'valence_4' => '4',
+  'sourcecat' => '[',
+  'submit' => 'Soumettre',
+)
+[19/11/2015 - 15:27:42] (::1|)  => NULL
+[19/11/2015 - 15:27:42] (::1|)  => array (
+  'sid_1' => '488732531416911872',
+  'valence_1' => '2',
+  'sid_2' => '489750956297289728',
+  'valence_2' => '1',
+  'sid_3' => '488352128054722560',
+  'valence_3' => '3',
+  'sid_4' => '490062104083582976',
+  'valence_4' => '4',
+  'sourcecat' => '[',
+  'submit' => 'Soumettre',
+)
+[19/11/2015 - 15:27:42] (::1|)  => 488732531416911872	
+489750956297289728	
+488352128054722560	
+490062104083582976
+[19/11/2015 - 15:27:43] (::1|)  => array (
+  487643118129274880 => 'Le club d\'investisseurs parisien étoffe avec rool\'in son portefeuille dans le domaine du développement durable.
+',
+  487575629282693121 => 'Bravo @VilleLongueuil pour votre vision d\'une #agriculture durable et écoresponsable.
+',
+  506538006690676737 => 'ONVPSM On peut aussi tjs espérer une remise en question de notre majorité vers la gauche et les écologistes @LauraSlimani #uniondelagauche”
+',
+  489878870883975168 => '#Senegal REPORTAGE : DOUNE BABA DIEYE en renaissance (vidéo): Après la tragédie écologique engendrée par...
+',
+)
+[19/11/2015 - 15:30:13] (::1|)  => array (
+  489267125425827840 => 'La #sardine, l’un des poissons les plus en danger en #Méditerranée via @DZnews_App
+',
+  507145771998007296 => 'Du rapport complexe entre environnement et intérêt économique.Ici on réintroduit le bouquetin, plus loin on éradique
+',
+  488744616142073856 => 'Merci Au jdp/y.guérin ! Journal des Professionnels Journal des Professionnels - Les points de presse de l\'entreprise:
+',
+  489398795281510400 => 'Je tiens à féliciter les écologistes qui ont réussi à surpasser, dans mon échelle d\'écœurement, les nutritionnistes.
+',
+)
+[19/11/2015 - 15:31:5] (::1|)  => array (
+  0 => 'EMOTION',
+  1 => 'SENTIMENT',
+  2 => 'INFORMATION',
+  3 => 'OPINION',
+)
+[19/11/2015 - 15:31:5] (::1|)  => array (
+  'sid_1' => '489267125425827840',
+  'valence_1' => '3',
+  'sid_2' => '507145771998007296',
+  'valence_2' => '4',
+  'sid_3' => '488744616142073856',
+  'valence_3' => '1',
+  'sid_4' => '489398795281510400',
+  'valence_4' => '2',
+  'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+  'submit' => 'Soumettre',
+)
+[19/11/2015 - 15:31:5] (::1|)  => 489267125425827840	INFORMATION
+507145771998007296	OPINION
+488744616142073856	EMOTION
+489398795281510400	SENTIMENT
+[19/11/2015 - 15:31:5] (::1|)  => array (
+  489750956297289728 => '@kevadamsss Le Lorax ? Je ne m\'en lasse pas, une vraie leçon écologique...
+',
+  489094626872393728 => 'L\'élite restera l\'ELITE ! #TeamRouxForEver
+',
+  489883791843160064 => 'Les religions détruiront le monde, bien avant l’effet de serre, le réchauffement climatique et la pollution, etc etc….
+',
+  489814842434670592 => 'Enfin ! Le décret d\'éco-conditionnalité signé
+',
+)
+[19/11/2015 - 15:33:30] (::1|)  => array (
+  507194988304674816 => '#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+',
+  488270205840150528 => '#Sciences Les OGM et la panne de la biodiversité agricole: Le chercheur Pierre-Henri Gouyon conteste une certa...
+',
+  489879919313186817 => '#ecologie Programme Environnement-Plage: la qualité de l\'eau des plages
+',
+  489138712732008448 => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+)
+[19/11/2015 - 15:34:22] (::1|)  => array (
+  506860779061391360 => 'Réchauffement climatique: il est grand temps d’agir | Ban Ki-moon
+',
+  489059789771898880 => 'Comprendre l’emploi dans l’économie verte par l’analyse des métiers
+',
+)
+[19/11/2015 - 15:34:34] (::1|)  => array (
+  489001260063129600 => 'Un Israélien a inventé un chargeur qui charge le tel en 30s..Imaginez juste la conséquence pour les voitures électriques [AMPERSAND]l\'écologie #futur
+',
+  490038690123882496 => 'Rt @Corse_Matin: AOC Miel de Corse: moins de miel en 2013 lié au changement climatique
+',
+)
+[19/11/2015 - 15:34:50] (::1|)  => array (
+  489522740781527040 => 'Moi et Martin on a sauvés la terre du réchauffement climatique ! @Sauvee_Martin
+',
+  488349097141604352 => 'Video : Les #OGM et la panne de la #biodiversité agricole
+',
+)
+[19/11/2015 - 15:37:28] (::1|)  => array (
+  487598305661423616 => '.@RoyalSegolene mobilise ses services pour faire la lumière sur le décès du jeune garçon au chalet d’Ascou (Ariège)
+',
+  489407350487277568 => 'Biodiversité et climat: Deux crises qui glissent entre les mains du gouvernement Couillard | Greenpeace Canada
+',
+)
+[19/11/2015 - 15:37:44] (::1|)  => array (
+  489475726195040257 => '#RegionPACA Un Budget 2015 bien difficile à préparer  Merci au #CICE et à la baisse des dotations aux Régions
+',
+  489012163059924992 => 'Protection de la biodiversité : dysfonctionnement inacceptable dans le cœur du parc national des...
+',
+)
+[19/11/2015 - 15:38:22] (::1|)  => array (
+  489677577724772352 => 'Escroquerie du réchauffement climatique anthropique… La fadaise des 97% de “consensus” scientifi...
+',
+  506261450273206272 => 'Écologistes! Le Pape François promet une encyclique sur la préservation de la création |
+',
+)
+[19/11/2015 - 15:38:30] (::1|)  => array (
+  490042535231127552 => 'Le projet européen TowerPower contrôle le vieillissement des structures d\'éoliennes offshore | @scoopit
+',
+  489722349529206784 => 'A Montréal aussi (Québec), pas facile de trouver un consensus sur les lieux de traitement des déchets ménagers…
+',
+)
+[19/11/2015 - 15:38:44] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 15:56:22] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 15:57:8] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 15:57:12] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 15:57:40] (::1|)  => array (
+  487852753352683520 => 
+  array (
+    'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_MEPRIS.xml',
+    'content' => 'Plage du Costa Rica. A tous les naïfs qui pensent que la disparition des espèces est due au changement climatique.😭
+',
+  ),
+)
+[19/11/2015 - 15:57:40] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 15:58:49] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:1:6] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:1:53] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:1:54] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:1:56] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:2:19] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:3:41] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:11:42] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:14:39] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:30:13] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:37:24] (::1|)  => grep -l 505912494024851458 /home/paul/projects/custom/cpm/data/demo_pap/xml/*
+[19/11/2015 - 16:37:24] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/xml/DEVALORISATION.xml
+
+[19/11/2015 - 16:38:36] (::1|)  => grep -l 489677577724772352 /home/paul/projects/custom/cpm/data/demo_pap/xml/*
+[19/11/2015 - 16:38:36] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/xml/NEGATIF.xml
+
+[19/11/2015 - 16:38:36] (::1|)  => tools/extractpassagesentences.py /home/paul/projects/custom/cpm/data/demo_pap/xml/NEGATIF.xml
+ 1 489677577724772352.txt
+[19/11/2015 - 16:48:33] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:48:41] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:48:53] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 16:49:12] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 17:13:52] (::1|)  => NULL
+[19/11/2015 - 18:10:55] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[19/11/2015 - 18:12:3] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[19/11/2015 - 18:12:49] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[19/11/2015 - 18:13:23] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 18:13:53] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 18:18:24] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 18:20:27] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 18:20:40] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 18:21:25] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:22:23] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:22:26] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:22:29] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:41:53] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:41:55] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:41:57] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:42:3] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:55:52] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:55:55] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:55:57] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 20:56:3] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:4:15] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:4:17] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:4:20] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:18:26] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:18:28] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:18:29] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:18:29] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:25:46] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:28:20] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:28:26] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:28:50] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:28:58] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 21:29:27] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:30:32] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:32:59] (::1|)  => Form::__set_state(array(
+   'name' => '489017162674503680',
+   'sections' => 
+  array (
+    0 => 
+    FormSection::__set_state(array(
+       'form' => NULL,
+       'title' => '',
+       'warpable' => false,
+       'warped' => false,
+       'items' => 
+      array (
+        0 => 
+        FormElement::__set_state(array(
+           'default_value' => 489017162674503680,
+           'title' => '',
+           'name' => 'sid_0',
+           'type' => 'hidden',
+           'values' => 
+          array (
+            'hidden' => true,
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        1 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'title_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'inline' => true,
+            'html' => '<h3>1/1</h3>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        2 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'refid_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'html' => '<div style="width:100%; display:block;">489017162674503680</div>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        3 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'sentence_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'inline' => true,
+            'html' => '<div class="panel" style="display:inline-block; width:800px;">Le #Carrelage : NK Concept, la nouvelle collection de robinetteries écologiques de Noken
+</div>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        4 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'valence_0',
+           'type' => 'select',
+           'values' => 
+          array (
+            'inline' => true,
+            'options' => 
+            array (
+              0 => '',
+              1 => 'EMOTION',
+              2 => 'SENTIMENT',
+              3 => 'INFORMATION',
+              4 => 'OPINION',
+            ),
+            'otherparams' => 'style="margin-left:50px; max-width:100px;"',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+      ),
+       'inline' => true,
+    )),
+    1 => 
+    FormSection::__set_state(array(
+       'form' => NULL,
+       'title' => '',
+       'warpable' => false,
+       'warped' => false,
+       'items' => 
+      array (
+        0 => 
+        FormElement::__set_state(array(
+           'default_value' => '[&quot;EMOTION&quot;,&quot;SENTIMENT&quot;,&quot;INFORMATION&quot;,&quot;OPINION&quot;]',
+           'title' => '',
+           'name' => 'sourcecat',
+           'type' => 'hidden',
+           'values' => 
+          array (
+            'hidden' => true,
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        1 => 
+        FormElement::__set_state(array(
+           'default_value' => 'Soumettre',
+           'title' => '',
+           'name' => 'submit',
+           'type' => 'submit',
+           'values' => 
+          array (
+            'callback' => 'eval_t1_2',
+            'otherparams' => 'style="margin-left:40%;display:none;"',
+          ),
+           'classes' => 'button',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+      ),
+       'inline' => true,
+    )),
+  ),
+   'callbacks' => 
+  array (
+    0 => 
+    FormElement::__set_state(array(
+       'default_value' => 'Soumettre',
+       'title' => '',
+       'name' => 'submit',
+       'type' => 'submit',
+       'values' => 
+      array (
+        'callback' => 'eval_t1_2',
+        'otherparams' => 'style="margin-left:40%;display:none;"',
+      ),
+       'classes' => 'button',
+       'required' => false,
+       'formsection' => 
+      FormSection::__set_state(array(
+         'form' => NULL,
+         'title' => '',
+         'warpable' => false,
+         'warped' => false,
+         'items' => 
+        array (
+          0 => 
+          FormElement::__set_state(array(
+             'default_value' => '[&quot;EMOTION&quot;,&quot;SENTIMENT&quot;,&quot;INFORMATION&quot;,&quot;OPINION&quot;]',
+             'title' => '',
+             'name' => 'sourcecat',
+             'type' => 'hidden',
+             'values' => 
+            array (
+              'hidden' => true,
+            ),
+             'classes' => '',
+             'required' => false,
+             'formsection' => NULL,
+          )),
+          1 => NULL,
+        ),
+         'inline' => true,
+      )),
+    )),
+  ),
+   'formitemnames' => 
+  array (
+    0 => 'sid_0',
+    1 => 'title_0',
+    2 => 'refid_0',
+    3 => 'sentence_0',
+    4 => 'valence_0',
+    5 => 'sourcecat',
+    6 => 'submit',
+  ),
+   'requireditems' => 
+  array (
+  ),
+   'dataobject' => NULL,
+   'enctype' => NULL,
+   'action' => 'http://localhost:80/cpm/demo/t2/result/result/result/result/result/result/result/result/result/result',
+))
+[19/11/2015 - 21:32:59] (::1|)  => Form::__set_state(array(
+   'name' => '489924364000038912',
+   'sections' => 
+  array (
+    0 => 
+    FormSection::__set_state(array(
+       'form' => NULL,
+       'title' => '',
+       'warpable' => false,
+       'warped' => false,
+       'items' => 
+      array (
+        0 => 
+        FormElement::__set_state(array(
+           'default_value' => 489924364000038912,
+           'title' => '',
+           'name' => 'sid_0',
+           'type' => 'hidden',
+           'values' => 
+          array (
+            'hidden' => true,
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        1 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'title_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'inline' => true,
+            'html' => '<h3>1/1</h3>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        2 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'refid_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'html' => '<div style="width:100%; display:block;">489924364000038912</div>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        3 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'sentence_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'inline' => true,
+            'html' => '<div class="panel" style="display:inline-block; width:800px;">Actus énergie : Publication du rgime d\'aide  l\'innovation et au dveloppement durable du transport arien
+</div>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        4 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'valence_0',
+           'type' => 'select',
+           'values' => 
+          array (
+            'inline' => true,
+            'options' => 
+            array (
+              0 => '',
+              1 => 'EMOTION',
+              2 => 'SENTIMENT',
+              3 => 'INFORMATION',
+              4 => 'OPINION',
+            ),
+            'otherparams' => 'style="margin-left:50px; max-width:100px;"',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+      ),
+       'inline' => true,
+    )),
+    1 => 
+    FormSection::__set_state(array(
+       'form' => NULL,
+       'title' => '',
+       'warpable' => false,
+       'warped' => false,
+       'items' => 
+      array (
+        0 => 
+        FormElement::__set_state(array(
+           'default_value' => '[&quot;EMOTION&quot;,&quot;SENTIMENT&quot;,&quot;INFORMATION&quot;,&quot;OPINION&quot;]',
+           'title' => '',
+           'name' => 'sourcecat',
+           'type' => 'hidden',
+           'values' => 
+          array (
+            'hidden' => true,
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        1 => 
+        FormElement::__set_state(array(
+           'default_value' => 'Soumettre',
+           'title' => '',
+           'name' => 'submit',
+           'type' => 'submit',
+           'values' => 
+          array (
+            'callback' => 'eval_t1_2',
+            'otherparams' => 'style="margin-left:40%;"',
+          ),
+           'classes' => 'button',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+      ),
+       'inline' => true,
+    )),
+  ),
+   'callbacks' => 
+  array (
+    0 => 
+    FormElement::__set_state(array(
+       'default_value' => 'Soumettre',
+       'title' => '',
+       'name' => 'submit',
+       'type' => 'submit',
+       'values' => 
+      array (
+        'callback' => 'eval_t1_2',
+        'otherparams' => 'style="margin-left:40%;"',
+      ),
+       'classes' => 'button',
+       'required' => false,
+       'formsection' => 
+      FormSection::__set_state(array(
+         'form' => NULL,
+         'title' => '',
+         'warpable' => false,
+         'warped' => false,
+         'items' => 
+        array (
+          0 => 
+          FormElement::__set_state(array(
+             'default_value' => '[&quot;EMOTION&quot;,&quot;SENTIMENT&quot;,&quot;INFORMATION&quot;,&quot;OPINION&quot;]',
+             'title' => '',
+             'name' => 'sourcecat',
+             'type' => 'hidden',
+             'values' => 
+            array (
+              'hidden' => true,
+            ),
+             'classes' => '',
+             'required' => false,
+             'formsection' => NULL,
+          )),
+          1 => NULL,
+        ),
+         'inline' => true,
+      )),
+    )),
+  ),
+   'formitemnames' => 
+  array (
+    0 => 'sid_0',
+    1 => 'title_0',
+    2 => 'refid_0',
+    3 => 'sentence_0',
+    4 => 'valence_0',
+    5 => 'sourcecat',
+    6 => 'submit',
+  ),
+   'requireditems' => 
+  array (
+  ),
+   'dataobject' => NULL,
+   'enctype' => NULL,
+   'action' => 'http://localhost:80/cpm/demo/t2/result/result/result/result/result/result/result/result/result/result',
+))
+[19/11/2015 - 21:32:59] (::1|)  => Form::__set_state(array(
+   'name' => '489924364000038912',
+   'sections' => 
+  array (
+    0 => 
+    FormSection::__set_state(array(
+       'form' => NULL,
+       'title' => '',
+       'warpable' => false,
+       'warped' => false,
+       'items' => 
+      array (
+        0 => 
+        FormElement::__set_state(array(
+           'default_value' => 489924364000038912,
+           'title' => '',
+           'name' => 'sid_0',
+           'type' => 'hidden',
+           'values' => 
+          array (
+            'hidden' => true,
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        1 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'title_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'inline' => true,
+            'html' => '<h3>1/1</h3>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        2 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'refid_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'html' => '<div style="width:100%; display:block;">489924364000038912</div>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        3 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'sentence_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'inline' => true,
+            'html' => '<div class="panel" style="display:inline-block; width:800px;">Actus énergie : Publication du rgime d\'aide  l\'innovation et au dveloppement durable du transport arien
+</div>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        4 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'valence_0',
+           'type' => 'select',
+           'values' => 
+          array (
+            'inline' => true,
+            'options' => 
+            array (
+              0 => '',
+              1 => 'EMOTION',
+              2 => 'SENTIMENT',
+              3 => 'INFORMATION',
+              4 => 'OPINION',
+            ),
+            'otherparams' => 'style="margin-left:50px; max-width:100px;"',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+      ),
+       'inline' => true,
+    )),
+    1 => 
+    FormSection::__set_state(array(
+       'form' => NULL,
+       'title' => '',
+       'warpable' => false,
+       'warped' => false,
+       'items' => 
+      array (
+        0 => 
+        FormElement::__set_state(array(
+           'default_value' => '[&quot;EMOTION&quot;,&quot;SENTIMENT&quot;,&quot;INFORMATION&quot;,&quot;OPINION&quot;]',
+           'title' => '',
+           'name' => 'sourcecat',
+           'type' => 'hidden',
+           'values' => 
+          array (
+            'hidden' => true,
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        1 => 
+        FormElement::__set_state(array(
+           'default_value' => 'Soumettre',
+           'title' => '',
+           'name' => 'submit',
+           'type' => 'submit',
+           'values' => 
+          array (
+            'callback' => 'eval_t1_2',
+            'otherparams' => 'style="margin-left:40%;display:none;"',
+          ),
+           'classes' => 'button',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+      ),
+       'inline' => true,
+    )),
+  ),
+   'callbacks' => 
+  array (
+    0 => 
+    FormElement::__set_state(array(
+       'default_value' => 'Soumettre',
+       'title' => '',
+       'name' => 'submit',
+       'type' => 'submit',
+       'values' => 
+      array (
+        'callback' => 'eval_t1_2',
+        'otherparams' => 'style="margin-left:40%;display:none;"',
+      ),
+       'classes' => 'button',
+       'required' => false,
+       'formsection' => 
+      FormSection::__set_state(array(
+         'form' => NULL,
+         'title' => '',
+         'warpable' => false,
+         'warped' => false,
+         'items' => 
+        array (
+          0 => 
+          FormElement::__set_state(array(
+             'default_value' => '[&quot;EMOTION&quot;,&quot;SENTIMENT&quot;,&quot;INFORMATION&quot;,&quot;OPINION&quot;]',
+             'title' => '',
+             'name' => 'sourcecat',
+             'type' => 'hidden',
+             'values' => 
+            array (
+              'hidden' => true,
+            ),
+             'classes' => '',
+             'required' => false,
+             'formsection' => NULL,
+          )),
+          1 => NULL,
+        ),
+         'inline' => true,
+      )),
+    )),
+  ),
+   'formitemnames' => 
+  array (
+    0 => 'sid_0',
+    1 => 'title_0',
+    2 => 'refid_0',
+    3 => 'sentence_0',
+    4 => 'valence_0',
+    5 => 'sourcecat',
+    6 => 'submit',
+  ),
+   'requireditems' => 
+  array (
+  ),
+   'dataobject' => NULL,
+   'enctype' => NULL,
+   'action' => 'http://localhost:80/cpm/demo/t2/result/result/result/result/result/result/result/result/favicon.ico/result',
+))
+[19/11/2015 - 21:32:59] (::1|)  => Form::__set_state(array(
+   'name' => '489487364553998337',
+   'sections' => 
+  array (
+    0 => 
+    FormSection::__set_state(array(
+       'form' => NULL,
+       'title' => '',
+       'warpable' => false,
+       'warped' => false,
+       'items' => 
+      array (
+        0 => 
+        FormElement::__set_state(array(
+           'default_value' => 489487364553998337,
+           'title' => '',
+           'name' => 'sid_0',
+           'type' => 'hidden',
+           'values' => 
+          array (
+            'hidden' => true,
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        1 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'title_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'inline' => true,
+            'html' => '<h3>1/1</h3>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        2 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'refid_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'html' => '<div style="width:100%; display:block;">489487364553998337</div>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        3 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'sentence_0',
+           'type' => 'custom',
+           'values' => 
+          array (
+            'inline' => true,
+            'html' => '<div class="panel" style="display:inline-block; width:800px;">Insolite : la loi #ALUR (par @CecileDuflot) conduit à une augmentation de 450 tonnes de papier par an #écologie
+</div>',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        4 => 
+        FormElement::__set_state(array(
+           'default_value' => NULL,
+           'title' => '',
+           'name' => 'valence_0',
+           'type' => 'select',
+           'values' => 
+          array (
+            'inline' => true,
+            'options' => 
+            array (
+              0 => '',
+              1 => 'EMOTION',
+              2 => 'SENTIMENT',
+              3 => 'INFORMATION',
+              4 => 'OPINION',
+            ),
+            'otherparams' => 'style="margin-left:50px; max-width:100px;"',
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+      ),
+       'inline' => true,
+    )),
+    1 => 
+    FormSection::__set_state(array(
+       'form' => NULL,
+       'title' => '',
+       'warpable' => false,
+       'warped' => false,
+       'items' => 
+      array (
+        0 => 
+        FormElement::__set_state(array(
+           'default_value' => '[&quot;EMOTION&quot;,&quot;SENTIMENT&quot;,&quot;INFORMATION&quot;,&quot;OPINION&quot;]',
+           'title' => '',
+           'name' => 'sourcecat',
+           'type' => 'hidden',
+           'values' => 
+          array (
+            'hidden' => true,
+          ),
+           'classes' => '',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+        1 => 
+        FormElement::__set_state(array(
+           'default_value' => 'Soumettre',
+           'title' => '',
+           'name' => 'submit',
+           'type' => 'submit',
+           'values' => 
+          array (
+            'callback' => 'eval_t1_2',
+            'otherparams' => 'style="margin-left:40%;"',
+          ),
+           'classes' => 'button',
+           'required' => false,
+           'formsection' => NULL,
+        )),
+      ),
+       'inline' => true,
+    )),
+  ),
+   'callbacks' => 
+  array (
+    0 => 
+    FormElement::__set_state(array(
+       'default_value' => 'Soumettre',
+       'title' => '',
+       'name' => 'submit',
+       'type' => 'submit',
+       'values' => 
+      array (
+        'callback' => 'eval_t1_2',
+        'otherparams' => 'style="margin-left:40%;"',
+      ),
+       'classes' => 'button',
+       'required' => false,
+       'formsection' => 
+      FormSection::__set_state(array(
+         'form' => NULL,
+         'title' => '',
+         'warpable' => false,
+         'warped' => false,
+         'items' => 
+        array (
+          0 => 
+          FormElement::__set_state(array(
+             'default_value' => '[&quot;EMOTION&quot;,&quot;SENTIMENT&quot;,&quot;INFORMATION&quot;,&quot;OPINION&quot;]',
+             'title' => '',
+             'name' => 'sourcecat',
+             'type' => 'hidden',
+             'values' => 
+            array (
+              'hidden' => true,
+            ),
+             'classes' => '',
+             'required' => false,
+             'formsection' => NULL,
+          )),
+          1 => NULL,
+        ),
+         'inline' => true,
+      )),
+    )),
+  ),
+   'formitemnames' => 
+  array (
+    0 => 'sid_0',
+    1 => 'title_0',
+    2 => 'refid_0',
+    3 => 'sentence_0',
+    4 => 'valence_0',
+    5 => 'sourcecat',
+    6 => 'submit',
+  ),
+   'requireditems' => 
+  array (
+  ),
+   'dataobject' => NULL,
+   'enctype' => NULL,
+   'action' => 'http://localhost:80/cpm/demo/t2/result/result/result/result/result/result/result/result/favicon.ico/result',
+))
+[19/11/2015 - 21:34:1] (::1|)  => array (
+  'prevform' => 
+  array (
+    489487364553998337 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SURPRISE_NEGATIVE.xml',
+      'content' => 'Insolite : la loi #ALUR (par @CecileDuflot) conduit à une augmentation de 450 tonnes de papier par an #écologie
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:34:1] (::1|)  => array (
+  489924364000038912 => 
+  array (
+    'sid_0' => '489924364000038912',
+    'valence_0' => '0',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:34:2] (::1|)  => array (
+  'prevform' => 
+  array (
+    505841246951440384 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_AMOUR.xml',
+      'content' => 'Écologiste c’est pas un parti politique tout le monde aime la nature
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:34:2] (::1|)  => array (
+)
+[19/11/2015 - 21:34:45] (::1|)  => array (
+  'prevform' => 
+  array (
+    489299485194203136 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => '#desirdeperchoir Ségolène Royal: "Je ne veux pas que l\'écologie soit punitive" - Nice-Matin
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:34:45] (::1|)  => array (
+)
+[19/11/2015 - 21:34:49] (::1|)  => array (
+  'prevform' => 
+  array (
+    507194988304674816 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SURPRISE_POSITIVE.xml',
+      'content' => '#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:34:49] (::1|)  => array (
+  507194988304674816 => 
+  array (
+    'sid_0' => '507194988304674816',
+    'valence_0' => '2',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:34:49] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:34:49] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="507194988304674816" action="http://localhost:80/cpm/demo/t2/result/result" id="form-507194988304674816"><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816[sid_0]" value="507194988304674816"/></span><h3>1/1</h3><div style="width:100%; display:block;">507194988304674816</div><div class="panel" style="display:inline-block; width:800px;">#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816[valence_0]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">EMOTION</option><option selected  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="507194988304674816[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:34:49] (::1|)  => array (
+)
+[19/11/2015 - 21:34:50] (::1|)  => array (
+)
+[19/11/2015 - 21:34:50] (::1|)  => array (
+)
+[19/11/2015 - 21:34:56] (::1|)  => array (
+  'prevform' => 
+  array (
+    488374479215931392 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@PierreMinnaert c est grave l\'incitation aux conflits  !! Oui a l écologie mais non aux écologistes !@JVPlace
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:34:56] (::1|)  => array (
+)
+[19/11/2015 - 21:34:56] (::1|)  => array (
+  'prevform' => 
+  array (
+    489126931443773440 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Félicitations ! “@omongeau: Après compétition, @EDFofficiel confie la refonte de son écosystème digital à l\'agence @NurunFrance ”
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:34:56] (::1|)  => array (
+)
+[19/11/2015 - 21:35:2] (::1|)  => array (
+  'prevform' => 
+  array (
+    489513617222402051 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => 'La sénatrice Marie Blandin quitte EELV - Nouvel Obs | @scoopit
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:2] (::1|)  => array (
+)
+[19/11/2015 - 21:35:2] (::1|)  => array (
+  'prevform' => 
+  array (
+    489650388102946816 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Développement durable : entreprises et consommateurs divisés  #developpementdurable
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:2] (::1|)  => array (
+)
+[19/11/2015 - 21:35:6] (::1|)  => array (
+  'prevform' => 
+  array (
+    488290640552558592 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_COLERE.xml',
+      'content' => 'Mais on s en tape de la biodiversité. Passez sur le direct ! :/ #Francetvsport #TdF
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:6] (::1|)  => array (
+  489650388102946816 => 
+  array (
+    'sid_0' => '489650388102946816',
+    'valence_0' => '3',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:35:6] (::1|)  => array (
+  'prevform' => 
+  array (
+    489422441949982720 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'les nantais d’Atlantic Challenge inventent l\'habitation écologique et se classent deuxième au Solar Décathlon . Bravo
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:6] (::1|)  => array (
+)
+[19/11/2015 - 21:35:9] (::1|)  => array (
+  'prevform' => 
+  array (
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:9] (::1|)  => array (
+)
+[19/11/2015 - 21:35:9] (::1|)  => array (
+  'prevform' => 
+  array (
+    489083241123815424 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => 'Des citoyens tentent d\'empêcher une coupe massive d\'arbres
+',
+    ),
+    489755004836659200 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEPLAISIR.xml',
+      'content' => 'Le rouleau de papier toilette qui froisse la mairie de Paris  via @Zehub
+',
+    ),
+    489356201465884672 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'La ministre de l\'Ecologie Ségolène Royal va passer deux jours dans les Pyrénées:...
+',
+    ),
+    489295776284426240 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Merci @savinanne pour RT Fontaine-Daniel : une si belle #histoire
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:9] (::1|)  => array (
+)
+[19/11/2015 - 21:35:11] (::1|)  => array (
+  'prevform' => 
+  array (
+    490058009427865600 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_APAISEMENT.xml',
+      'content' => 'Des plantes pour soulager les coups de soleil
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:11] (::1|)  => array (
+  '489083241123815424_489755004836659200_489356201465884672_489295776284426240' => 
+  array (
+    'sid_0' => '489083241123815424',
+    'valence_0' => '0',
+    'sid_1' => '489755004836659200',
+    'valence_1' => '0',
+    'sid_2' => '489356201465884672',
+    'valence_2' => '0',
+    'sid_3' => '489295776284426240',
+    'valence_3' => '0',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:35:11] (::1|)  => array (
+  'prevform' => 
+  array (
+    487609078995517441 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_PLAISIR.xml',
+      'content' => 'On aime @Sociallymap #ecosysteme #socialmedia en toute simplicité
+',
+    ),
+    489063806350671873 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '@Phil_PIRANDELIN @GeolNuc Je ne change pas de sujet  et ne botte pas en touche: Géothermie=grave problème pour enfouir déchets radioactifs.
+',
+    ),
+    488374479215931392 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@PierreMinnaert c est grave l\'incitation aux conflits  !! Oui a l écologie mais non aux écologistes !@JVPlace
+',
+    ),
+    488945329350660096 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => 'Les mesures protectionnistes US contre les panneaux solaires chinois contraires aux règles de l\'OMC. Mauvais pour UE.
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:11] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489050414307106816 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => '.@KaterinaOblomov pas d\'accord, ça c\'est la définition d\'un ministre socialiste ou écologiste
+',
+    ),
+    489929487728267264 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Habiter au rez de chaussée c\'est vraiment top, y a tout l\'écosystème qui s\'installe dans l\'appart.
+',
+    ),
+    488976829995180033 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_PEUR.xml',
+      'content' => '#biodiversité Concordia : le renflouement risque de menacer la vie sous-marine
+',
+    ),
+    488720944202915840 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Biodiversité : « Tout peut être enjeu de production aujourd\'hui »: Au Séquestre près d\'Albi, des espaces verts...
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    487502013010169856 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '[Lorraine (Développement Durable)] L’écologie est politique
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    488744616142073856 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Merci Au jdp/y.guérin ! Journal des Professionnels Journal des Professionnels - Les points de presse de l\'entreprise:
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489151904094892032 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'La Lettre des énergies renouvelables LE STOCKAGE DISTRIBUÉ, DE L’INTELLIGENCE DANS LE RÉSEAU  Les États-Unis...
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489075112285839360 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => 'Luxembourg: Sensibilisation aux abeilles et à la biodiversité:
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489303425671516160 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'On se plaint de l\'environnement et de l\'écologie et l\'économie etc mais y\'a pire en fait 😂😂
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    487659496723193856 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => 'Nouvelle France industrielle : pour une relance des #EnR | @Actuenviro #énergies
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489661916520796161 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Quais bus modulaires, une des réponses à l\'objectif d\'accessibilité des transports collectifs: Dans le rapport...
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    488744616142073856 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Merci Au jdp/y.guérin ! Journal des Professionnels Journal des Professionnels - Les points de presse de l\'entreprise:
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    506762923822551040 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => '@30millionsdamis  @ FBB_PORTEPAROLE S.Royal fait abattre les loups espèce protégée. Peut on la traduire en justice pour cette infraction ?
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    488693365379039232 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Ladybird, un robot pour surveiller les cultures:
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    504941192778637312 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => '@corinnelepage : Sur les #energiesrenouvelables, il y a un manque de volonté
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489847502099582976 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Yannick Jadot intervient sur TAFTA au Parlement Européen | Europe Écologie Les Verts
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    488966215650394112 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => 'L\'automate pour déchets électronique est une idée innovante que nous avions déjà repéré au japon qui proposait un...
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489427879231369218 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Transition écologique et énergétique : les contrats de plan Etat-Régions effectifs en 2015: La mini...
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489138712732008448 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    490033257367764992 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Pour les distraits qui n\'auraient pas pris le temps de mettre de la crème solaire sous ce généreux soleil,...
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    488636176010858496 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_PLAISIR.xml',
+      'content' => 'Le Centrale électrique solaire rendra mon entreprise plus florissante et mes touristes plus heureux !
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489126931443773440 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Félicitations ! “@omongeau: Après compétition, @EDFofficiel confie la refonte de son écosystème digital à l\'agence @NurunFrance ”
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489449456153399296 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Merci @CAROLoick pour RT Fontaine-Daniel : une si belle histoire -
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489513617222402051 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => 'La sénatrice Marie Blandin quitte EELV - Nouvel Obs | @scoopit
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489762810696462336 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => '[Livre blanc] Optimiser et intégrer les ressources d\' #énergies renouvelables
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    489487364553998337 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SURPRISE_NEGATIVE.xml',
+      'content' => 'Insolite : la loi #ALUR (par @CecileDuflot) conduit à une augmentation de 450 tonnes de papier par an #écologie
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    488791764518846464 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'j\'avais cru pouvoir voir le feu mais en fait c\'était des éoliennes, j\'suis vraiment atteinte ce soir moi
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    488961985996791808 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEPLAISIR.xml',
+      'content' => 'Ben voyons... Rupert Murdoch trouve que l\'on en fait trop sur le changement climatique
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:17] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489076809133068290 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '#Produits #BTP #Bâtiment Un an ferme pour un ancien gérant de société de pose de panneaux solaires
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489422441949982720 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'les nantais d’Atlantic Challenge inventent l\'habitation écologique et se classent deuxième au Solar Décathlon . Bravo
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    488318642283479040 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => 'En d\'autres termes : la #biodiversité exprime la qualité de systèmes complexes, et non des quantités catégorisées d\'espèces.
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489391609239580672 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Très belle levée @MidiCapital avec 44m€.
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489929487728267264 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Habiter au rez de chaussée c\'est vraiment top, y a tout l\'écosystème qui s\'installe dans l\'appart.
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    488335705459138561 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '@leLab_E1 @PierreMinnaert est Chargé projet "Tourisme nature développement durable" Comité région IdF...il n\'est pas membre fédéral #EELV
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489362362747846656 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_TRISTESSE.xml',
+      'content' => 'Plaidoyer de B.Coriat_Economistes atterrés pour des investissements publics dans l\'#écologie et l\'#énergie @atterres
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    490059352871800832 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => 'L\'ignorance sur le réchauffement climatique est si grande qu\'UMPrimaire pense que l\'or est le meilleur métal à mettre dans une clim\'géante !
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    507411251035521024 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SURPRISE_NEGATIVE.xml',
+      'content' => '#GCO : les écologistes strasbourgeois sont "stupéfaits" -
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489281731732574208 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '#UBIFRANCE Le marché de l\'électricité et des énergies renouvelables en Angola
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489322165486247937 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Baignade écologique : 55m2 d’eau pure à l´abri des regards -
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489017738611154944 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Actu-Environnement: l\'actualité quotidienne du secteur de l\'Environnement et du Développement Durable
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489018267462565888 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => 'Loup : Dysfonctionnement inacceptable du Parc National des Ecrins
+',
+    ),
+    489863586437541888 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Le vrai impact écologique du Tour de France
+',
+    ),
+    489138712732008448 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+    ),
+    490038666421895168 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_ENNUI.xml',
+      'content' => 'je ressent enfin le réchauffement climatique en action :) RT @NoraGaspard: Ça vous ennuie si j\'enlève mes chaussures ? Mon chemisier ?
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489138712732008448 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+    ),
+    489754168513409026 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Les applications spatiales au service de la transition écologique, par @ecologiEnergie
+',
+    ),
+    489357312746725376 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => 'Le secteur agricole africain : les défis à rele...
+',
+    ),
+    506856916455526400 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEPLAISIR.xml',
+      'content' => '@attac_fr @frebsamen @EmmanuelMacron @_PhMartin_, lamentable ministre écologie prônant chasse, corrida, gavage des oies et autres horreurs
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    488968657935278080 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Nicolas Vanier, le trophée de plomb de l\'ASPAS pour ses actions anti-écologistes
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489335684394913792 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_ACCORD.xml',
+      'content' => 'Le Sénégal souscrit à un mécanisme panafricain d\'assurance contre les sécheresses
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+  'prevform' => 
+  array (
+    489295776284426240 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Merci @savinanne pour RT Fontaine-Daniel : une si belle #histoire
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:18] (::1|)  => array (
+)
+[19/11/2015 - 21:35:19] (::1|)  => array (
+  'prevform' => 
+  array (
+    489302780033892352 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => 'Ils servent à rien dans l\'écosystème en plus ces pd
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:19] (::1|)  => array (
+)
+[19/11/2015 - 21:35:22] (::1|)  => array (
+  'prevform' => 
+  array (
+    489327703909490689 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_ACCORD.xml',
+      'content' => 'La #Commission valide la réforme sur les renouvelables en Allemagne https://t.co/iRG61lgXnh
+',
+    ),
+    489074605617725440 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '#activités #guide #ballade #marche #forêt #biodiversité #végétation #faune avec mes #hôtes #américains…
+',
+    ),
+    490038666421895168 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_ENNUI.xml',
+      'content' => 'je ressent enfin le réchauffement climatique en action :) RT @NoraGaspard: Ça vous ennuie si j\'enlève mes chaussures ? Mon chemisier ?
+',
+    ),
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:22] (::1|)  => array (
+  '489327703909490689_489074605617725440_490038666421895168_489095117446586368' => 
+  array (
+    'sid_0' => '489327703909490689',
+    'valence_0' => '3',
+    'sid_1' => '489074605617725440',
+    'valence_1' => '0',
+    'sid_2' => '490038666421895168',
+    'valence_2' => '0',
+    'sid_3' => '489095117446586368',
+    'valence_3' => '0',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:35:22] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:35:22] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368" action="http://localhost:80/cpm/demo/t2/multiple/result/result" id="form-489327703909490689_489074605617725440_490038666421895168_489095117446586368"><div><div><span><div class="form-item-title"></div><input type="hidden" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368[sid_0]" value="489327703909490689"/></span><h3>1/4</h3><div style="width:100%; display:block;">489327703909490689</div><div class="panel" style="display:inline-block; width:800px;">La #Commission valide la réforme sur les renouvelables en Allemagne https://t.co/iRG61lgXnh
+</div><span><span class="form-item-title"></span><select type="select" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368[valence_0]" style="margin-left:50px; max-width:100px;" value="3"><option  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option selected  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368[sid_1]" value="489074605617725440"/></span><h3>2/4</h3><div style="width:100%; display:block;">489074605617725440</div><div class="panel" style="display:inline-block; width:800px;">#activités #guide #ballade #marche #forêt #biodiversité #végétation #faune avec mes #hôtes #américains…
+</div><span><span class="form-item-title"></span><select type="select" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368[valence_1]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368[sid_2]" value="490038666421895168"/></span><h3>3/4</h3><div style="width:100%; display:block;">490038666421895168</div><div class="panel" style="display:inline-block; width:800px;">je ressent enfin le réchauffement climatique en action :) RT @NoraGaspard: Ça vous ennuie si j\'enlève mes chaussures ? Mon chemisier ?
+</div><span><span class="form-item-title"></span><select type="select" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368[valence_2]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368[sid_3]" value="489095117446586368"/></span><h3>4/4</h3><div style="width:100%; display:block;">489095117446586368</div><div class="panel" style="display:inline-block; width:800px;">L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+</div><span><span class="form-item-title"></span><select type="select" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368[valence_3]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="489327703909490689_489074605617725440_490038666421895168_489095117446586368[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">OPINION</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><div id="item-result-2" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><div id="item-result-3" class="item-result-false"><div style="padding-top:35px;">SENTIMENT</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:35:22] (::1|)  => array (
+)
+[19/11/2015 - 21:35:23] (::1|)  => array (
+)
+[19/11/2015 - 21:35:23] (::1|)  => array (
+)
+[19/11/2015 - 21:35:26] (::1|)  => array (
+  'prevform' => 
+  array (
+    507194988304674816 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SURPRISE_POSITIVE.xml',
+      'content' => '#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+',
+    ),
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+    487509876676247552 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => '"@futurasciences: Les appareils connectés en mode veille : un gâchis planétaire
+',
+    ),
+    489403706333339648 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Big data et voitures connectées :
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:26] (::1|)  => array (
+  '507194988304674816_489095117446586368_487509876676247552_489403706333339648' => 
+  array (
+    'sid_0' => '507194988304674816',
+    'valence_0' => '3',
+    'sid_1' => '489095117446586368',
+    'valence_1' => '0',
+    'sid_2' => '487509876676247552',
+    'valence_2' => '0',
+    'sid_3' => '489403706333339648',
+    'valence_3' => '0',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:35:26] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:35:26] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648" action="http://localhost:80/cpm/demo/t2/multiple/result/result/result" id="form-507194988304674816_489095117446586368_487509876676247552_489403706333339648"><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648[sid_0]" value="507194988304674816"/></span><h3>1/4</h3><div style="width:100%; display:block;">507194988304674816</div><div class="panel" style="display:inline-block; width:800px;">#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648[valence_0]" style="margin-left:50px; max-width:100px;" value="3"><option  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option selected  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648[sid_1]" value="489095117446586368"/></span><h3>2/4</h3><div style="width:100%; display:block;">489095117446586368</div><div class="panel" style="display:inline-block; width:800px;">L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648[valence_1]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648[sid_2]" value="487509876676247552"/></span><h3>3/4</h3><div style="width:100%; display:block;">487509876676247552</div><div class="panel" style="display:inline-block; width:800px;">"@futurasciences: Les appareils connectés en mode veille : un gâchis planétaire
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648[valence_2]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648[sid_3]" value="489403706333339648"/></span><h3>4/4</h3><div style="width:100%; display:block;">489403706333339648</div><div class="panel" style="display:inline-block; width:800px;">Big data et voitures connectées :
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648[valence_3]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="507194988304674816_489095117446586368_487509876676247552_489403706333339648[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">SENTIMENT</div></div><div id="item-result-2" class="item-result-false"><div style="padding-top:35px;">OPINION</div></div><div id="item-result-3" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:35:26] (::1|)  => array (
+)
+[19/11/2015 - 21:35:26] (::1|)  => array (
+)
+[19/11/2015 - 21:35:26] (::1|)  => array (
+)
+[19/11/2015 - 21:35:26] (::1|)  => array (
+  'prevform' => 
+  array (
+    488374479215931392 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@PierreMinnaert c est grave l\'incitation aux conflits  !! Oui a l écologie mais non aux écologistes !@JVPlace
+',
+    ),
+    505339685557006336 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_APAISEMENT.xml',
+      'content' => 'Merci à tous les pompiers @ParcsCanada pour garantir la diversité de l’écosystème de la forêt boréale
+',
+    ),
+    487360659517345792 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Chez #cleaetroman les envois #gratuit  sont en lettre verte pour la France metro. #reduction émission de #co2
+',
+    ),
+    506092670746243072 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => '@NicolasTetrault Syndicats, lobby et écologistes bloquent tout développement au QC #ceic #plq
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:26] (::1|)  => array (
+)
+[19/11/2015 - 21:35:26] (::1|)  => array (
+  'prevform' => 
+  array (
+    489049705603940352 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => '#Biodiversité : Victimes de la route les #serpents disparaissent
+',
+    ),
+    489918127023464449 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_APAISEMENT.xml',
+      'content' => '#ecologie Le premier été silencieux de l’histoire du monde
+',
+    ),
+    489439067084296192 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Les toilettes de train Thaïlandais = trou qui mène directement aux rails... 100% écologique
+',
+    ),
+    489668650081583104 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Marquages aux sols qui s\'efface, bravo pour le choix écologique et visuel de Bernay... | @scoopit
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:26] (::1|)  => array (
+)
+[19/11/2015 - 21:35:28] (::1|)  => array (
+  'prevform' => 
+  array (
+    487575629282693121 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Bravo @VilleLongueuil pour votre vision d\'une #agriculture durable et écoresponsable.
+',
+    ),
+    489436130283388928 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => 'Compte rendu du procès d\'Orléans à propos du fauchage de tournesols mutés.
+',
+    ),
+    488450121751732224 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_COLERE.xml',
+      'content' => 'MDRRR IL SONT CONS SES PALESTINIENS?? Le truc le moins possibles ils tirent sur leurs centrales electriques 😹😹😹
+',
+    ),
+    489009640651649024 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '@Cuisiconscience par exemple ce qui est visible n\'est que très rarement ce qui pollue le  ! #pollution #ecologie #politique Frédéric Denhez
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:28] (::1|)  => array (
+)
+[19/11/2015 - 21:35:30] (::1|)  => array (
+  'prevform' => 
+  array (
+    507194988304674816 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SURPRISE_POSITIVE.xml',
+      'content' => '#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+',
+    ),
+    488687374906712065 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'La biodiversité: avant [AMPERSAND]maintenant
+',
+    ),
+    490071704199528448 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => 'L\'algue A.F.A : un écosystème d\'une richesse nutritive exceptionnelle
+',
+    ),
+    489138712732008448 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:30] (::1|)  => array (
+  '507194988304674816_488687374906712065_490071704199528448_489138712732008448' => 
+  array (
+    'sid_0' => '507194988304674816',
+    'valence_0' => '0',
+    'sid_1' => '488687374906712065',
+    'valence_1' => '0',
+    'sid_2' => '490071704199528448',
+    'valence_2' => '0',
+    'sid_3' => '489138712732008448',
+    'valence_3' => '0',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:35:30] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:35:30] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448" action="http://localhost:80/cpm/demo/t2/multiple/result/result/result/result" id="form-507194988304674816_488687374906712065_490071704199528448_489138712732008448"><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448[sid_0]" value="507194988304674816"/></span><h3>1/4</h3><div style="width:100%; display:block;">507194988304674816</div><div class="panel" style="display:inline-block; width:800px;">#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448[sid_1]" value="488687374906712065"/></span><h3>2/4</h3><div style="width:100%; display:block;">488687374906712065</div><div class="panel" style="display:inline-block; width:800px;">La biodiversité: avant [AMPERSAND]maintenant
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448[valence_1]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448[sid_2]" value="490071704199528448"/></span><h3>3/4</h3><div style="width:100%; display:block;">490071704199528448</div><div class="panel" style="display:inline-block; width:800px;">L\'algue A.F.A : un écosystème d\'une richesse nutritive exceptionnelle
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448[valence_2]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448[sid_3]" value="489138712732008448"/></span><h3>4/4</h3><div style="width:100%; display:block;">489138712732008448</div><div class="panel" style="display:inline-block; width:800px;">@MisterC00l Il manque l\'écosystème Apple :)
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448[valence_3]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="507194988304674816_488687374906712065_490071704199528448_489138712732008448[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><div id="item-result-2" class="item-result-false"><div style="padding-top:35px;">OPINION</div></div><div id="item-result-3" class="item-result-false"><div style="padding-top:35px;">SENTIMENT</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:35:30] (::1|)  => array (
+)
+[19/11/2015 - 21:35:30] (::1|)  => array (
+)
+[19/11/2015 - 21:35:30] (::1|)  => array (
+)
+[19/11/2015 - 21:35:30] (::1|)  => array (
+  'prevform' => 
+  array (
+    488374479215931392 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@PierreMinnaert c est grave l\'incitation aux conflits  !! Oui a l écologie mais non aux écologistes !@JVPlace
+',
+    ),
+    505754207493046272 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SURPRISE_NEGATIVE.xml',
+      'content' => '@Alex_Le_Rouge Visiblement, être assis à côté d\'un centriste "environnementaliste" n\'a pas l\'air de le déranger... #UEPS
+',
+    ),
+    489924355397545985 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Energie durable : Sgolne Royal prsente,  Berlin, le nouveau modle nergtique franais
+',
+    ),
+    489417417936736257 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_ACCORD.xml',
+      'content' => 'Martin Malvy est réélu président du comité de bassin Adour-Garonne: A 78 ans, Martin Malvy, préside...
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:30] (::1|)  => array (
+)
+[19/11/2015 - 21:35:30] (::1|)  => array (
+  'prevform' => 
+  array (
+    488892359346647040 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_PEUR.xml',
+      'content' => 'Un groupe écologiste s\'inquiète du sort des parcs nationaux #polcan
+',
+    ),
+    488647241922781185 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Énergie solaire et climatisation Tanger -
+',
+    ),
+    488944331362148353 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => 'Jospin, Bové, Testart... demandent à Hollande de contester la décision de la CEDH d\'autoriser la #GPA. #écologie
+',
+    ),
+    487575629282693121 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Bravo @VilleLongueuil pour votre vision d\'une #agriculture durable et écoresponsable.
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:30] (::1|)  => array (
+)
+[19/11/2015 - 21:35:31] (::1|)  => array (
+  'prevform' => 
+  array (
+    489408478122110976 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'La @JVMValley en orbite ! L’écosystème expert du #savoirproduire français ! @IRTJulesVerne @Polemc2 @paysdelaloire
+',
+    ),
+    488873085336952832 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_ACCORD.xml',
+      'content' => 'Des gens signent une pétition pour éviter la prison à la «sauveuse de canards» : des jeunes, des écologistes, des vieux avec une «canne».
+',
+    ),
+    487470067928813568 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_PLAISIR.xml',
+      'content' => 'Bienvenue à Elsa Jeannes @ElsaJeannes étudiante dans l\'#environnement et le #développement_durable qui nous suit maintenant sur Twitter,
+',
+    ),
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:31] (::1|)  => array (
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+  'prevform' => 
+  array (
+    489814842434670592 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Enfin ! Le décret d\'éco-conditionnalité signé
+',
+    ),
+    488333420175847424 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => 'Changement climatique: l\'inquisition verte
+',
+    ),
+    507194988304674816 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SURPRISE_POSITIVE.xml',
+      'content' => '#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+',
+    ),
+    489432910836273152 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Nos gagnants du Prix de développement durable, Korb [AMPERSAND]Kelly Whale, with @ws04 [AMPERSAND]Jason @DeLavalCanada  #dfcplc14
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+  '489814842434670592_488333420175847424_507194988304674816_489432910836273152' => 
+  array (
+    'sid_0' => '489814842434670592',
+    'valence_0' => '0',
+    'sid_1' => '488333420175847424',
+    'valence_1' => '0',
+    'sid_2' => '507194988304674816',
+    'valence_2' => '0',
+    'sid_3' => '489432910836273152',
+    'valence_3' => '0',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:35:32] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:35:32] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152" action="http://localhost:80/cpm/demo/t2/multiple/result/result/result/result/result" id="form-489814842434670592_488333420175847424_507194988304674816_489432910836273152"><div><div><span><div class="form-item-title"></div><input type="hidden" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152[sid_0]" value="489814842434670592"/></span><h3>1/4</h3><div style="width:100%; display:block;">489814842434670592</div><div class="panel" style="display:inline-block; width:800px;">Enfin ! Le décret d\'éco-conditionnalité signé
+</div><span><span class="form-item-title"></span><select type="select" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152[sid_1]" value="488333420175847424"/></span><h3>2/4</h3><div style="width:100%; display:block;">488333420175847424</div><div class="panel" style="display:inline-block; width:800px;">Changement climatique: l\'inquisition verte
+</div><span><span class="form-item-title"></span><select type="select" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152[valence_1]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152[sid_2]" value="507194988304674816"/></span><h3>3/4</h3><div style="width:100%; display:block;">507194988304674816</div><div class="panel" style="display:inline-block; width:800px;">#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+</div><span><span class="form-item-title"></span><select type="select" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152[valence_2]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152[sid_3]" value="489432910836273152"/></span><h3>4/4</h3><div style="width:100%; display:block;">489432910836273152</div><div class="panel" style="display:inline-block; width:800px;">Nos gagnants du Prix de développement durable, Korb [AMPERSAND]Kelly Whale, with @ws04 [AMPERSAND]Jason @DeLavalCanada  #dfcplc14
+</div><span><span class="form-item-title"></span><select type="select" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152[valence_3]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="489814842434670592_488333420175847424_507194988304674816_489432910836273152[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">SENTIMENT</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">OPINION</div></div><div id="item-result-2" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><div id="item-result-3" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+  'prevform' => 
+  array (
+    489432562247299072 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_MEPRIS.xml',
+      'content' => 'ECOLOGIE. Pêche Profonde=DESASTRE
+',
+    ),
+    489508762542407680 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => 'La sénatrice du Nord Marie-Christine Blandin démissionne d’Europe Écologie – Les Verts
+',
+    ),
+    489391609239580672 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Très belle levée @MidiCapital avec 44m€.
+',
+    ),
+    489777687641092096 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '“Elu adjoint au Maire de Paris ... chargé de toutes les questions relatives à la propreté et au traitement des déchets”
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+  'prevform' => 
+  array (
+    488365206813569024 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Bonne nouvelle pour  le projet d\'Éoliennes du Mont des 4 Faux : la Défense donne son feu vert pour les travaux @Champa_Ardenne #éolien
+',
+    ),
+    488380439808073729 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_COLERE.xml',
+      'content' => 'Une affaire de fous! D\'un côté, on ordonne un sursis pour recompter les voix, de l\'autre on autorise...
+',
+    ),
+    489650242586173440 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => '@acampadabuc @PaalomaBeaau Oh j\'ai pas pris l\'avion depuis 26 ans je crois. Mon empreinte écologique, pas trop mal ;-)
+',
+    ),
+    489563986644320256 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '#ecologie Oxfam: proposer une nouvelle vision pour le développement
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+  'prevform' => 
+  array (
+    489138617957511168 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '@fleurdebitume que cette motivation soit écologique, économique, éthique, nutritionnelle..
+',
+    ),
+    488420212354449408 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_PLAISIR.xml',
+      'content' => 'J\'ai ajouté une vidéo à une playlist @YouTube - (FR) Sexualité épanouie: frémissement intérieur [AMPERSAND]énergie naturelle - Diane Bellego
+',
+    ),
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+    505765747235106816 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => 'Énergies éoliennes et photovoltaïques : inconstantes, on ne peut pas compter sur elles
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:32] (::1|)  => array (
+)
+[19/11/2015 - 21:35:33] (::1|)  => array (
+  'prevform' => 
+  array (
+    489517957995712513 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => 'Afrique du Sud : MTN adopte l’énergie solaire pour rafraichir son data centre de 484 m2 – Ecofin
+',
+    ),
+    488347621590052864 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Demain sur Reputatiolab, exploration de l’écosystème du monde de la communication et du marketing belge !
+',
+    ),
+    489138712732008448 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+    ),
+    489918127023464449 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_APAISEMENT.xml',
+      'content' => '#ecologie Le premier été silencieux de l’histoire du monde
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:33] (::1|)  => array (
+  '489517957995712513_488347621590052864_489138712732008448_489918127023464449' => 
+  array (
+    'sid_0' => '489517957995712513',
+    'valence_0' => '0',
+    'sid_1' => '488347621590052864',
+    'valence_1' => '0',
+    'sid_2' => '489138712732008448',
+    'valence_2' => '0',
+    'sid_3' => '489918127023464449',
+    'valence_3' => '0',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:35:33] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:35:33] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449" action="http://localhost:80/cpm/demo/t2/multiple/result/result/result/result/result/result" id="form-489517957995712513_488347621590052864_489138712732008448_489918127023464449"><div><div><span><div class="form-item-title"></div><input type="hidden" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449[sid_0]" value="489517957995712513"/></span><h3>1/4</h3><div style="width:100%; display:block;">489517957995712513</div><div class="panel" style="display:inline-block; width:800px;">Afrique du Sud : MTN adopte l’énergie solaire pour rafraichir son data centre de 484 m2 – Ecofin
+</div><span><span class="form-item-title"></span><select type="select" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449[sid_1]" value="488347621590052864"/></span><h3>2/4</h3><div style="width:100%; display:block;">488347621590052864</div><div class="panel" style="display:inline-block; width:800px;">Demain sur Reputatiolab, exploration de l’écosystème du monde de la communication et du marketing belge !
+</div><span><span class="form-item-title"></span><select type="select" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449[valence_1]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449[sid_2]" value="489138712732008448"/></span><h3>3/4</h3><div style="width:100%; display:block;">489138712732008448</div><div class="panel" style="display:inline-block; width:800px;">@MisterC00l Il manque l\'écosystème Apple :)
+</div><span><span class="form-item-title"></span><select type="select" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449[valence_2]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449[sid_3]" value="489918127023464449"/></span><h3>4/4</h3><div style="width:100%; display:block;">489918127023464449</div><div class="panel" style="display:inline-block; width:800px;">#ecologie Le premier été silencieux de l’histoire du monde
+</div><span><span class="form-item-title"></span><select type="select" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449[valence_3]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="489517957995712513_488347621590052864_489138712732008448_489918127023464449[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">OPINION</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><div id="item-result-2" class="item-result-false"><div style="padding-top:35px;">SENTIMENT</div></div><div id="item-result-3" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:35:33] (::1|)  => array (
+)
+[19/11/2015 - 21:35:33] (::1|)  => array (
+)
+[19/11/2015 - 21:35:33] (::1|)  => array (
+)
+[19/11/2015 - 21:35:34] (::1|)  => array (
+  'prevform' => 
+  array (
+    488374479215931392 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@PierreMinnaert c est grave l\'incitation aux conflits  !! Oui a l écologie mais non aux écologistes !@JVPlace
+',
+    ),
+    489050639327313922 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => '#Conduit_lumière pour #éclairage #écologique - Construire ma maison - Mozilla Firefox
+',
+    ),
+    489614934616313856 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '@bastxrde j\'suis ecologiste
+',
+    ),
+    505841246951440384 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_AMOUR.xml',
+      'content' => 'Écologiste c’est pas un parti politique tout le monde aime la nature
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:34] (::1|)  => array (
+)
+[19/11/2015 - 21:35:34] (::1|)  => array (
+  'prevform' => 
+  array (
+    505244768855941120 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => 'Progression des énergies renouvelables dans le monde, mais insuffisante
+',
+    ),
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+    489864696355233792 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '#ecologie Décoration et ambiance
+',
+    ),
+    489843596820881408 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_TRISTESSE.xml',
+      'content' => 'L’UE déplore l’abandon de la taxe carbone en Australie @Euractiv_FR
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:35:34] (::1|)  => array (
+)
+[19/11/2015 - 21:36:10] (::1|)  => array (
+  'prevform' => 
+  array (
+    489738363235475456 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Le tout nouveau billet de notre expert en #géothermie
+',
+    ),
+    488374479215931392 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@PierreMinnaert c est grave l\'incitation aux conflits  !! Oui a l écologie mais non aux écologistes !@JVPlace
+',
+    ),
+    489054432110600193 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_MEPRIS.xml',
+      'content' => '@Muriel_F_Pacani @ledauphine  Un excellent article de Néoplanète sur l\'incompétence de notre ministre de l\'écologie
+',
+    ),
+    489096172728885250 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => '#Mayenne : #Lafarge et #Pigeon optent pour une plateforme écologique
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:10] (::1|)  => array (
+)
+[19/11/2015 - 21:36:13] (::1|)  => array (
+  'prevform' => 
+  array (
+    488928184097046528 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Objets connectés : 400 TWh consommés chaque année
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:13] (::1|)  => array (
+  488928184097046528 => 
+  array (
+    'sid_0' => '488928184097046528',
+    'valence_0' => '2',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:13] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:36:13] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="488928184097046528" action="" id="form-488928184097046528"><div><div><span><div class="form-item-title"></div><input type="hidden" name="488928184097046528[sid_0]" value="488928184097046528"/></span><h3>1/1</h3><div style="width:100%; display:block;">488928184097046528</div><div class="panel" style="display:inline-block; width:800px;">Objets connectés : 400 TWh consommés chaque année
+</div><span><span class="form-item-title"></span><select type="select" name="488928184097046528[valence_0]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">EMOTION</option><option selected  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="488928184097046528[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="488928184097046528[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:13] (::1|)  => array (
+)
+[19/11/2015 - 21:36:15] (::1|)  => array (
+)
+[19/11/2015 - 21:36:15] (::1|)  => array (
+)
+[19/11/2015 - 21:36:16] (::1|)  => array (
+  'prevform' => 
+  array (
+    488318642283479040 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DEVALORISATION.xml',
+      'content' => 'En d\'autres termes : la #biodiversité exprime la qualité de systèmes complexes, et non des quantités catégorisées d\'espèces.
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:16] (::1|)  => array (
+  488318642283479040 => 
+  array (
+    'sid_0' => '488318642283479040',
+    'valence_0' => '0',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:16] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:36:16] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="488318642283479040" action="" id="form-488318642283479040"><div><div><span><div class="form-item-title"></div><input type="hidden" name="488318642283479040[sid_0]" value="488318642283479040"/></span><h3>1/1</h3><div style="width:100%; display:block;">488318642283479040</div><div class="panel" style="display:inline-block; width:800px;">En d\'autres termes : la #biodiversité exprime la qualité de systèmes complexes, et non des quantités catégorisées d\'espèces.
+</div><span><span class="form-item-title"></span><select type="select" name="488318642283479040[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="488318642283479040[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="488318642283479040[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">OPINION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:16] (::1|)  => array (
+)
+[19/11/2015 - 21:36:17] (::1|)  => array (
+)
+[19/11/2015 - 21:36:17] (::1|)  => array (
+)
+[19/11/2015 - 21:36:17] (::1|)  => array (
+  'prevform' => 
+  array (
+    487569854170669056 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Mission commerciale France-Québec sur le développement durable
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:17] (::1|)  => array (
+  487569854170669056 => 
+  array (
+    'sid_0' => '487569854170669056',
+    'valence_0' => '0',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:17] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:36:17] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="487569854170669056" action="" id="form-487569854170669056"><div><div><span><div class="form-item-title"></div><input type="hidden" name="487569854170669056[sid_0]" value="487569854170669056"/></span><h3>1/1</h3><div style="width:100%; display:block;">487569854170669056</div><div class="panel" style="display:inline-block; width:800px;">Mission commerciale France-Québec sur le développement durable
+</div><span><span class="form-item-title"></span><select type="select" name="487569854170669056[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="487569854170669056[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="487569854170669056[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:17] (::1|)  => array (
+)
+[19/11/2015 - 21:36:18] (::1|)  => array (
+)
+[19/11/2015 - 21:36:18] (::1|)  => array (
+)
+[19/11/2015 - 21:36:20] (::1|)  => array (
+  'prevform' => 
+  array (
+    490038666421895168 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_ENNUI.xml',
+      'content' => 'je ressent enfin le réchauffement climatique en action :) RT @NoraGaspard: Ça vous ennuie si j\'enlève mes chaussures ? Mon chemisier ?
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:20] (::1|)  => array (
+  490038666421895168 => 
+  array (
+    'sid_0' => '490038666421895168',
+    'valence_0' => '3',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:20] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:36:20] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="490038666421895168" action="" id="form-490038666421895168"><div><div><span><div class="form-item-title"></div><input type="hidden" name="490038666421895168[sid_0]" value="490038666421895168"/></span><h3>1/1</h3><div style="width:100%; display:block;">490038666421895168</div><div class="panel" style="display:inline-block; width:800px;">je ressent enfin le réchauffement climatique en action :) RT @NoraGaspard: Ça vous ennuie si j\'enlève mes chaussures ? Mon chemisier ?
+</div><span><span class="form-item-title"></span><select type="select" name="490038666421895168[valence_0]" style="margin-left:50px; max-width:100px;" value="3"><option  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option selected  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="490038666421895168[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="490038666421895168[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:20] (::1|)  => array (
+)
+[19/11/2015 - 21:36:21] (::1|)  => array (
+)
+[19/11/2015 - 21:36:21] (::1|)  => array (
+)
+[19/11/2015 - 21:36:24] (::1|)  => array (
+  'prevform' => 
+  array (
+    489990016408776704 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DERANGEMENT.xml',
+      'content' => '@hellxions pas de photos de la biodiversité ? et des voies de train ? bon courage pour cette journée encore + chaude qu\'hier ;)
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:24] (::1|)  => array (
+  489990016408776704 => 
+  array (
+    'sid_0' => '489990016408776704',
+    'valence_0' => '4',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:24] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:36:24] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="489990016408776704" action="" id="form-489990016408776704"><div><div><span><div class="form-item-title"></div><input type="hidden" name="489990016408776704[sid_0]" value="489990016408776704"/></span><h3>1/1</h3><div style="width:100%; display:block;">489990016408776704</div><div class="panel" style="display:inline-block; width:800px;">@hellxions pas de photos de la biodiversité ? et des voies de train ? bon courage pour cette journée encore + chaude qu\'hier ;)
+</div><span><span class="form-item-title"></span><select type="select" name="489990016408776704[valence_0]" style="margin-left:50px; max-width:100px;" value="4"><option  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option selected  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489990016408776704[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="489990016408776704[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:24] (::1|)  => array (
+)
+[19/11/2015 - 21:36:27] (::1|)  => array (
+)
+[19/11/2015 - 21:36:27] (::1|)  => array (
+)
+[19/11/2015 - 21:36:29] (::1|)  => array (
+  'prevform' => 
+  array (
+    489138712732008448 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:29] (::1|)  => array (
+  489138712732008448 => 
+  array (
+    'sid_0' => '489138712732008448',
+    'valence_0' => '3',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:29] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:36:29] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="489138712732008448" action="" id="form-489138712732008448"><div><div><span><div class="form-item-title"></div><input type="hidden" name="489138712732008448[sid_0]" value="489138712732008448"/></span><h3>1/1</h3><div style="width:100%; display:block;">489138712732008448</div><div class="panel" style="display:inline-block; width:800px;">@MisterC00l Il manque l\'écosystème Apple :)
+</div><span><span class="form-item-title"></span><select type="select" name="489138712732008448[valence_0]" style="margin-left:50px; max-width:100px;" value="3"><option  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option selected  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489138712732008448[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="489138712732008448[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">SENTIMENT</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:29] (::1|)  => array (
+)
+[19/11/2015 - 21:36:31] (::1|)  => array (
+)
+[19/11/2015 - 21:36:31] (::1|)  => array (
+)
+[19/11/2015 - 21:36:32] (::1|)  => array (
+  'prevform' => 
+  array (
+    488732531416911872 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => '@JusteReaction   Je suis pour une écologie éthylique. Fièrement.
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:32] (::1|)  => array (
+)
+[19/11/2015 - 21:36:33] (::1|)  => array (
+  'prevform' => 
+  array (
+    488608551225810944 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'La biodiversité et son importance pour l\'agriculture, brillante présentation de Pierre-Henri Gouyon
+',
+    ),
+    506391812177551360 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => 'Au Kenya, des techniques commando contre les braconniers  - Page 5#27435#27435#27435#27435
+',
+    ),
+    489110550249340928 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'La French Tech : L\'écosystème de startups français (#FrenchTech @LaFrenchTech)
+',
+    ),
+    507194988304674816 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SURPRISE_POSITIVE.xml',
+      'content' => '#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:33] (::1|)  => array (
+)
+[19/11/2015 - 21:36:34] (::1|)  => array (
+  'prevform' => 
+  array (
+    488117630382120960 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => 'La famille est un élément essentiel de tout développement humain et social durable.
+',
+    ),
+    489095117446586368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => 'L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+',
+    ),
+    488742182975963136 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'La feuille de route #technologique de l\'énergie #photovoltaïque
+',
+    ),
+    489139797286744065 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_TRISTESSE.xml',
+      'content' => 'Si vous vous contentez de faire ce que l\'on vous dit de faire, malheureusement vous n\'en faites pas encore assez. #agriculturebio #ecologie
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:34] (::1|)  => array (
+  '488117630382120960_489095117446586368_488742182975963136_489139797286744065' => 
+  array (
+    'sid_0' => '488117630382120960',
+    'valence_0' => '0',
+    'sid_1' => '489095117446586368',
+    'valence_1' => '0',
+    'sid_2' => '488742182975963136',
+    'valence_2' => '0',
+    'sid_3' => '489139797286744065',
+    'valence_3' => '0',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:34] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 21:36:34] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065" action="" id="form-488117630382120960_489095117446586368_488742182975963136_489139797286744065"><div><div><span><div class="form-item-title"></div><input type="hidden" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065[sid_0]" value="488117630382120960"/></span><h3>1/4</h3><div style="width:100%; display:block;">488117630382120960</div><div class="panel" style="display:inline-block; width:800px;">La famille est un élément essentiel de tout développement humain et social durable.
+</div><span><span class="form-item-title"></span><select type="select" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065[sid_1]" value="489095117446586368"/></span><h3>2/4</h3><div style="width:100%; display:block;">489095117446586368</div><div class="panel" style="display:inline-block; width:800px;">L’#UE somme les Etats d’optimiser les #dépenses en faveur des #ENR
+</div><span><span class="form-item-title"></span><select type="select" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065[valence_1]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065[sid_2]" value="488742182975963136"/></span><h3>3/4</h3><div style="width:100%; display:block;">488742182975963136</div><div class="panel" style="display:inline-block; width:800px;">La feuille de route #technologique de l\'énergie #photovoltaïque
+</div><span><span class="form-item-title"></span><select type="select" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065[valence_2]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065[sid_3]" value="489139797286744065"/></span><h3>4/4</h3><div style="width:100%; display:block;">489139797286744065</div><div class="panel" style="display:inline-block; width:800px;">Si vous vous contentez de faire ce que l\'on vous dit de faire, malheureusement vous n\'en faites pas encore assez. #agriculturebio #ecologie
+</div><span><span class="form-item-title"></span><select type="select" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065[valence_3]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="488117630382120960_489095117446586368_488742182975963136_489139797286744065[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">OPINION</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">SENTIMENT</div></div><div id="item-result-2" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><div id="item-result-3" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:34] (::1|)  => array (
+)
+[19/11/2015 - 21:36:37] (::1|)  => array (
+)
+[19/11/2015 - 21:36:37] (::1|)  => array (
+)
+[19/11/2015 - 21:36:38] (::1|)  => array (
+  'prevform' => 
+  array (
+    489801306669084672 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => '@maevagab T\'inquiète yavais les feuilles juste à côté, c\'est + écologique !
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:38] (::1|)  => array (
+)
+[19/11/2015 - 21:36:39] (::1|)  => array (
+  'prevform' => 
+  array (
+    488585572148322304 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => '@lauhaim Bref, preuve encore une fois que nos postes diplomatiques ignorent la triste réalité de leur écosystème.
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:39] (::1|)  => array (
+)
+[19/11/2015 - 21:36:39] (::1|)  => array (
+  'prevform' => 
+  array (
+    489294370982465536 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'Eric Fruteau: Un Port à Bois Rouge "Version Virapoullé"… un monstre de développement durable car lié à l’énergie...
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:39] (::1|)  => array (
+)
+[19/11/2015 - 21:36:40] (::1|)  => array (
+  'prevform' => 
+  array (
+    507147416127016960 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => 'Barrage de Sivens : Non à la répression, oui à l’intérêt général | Europe Écologie Les Verts
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:40] (::1|)  => array (
+  507147416127016960 => 
+  array (
+    'sid_0' => '507147416127016960',
+    'valence_0' => '0',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:40] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[19/11/2015 - 21:36:40] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="507147416127016960" action="" id="form-507147416127016960"><div><div><span><div class="form-item-title"></div><input type="hidden" name="507147416127016960[sid_0]" value="507147416127016960"/></span><h3>1/1</h3><div style="width:100%; display:block;">507147416127016960</div><div class="panel" style="display:inline-block; width:800px;">Barrage de Sivens : Non à la répression, oui à l’intérêt général | Europe Écologie Les Verts
+</div><span><span class="form-item-title"></span><select type="select" name="507147416127016960[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507147416127016960[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="507147416127016960[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">+</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:40] (::1|)  => array (
+)
+[19/11/2015 - 21:36:43] (::1|)  => array (
+)
+[19/11/2015 - 21:36:43] (::1|)  => array (
+)
+[19/11/2015 - 21:36:43] (::1|)  => array (
+  'prevform' => 
+  array (
+    489712870683197440 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'L\'Arctique attise les convoitises européennes
+',
+    ),
+    504743430325817344 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => 'Dix ans d\'engagement pour la gauche et les écologistes. Sans compter. Sans souffler. Pour en arriver là... (et p. 12)
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:43] (::1|)  => array (
+)
+[19/11/2015 - 21:36:43] (::1|)  => array (
+  'prevform' => 
+  array (
+    505803120442880000 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => 'Le gouvernement wallon renonce aux objectifs de production d\'énergie renouvelable, "trop ambitieux et dogmatiques"
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:43] (::1|)  => array (
+)
+[19/11/2015 - 21:36:43] (::1|)  => array (
+  'prevform' => 
+  array (
+    489875521296416768 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'RT @lemondefr Les OGM et la panne de la biodiversité agricole
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:43] (::1|)  => array (
+)
+[19/11/2015 - 21:36:44] (::1|)  => array (
+  'prevform' => 
+  array (
+    489137473797095425 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => '#Biodiversité et #climat: Deux crises qui glissent entre les mains du gouvernement Couillard #assnat
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:44] (::1|)  => array (
+  '489712870683197440_504743430325817344' => 
+  array (
+    'sid_0' => '489712870683197440',
+    'valence_0' => '0',
+    'sid_1' => '504743430325817344',
+    'valence_1' => '0',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:45] (::1|)  => array (
+  'prevform' => 
+  array (
+    504773654035435520 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => '@NathFANFANT Merci pour le RT ! Nous avons hâte de lever le voile sur l\'écosystème startup en zone caraïbes !
+',
+    ),
+    489712870683197440 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'L\'Arctique attise les convoitises européennes
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:45] (::1|)  => array (
+  '504773654035435520_489712870683197440' => 
+  array (
+    'sid_0' => '504773654035435520',
+    'valence_0' => '0',
+    'sid_1' => '489712870683197440',
+    'valence_1' => '0',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:45] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[19/11/2015 - 21:36:45] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="504773654035435520_489712870683197440" action="" id="form-504773654035435520_489712870683197440"><div><div><span><div class="form-item-title"></div><input type="hidden" name="504773654035435520_489712870683197440[sid_0]" value="504773654035435520"/></span><h3>1/2</h3><div style="width:100%; display:block;">504773654035435520</div><div class="panel" style="display:inline-block; width:800px;">@NathFANFANT Merci pour le RT ! Nous avons hâte de lever le voile sur l\'écosystème startup en zone caraïbes !
+</div><span><span class="form-item-title"></span><select type="select" name="504773654035435520_489712870683197440[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="504773654035435520_489712870683197440[sid_1]" value="489712870683197440"/></span><h3>2/2</h3><div style="width:100%; display:block;">489712870683197440</div><div class="panel" style="display:inline-block; width:800px;">L\'Arctique attise les convoitises européennes
+</div><span><span class="form-item-title"></span><select type="select" name="504773654035435520_489712870683197440[valence_1]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="504773654035435520_489712870683197440[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="504773654035435520_489712870683197440[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">+</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">-</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:45] (::1|)  => array (
+)
+[19/11/2015 - 21:36:47] (::1|)  => array (
+)
+[19/11/2015 - 21:36:47] (::1|)  => array (
+)
+[19/11/2015 - 21:36:48] (::1|)  => array (
+  'prevform' => 
+  array (
+    507329772771618816 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => 'J\'aime ma bio parce que je mange bio et je travail dans la biologie et je roule en biocarburant.
+',
+    ),
+    489112093443260416 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'Ma vie de masochiste écologique.
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:48] (::1|)  => array (
+  '507329772771618816_489112093443260416' => 
+  array (
+    'sid_0' => '507329772771618816',
+    'valence_0' => '0',
+    'sid_1' => '489112093443260416',
+    'valence_1' => '0',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:48] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[19/11/2015 - 21:36:48] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="507329772771618816_489112093443260416" action="" id="form-507329772771618816_489112093443260416"><div><div><span><div class="form-item-title"></div><input type="hidden" name="507329772771618816_489112093443260416[sid_0]" value="507329772771618816"/></span><h3>1/2</h3><div style="width:100%; display:block;">507329772771618816</div><div class="panel" style="display:inline-block; width:800px;">J\'aime ma bio parce que je mange bio et je travail dans la biologie et je roule en biocarburant.
+</div><span><span class="form-item-title"></span><select type="select" name="507329772771618816_489112093443260416[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507329772771618816_489112093443260416[sid_1]" value="489112093443260416"/></span><h3>2/2</h3><div style="width:100%; display:block;">489112093443260416</div><div class="panel" style="display:inline-block; width:800px;">Ma vie de masochiste écologique.
+</div><span><span class="form-item-title"></span><select type="select" name="507329772771618816_489112093443260416[valence_1]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507329772771618816_489112093443260416[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="507329772771618816_489112093443260416[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">+</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">-</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:48] (::1|)  => array (
+)
+[19/11/2015 - 21:36:49] (::1|)  => array (
+)
+[19/11/2015 - 21:36:49] (::1|)  => array (
+)
+[19/11/2015 - 21:36:49] (::1|)  => array (
+  'prevform' => 
+  array (
+    506778942393819136 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => '@eurodeputesEELV au Parlement européen, l\'aventure continue! Retrouvez notre brochure de présentation de la...
+',
+    ),
+    489054499085225985 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'Retourner avec panache les courriers/publicités non désiré(e)s à l\'envoyeur :
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:49] (::1|)  => array (
+  '506778942393819136_489054499085225985' => 
+  array (
+    'sid_0' => '506778942393819136',
+    'valence_0' => '0',
+    'sid_1' => '489054499085225985',
+    'valence_1' => '0',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:49] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[19/11/2015 - 21:36:50] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="506778942393819136_489054499085225985" action="" id="form-506778942393819136_489054499085225985"><div><div><span><div class="form-item-title"></div><input type="hidden" name="506778942393819136_489054499085225985[sid_0]" value="506778942393819136"/></span><h3>1/2</h3><div style="width:100%; display:block;">506778942393819136</div><div class="panel" style="display:inline-block; width:800px;">@eurodeputesEELV au Parlement européen, l\'aventure continue! Retrouvez notre brochure de présentation de la...
+</div><span><span class="form-item-title"></span><select type="select" name="506778942393819136_489054499085225985[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="506778942393819136_489054499085225985[sid_1]" value="489054499085225985"/></span><h3>2/2</h3><div style="width:100%; display:block;">489054499085225985</div><div class="panel" style="display:inline-block; width:800px;">Retourner avec panache les courriers/publicités non désiré(e)s à l\'envoyeur :
+</div><span><span class="form-item-title"></span><select type="select" name="506778942393819136_489054499085225985[valence_1]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="506778942393819136_489054499085225985[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="506778942393819136_489054499085225985[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">+</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">-</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:50] (::1|)  => array (
+)
+[19/11/2015 - 21:36:50] (::1|)  => array (
+)
+[19/11/2015 - 21:36:50] (::1|)  => array (
+)
+[19/11/2015 - 21:36:53] (::1|)  => array (
+  'prevform' => 
+  array (
+    487527889563578368 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'Les #appareils électroniques connectés gaspillent actuellement près de 60 milliards d\'euros
+',
+    ),
+    489059789771898880 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => 'Comprendre l’emploi dans l’économie verte par l’analyse des métiers
+',
+    ),
+  ),
+)
+[19/11/2015 - 21:36:53] (::1|)  => array (
+  '487527889563578368_489059789771898880' => 
+  array (
+    'sid_0' => '487527889563578368',
+    'valence_0' => '2',
+    'sid_1' => '489059789771898880',
+    'valence_1' => '1',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 21:36:53] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[19/11/2015 - 21:36:53] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="487527889563578368_489059789771898880" action="" id="form-487527889563578368_489059789771898880"><div><div><span><div class="form-item-title"></div><input type="hidden" name="487527889563578368_489059789771898880[sid_0]" value="487527889563578368"/></span><h3>1/2</h3><div style="width:100%; display:block;">487527889563578368</div><div class="panel" style="display:inline-block; width:800px;">Les #appareils électroniques connectés gaspillent actuellement près de 60 milliards d\'euros
+</div><span><span class="form-item-title"></span><select type="select" name="487527889563578368_489059789771898880[valence_0]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">POSITIF</option><option selected  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="487527889563578368_489059789771898880[sid_1]" value="489059789771898880"/></span><h3>2/2</h3><div style="width:100%; display:block;">489059789771898880</div><div class="panel" style="display:inline-block; width:800px;">Comprendre l’emploi dans l’économie verte par l’analyse des métiers
+</div><span><span class="form-item-title"></span><select type="select" name="487527889563578368_489059789771898880[valence_1]" style="margin-left:50px; max-width:100px;" value="1"><option  value="0"></option><option selected  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="487527889563578368_489059789771898880[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="487527889563578368_489059789771898880[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-true"></div><div id="item-result-1" class="item-result-true"></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 21:36:53] (::1|)  => array (
+)
+[19/11/2015 - 21:36:55] (::1|)  => array (
+)
+[19/11/2015 - 21:36:55] (::1|)  => array (
+)
+[19/11/2015 - 21:37:1] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 23:26:44] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 23:47:39] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 23:48:26] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 23:48:55] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 23:51:42] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 23:52:28] (::1|)  => array (
+  489918127023464449 => 
+  array (
+    'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_APAISEMENT.xml',
+    'content' => '#ecologie Le premier été silencieux de l’histoire du monde
+',
+    'annotated' => '/home/paul/projects/custom/cpm/data/demo_pap/xml/APAISEMENT.xml',
+  ),
+)
+[19/11/2015 - 23:55:33] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[19/11/2015 - 23:57:1] (::1|)  => array (
+)
+[19/11/2015 - 23:57:1] (::1|)  => array (
+)
+[19/11/2015 - 23:57:14] (::1|)  => array (
+  'prevform' => 
+  array (
+    507194988304674816 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SURPRISE_POSITIVE.xml',
+      'content' => '#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+',
+      'annotated' => '/home/paul/projects/custom/cpm/data/demo_pap/xml/SURPRISE_POSITIVE.xml',
+    ),
+    489398795281510400 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'Je tiens à féliciter les écologistes qui ont réussi à surpasser, dans mon échelle d\'écœurement, les nutritionnistes.
+',
+      'annotated' => '/home/paul/projects/custom/cpm/data/demo_pap/xml/SATISFACTION.xml',
+    ),
+    489007558884360192 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => '#infoStBrieuc le choix de la jacket structure métallique en treillis sera la fondation des éoliennes de St-Brieuc
+',
+      'annotated' => '/home/paul/projects/custom/cpm/data/demo_pap/xml/INFORMATION.xml',
+    ),
+    505763742928601088 => 
+    array (
+      'sourcefile' => '/home/paul/projects/custom/cpm/data/demo_pap/demo_workspace/empty_DESACCORD.xml',
+      'content' => 'Les écologistes sont contre l\'automobile...  *** Alors qu\'il faut bien l\'admettre, c\'est pratique et fantastique...
+',
+      'annotated' => '/home/paul/projects/custom/cpm/data/demo_pap/xml/DESACCORD.xml',
+    ),
+  ),
+)
+[19/11/2015 - 23:57:14] (::1|)  => array (
+  '507194988304674816_489398795281510400_489007558884360192_505763742928601088' => 
+  array (
+    'sid_0' => '507194988304674816',
+    'valence_0' => '2',
+    'sid_1' => '489398795281510400',
+    'valence_1' => '3',
+    'sid_2' => '489007558884360192',
+    'valence_2' => '4',
+    'sid_3' => '505763742928601088',
+    'valence_3' => '1',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[19/11/2015 - 23:57:14] (::1|)  => /home/paul/projects/custom/cpm/data/demo_pap/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[19/11/2015 - 23:57:14] (::1|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088" action="" id="form-507194988304674816_489398795281510400_489007558884360192_505763742928601088"><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088[sid_0]" value="507194988304674816"/></span><h3>1/4</h3><div style="width:100%; display:block;">507194988304674816</div><div class="panel" style="display:inline-block; width:800px;">#GCO : les écologistes strasbourgeois sont "stupéfaits"  #Strasbourg #bisbilles #PS #EELV -
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088[valence_0]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">EMOTION</option><option selected  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088[sid_1]" value="489398795281510400"/></span><h3>2/4</h3><div style="width:100%; display:block;">489398795281510400</div><div class="panel" style="display:inline-block; width:800px;">Je tiens à féliciter les écologistes qui ont réussi à surpasser, dans mon échelle d\'écœurement, les nutritionnistes.
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088[valence_1]" style="margin-left:50px; max-width:100px;" value="3"><option  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option selected  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088[sid_2]" value="489007558884360192"/></span><h3>3/4</h3><div style="width:100%; display:block;">489007558884360192</div><div class="panel" style="display:inline-block; width:800px;">#infoStBrieuc le choix de la jacket structure métallique en treillis sera la fondation des éoliennes de St-Brieuc
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088[valence_2]" style="margin-left:50px; max-width:100px;" value="4"><option  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option selected  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088[sid_3]" value="505763742928601088"/></span><h3>4/4</h3><div style="width:100%; display:block;">505763742928601088</div><div class="panel" style="display:inline-block; width:800px;">Les écologistes sont contre l\'automobile...  *** Alors qu\'il faut bien l\'admettre, c\'est pratique et fantastique...
+</div><span><span class="form-item-title"></span><select type="select" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088[valence_3]" style="margin-left:50px; max-width:100px;" value="1"><option  value="0"></option><option selected  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="507194988304674816_489398795281510400_489007558884360192_505763742928601088[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">SENTIMENT</div></div><div id="item-result-2" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><div id="item-result-3" class="item-result-false"><div style="padding-top:35px;">OPINION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+  ),
+)
+[19/11/2015 - 23:57:14] (::1|)  => array (
+)
+[20/11/2015 - 0:1:32] (::1|)  => array (
+)
+[20/11/2015 - 0:1:32] (::1|)  => array (
+)
+[20/11/2015 - 0:5:53] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /tmp/demo_deft_hyp_fixed /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt
+[20/11/2015 - 0:10:55] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 
+[20/11/2015 - 0:11:44] (::1|)  => /var/www/cpm/tools/extractdeftsubsetfromentry3.py /home/paul/projects/custom/cpm/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488325062295289859 487609078995517441 490058009427865600 489095117446586368 489714037404745728

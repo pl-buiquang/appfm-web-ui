@@ -2,7 +2,7 @@
 
 import argparse
 
-parser = argparse.ArgumentParser(description='Extract result subset from entry list')
+parser = argparse.ArgumentParser()
 parser.add_argument('entry', type=file, help='entry file')
 parser.add_argument('result', type=file, help='result file')
 

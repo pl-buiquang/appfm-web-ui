@@ -27,7 +27,6 @@ class Router{
   
   public static function dispach(){
     $path = Router::getRoute();
-    Logger::Log($path);
     $l = 0;
     $callback = null;
     $restofpath = "";

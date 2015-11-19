@@ -285,8 +285,9 @@ class Form{
   public $dataobject = NULL; 
   public $enctype=NULL;
 
-  public function __construct($name="default"){
+  public function __construct($name="default",$action=""){
     $name = Utils::toMachineName($name);
+    $this->action = $action;
     if(FALSE === array_search($name,self::$forms)){
       self::$forms[]=$name;
       $this->name = $name;
@@ -312,7 +313,7 @@ class Form{
     if(isset($this->enctype)){
       $enctype = ' enctype="'.$this->enctype.'"';
     }
-    $rendered = '<form method="post" name="'.$this->name.'" action=""'.$id.$enctype.'>';
+    $rendered = '<form method="post" name="'.$this->name.'" action="'.$this->action.'"'.$id.$enctype.'>';
     foreach ($this->sections as $section) {
       if($section->title || $section->warpable || $section->warped){
         $rendered .= '<fieldset';

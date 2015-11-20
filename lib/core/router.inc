@@ -8,13 +8,16 @@ class Router{
   public static function getRoute(){
     if(!isset(Router::$route)){
       $requestUri = $_SERVER['REQUEST_URI'];
+			if(Utils::startsWith($requestUri,APP_HOME_ROUTE_FIX)){
+				$requestUri = substr($requestUri,strlen(APP_HOME_ROUTE_FIX));
+			}
       $requestArgs = explode("/",$requestUri);
       $path = array();
       for($i=0;$i<count($requestArgs);$i++){
         if(isset($requestArgs[$i]) && !empty($requestArgs[$i])){
           $pathPart = $requestArgs[$i];
           $pathParts = explode("?", $pathPart);
-          if(!empty($pathParts[0]) && $pathParts[0]!=APP_HOME_ROUTE_FIX){
+          if(!empty($pathParts[0])){
             $path[] = $pathParts[0];
           }
         }

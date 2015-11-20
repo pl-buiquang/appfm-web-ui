@@ -8,3 +8,6 @@
   </div>
 
 </div>
+<div class="row" style="margin-top:25px;">
+[[MORE]]
+</div>

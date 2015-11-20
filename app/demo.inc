@@ -19,7 +19,8 @@ to get non annotated xml : egrep -v "</?(G|R|source|osee|target).*" ORIGIN_FILE 
 Router::addRoutes(
   array(
     "demo"=>"demo_pap",
-    "demo/rest/difft3"=>"pasta_diff_results"
+    "demo/rest/difft3"=>"pasta_diff_results",
+    "demo/rest/annotatedres"=>"pasta_annotated_res"
   )
 );
 
@@ -29,7 +30,6 @@ function demo_pap($args){
 
   $page->addCSS('https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic');
   $page->addCSS(BASE_URL.'public/css/demo.css');
-
 
   $content = tplset(array("BASE_URL"=>BASE_URL),tpl("demo-pap/startmenu"));  
   if(isset($args) && count($args)>=1){
@@ -126,6 +126,7 @@ function demo_pap_t1_2($task,$args){
   
   $content = "";
   $result = "";
+  $more="";
   $prevresult = NULL;
     Logger::Log($_SESSION);
     Logger::Log($_POST);
@@ -139,12 +140,28 @@ function demo_pap_t1_2($task,$args){
     $prevform->setPostValues();
     $content = $prevform->render();
     $result = renderResult1_2($prevresult);
+    $more = '<button id="compare-result" type="button" class="button" style="margin-left:40%;">Voir les annotations complètes</button>
+  <script>
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : '.json_encode($_SESSION['prevform']).',
+        url: "'.BASE_URL.'demo/rest/annotatedres",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ';
     unset($_SESSION['prevform']);
-    $_SESSION['prevresult'] = array("content"=>$content,"result"=>$result);
+    $_SESSION['prevresult'] = array("content"=>$content,"result"=>$result,"more"=>$more);
     Router::redirect();
   }elseif(isset($_SESSION['prevresult'])){
     $content = $_SESSION['prevresult']['content'];
     $result = $_SESSION['prevresult']['result'];
+    $more = $_SESSION['prevresult']['more'];
     unset($_SESSION['prevresult']);
   }else{
     $multiple = isset($args) && count($args)>=1 && $args[0] == "multiple";
@@ -167,7 +184,7 @@ function demo_pap_t1_2($task,$args){
 
 
 
-  $html = tplset(array("CONTENT"=>$content,"RESULT"=>$result),tpl("demo-pap/annotate"));
+  $html = tplset(array("CONTENT"=>$content,"RESULT"=>$result,"MORE"=>$more),tpl("demo-pap/annotate"));
 
   return $html; 
 }
@@ -347,7 +364,7 @@ function eval_t1_2($form,&$values){
   $res_content = trim($res_content);
   $res_file = "/tmp/demo_deft_hyp";
   file_put_contents($res_file,$res_content);
-  $cmd = $demo_home.getConf("extractrefbin")." ".$res_file." ".$refdir."/".$reffilename;
+  $cmd = BASE_DIR.getConf("extractrefbin")." ".$res_file." ".$refdir."/".$reffilename;
   Logger::Log($cmd);
   $ref_content = shell_exec($cmd);
   
@@ -539,8 +556,15 @@ function demo_pap_t3($args){
   return $content; 
 }
 
+function pasta_annotated_res(){
+  pasta_show_results(false);
+}
 
 function pasta_diff_results(){
+  pasta_show_results();
+}
+
+function pasta_show_results($diff=true){
   $sentences_info = "";
   header("Content-type:application/json");
   echo "{}";
@@ -557,9 +581,11 @@ function pasta_diff_results(){
   $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Document dtdVersion=\"2.1\" file=\"uComp_xml_utf8_tokenizer_FR_ax9tvaU/INPUT_NOHTML\">\n";
   $i = 1;
   foreach($sentences_info as $id => $sentence_info){
-    $content .= shell_exec(getConf("extractpassagesentences")." /tmp/demo_deft_hyp_passage $i $id.txt");
-    $content .= "\n";
-    $i+=1;
+    if($diff){
+      $content .= shell_exec(getConf("extractpassagesentences")." /tmp/demo_deft_hyp_passage $i $id.txt");
+      $content .= "\n";
+      $i+=1;
+    }
     $content .= shell_exec(getConf("extractpassagesentences")." ".$sentence_info['annotated']." $i $id.txt");
     $content .= "\n";
     $i+=1;
@@ -602,7 +628,7 @@ function eval_t3($sentences_info){
 
   $ids = array_keys($sentences_info);
   $ids = implode(" ", $ids);  
-  $cmd2 = BASE_DIR."tools/".getConf("extractrefbin3")." ".$refdir."/".getConf("ref_t3")." ".$ids;
+  $cmd2 = BASE_DIR.getConf("extractrefbin3")." ".$refdir."/".getConf("ref_t3")." ".$ids;
   Logger::Log($cmd2);
   $ref_content = shell_exec($cmd2);
   $ref_file = "/tmp/demo_deft_ref";

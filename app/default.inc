@@ -2,7 +2,7 @@
 
 Router::addRoutes(
   array(
-    ""=>"default_entry",
+    //""=>"default_entry",
     "404"=>"default_404"
   )
 );

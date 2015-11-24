@@ -30,6 +30,8 @@ function demo_pap($args){
 
   $page->addCSS('https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic');
   $page->addCSS(BASE_URL.'public/css/demo.css');
+  $page->addCSS(BASE_URL.'public/css/perfect-scrollbar/css/perfect-scrollbar.css');
+  $page->addJS(BASE_URL.'public/js/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js');
 
   $content = tplset(array("BASE_URL"=>BASE_URL),tpl("demo-pap/startmenu"));  
   if(isset($args) && count($args)>=1){
@@ -486,6 +488,11 @@ function demo_pap_t3_brat($args){
 
 function demo_pap_t3($args){
   $multiple = isset($args) && count($args)==1 && $args[0] == "multiple";
+  $fixednumber = 5;
+  if(!$multiple && isset($args) && count($args)>=1 && filter_var($args[0], FILTER_VALIDATE_INT) !== FALSE){
+    $fixednumber = $args[0];
+    $multiple = true;
+  }
 
   $sourcescat = array(
     "AMOUR",
@@ -531,27 +538,13 @@ function demo_pap_t3($args){
     array("VALORISATION.xml")
     );
 
-  $sentences_info = fetchSentences($sourcescat,$sourcesfiles,$multiple,5);
+  $sentences_info = fetchSentences($sourcescat,$sourcesfiles,$multiple,$fixednumber);
   
   launch_pasta($sentences_info);
 
-  $content = eval_t3($sentences_info);
-  $content = str_replace("\n","<br>",$content);
-  $content = $content.'<button id="compare-result" type="button" class="button" style="margin-left:40%;">Comparer les résultats</button>
-  <script>
-    jQuery("#compare-result").click(function(){
-      jQuery.ajax({
-        type: "POST",
-        data : '.json_encode($sentences_info).',
-        url: "'.BASE_URL.'demo/rest/difft3",
-        dataType : "json",
-        success: function(data, textStatus, jqXHR) {
-          console.log(data);
-        }
-      });
-    });
-  </script>
-  ';
+  $raw_output = eval_t3($sentences_info);
+  $content = render_eval_t3($raw_output,$sentences_info,$sourcescat);
+  
 
   return $content; 
 }
@@ -634,4 +627,165 @@ function eval_t3($sentences_info){
   $ref_file = "/tmp/demo_deft_ref";
   file_put_contents($ref_file,$ref_content);
   return shell_exec($demo_home.getConf("eval3")." -vRG -s /tmp/demo_deft_hyp_fixed -g ".$ref_file);
+}
+
+function renderTableInfo($lines){
+  $attrs = array("Precision","Recall","F-Measure1");
+
+  $html = "";
+  $tableinfo = array();
+  $currtableinfo = NULL;
+  $prevline = NULL;
+  foreach ($lines as $line) {
+    $line = trim($line);
+    if($line == ""){
+      continue;
+    }
+    $lineelts = explode(":",$line);
+    if(array_search($lineelts[0],$attrs) === FALSE){
+      $currtableinfo = &$tableinfo[];
+      $currtableinfo = array("groupe"=>$lineelts[0]);
+    }else if(isset($currtableinfo)){
+      $currtableinfo[$lineelts[0]]=$lineelts[1];
+    }
+    $prevline = $line;
+  }
+  
+  $html .= '<div class="limit-size-ps"><table>';
+  if(count($tableinfo[0])==1){
+    array_shift($tableinfo);
+  }
+  $keys = array_keys($tableinfo[0]);
+  foreach ($tableinfo as $infos) {
+    $tmpkeys = array_keys($infos);
+    if(count($tmpkeys)>count($keys)){
+      $keys = $tmpkeys;
+    }
+  }
+  foreach ($keys as $key) {
+    $html .= '<tr>';
+    $html .= '<td>'.$key.'</td>';
+    foreach ($tableinfo as $info) {
+      $html .= '<td>'.$info[$key].'</td>';
+    }
+    $html .= '</tr>';
+  }
+  $html.='</table></div>';
+  return $html;
+}
+
+function renderExempleDetailResult($lines,$sentences_info,$htmlidprefix){
+  $sids = array_keys($sentences_info);
+  //$html .='<ul class="accordion" data-accordion style="margin-left:0;">';
+  $html = "";
+  $grouptable = NULL;
+  $i =1;
+  foreach ($lines as $line) {
+    $line = trim($line);
+    if(array_search($line, $sids)!==FALSE){
+      if(isset($grouptable)){
+        $html .= renderTableInfo($grouptable);
+        //$html .= '</div></li>';
+        $html .= '</div>';
+      }
+      $html .= '<div class="result-item-detail-title">'.$i.'. "'.$sentences_info[$line]['content'].'"</div><div class="accordion-content-like">';/*
+      $html .= ' <li class="accordion-navigation">
+    <a href="#'.$htmlidprefix.'-'.$line.'">'.$sentences_info[$line]['content'].'</a>
+    <div id="'.$htmlidprefix.'-'.$line.'" class="content '.(isset($grouptable)?"":"active").'">';*/
+      $grouptable = array();
+      $i+=1;
+    }else if(isset($grouptable)){
+      $grouptable[] = $line;
+    }
+    //$html .= $line."<br>";
+  }
+  if(isset($grouptable)){
+    $html .= renderTableInfo($grouptable);
+  }
+  //$html .= '</div></li></ul>';
+  $html .= '</div>';
+  return $html;
+}
+
+function render_eval_t3($raw_output,$sentences_info,$sourcescat){
+  $html = "";
+  $sids = array_keys($sentences_info);
+  $output_groups = explode("------------------------------",$raw_output);
+  foreach ($output_groups as &$group) {
+    $group =  explode("\n",$group);
+  }
+
+  $addon0 = array();
+  foreach ($output_groups[2] as $line) {
+    $line = trim($line);
+    if(array_search($line, $sids)!==FALSE){
+      break;
+    }
+    $addon0[] = $line;
+  }
+
+  $output_groups[1] = array_merge($output_groups[1],$addon0);
+  $output_groups[3] = array_merge($output_groups[3],$output_groups[4]);
+
+  $html .= '<h2>Résultats</h2><ul class="tabs" data-tab>
+  <li class="tab-title active"><a href="#results-groups">Groupes</a></li>
+  <li class="tab-title"><a href="#results-rels">Relations</a></li>
+</ul>
+<div class="tabs-content" style="background-color:#fff;">
+  <div class="content active" id="results-groups"><div class="result-item-detail-title">Global</div><div class="accordion-content-like">
+';
+
+  // global group result
+  $html .= renderTableInfo($output_groups[1]);
+
+
+  $html .= '</div>';
+
+  $html .= renderExempleDetailResult($output_groups[0],$sentences_info,"group");
+
+  $html.='';
+
+  $html .= '</div>
+  <div class="content" id="results-rels"><div class="result-item-detail-title">Global</div><div class="accordion-content-like">
+';
+
+  // global group result
+  $html .= renderTableInfo($output_groups[3]);
+
+
+  $html .= '</div>';
+
+  $html .= renderExempleDetailResult($output_groups[2],$sentences_info,"rel");
+
+  $html.='</div></div>';
+
+
+  
+  /*foreach ($output_groups as $output_lines) {
+    $html .= '<div class="row"><div class="panel">';
+    foreach ($output_lines as $line) {
+      $html .= $line."<br>";
+    }
+    $html .= '</div></div>';
+  }*/
+
+
+  $html = $html.'<button id="compare-result" type="button" class="button" style="margin-left:40%;">Comparer les résultats</button>
+  <script>
+    jQuery(".limit-size-ps").perfectScrollbar();  
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : '.json_encode($sentences_info).',
+        url: "'.BASE_URL.'demo/rest/difft3",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ';
+
+  return $html;
 }

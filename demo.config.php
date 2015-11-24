@@ -1,8 +1,8 @@
 <?php
 
 # home of the demo binaries and data 
-#$demo_home = "/vagrant/data/demo_pap/";
-$demo_home = "/home/paul/projects/custom/cpm/data/demo_pap/";
+$demo_home = "/vagrant/data/demo_pap/";
+#$demo_home = "/home/paul/projects/custom/cpm/data/demo_pap/";
 
 # relative directory containing reference results
 $ref_dir = "deft2015_corpus/TESTS_REFERENCE_DATA";

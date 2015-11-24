@@ -4691,3 +4691,977 @@
 )
 [20/11/2015 - 13:37:55] (::1|)  => array (
 )
+[23/11/2015 - 10:14:19] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:14:19] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:15:24] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    '' => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => NULL,
+      'annotated' => '/vagrant/data/demo_pap/xml/POSITIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:15:24] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:15:30] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    487937071282409472 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => '"Les appareils connectés en mode veille : un gâchis planétaire"
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/NEGATIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:15:30] (10.0.2.2|)  => array (
+  487937071282409472 => 
+  array (
+    'sid_0' => '487937071282409472',
+    'valence_0' => '2',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[23/11/2015 - 10:15:30] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[23/11/2015 - 10:15:30] (10.0.2.2|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="487937071282409472" action="" id="form-487937071282409472"><div><div><span><div class="form-item-title"></div><input type="hidden" name="487937071282409472[sid_0]" value="487937071282409472"/></span><h3>1/1</h3><div style="width:100%; display:block;">487937071282409472</div><div class="panel" style="display:inline-block; width:800px;">"Les appareils connectés en mode veille : un gâchis planétaire"
+</div><span><span class="form-item-title"></span><select type="select" name="487937071282409472[valence_0]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">POSITIF</option><option selected  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="487937071282409472[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="487937071282409472[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-true"></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+    'more' => '<button id="compare-result" type="button" class="button" style="margin-left:40%;">Voir les annotations complètes</button>
+  <script>
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : {"487937071282409472":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_NEGATIF.xml","content":"\\"Les appareils connect\\u00e9s en mode veille : un g\\u00e2chis plan\\u00e9taire\\"\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/NEGATIF.xml"}},
+        url: "http://localhost:8080/demo/rest/annotatedres",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ',
+  ),
+)
+[23/11/2015 - 10:15:30] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:15:34] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:15:34] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:15:38] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    507049324371787776 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => 'Land art par un artiste Hollandais .. qui aurait pu sauver un  accée écologiste à la plage de Piemanson qui sera...
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/POSITIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:15:38] (10.0.2.2|)  => array (
+  507049324371787776 => 
+  array (
+    'sid_0' => '507049324371787776',
+    'valence_0' => '1',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[23/11/2015 - 10:15:38] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[23/11/2015 - 10:15:38] (10.0.2.2|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="507049324371787776" action="" id="form-507049324371787776"><div><div><span><div class="form-item-title"></div><input type="hidden" name="507049324371787776[sid_0]" value="507049324371787776"/></span><h3>1/1</h3><div style="width:100%; display:block;">507049324371787776</div><div class="panel" style="display:inline-block; width:800px;">Land art par un artiste Hollandais .. qui aurait pu sauver un  accée écologiste à la plage de Piemanson qui sera...
+</div><span><span class="form-item-title"></span><select type="select" name="507049324371787776[valence_0]" style="margin-left:50px; max-width:100px;" value="1"><option  value="0"></option><option selected  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="507049324371787776[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="507049324371787776[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-true"></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+    'more' => '<button id="compare-result" type="button" class="button" style="margin-left:40%;">Voir les annotations complètes</button>
+  <script>
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : {"507049324371787776":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_POSITIF.xml","content":"Land art par un artiste Hollandais .. qui aurait pu sauver un  acc\\u00e9e \\u00e9cologiste \\u00e0 la plage de Piemanson qui sera...\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/POSITIF.xml"}},
+        url: "http://localhost:8080/demo/rest/annotatedres",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ',
+  ),
+)
+[23/11/2015 - 10:15:38] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:15:46] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:15:46] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:17:41] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    488277258063208450 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'Les OGM et la panne de la biodiversité agricole: Le chercheur Pierre-Henri Gouyon conteste une certaine vision...
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/NEGATIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:17:41] (10.0.2.2|)  => array (
+  488277258063208450 => 
+  array (
+    'sid_0' => '488277258063208450',
+    'valence_0' => '0',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[23/11/2015 - 10:17:41] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[23/11/2015 - 10:17:41] (10.0.2.2|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="488277258063208450" action="" id="form-488277258063208450"><div><div><span><div class="form-item-title"></div><input type="hidden" name="488277258063208450[sid_0]" value="488277258063208450"/></span><h3>1/1</h3><div style="width:100%; display:block;">488277258063208450</div><div class="panel" style="display:inline-block; width:800px;">Les OGM et la panne de la biodiversité agricole: Le chercheur Pierre-Henri Gouyon conteste une certaine vision...
+</div><span><span class="form-item-title"></span><select type="select" name="488277258063208450[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="488277258063208450[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="488277258063208450[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">-</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+    'more' => '<button id="compare-result" type="button" class="button" style="margin-left:40%;">Voir les annotations complètes</button>
+  <script>
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : {"488277258063208450":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_NEGATIF.xml","content":"Les OGM et la panne de la biodiversit\\u00e9 agricole: Le chercheur Pierre-Henri Gouyon conteste une certaine vision...\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/NEGATIF.xml"}},
+        url: "http://localhost:8080/demo/rest/annotatedres",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ',
+  ),
+)
+[23/11/2015 - 10:17:41] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:18:58] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:18:58] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:19:25] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    489736260714778624 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => '@lesnox @Sosh_fr @Matthieu_Tanguy @petillatg La mer à Metz...ça fait du mal quand même le réchauffement climatique.. ;-)
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/NEGATIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:19:25] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:20:3] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:20:3] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:20:7] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    488977569966850048 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => 'Le dialogue 2014 de Petersberg sur le climat (14/15 juillet): Le Dialogue de Petersberg est une initiative lan...
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/POSITIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:20:7] (10.0.2.2|)  => array (
+  488977569966850048 => 
+  array (
+    'sid_0' => '488977569966850048',
+    'valence_0' => '0',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[23/11/2015 - 10:20:7] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[23/11/2015 - 10:20:7] (10.0.2.2|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="488977569966850048" action="" id="form-488977569966850048"><div><div><span><div class="form-item-title"></div><input type="hidden" name="488977569966850048[sid_0]" value="488977569966850048"/></span><h3>1/1</h3><div style="width:100%; display:block;">488977569966850048</div><div class="panel" style="display:inline-block; width:800px;">Le dialogue 2014 de Petersberg sur le climat (14/15 juillet): Le Dialogue de Petersberg est une initiative lan...
+</div><span><span class="form-item-title"></span><select type="select" name="488977569966850048[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="488977569966850048[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="488977569966850048[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">+</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+    'more' => '<button id="compare-result" type="button" class="button" style="margin-left:40%;">Voir les annotations complètes</button>
+  <script>
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : {"488977569966850048":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_POSITIF.xml","content":"Le dialogue 2014 de Petersberg sur le climat (14\\/15 juillet): Le Dialogue de Petersberg est une initiative lan...\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/POSITIF.xml"}},
+        url: "http://localhost:8080/demo/rest/annotatedres",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ',
+  ),
+)
+[23/11/2015 - 10:20:7] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:20:38] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:20:38] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:23:42] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    506261450273206272 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => 'Écologistes! Le Pape François promet une encyclique sur la préservation de la création |
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/POSITIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:23:42] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:23:44] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    489185524209291265 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => '#ecologie Terrebonne crée sa Direction de l\'urbanisme durable
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/POSITIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:23:44] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:23:48] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    489795877670617088 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'Pétition relative aux risques d’inondations liés au projet d’aéroport deNDDL - ACIPA NDL
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/NEGATIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:23:48] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:24:22] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    488701063198154752 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'Le Moniteur: « L’autoconsommation au secours de la filière solaire » #énergie
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/NEGATIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:24:22] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:25:57] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    487535575957008384 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => 'Simplifier les exigences de la RT 2012, mais pas à n’importe quel prix - Logement | @scoopit
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/POSITIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:25:57] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:26:4] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    489438518322540545 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_POSITIF.xml',
+      'content' => 'Gestion des eaux pluviales, lutte aux îlots de chaleur, aide à la biodiversité, agriculture urbaine... Les toits...
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/POSITIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:26:4] (10.0.2.2|)  => array (
+  489438518322540545 => 
+  array (
+    'sid_0' => '489438518322540545',
+    'valence_0' => '0',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[23/11/2015 - 10:26:4] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[23/11/2015 - 10:26:4] (10.0.2.2|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="489438518322540545" action="" id="form-489438518322540545"><div><div><span><div class="form-item-title"></div><input type="hidden" name="489438518322540545[sid_0]" value="489438518322540545"/></span><h3>1/1</h3><div style="width:100%; display:block;">489438518322540545</div><div class="panel" style="display:inline-block; width:800px;">Gestion des eaux pluviales, lutte aux îlots de chaleur, aide à la biodiversité, agriculture urbaine... Les toits...
+</div><span><span class="form-item-title"></span><select type="select" name="489438518322540545[valence_0]" style="margin-left:50px; max-width:100px;" value="0"><option selected  value="0"></option><option  value="1">POSITIF</option><option  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489438518322540545[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="489438518322540545[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">+</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+    'more' => '<button id="compare-result" type="button" class="button" style="margin-left:40%;">Voir les annotations complètes</button>
+  <script>
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : {"489438518322540545":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_POSITIF.xml","content":"Gestion des eaux pluviales, lutte aux \\u00eelots de chaleur, aide \\u00e0 la biodiversit\\u00e9, agriculture urbaine... Les toits...\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/POSITIF.xml"}},
+        url: "http://localhost:8080/demo/rest/annotatedres",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ',
+  ),
+)
+[23/11/2015 - 10:26:4] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:26:12] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:26:12] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:26:16] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    489771759479324672 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_NEGATIF.xml',
+      'content' => 'Les appareils connectés en mode veille : un gâchis planétaire
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/NEGATIF.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:26:16] (10.0.2.2|)  => array (
+  489771759479324672 => 
+  array (
+    'sid_0' => '489771759479324672',
+    'valence_0' => '2',
+    'sourcecat' => '["POSITIF","NEGATIF"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[23/11/2015 - 10:26:16] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T1b.txt
+[23/11/2015 - 10:26:16] (10.0.2.2|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="489771759479324672" action="" id="form-489771759479324672"><div><div><span><div class="form-item-title"></div><input type="hidden" name="489771759479324672[sid_0]" value="489771759479324672"/></span><h3>1/1</h3><div style="width:100%; display:block;">489771759479324672</div><div class="panel" style="display:inline-block; width:800px;">Les appareils connectés en mode veille : un gâchis planétaire
+</div><span><span class="form-item-title"></span><select type="select" name="489771759479324672[valence_0]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">POSITIF</option><option selected  value="2">NEGATIF</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489771759479324672[sourcecat]" value="["POSITIF","NEGATIF"]"/></span><span><div class="form-item-title"></div><input type="submit" name="489771759479324672[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-true"></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+    'more' => '<button id="compare-result" type="button" class="button" style="margin-left:40%;">Voir les annotations complètes</button>
+  <script>
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : {"489771759479324672":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_NEGATIF.xml","content":"Les appareils connect\\u00e9s en mode veille : un g\\u00e2chis plan\\u00e9taire\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/NEGATIF.xml"}},
+        url: "http://localhost:8080/demo/rest/annotatedres",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ',
+  ),
+)
+[23/11/2015 - 10:26:16] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:26:18] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:26:18] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 10:27:11] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    490036430757187585 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'Qmilch, un tissu écologique à base de lait #economiecirculaire #LivingCircular
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/INFORMATION.xml',
+    ),
+    489138712732008448 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/INSATISFACTION.xml',
+    ),
+    489400251019571200 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_ACCORD.xml',
+      'content' => 'Joël Pélicot est élu président du comité de bassin Loire-Bretagne: Joël Pélicot, conseiller municip...
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/ACCORD.xml',
+    ),
+    489978650180460544 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_DERANGEMENT.xml',
+      'content' => 'Jsui enrhume de con c\'st a cause du changement climatique wlh !
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/DERANGEMENT.xml',
+    ),
+  ),
+)
+[23/11/2015 - 10:27:11] (10.0.2.2|)  => array (
+  '490036430757187585_489138712732008448_489400251019571200_489978650180460544' => 
+  array (
+    'sid_0' => '490036430757187585',
+    'valence_0' => '2',
+    'sid_1' => '489138712732008448',
+    'valence_1' => '4',
+    'sid_2' => '489400251019571200',
+    'valence_2' => '3',
+    'sid_3' => '489978650180460544',
+    'valence_3' => '1',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[23/11/2015 - 10:27:11] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[23/11/2015 - 10:27:11] (10.0.2.2|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544" action="" id="form-490036430757187585_489138712732008448_489400251019571200_489978650180460544"><div><div><span><div class="form-item-title"></div><input type="hidden" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544[sid_0]" value="490036430757187585"/></span><h3>1/4</h3><div style="width:100%; display:block;">490036430757187585</div><div class="panel" style="display:inline-block; width:800px;">Qmilch, un tissu écologique à base de lait #economiecirculaire #LivingCircular
+</div><span><span class="form-item-title"></span><select type="select" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544[valence_0]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">EMOTION</option><option selected  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544[sid_1]" value="489138712732008448"/></span><h3>2/4</h3><div style="width:100%; display:block;">489138712732008448</div><div class="panel" style="display:inline-block; width:800px;">@MisterC00l Il manque l\'écosystème Apple :)
+</div><span><span class="form-item-title"></span><select type="select" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544[valence_1]" style="margin-left:50px; max-width:100px;" value="4"><option  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option selected  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544[sid_2]" value="489400251019571200"/></span><h3>3/4</h3><div style="width:100%; display:block;">489400251019571200</div><div class="panel" style="display:inline-block; width:800px;">Joël Pélicot est élu président du comité de bassin Loire-Bretagne: Joël Pélicot, conseiller municip...
+</div><span><span class="form-item-title"></span><select type="select" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544[valence_2]" style="margin-left:50px; max-width:100px;" value="3"><option  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option selected  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544[sid_3]" value="489978650180460544"/></span><h3>4/4</h3><div style="width:100%; display:block;">489978650180460544</div><div class="panel" style="display:inline-block; width:800px;">Jsui enrhume de con c\'st a cause du changement climatique wlh !
+</div><span><span class="form-item-title"></span><select type="select" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544[valence_3]" style="margin-left:50px; max-width:100px;" value="1"><option  value="0"></option><option selected  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="490036430757187585_489138712732008448_489400251019571200_489978650180460544[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">SENTIMENT</div></div><div id="item-result-2" class="item-result-false"><div style="padding-top:35px;">OPINION</div></div><div id="item-result-3" class="item-result-true"></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+    'more' => '<button id="compare-result" type="button" class="button" style="margin-left:40%;">Voir les annotations complètes</button>
+  <script>
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : {"490036430757187585":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_INFORMATION.xml","content":"Qmilch, un tissu \\u00e9cologique \\u00e0 base de lait #economiecirculaire #LivingCircular\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/INFORMATION.xml"},"489138712732008448":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_INSATISFACTION.xml","content":"@MisterC00l Il manque l\'\\u00e9cosyst\\u00e8me Apple :)\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/INSATISFACTION.xml"},"489400251019571200":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_ACCORD.xml","content":"Jo\\u00ebl P\\u00e9licot est \\u00e9lu pr\\u00e9sident du comit\\u00e9 de bassin Loire-Bretagne: Jo\\u00ebl P\\u00e9licot, conseiller municip...\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/ACCORD.xml"},"489978650180460544":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_DERANGEMENT.xml","content":"Jsui enrhume de con c\'st a cause du changement climatique wlh !\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/DERANGEMENT.xml"}},
+        url: "http://localhost:8080/demo/rest/annotatedres",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ',
+  ),
+)
+[23/11/2015 - 10:27:11] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 11:41:21] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 490064594530861056 490038666421895168 489355435762126848 489556779060461569 488991817913073664
+[23/11/2015 - 11:53:46] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 487923076303450112 488369511331287040 489709253515415552 489556779060461569 489348871806398464
+[23/11/2015 - 11:55:36] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 490058009427865600
+[23/11/2015 - 11:56:40] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488661110921232384 489755004836659200 507194988304674816 489138712732008448 489800398774210560
+[23/11/2015 - 12:3:28] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 507194988304674816 489296401180811265 489095117446586368 506081725085396992 489427897212751872
+[23/11/2015 - 12:4:23] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488360871836786688 507226397354762241 489761067506364417 488732531416911872 490052045966417920
+[23/11/2015 - 12:5:44] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488939782672621570 488638035589079040 507251848131411968 507421595946586112 489918127023464449
+[23/11/2015 - 12:6:47] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 490069001679421440 489758419327258624 506092670746243072 488048051798695936 489194551957942273
+[23/11/2015 - 12:7:4] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489918127023464449 488048051798695936 488936037494706176 489046736284155904 490038666421895168
+[23/11/2015 - 12:9:57] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 505690707311747072 488636176010858496 506936979129663488 489336659180527616 489990016408776704
+[23/11/2015 - 12:13:38] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488991550824001536 490038666421895168 488374479215931392 489918127023464449 489276210309263361
+[23/11/2015 - 12:13:55] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 490058009427865600 489224011742990336 507194988304674816 489824708456873984 488986387342163968
+[23/11/2015 - 12:14:1] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489774113029107712 489335684394913792 506765483144925184 489556779060461569 490038666421895168
+[23/11/2015 - 12:33:18] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489348871806398464 505841246951440384 489578841006821376 489138712732008448 489918127023464449
+[23/11/2015 - 12:34:12] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489372368641327106 507194988304674816 505059323647918080 487542365481992192 488696534490288128
+[23/11/2015 - 12:34:13] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489138712732008448 490058009427865600 507411251035521024 488791764518846464 489761067506364417
+[23/11/2015 - 12:34:48] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 507119936008093696 489139797286744065 488638035589079040 488331144711380992 488688134809739264
+[23/11/2015 - 12:36:49] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 507226397354762241 489322717712105472 489303425671516160 507194988304674816 489491965764198400
+[23/11/2015 - 12:37:46] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 490038666421895168 505059323647918080 489378881917702144 488722037821943809 489918127023464449
+[23/11/2015 - 12:41:25] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489709253515415552 488382926766104577 489560136613392385 490068065065791488 507194988304674816
+[23/11/2015 - 12:41:25] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489432562247299072 507299407025696768 489100932592857088 489964532908175360 488964373336293376
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => 
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Micro
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => 
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => VALORISATION:
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Precision: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Recall: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => F-Measure1: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => DESTINATAIRE:
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Precision: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Recall: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => F-Measure1: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => INSTRUCTION_DEMANDE:
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Precision: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Recall: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => F-Measure1: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => DESACCORD:
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Precision: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Recall: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => F-Measure1: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => SOURCE:
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Precision: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Recall: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => F-Measure1: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => MEPRIS:
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Precision: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Recall: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => F-Measure1: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => SATISFACTION:
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Precision: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Recall: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => F-Measure1: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => CIBLE:
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Precision: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => Recall: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => F-Measure1: 0
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => 
+[23/11/2015 - 12:42:10] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 12:42:54] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489719694728118272 488871728806785025 505841246951440384 489303425671516160 489487364553998337
+[23/11/2015 - 12:42:54] (10.0.2.2|)  => array (
+  0 => 
+  array (
+    'groupe' => 'AMOUR',
+  ),
+)
+[23/11/2015 - 12:42:54] (10.0.2.2|)  => array (
+  0 => 
+  array (
+    'groupe' => 'INSATISFACTION',
+  ),
+  1 => 
+  array (
+    'groupe' => 'INSATISFACTION',
+  ),
+)
+[23/11/2015 - 12:42:54] (10.0.2.2|)  => array (
+  0 => 
+  array (
+    'groupe' => 'MEPRIS',
+  ),
+  1 => 
+  array (
+    'groupe' => 'MEPRIS',
+  ),
+  2 => 
+  array (
+    'groupe' => 'MEPRIS',
+  ),
+)
+[23/11/2015 - 12:42:54] (10.0.2.2|)  => array (
+  0 => 
+  array (
+    'groupe' => 'MEPRIS',
+    'Precision' => ' 0',
+    'Recall' => ' 0',
+    'F-Measure1' => ' 0',
+  ),
+  1 => 
+  array (
+    'groupe' => 'MEPRIS',
+    'Precision' => ' 0',
+    'Recall' => ' 0',
+    'F-Measure1' => ' 0',
+  ),
+  2 => 
+  array (
+    'groupe' => 'MEPRIS',
+    'Precision' => ' 0',
+    'Recall' => ' 0',
+    'F-Measure1' => ' 0',
+  ),
+)
+[23/11/2015 - 12:43:6] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488382926766104577 489138712732008448 489079880370245632 489168171535196160 489990016408776704
+[23/11/2015 - 12:43:6] (10.0.2.2|)  => array (
+  0 => 
+  array (
+    'groupe' => 'INSATISFACTION',
+  ),
+)
+[23/11/2015 - 12:43:6] (10.0.2.2|)  => array (
+  0 => 
+  array (
+    'groupe' => 'INSATISFACTION',
+  ),
+  1 => 
+  array (
+    'groupe' => 'VALORISATION',
+  ),
+)
+[23/11/2015 - 12:43:6] (10.0.2.2|)  => array (
+  0 => 
+  array (
+    'groupe' => 'INSATISFACTION',
+  ),
+  1 => 
+  array (
+    'groupe' => 'VALORISATION',
+  ),
+  2 => 
+  array (
+    'groupe' => 'TRISTESSE',
+  ),
+)
+[23/11/2015 - 12:43:6] (10.0.2.2|)  => array (
+  0 => 
+  array (
+    'groupe' => 'INSATISFACTION',
+  ),
+  1 => 
+  array (
+    'groupe' => 'VALORISATION',
+  ),
+  2 => 
+  array (
+    'groupe' => 'TRISTESSE',
+  ),
+  3 => 
+  array (
+    'groupe' => 'PLAISIR',
+  ),
+)
+[23/11/2015 - 12:43:6] (10.0.2.2|)  => array (
+  0 => 
+  array (
+    'groupe' => 'INSATISFACTION',
+  ),
+  1 => 
+  array (
+    'groupe' => 'VALORISATION',
+  ),
+  2 => 
+  array (
+    'groupe' => 'TRISTESSE',
+  ),
+  3 => 
+  array (
+    'groupe' => 'PLAISIR',
+  ),
+)
+[23/11/2015 - 12:43:53] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488352119746215936 507194988304674816 489346197644386304 489450628620767232 489279362374856704
+[23/11/2015 - 12:43:53] (10.0.2.2|)  => array (
+  0 => 
+  array (
+    'groupe' => 'SATISFACTION',
+    'Precision' => ' 0',
+    'Recall' => ' 0',
+    'F-Measure1' => ' 0',
+  ),
+  1 => 
+  array (
+    'groupe' => 'PEUR',
+    'Precision' => ' 0',
+    'Recall' => ' 0',
+    'F-Measure1' => ' 0',
+    'CIBLE' => '',
+  ),
+  2 => 
+  array (
+    'groupe' => 'COLERE',
+    'Precision' => ' 0',
+    'Recall' => ' 0',
+    'F-Measure1' => ' 0',
+  ),
+  3 => 
+  array (
+    'groupe' => 'PLAISIR',
+    'Precision' => ' 0',
+    'Recall' => ' 0',
+    'F-Measure1' => ' 0',
+  ),
+  4 => 
+  array (
+    'groupe' => 'SURPRISE_POSITIVE',
+    'Precision' => ' 0',
+    'Recall' => ' 0',
+    'F-Measure1' => ' 0',
+  ),
+)
+[23/11/2015 - 12:51:38] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489030101904793600 489742121579331584 489094702382460928 489087727049379840 489303425671516160
+[23/11/2015 - 12:55:52] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489514454183186432 490047184323088384 488736957623988224 489012872115408897 489365953889976320
+[23/11/2015 - 12:58:29] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 505841246951440384 490072032982216705 489685821092810752 488288028801372160 488597394037035008
+[23/11/2015 - 12:58:43] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488374479215931392 506765483144925184 488945719358021632 487705881904427009 507226397354762241
+[23/11/2015 - 13:6:4] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 487350513436880896 489843596820881408 489861668688920576 507201307405721601 489297439988264960
+[23/11/2015 - 13:10:56] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489224011742990336 489751451057405952 489095117446586368 489766696904036352 488882813631225856
+[23/11/2015 - 13:12:4] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488882813631225856 488649024925622272 490038666421895168 489487364553998337 505339685557006336
+[23/11/2015 - 13:12:6] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489391609239580672 488972312234819584 489690944162119680 490038666421895168 489990016408776704
+[23/11/2015 - 13:12:16] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488672417146228736 507411251035521024 488862565007515648 489491965764198400 488048051798695936
+[23/11/2015 - 13:13:5] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 505059323647918080 489427897212751872 489303425671516160 490038666421895168 488293146494005248
+[23/11/2015 - 13:18:58] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 490038666421895168 489698055378046976 487889368276037632 488079707380805632 489095117446586368
+[23/11/2015 - 13:20:11] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489502604213649410 489978650180460544 488374479215931392 487872431521271809 489059961863806976
+[23/11/2015 - 13:21:47] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489625045703360513 489990016408776704 489185411697086464 488978075309584384 489391609239580672
+[23/11/2015 - 13:26:12] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488703723288289280 489095117446586368 506155530461904896 489867045790822400 489670881036492800
+[23/11/2015 - 13:27:45] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489059961863806976 488928555485507584 489095117446586368 489914260097875969 488402297626836992
+[23/11/2015 - 13:28:13] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488352128054722560 507194988304674816 488862565007515648 490038666421895168 489325135967440896
+[23/11/2015 - 13:32:5] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488882813631225856 489366155388153856 507411251035521024 489010073994530817 487506605236166657
+[23/11/2015 - 14:2:50] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489487364553998337 488129462622760960 504941192778637312 488349741483581440 490038666421895168
+[23/11/2015 - 14:3:35] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489341763623325697 488374479215931392 489295776284426240 507194988304674816 505339685557006336
+[23/11/2015 - 14:4:28] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489847502099582976 490047184323088384 489057421273612288 489138712732008448 505754207493046272
+[23/11/2015 - 14:6:13] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489303425671516160 488636176010858496 489427897212751872 489224011742990336 488679003952513024
+[23/11/2015 - 14:6:25] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489746252171456513
+[23/11/2015 - 14:6:32] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488374479215931392
+[23/11/2015 - 14:7:28] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488700706757804032 489054020146069504 489867045790822400 487609078995517441 489696192088244224 489978650180460544 489442171352002560 488443450267037697 488352119746215936 490038666421895168 489768442040299521 489095117446586368
+[23/11/2015 - 14:8:3] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 14:8:3] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 14:8:59] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488369511331287040 507098250961096705 490047184323088384 505059323647918080 490038666421895168
+[23/11/2015 - 14:13:5] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489764988585000960 507194988304674816 488048051798695936 489561690657550336 505982000394543104
+[23/11/2015 - 14:13:40] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 505244768855941120 507194988304674816 489311318382366720 489514454183186432 490038666421895168
+[23/11/2015 - 14:21:26] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 507226397354762241 489384176760524800 489867045790822400 489694576958263296 489517781046415362
+[23/11/2015 - 14:21:32] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488928555485507584 489010073994530817 488931913730895872 489382154481459200 489138712732008448
+[23/11/2015 - 14:21:34] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489577075825602560 488465402461433856 489083241123815424 488065862230736896 489303425671516160
+[23/11/2015 - 14:22:58] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489103915229913088 487575976545505280 489964532908175360 489224011742990336 489491965764198400
+[23/11/2015 - 14:24:19] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489303425671516160 488297863232122880 489340385354063872 490038666421895168 489990016408776704
+[23/11/2015 - 15:6:28] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489904111966777344 490038666421895168 489751324381032448 488385757812641792 489918127023464449
+[23/11/2015 - 15:7:41] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488882813631225856 489556779060461569 488378985840390144 489095117446586368 505841246951440384
+[23/11/2015 - 15:8:54] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 505339685557006336 488968345287663616 489851636287045632 489978650180460544 489867045790822400
+[23/11/2015 - 15:10:11] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489755004836659200 490038666421895168 489851636287045632 488994504213823489 507194988304674816
+[23/11/2015 - 15:10:34] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    489964532908175360 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => '@ChTaubira  chère madame , je vous félicite pour votre actions, votre patriotisme , votre engagement dans l\'écologie , continuez , BRAVO...
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/SATISFACTION.xml',
+    ),
+  ),
+)
+[23/11/2015 - 15:10:34] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 15:10:36] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    488608551225810944 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_SATISFACTION.xml',
+      'content' => 'La biodiversité et son importance pour l\'agriculture, brillante présentation de Pierre-Henri Gouyon
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/SATISFACTION.xml',
+    ),
+  ),
+)
+[23/11/2015 - 15:10:36] (10.0.2.2|)  => array (
+  488608551225810944 => 
+  array (
+    'sid_0' => '488608551225810944',
+    'valence_0' => '2',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[23/11/2015 - 15:10:36] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[23/11/2015 - 15:10:37] (10.0.2.2|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="488608551225810944" action="" id="form-488608551225810944"><div><div><span><div class="form-item-title"></div><input type="hidden" name="488608551225810944[sid_0]" value="488608551225810944"/></span><h3>1/1</h3><div style="width:100%; display:block;">488608551225810944</div><div class="panel" style="display:inline-block; width:800px;">La biodiversité et son importance pour l\'agriculture, brillante présentation de Pierre-Henri Gouyon
+</div><span><span class="form-item-title"></span><select type="select" name="488608551225810944[valence_0]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">EMOTION</option><option selected  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="488608551225810944[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="488608551225810944[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-true"></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+    'more' => '<button id="compare-result" type="button" class="button" style="margin-left:40%;">Voir les annotations complètes</button>
+  <script>
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : {"488608551225810944":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_SATISFACTION.xml","content":"La biodiversit\\u00e9 et son importance pour l\'agriculture, brillante pr\\u00e9sentation de Pierre-Henri Gouyon\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/SATISFACTION.xml"}},
+        url: "http://localhost:8080/demo/rest/annotatedres",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ',
+  ),
+)
+[23/11/2015 - 15:10:37] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 15:10:39] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 15:10:39] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 15:10:47] (10.0.2.2|)  => array (
+  'prevform' => 
+  array (
+    489138712732008448 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_INSATISFACTION.xml',
+      'content' => '@MisterC00l Il manque l\'écosystème Apple :)
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/INSATISFACTION.xml',
+    ),
+    489766356393672704 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_TRISTESSE.xml',
+      'content' => 'L’UE déplore l’abandon de la taxe carbone en Australie | The Shift Project aussi !
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/TRISTESSE.xml',
+    ),
+    489311318382366720 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_VALORISATION.xml',
+      'content' => '#chatellerault Dans l\'ex-usine New Fabris, VMH Énergie a lancé la production de panneaux solaires
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/VALORISATION.xml',
+    ),
+    489284143432622080 => 
+    array (
+      'sourcefile' => '/vagrant/data/demo_pap/demo_workspace/empty_INFORMATION.xml',
+      'content' => 'la politique de ce pays a besoin de réforme, dans l\'éducation, dans la culture, dans l\'innovation écologique, le reste suivra notre jeunesse
+',
+      'annotated' => '/vagrant/data/demo_pap/xml/INFORMATION.xml',
+    ),
+  ),
+)
+[23/11/2015 - 15:10:47] (10.0.2.2|)  => array (
+  '489138712732008448_489766356393672704_489311318382366720_489284143432622080' => 
+  array (
+    'sid_0' => '489138712732008448',
+    'valence_0' => '2',
+    'sid_1' => '489766356393672704',
+    'valence_1' => '4',
+    'sid_2' => '489311318382366720',
+    'valence_2' => '2',
+    'sid_3' => '489284143432622080',
+    'valence_3' => '2',
+    'sourcecat' => '["EMOTION","SENTIMENT","INFORMATION","OPINION"]',
+    'submit' => 'Soumettre',
+  ),
+)
+[23/11/2015 - 15:10:47] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry.py /tmp/demo_deft_hyp /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T2.1b.txt
+[23/11/2015 - 15:10:47] (10.0.2.2|)  => array (
+  'prevresult' => 
+  array (
+    'content' => '<form method="post" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080" action="" id="form-489138712732008448_489766356393672704_489311318382366720_489284143432622080"><div><div><span><div class="form-item-title"></div><input type="hidden" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080[sid_0]" value="489138712732008448"/></span><h3>1/4</h3><div style="width:100%; display:block;">489138712732008448</div><div class="panel" style="display:inline-block; width:800px;">@MisterC00l Il manque l\'écosystème Apple :)
+</div><span><span class="form-item-title"></span><select type="select" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080[valence_0]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">EMOTION</option><option selected  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080[sid_1]" value="489766356393672704"/></span><h3>2/4</h3><div style="width:100%; display:block;">489766356393672704</div><div class="panel" style="display:inline-block; width:800px;">L’UE déplore l’abandon de la taxe carbone en Australie | The Shift Project aussi !
+</div><span><span class="form-item-title"></span><select type="select" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080[valence_1]" style="margin-left:50px; max-width:100px;" value="4"><option  value="0"></option><option  value="1">EMOTION</option><option  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option selected  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080[sid_2]" value="489311318382366720"/></span><h3>3/4</h3><div style="width:100%; display:block;">489311318382366720</div><div class="panel" style="display:inline-block; width:800px;">#chatellerault Dans l\'ex-usine New Fabris, VMH Énergie a lancé la production de panneaux solaires
+</div><span><span class="form-item-title"></span><select type="select" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080[valence_2]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">EMOTION</option><option selected  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080[sid_3]" value="489284143432622080"/></span><h3>4/4</h3><div style="width:100%; display:block;">489284143432622080</div><div class="panel" style="display:inline-block; width:800px;">la politique de ce pays a besoin de réforme, dans l\'éducation, dans la culture, dans l\'innovation écologique, le reste suivra notre jeunesse
+</div><span><span class="form-item-title"></span><select type="select" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080[valence_3]" style="margin-left:50px; max-width:100px;" value="2"><option  value="0"></option><option  value="1">EMOTION</option><option selected  value="2">SENTIMENT</option><option  value="3">INFORMATION</option><option  value="4">OPINION</option></select></span></div></div><div><div><span><div class="form-item-title"></div><input type="hidden" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080[sourcecat]" value="["EMOTION","SENTIMENT","INFORMATION","OPINION"]"/></span><span><div class="form-item-title"></div><input type="submit" name="489138712732008448_489766356393672704_489311318382366720_489284143432622080[submit]" action="" style="margin-left:40%;display:none;" class="button" value="Soumettre"/></span></div></div> 
+    </form>',
+    'result' => '<div id="item-result-0" class="item-result-true"></div><div id="item-result-1" class="item-result-false"><div style="padding-top:35px;">EMOTION</div></div><div id="item-result-2" class="item-result-false"><div style="padding-top:35px;">OPINION</div></div><div id="item-result-3" class="item-result-false"><div style="padding-top:35px;">INFORMATION</div></div><script>
+    var children = jQuery("form").children();
+    console.log(children);
+    for(var i in children){
+      var height = jQuery(children[i]).height();
+      jQuery("#item-result-"+i).height(height-60);
+      jQuery("#item-result-"+i).css("margin-top","60px");
+    }
+  </script>',
+    'more' => '<button id="compare-result" type="button" class="button" style="margin-left:40%;">Voir les annotations complètes</button>
+  <script>
+    jQuery("#compare-result").click(function(){
+      jQuery.ajax({
+        type: "POST",
+        data : {"489138712732008448":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_INSATISFACTION.xml","content":"@MisterC00l Il manque l\'\\u00e9cosyst\\u00e8me Apple :)\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/INSATISFACTION.xml"},"489766356393672704":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_TRISTESSE.xml","content":"L\\u2019UE d\\u00e9plore l\\u2019abandon de la taxe carbone en Australie | The Shift Project aussi !\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/TRISTESSE.xml"},"489311318382366720":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_VALORISATION.xml","content":"#chatellerault Dans l\'ex-usine New Fabris, VMH \\u00c9nergie a lanc\\u00e9 la production de panneaux solaires\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/VALORISATION.xml"},"489284143432622080":{"sourcefile":"\\/vagrant\\/data\\/demo_pap\\/demo_workspace\\/empty_INFORMATION.xml","content":"la politique de ce pays a besoin de r\\u00e9forme, dans l\'\\u00e9ducation, dans la culture, dans l\'innovation \\u00e9cologique, le reste suivra notre jeunesse\\n","annotated":"\\/vagrant\\/data\\/demo_pap\\/xml\\/INFORMATION.xml"}},
+        url: "http://localhost:8080/demo/rest/annotatedres",
+        dataType : "json",
+        success: function(data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+    });
+  </script>
+  ',
+  ),
+)
+[23/11/2015 - 15:10:47] (10.0.2.2|)  => array (
+)
+[23/11/2015 - 15:10:51] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 488655877465853953 490038666421895168 489138712732008448 489556779060461569 489487364553998337
+[23/11/2015 - 16:49:53] (10.0.2.2|)  => /vagrant/cpm-web-ui/tools/extractdeftsubsetfromentry3.py /vagrant/data/demo_pap/deft2015_corpus/TESTS_REFERENCE_DATA/T3b.txt 489094702382460928 507194988304674816 505754207493046272 490038666421895168 490047184323088384

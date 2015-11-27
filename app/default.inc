@@ -34,10 +34,14 @@ function front_default_main_template($method,$args){
   global $page;
 
   //$page->addJS(BASE_URL."public/js/vendor/foundation/vendor/modernizr.js");
-  $page->addCSS(BASE_URL."public/css/foundation/foundation.css");
+  $page->addCSS(BASE_URL."public/css/foundation.css");
+  $page->addCSS(BASE_URL."public/css/jquery-ui.css");
   $page->addJS(BASE_URL."public/js/vendor/jquery-2.1.0.min.js");
   //$page->addJS(BASE_URL."public/js/vendor/bootstrap-3.1.1-dist/js/bootstrap.min.js");
-  $page->addJS(BASE_URL."public/js/vendor/foundation/foundation.min.js");
+  $page->addJS(BASE_URL."public/js/foundation.min.js");
+  $page->addJS(BASE_URL."public/js/vendor/jquery-ui.min.js");
+
+  
 
   $messages = Utils::consumeMessages();
   if(isset($messages)){
@@ -55,24 +59,14 @@ function front_default_main_template($method,$args){
 
 
 
- /* $page->addToBody('<script>
+  $page->addToBody('<script>
+
+      
         $(document).ready(function(){
           $(document).foundation();
 
-          var footer = $("footer");
-          if(footer.length > 0 ){
-            var pos = footer.position();
-            var height = $(window).height();
-            height = height - pos.top;
-            height = height - footer.height();
-            if (height > 0) {
-                footer.css({
-                    \'margin-top\': height + \'px\'
-                });
-            }
-          }
         });
-    </script>');*/
+    </script>');
 
   $page->render();
 

@@ -63,12 +63,6 @@ function demo_pap($args){
 
   $page->addToBody($html);
 
-  $page->addToBody('<script>
-        $(document).ready(function(){
-          $(document).foundation({
-          });
-        });
-    </script>');
 }
 
 

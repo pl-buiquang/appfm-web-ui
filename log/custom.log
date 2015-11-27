@@ -4691,3 +4691,5812 @@
 )
 [20/11/2015 - 13:37:55] (::1|)  => array (
 )
+[25/11/2015 - 15:54:26] (::1|)  => NULL
+[25/11/2015 - 15:57:8] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 15:58:8] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 15:58:37] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 15:58:50] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 15:59:19] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:5:50] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:6:15] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:7:3] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:8:28] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:8:41] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:8:55] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:17:38] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:18:2] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:18:18] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:18:26] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:20:18] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:49:31] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[25/11/2015 - 16:50:11] (::1|)  => array (
+  0 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => '${_MAP.stanford-parser.OUT}',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'pipeline-test',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_MAP' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$CORPUS',
+             'RUN' => 
+            array (
+              0 => 
+              stdClass::__set_state(array(
+                 'stanford-parser' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                     'OUT_DIR' => '$_RUN_DIR',
+                  )),
+                )),
+              )),
+              1 => 
+              stdClass::__set_state(array(
+                 'test=_CMD' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'DOCKERFILE' => 'base_cpm_shell',
+                     'SERVICE' => 'false',
+                     'CMD' => 'echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/${stanford-parser.OUT:basename}.txt',
+                  )),
+                )),
+              )),
+              2 => 
+              stdClass::__set_state(array(
+                 'foo' => 
+                stdClass::__set_state(array(
+                   'input' => 
+                  stdClass::__set_state(array(
+                     'IN' => '$_',
+                  )),
+                )),
+              )),
+            ),
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'merge=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'cat ${_MAP.stanford-parser.OUT} > $_RUN_DIR/merged.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  1 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/out.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'corenlp-server',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'true',
+             'CMD' => 'python $_DEF_DIR/src/main/python/client.py $IN > $_RUN_DIR/out.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'stanford core nlp server mode test',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'CORPUS_MODIFIED' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+         'value' => '$CORPUS',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'SEED' => 
+      stdClass::__set_state(array(
+         'schema' => 'brat_annotation',
+         'type' => 'FILE',
+      )),
+       'CORPUS' => 
+      stdClass::__set_state(array(
+         'schema' => 'text',
+         'type' => 'DIR',
+      )),
+    )),
+     'name' => 'brat_propagate',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'perl propagation.pl -r $CORPUS -s $SEED',
+          )),
+        )),
+      )),
+    ),
+  )),
+  3 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'format' => 'unknown',
+         'type' => 'FILE',
+         'value' => '$OUT_DIR/${IN:basename}.xml',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'desc' => 'File to be annotated',
+      )),
+       'OUT_DIR' => 
+      stdClass::__set_state(array(
+         'type' => 'DIR',
+         'value' => '$_RUN_DIR',
+      )),
+    )),
+     'name' => 'stanford-parser',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => '$_DEF_DIR/stanford-parser-full-2015-04-20/lexparser.sh $IN > $OUT_DIR/${IN:basename}.xml',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'The stanford parser',
+  )),
+  4 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'VOID' => 
+      stdClass::__set_state(array(
+         'type' => 'VAL',
+         'value' => 'ok',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'pipeline-test0',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         'stanford-parser' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'IN' => '$IN',
+             'OUT_DIR' => '$_RUN_DIR',
+          )),
+        )),
+      )),
+      1 => 
+      stdClass::__set_state(array(
+         'test=_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'dd echo \'${stanford-parser.OUT:basename}\' > $_RUN_DIR/test.txt',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'test de pipeline',
+  )),
+  5 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+         'value' => '$_RUN_DIR/tweets.json',
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'tweetparse@jose',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => '$_DEF_DIR/Dockerfile',
+             'SERVICE' => 'false',
+             'CMD' => 'python $_DEF_DIR/twitter-crawler_copy/getTwitterIds.py $IN > $_RUN_DIR/tweets.json',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'crawl some tweets',
+  )),
+  6 => 
+  stdClass::__set_state(array(
+     'output' => 
+    stdClass::__set_state(array(
+       'OUT' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE*',
+         'value' => 
+        array (
+          0 => '$_RUN_DIR/foo1',
+          1 => '$_RUN_DIR/foo2',
+          2 => '$_RUN_DIR/foo3',
+        ),
+      )),
+    )),
+     'input' => 
+    stdClass::__set_state(array(
+       'IN' => 
+      stdClass::__set_state(array(
+         'type' => 'FILE',
+      )),
+    )),
+     'name' => 'foo',
+     'exec' => 
+    array (
+      0 => 
+      stdClass::__set_state(array(
+         '_CMD' => 
+        stdClass::__set_state(array(
+           'input' => 
+          stdClass::__set_state(array(
+             'DOCKERFILE' => 'base_cpm_shell',
+             'SERVICE' => 'false',
+             'CMD' => 'echo "foo1" > $_RUN_DIR/foo1; echo "foo2" > $_RUN_DIR/foo2; echo "foo3" > $_RUN_DIR/foo3;',
+          )),
+        )),
+      )),
+    ),
+     'desc' => 'foo module for testing purposes',
+  )),
+)
+[26/11/2015 - 15:10:3] (::1|)  => NULL
+[26/11/2015 - 15:10:40] (::1|)  => NULL
+[26/11/2015 - 15:19:5] (::1|)  => NULL
+[26/11/2015 - 15:24:1] (::1|)  => NULL
+[26/11/2015 - 15:28:54] (::1|)  => NULL
+[26/11/2015 - 15:34:53] (::1|)  => NULL
+[26/11/2015 - 15:36:0] (::1|)  => NULL
+[26/11/2015 - 17:2:17] (::1|)  => NULL
+[26/11/2015 - 17:3:5] (::1|)  => NULL
+[26/11/2015 - 17:3:14] (::1|)  => NULL
+[26/11/2015 - 17:3:49] (::1|)  => NULL
+[26/11/2015 - 21:34:30] (::1|)  => NULL

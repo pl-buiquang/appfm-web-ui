@@ -7,7 +7,8 @@ $context = new ZMQContext();
 
 Router::addRoutes(array(
   ""=>"cpm_main",
-  "test"=>"cpm_test"
+  "test"=>"cpm_test",
+  "rest/cmd"=>"cmdexec"
 ));
 
 function cpm_main(){
@@ -36,7 +37,9 @@ function cpm_main(){
   $page->addJS(BASE_URL.'public/js/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js');
 
 
-  $html = tpl("main");
+  $html = tplset(array(
+    "BASE_URL"=>BASE_URL
+    ),tpl("main"));
 
 
 
@@ -44,18 +47,6 @@ function cpm_main(){
 
   $page->addToBody($html);
 
-  $page->addToBody('
-
-    <script>
-    jQuery("#tool-panel").click(function(){
-      jQuery(this).toggle();
-    });
-
-
-var canvas = new draw2d.Canvas("gfx_holder");
-    var rect =  new draw2d.shape.basic.Rectangle();
-       canvas.add(rect,100,10);
-</script>');
 
 
 
@@ -97,6 +88,27 @@ function cpm_test(){
 
 
 
+}
+
+function cmdexec(){
+  if(isset($_POST)){
+    global $context;
+
+    $socket = $context->getSocket(ZMQ::SOCKET_REQ,'default');
+
+    $socket->connect("tcp://192.168.1.27:5555");
+
+    /* Send a request */
+    $socket->send("==CMD==".$_POST['cmd']."==END_CMD==");
+
+    /* Receive back the response */
+    $message = $socket->recv();
+
+    echo $message;
+    exit();
+  }
+  echo "";
+  exit();
 }
 
 

@@ -93,55 +93,7 @@
 
 <script>
 
-    $("#cmd-bar-container").perfectScrollbar({suppressScrollX:true});  
-
-    window.cliobj = $('#cmdbar').cmd({
-        prompt: '$',
-        width: '100%',
-        commands: function(command) {
-          console.log(command);
-            console.log(this);
-        },
-    });
-
-
-
-    function toggleCLI(activate='undefined'){
-        if(activate!="undefined"){
-          if(activate){
-            if(!window.cliobj.isenabled()){
-              window.cliobj.enable();
-            }
-          }else{
-            if(window.cliobj.isenabled()){
-              window.cliobj.disable();
-            }
-          }
-        }else if(window.cliobj.isenabled()){
-          window.cliobj.disable();
-        }else{
-            window.cliobj.enable();
-              
-        }
-    }
-
-
-
-
-jQuery("#menu").click(function(){
-  toggleCLI(false);
-  jQuery("#main.menu-open").switchClass("menu-open","menu-closed");
-  jQuery("#main.menu-closed").switchClass("menu-closed","menu-open");
-})
-
-jQuery("#active-content").on("click",function(){
-  toggleCLI(false);
-})
-
-jQuery("#cmd-bar-container").on("click",function(){
-  toggleCLI(true);
-})
-
-var cli = new vw.cpm.CLI(jQuery("#cpm-cli-main"));
+    
+var cli = new vw.cpm.CLI(jQuery("#main"),{cpmbaseurl:"[[BASE_URL]]"});
 </script>
 

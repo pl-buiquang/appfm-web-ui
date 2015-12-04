@@ -6,10 +6,15 @@
     this.init();
   }
 
+  
+
+
+
+  
   vw.cpm.CLI.prototype.init = function(){
     var me = this;
 
-    
+    this.activemenu = "";
 
     this.menus = {
       "default":{title:"Corpus & Process Manager",body:"???"},
@@ -17,8 +22,10 @@
       "module-menu":{title:"Modules",body:"???"},
       "process-menu":{title:"Process",body:"???"},
       "settings-menu":{title:"Settings",body:"???"},
-      "help-menu":{title:"Help",body:"???"}
+      "help-menu":{title:"Help",body:$('<div></div>')}
     }
+
+    this.helpmanager = new vw.cpm.HelpManager(this,this.menus['help-menu'].body);
 
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 

@@ -28,6 +28,17 @@ Router::addRoutes(
 function demo_pap($args){
   global $page;
 
+  
+  $page->addCSS(BASE_URL."public/css/jquery-ui.css");
+  $page->addJS(BASE_URL."public/js/vendor/jquery-2.1.0.min.js");
+  $page->addJS(BASE_URL."public/js/vendor/jquery-2.1.0.min.js");
+  $page->addJS(BASE_URL."public/js/vendor/foundation/vendor/modernizr.js");
+
+  //$page->addJS(BASE_URL."public/js/vendor/bootstrap-3.1.1-dist/js/bootstrap.min.js");
+  $page->addCSS(BASE_URL."public/css/foundation/foundation.css");
+  $page->addJS(BASE_URL."public/js/vendor/foundation/foundation.min.js");
+  $page->addJS(BASE_URL."public/js/vendor/jquery-ui.min.js");
+
   $page->addCSS('https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic');
   $page->addCSS(BASE_URL.'public/css/demo.css');
   $page->addCSS(BASE_URL.'public/css/perfect-scrollbar/css/perfect-scrollbar.css');
@@ -62,6 +73,15 @@ function demo_pap($args){
     ),tpl("demo-pap/demo"));
 
   $page->addToBody($html);
+
+  $page->addToBody('<script>
+
+      
+        $(document).ready(function(){
+          $(document).foundation();
+
+        });
+    </script>');
 
 }
 

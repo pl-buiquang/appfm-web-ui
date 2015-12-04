@@ -134,7 +134,7 @@ ul.main-menu{
   font-weight: bolder;
   font-size: 1.6rem;
   cursor: pointer;
-  height:50px;
+  height:46px;
   -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   -moz-box-shadow:    0 1px 2px 0 rgba(0, 0, 0, 0.5);
   box-shadow:         0 1px 2px 0 rgba(0, 0, 0, 0.5);
@@ -148,10 +148,16 @@ ul.main-menu{
 }
 
 #menu-content-title{
-  border-bottom: 2px solid #d4d4d4;
-  color: #d4d4d4;
+  background-color: #444444;
   font-size: 24px;
   padding: 6px 12px;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow:    0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  box-shadow:         0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  height: 38px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  color:#ffffff;
 }
 
 #menu-content-body{
@@ -245,18 +251,27 @@ ul.main-menu{
 
 .treeview-node{
   background-image:url('../img/system/folder.png');
-  padding-left:32px;
+  padding-left:40px;
   min-height: 32px;
   background-repeat: no-repeat;
   background-position: middle;
   margin-top: 2px;
+  padding-top: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  color:#ffffff;
+  z-index: 9999;
 }
 
 .treeview-leaf{
   background-image:url('../img/system/file.png');
-  padding-left:32px;
+  padding-left:40px;
   min-height: 32px;
   background-repeat: no-repeat;
   background-position: middle;
   margin-top: 2px;
+  font-size: 14px;
+  padding-top: 6px;
+  cursor: pointer;
+  color:#ffffff;
 }

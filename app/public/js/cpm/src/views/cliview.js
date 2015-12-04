@@ -9,8 +9,13 @@
     this.panels = [];
   };
 
+  vw.cpm.CLIView.maxFrameHeight = 500;
+
   vw.cpm.CLIView.prototype.init=function(){
     var me = this;
+
+    vw.cpm.CLIView.maxFrameHeight = $(window).height()-154 ;
+
     $("#cmd-bar-container").perfectScrollbar({suppressScrollX:true});  
 
     $("#menu-content-body").css('height',window.innerHeight-80);
@@ -18,6 +23,7 @@
     $(window).on('resize',function(){
       $("#menu-content-body").css('height',window.innerHeight-80);
       $("#menu-content-body").perfectScrollbar();
+      vw.cpm.CLIView.maxFrameHeight = $(window).height()-154 ;
     });
 
 
@@ -45,9 +51,11 @@
     jQuery("#app-title").click(function(){
       me.toggleCLI(false);
       // set default menu if menu is to be opened and is empty
-      if(jQuery("#main").hasClass("menu-closed") && me.$el.find("#menu-content-title").children().length==0){
+      if(jQuery("#main").hasClass("menu-closed")){
+        me.model.activemenu = "default";
         me.model.setActiveMenu("default");
       }
+      
 
       jQuery("#main.menu-open").switchClass("menu-open","menu-closed");
       jQuery("#main.menu-closed").switchClass("menu-closed","menu-open");
@@ -55,8 +63,14 @@
     });
 
     $(".main-menu-item").click(function(){
-      jQuery("#main.menu-closed").switchClass("menu-closed","menu-open");
-      me.model.setActiveMenu(this.id);
+      if(me.model.activemenu == this.id){
+        jQuery("#main.menu-open").switchClass("menu-open","menu-closed");
+        jQuery("#main.menu-closed").switchClass("menu-closed","menu-open");
+      }else{
+        jQuery("#main.menu-closed").switchClass("menu-closed","menu-open");
+        me.model.setActiveMenu(this.id);
+        me.model.activemenu = this.id;
+      }
     });
 
 

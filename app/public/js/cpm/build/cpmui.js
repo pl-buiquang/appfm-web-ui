@@ -11,10 +11,15 @@
     this.init();
   }
 
+  
+
+
+
+  
   vw.cpm.CLI.prototype.init = function(){
     var me = this;
 
-    
+    this.activemenu = "";
 
     this.menus = {
       "default":{title:"Corpus & Process Manager",body:"???"},
@@ -22,8 +27,10 @@
       "module-menu":{title:"Modules",body:"???"},
       "process-menu":{title:"Process",body:"???"},
       "settings-menu":{title:"Settings",body:"???"},
-      "help-menu":{title:"Help",body:"???"}
+      "help-menu":{title:"Help",body:$('<div></div>')}
     }
+
+    this.helpmanager = new vw.cpm.HelpManager(this,this.menus['help-menu'].body);
 
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
@@ -157,6 +164,23 @@
 }(window.vw = window.vw || {}));
 (function(vw){
 
+  vw.cpm.HelpManager = function(app,$el,options){
+    this.options = options;
+    this.app = app;
+    this.view = new vw.cpm.HelpManagerView(this,$el);
+    this.init();
+  }
+
+  vw.cpm.HelpManager.prototype.init = function(){
+    var me = this;
+  }
+
+
+
+
+}(window.vw = window.vw || {}));
+(function(vw){
+
   vw.cpm.Module = function(app,$el,options){
     this.options = options;
     this.app = app;
@@ -196,8 +220,13 @@
     this.panels = [];
   };
 
+  vw.cpm.CLIView.maxFrameHeight = 500;
+
   vw.cpm.CLIView.prototype.init=function(){
     var me = this;
+
+    vw.cpm.CLIView.maxFrameHeight = $(window).height()-154 ;
+
     $("#cmd-bar-container").perfectScrollbar({suppressScrollX:true});  
 
     $("#menu-content-body").css('height',window.innerHeight-80);
@@ -205,6 +234,7 @@
     $(window).on('resize',function(){
       $("#menu-content-body").css('height',window.innerHeight-80);
       $("#menu-content-body").perfectScrollbar();
+      vw.cpm.CLIView.maxFrameHeight = $(window).height()-154 ;
     });
 
 
@@ -232,9 +262,11 @@
     jQuery("#app-title").click(function(){
       me.toggleCLI(false);
       // set default menu if menu is to be opened and is empty
-      if(jQuery("#main").hasClass("menu-closed") && me.$el.find("#menu-content-title").children().length==0){
+      if(jQuery("#main").hasClass("menu-closed")){
+        me.model.activemenu = "default";
         me.model.setActiveMenu("default");
       }
+      
 
       jQuery("#main.menu-open").switchClass("menu-open","menu-closed");
       jQuery("#main.menu-closed").switchClass("menu-closed","menu-open");
@@ -242,8 +274,14 @@
     });
 
     $(".main-menu-item").click(function(){
-      jQuery("#main.menu-closed").switchClass("menu-closed","menu-open");
-      me.model.setActiveMenu(this.id);
+      if(me.model.activemenu == this.id){
+        jQuery("#main.menu-open").switchClass("menu-open","menu-closed");
+        jQuery("#main.menu-closed").switchClass("menu-closed","menu-open");
+      }else{
+        jQuery("#main.menu-closed").switchClass("menu-closed","menu-open");
+        me.model.setActiveMenu(this.id);
+        me.model.activemenu = this.id;
+      }
     });
 
 
@@ -351,19 +389,73 @@
   }
 
   vw.cpm.CorpusManagerView.prototype.refresh = function(){
+    var me = this;
     this.$el.html(vw.cpm.CorpusManagerView.renderSubTree(this.model.filetree,0));
+    this.$el.find('.treeview-node').on("click",function(){
+      var parent = $(this).parent();
+      if(parent.hasClass("treeview-fold")){
+        var children = parent.children();
+        if(parent.hasClass("treeview-folded")){
+          $(children[1]).slideDown();
+          parent.removeClass("treeview-folded");
+          parent.addClass("treeview-unfolded");
+        }else{
+          $(children[1]).slideUp();
+          parent.removeClass("treeview-unfolded");
+          parent.addClass("treeview-folded");
+        }
+      }
+    });
+    this.$el.find('.treeview-node').draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
+    this.$el.find('.treeview-node').droppable();
+  }
+
+  function compareTreeView(a,b){
+    var at = typeof a;
+    var bt = typeof b;
+    
+    if(a.hasOwnProperty("...")){
+      return -1;
+    }else if(b.hasOwnProperty("...")){
+      return 1;
+    }else if(at != bt){
+      if(at == "string"){
+        return -1;
+      }else if(bt == "string"){
+        return 1;
+      }else{
+        return 0; // should not happen since it means that both elements are objects
+      }
+    }else {
+      return 0;
+    }
   }
 
   vw.cpm.CorpusManagerView.renderSubTree = function(tree,offset){
     var html = "";
     if(typeof tree == "object"){
       if(tree.constructor === Array){
+        tree = tree.sort(compareTreeView);
         for (var i = tree.length - 1; i >= 0; i--) {
           html += vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset)
         };  
       }else{
         for (var i in tree) {
-          html += '<div class="treeview-node" style="margin-left:'+offset+'px;">'+i+'</div>' + vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset + 12)
+          if(i=="..."){
+            if(tree[i] == "file"){
+              html += '<div class="treeview-leaf treeview-more" style="margin-left:'+offset+'px;">'+i+'</div>';
+            }else{
+              html += '<div class="treeview-node treeview-more" style="margin-left:'+offset+'px;">'+i+'</div>';
+            }
+          }else{
+            var folded = "treeview-folded";
+            var hidden = 'style="display:none;"';
+            if(offset == 0){
+              folded = "treeview-unfolded";
+              hidden = "";
+            }
+            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node" style="margin-left:'+offset+'px;">'+i+'</div><div '+hidden+'>' + vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset + 14)+'</div></div>';
+          }
         };
       }
 
@@ -372,6 +464,37 @@
     }
     return html;
   }
+
+
+
+}(window.vw = window.vw || {}));
+
+(function(vw){
+
+  vw.cpm.HelpManagerView = function(model,$el){
+    this.id = vw.cpm.utils.guid();
+    this.$el = $el || $('<div></div>');
+    this.el = this.$el[0];
+    this.model = model;
+    this.init();
+  };
+
+  vw.cpm.HelpManagerView.prototype.init=function(){
+    var me = this;
+    this.$el.append(vw.cpm.HelpManagerView.template);
+
+    this.$el.find("#help-module-doc").on("click",function(){
+      me.model.app.view.createPanel("Modules doc page",'<iframe width="100%" height="'+vw.cpm.CLIView.maxFrameHeight+'px;" style="border:none;" src="https://versatile-world.net/wiki/work/cpm/spec_draft?rev=1445003156&mddo=print">');
+    });
+    this.$el.find("#help-main-wiki-page").on("click",function(){
+      me.model.app.view.createPanel("Main wiki page",'<iframe width="100%" height="'+vw.cpm.CLIView.maxFrameHeight+'px;" style="border:none;" src="https://versatile-world.net/wiki/work/cpm">');
+    });
+    
+  }
+
+  vw.cpm.HelpManagerView.template = '<div id="help-main-wiki-page" style="cursor:pointer;">Main wiki</div><div id="help-module-doc" style="cursor:pointer;">Modules</div>';
+
+  
 
 
 

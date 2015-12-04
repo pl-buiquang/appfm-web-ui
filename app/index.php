@@ -10,7 +10,7 @@
   $page = new PageBuilder();
 
   Router::dispach();
-
+  Logger::Log(Router::getRoute());
   
 
 ?>

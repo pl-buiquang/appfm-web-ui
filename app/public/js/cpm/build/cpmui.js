@@ -22,11 +22,11 @@
     this.activemenu = "";
 
     this.menus = {
-      "default":{title:"Corpus & Process Manager",body:"???"},
+      "default":{title:"Corpus & Process Manager",body:$('<div></div>')},
       "corpus-menu":{title:"Corpora",body:$('<div></div>')},
-      "module-menu":{title:"Modules",body:"???"},
-      "process-menu":{title:"Process",body:"???"},
-      "settings-menu":{title:"Settings",body:"???"},
+      "module-menu":{title:"Modules",body:$('<div></div>')},
+      "process-menu":{title:"Process",body:$('<div></div>')},
+      "settings-menu":{title:"Settings",body:$('<div></div>')},
       "help-menu":{title:"Help",body:$('<div></div>')}
     }
 
@@ -56,7 +56,7 @@
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){
     this.view.$el.find('#menu-content-title').empty();
-    this.view.$el.find('#menu-content-body').empty();
+    this.view.$el.find('#menu-content-body').children().detach();
 
     var menucontent = this.menus[menuitem];
     this.view.$el.find('#menu-content-title').append(menucontent.title);

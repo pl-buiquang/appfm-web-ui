@@ -18,11 +18,16 @@
 
     $("#cmd-bar-container").perfectScrollbar({suppressScrollX:true});  
 
+    $("#active-content").css('height',window.innerHeight-70);
+    $("#active-content").perfectScrollbar();
+
     $("#menu-content-body").css('height',window.innerHeight-80);
     $("#menu-content-body").perfectScrollbar();
     $(window).on('resize',function(){
       $("#menu-content-body").css('height',window.innerHeight-80);
       $("#menu-content-body").perfectScrollbar();
+      $("#active-content").css('height',window.innerHeight-70);
+      $("#active-content").perfectScrollbar();
       vw.cpm.CLIView.maxFrameHeight = $(window).height()-154 ;
     });
 

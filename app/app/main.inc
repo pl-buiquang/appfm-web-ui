@@ -60,15 +60,15 @@ function cpm_main(){
   $page->addToBody($html);
 
 
-
-
 }
+
+
 
 function cpm_command_call($command){
   global $context;
 
   set_time_limit ( 30);
-  $socket = $context->getSocket(ZMQ::SOCKET_REQ,'default');
+  $socket = $context->getSocket(ZMQ::SOCKET_REQ);
 
   $socket->connect("tcp://".CPM_HOST.":".CPM_PORT);
 
@@ -99,6 +99,7 @@ function cpm_command_call($command){
   }else{
     $message = "timeout";
   }
+  Logger::Log($message);
   return $message;
 }
 

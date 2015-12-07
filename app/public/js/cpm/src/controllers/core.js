@@ -29,6 +29,9 @@
 
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
+    this.modulesmanager = new vw.cpm.ModuleManager(this,this.menus['module-menu'].body);
+
+
     this.cpmCall("settings",function(data){
       var html ="";
       html += '<div> Result directory : '+data.result_dir+'</div>';

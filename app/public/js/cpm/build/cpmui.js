@@ -34,6 +34,9 @@
 
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
+    this.modulesmanager = new vw.cpm.ModuleManager(this,this.menus['module-menu'].body);
+
+
     this.cpmCall("settings",function(data){
       var html ="";
       html += '<div> Result directory : '+data.result_dir+'</div>';
@@ -181,8 +184,8 @@
 }(window.vw = window.vw || {}));
 (function(vw){
 
-  vw.cpm.Module = function(app,$el,options){
-    this.options = options;
+  vw.cpm.Module = function(app,$el,moduledef){
+    this.def = moduledef;
     this.app = app;
     this.view = new vw.cpm.ModuleView(this,$el);
   }
@@ -199,11 +202,60 @@
   vw.cpm.ModuleManager = function(app,$el,options){
     this.options = options;
     this.app = app;
-    this.view = new vw.cpm.ModuleView(this,$el);
+    this.view = new vw.cpm.ModuleManagerView(this,$el);
+    this.init();
+    this.moduletree = {};
+    this.modules = {};
   }
 
   vw.cpm.ModuleManager.prototype.init = function(){
-    
+    var me = this;
+    me.sync();
+  }
+
+  vw.cpm.ModuleManager.prototype.sync = function(){
+    var me = this;
+    $.ajax({
+      type:"POST",
+      url : me.app.options.cpmbaseurl + "rest/cmd",
+      data:{cmd:"module ls --json"},
+      dataType : 'json',
+      success:function(data,textStatus,jqXHR){
+        me.moduletree = data;
+        me.parseModuleTree(data);
+        me.view.refresh();
+      }
+    })
+  }
+
+  vw.cpm.ModuleManager.prototype.parseModuleTree = function(tree){
+    if(typeof tree == "object"){
+      if(tree.constructor === Array){
+        for (var i = tree.length - 1; i >= 0; i--) {
+          this.parseModuleTree(tree[i])
+        };  
+      }else{
+        if(tree.hasOwnProperty("folder") && tree.folder){
+          this.parseModuleTree(tree.items);
+        }else{
+          this.modules[tree.modulename] = tree;
+        }
+      }
+    }
+  }
+
+  vw.cpm.ModuleManager.prototype.fetch = function(modulename,callback){
+    var me = this;
+    $.ajax({
+      type:"POST",
+      url : me.app.options.cpmbaseurl + "rest/cmd",
+      data:{cmd:"module info "+modulename+" --json"},
+      dataType : 'json',
+      success:function(data,textStatus,jqXHR){
+        callback.call(me,data);
+      }
+    })
+
   }
 
 
@@ -229,11 +281,16 @@
 
     $("#cmd-bar-container").perfectScrollbar({suppressScrollX:true});  
 
+    $("#active-content").css('height',window.innerHeight-70);
+    $("#active-content").perfectScrollbar();
+
     $("#menu-content-body").css('height',window.innerHeight-80);
     $("#menu-content-body").perfectScrollbar();
     $(window).on('resize',function(){
       $("#menu-content-body").css('height',window.innerHeight-80);
       $("#menu-content-body").perfectScrollbar();
+      $("#active-content").css('height',window.innerHeight-70);
+      $("#active-content").perfectScrollbar();
       vw.cpm.CLIView.maxFrameHeight = $(window).height()-154 ;
     });
 
@@ -514,6 +571,85 @@
     var me = this;
   }
 
+  vw.cpm.ModuleManagerView.prototype.refresh = function(){
+    var me = this;
+    this.$el.html(vw.cpm.ModuleManagerView.renderSubTree(this.model.moduletree,0));
+    this.$el.find('.treeview-node').on("click",function(){
+      var parent = $(this).parent();
+      if(parent.hasClass("treeview-fold")){
+        var children = parent.children();
+        if(parent.hasClass("treeview-folded")){
+          $(children[1]).slideDown();
+          parent.removeClass("treeview-folded");
+          parent.addClass("treeview-unfolded");
+        }else{
+          $(children[1]).slideUp();
+          parent.removeClass("treeview-unfolded");
+          parent.addClass("treeview-folded");
+        }
+      }
+    });
+    this.$el.find('.treeview-leaf').on("click",function(){
+      var modulename = $(this).html();
+      var $panel = me.model.app.view.createPanel(modulename);
+      var module = new vw.cpm.Module(me.model.app,$panel.find(".frame-body"),me.model.modules[modulename]);
+      module.view.render();
+    });
+    this.$el.find('.treeview-leaf').draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
+    this.$el.find('.treeview-leaf').droppable();
+  }
+
+  function compareTreeView(a,b){
+    var at = typeof a;
+    var bt = typeof b;
+    
+    if(a.hasOwnProperty("folder") && a.folder){
+      return 1;
+    }else if(b.hasOwnProperty("folder") && b.folder){
+      return -1;
+    }else if(at != bt){
+      if(at == "string"){
+        return -1;
+      }else if(bt == "string"){
+        return 1;
+      }else{
+        return 0; // should not happen since it means that both elements are objects
+      }
+    }else {
+      return 0;
+    }
+  }
+
+  vw.cpm.ModuleManagerView.renderSubTree = function(tree,offset){
+    var html = "";
+    if(typeof tree == "object"){
+      if(tree.constructor === Array){
+        tree = tree.sort(compareTreeView);
+        for (var i = tree.length - 1; i >= 0; i--) {
+          html += vw.cpm.ModuleManagerView.renderSubTree(tree[i],offset)
+        };  
+      }else{
+        if(tree.hasOwnProperty("folder") && tree.folder){
+          var folded = "treeview-folded";
+            var hidden = 'style="display:none;"';
+            if(true || offset == 0){
+              folded = "treeview-unfolded";
+              hidden = "";
+            }
+            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + 14)+'</div></div>';
+        }else if(tree.hasOwnProperty("module")){
+          html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;">'+tree.module.name+'</div>';
+        }else{
+          html += '<div class="treeview-leaf" style="margin-left:'+offset+'px; color:red;">'+tree.modulename+'</div>';
+        }
+        
+      }
+
+    }
+    return html;
+  }
+
+
   
 
 
@@ -532,12 +668,39 @@
 
   vw.cpm.ModuleView.prototype.init=function(){
     var me = this;
-    this.$el.append('<div id="'+this.id+'" class="canvas-view"></div>');
+    this.$el.append(vw.cpm.ModuleView.template);
+    if(me.model.def.hasOwnProperty("module")){
+      me.renderGraphical();
+    }else{
+      me.$el.find(".module-content-view").append(me.model.def.source.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;"));
+    }
+    this.$el.find(".module-view-source").on("click",function(){
+      me.$el.find(".module-content-view").empty();
+      me.$el.find(".module-content-view").append(me.model.def.source.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;"));
+    });
+    this.$el.find(".module-view-graphic").on("click",function(){
+      me.$el.find(".module-content-view").empty();
+      if(me.model.def.hasOwnProperty("module")){
+        me.renderGraphical();
+      }else{
+        me.$el.find(".module-content-view").append("Unable to display graphical view of this module, definition contains error, please correct source file before");
+      }
+    });
+  }
+
+  vw.cpm.ModuleView.prototype.render=function(){
+  }
+
+  vw.cpm.ModuleView.prototype.renderGraphical=function(){
+    var me = this;
+    this.$el.find(".module-content-view").append('<div id="'+this.id+'" class="canvas-view"></div>');
 
     var canvas = new draw2d.Canvas(me.id);
     var rect =  new draw2d.shape.basic.Rectangle();
        canvas.add(rect,100,10);
   }
+
+  vw.cpm.ModuleView.template = '<div class="module-header"><span class="module-view-source" style="float:left; margin-right:20px;">source</span><span class="module-view-graphic" style="float:left;">view</span></div><div class="module-content-view"></div>';
 
 
 

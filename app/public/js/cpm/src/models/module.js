@@ -1,7 +1,7 @@
 (function(vw){
 
-  vw.cpm.Module = function(app,$el,options){
-    this.options = options;
+  vw.cpm.Module = function(app,$el,moduledef){
+    this.def = moduledef;
     this.app = app;
     this.view = new vw.cpm.ModuleView(this,$el);
   }

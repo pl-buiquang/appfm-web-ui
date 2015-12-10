@@ -25,28 +25,15 @@
       "help-menu":{title:"Help",body:$('<div></div>')}
     }
 
+    this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body);
+
     this.helpmanager = new vw.cpm.HelpManager(this,this.menus['help-menu'].body);
+
+    this.modulesmanager = new vw.cpm.ModuleManager(this,this.menus['module-menu'].body);
 
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
-    this.cpmCall("settings",function(data){
-      var html ="";
-      html += '<div> Result directory : '+data.result_dir+'</div>';
-      html += '<div> Corpus directory : '+data.corpus_dir+'</div>';
-      var moduledir = '<div>'
-      for (var i = data.modules.length - 1; i >= 0; i--) {
-        moduledir += "<span ";
-        if(data.modules[i].exist){
-          moduledir += 'style="color:green">';
-        }else{
-          moduledir += 'style="color:red">';
-        }
-        moduledir+= data.modules[i].name+'</span>';
-      };
-      moduledir += '</div>';
-      html += moduledir;
-      me.menus['settings-menu'].body = html;
-    });
+    this.processmanager = new vw.cpm.ProcessManager(this,this.menus['module-menu'].body);
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){

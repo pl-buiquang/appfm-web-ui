@@ -14,7 +14,7 @@
 
   vw.cpm.CorpusManagerView.prototype.refresh = function(){
     var me = this;
-    this.$el.html(vw.cpm.CorpusManagerView.renderSubTree(this.model.filetree,0));
+    this.$el.html(vw.cpm.CorpusManagerView.renderSubTree(this.model.filetree,0,me.model.app.cpmsettingsmanager.cpmsettings.corpus_dir));
     this.$el.find('.treeview-node').on("click",function(){
       var parent = $(this).parent();
       if(parent.hasClass("treeview-fold")){
@@ -31,7 +31,6 @@
       }
     });
     this.$el.find('.treeview-node').draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
-    this.$el.find('.treeview-node').droppable();
   }
 
   function compareTreeView(a,b){
@@ -55,21 +54,21 @@
     }
   }
 
-  vw.cpm.CorpusManagerView.renderSubTree = function(tree,offset){
+  vw.cpm.CorpusManagerView.renderSubTree = function(tree,offset,parentpath){
     var html = "";
     if(typeof tree == "object"){
       if(tree.constructor === Array){
         tree = tree.sort(compareTreeView);
         for (var i = tree.length - 1; i >= 0; i--) {
-          html += vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset)
+          html += vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset,parentpath)
         };  
       }else{
         for (var i in tree) {
           if(i=="..."){
             if(tree[i] == "file"){
-              html += '<div class="treeview-leaf treeview-more" style="margin-left:'+offset+'px;">'+i+'</div>';
+              html += '<div class="treeview-leaf treeview-more" style="margin-left:'+offset+'px;" filepath="'+parentpath+'">'+i+'</div>';
             }else{
-              html += '<div class="treeview-node treeview-more" style="margin-left:'+offset+'px;">'+i+'</div>';
+              html += '<div class="treeview-node treeview-more" style="margin-left:'+offset+'px;" filepath="'+parentpath+'">'+i+'</div>';
             }
           }else{
             var folded = "treeview-folded";
@@ -78,13 +77,13 @@
               folded = "treeview-unfolded";
               hidden = "";
             }
-            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node" style="margin-left:'+offset+'px;">'+i+'</div><div '+hidden+'>' + vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset + 14)+'</div></div>';
+            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node" style="margin-left:'+offset+'px;" filepath="'+parentpath+i+'">'+i+'</div><div '+hidden+'>' + vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset + 14,parentpath+i+"/")+'</div></div>';
           }
         };
       }
 
     }else if(typeof tree == "string"){
-      html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;">'+tree+'</div>';
+      html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;" filepath="'+parentpath+tree+'">'+tree+'</div>';
     }
     return html;
   }

@@ -30,31 +30,13 @@
       "help-menu":{title:"Help",body:$('<div></div>')}
     }
 
-    this.helpmanager = new vw.cpm.HelpManager(this,this.menus['help-menu'].body);
+    this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body);
 
-    this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
+    this.helpmanager = new vw.cpm.HelpManager(this,this.menus['help-menu'].body);
 
     this.modulesmanager = new vw.cpm.ModuleManager(this,this.menus['module-menu'].body);
 
-
-    this.cpmCall("settings",function(data){
-      var html ="";
-      html += '<div> Result directory : '+data.result_dir+'</div>';
-      html += '<div> Corpus directory : '+data.corpus_dir+'</div>';
-      var moduledir = '<div>'
-      for (var i = data.modules.length - 1; i >= 0; i--) {
-        moduledir += "<span ";
-        if(data.modules[i].exist){
-          moduledir += 'style="color:green">';
-        }else{
-          moduledir += 'style="color:red">';
-        }
-        moduledir+= data.modules[i].name+'</span>';
-      };
-      moduledir += '</div>';
-      html += moduledir;
-      me.menus['settings-menu'].body = html;
-    });
+    this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){
@@ -132,6 +114,17 @@
     return guid;
   }
 
+  vw.cpm.utils.getSelectionText =function() {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    } else if (document.selection && document.selection.type != "Control") {
+        text = document.selection.createRange().text;
+    }
+    return text;
+  }
+    
+
 }(window.vw = window.vw || {}));
 (function(vw){
 
@@ -145,10 +138,10 @@
 
   vw.cpm.CorpusManager.prototype.init = function(){
     var me = this;
-    me.sync();
+    me.fetch();
   }
 
-  vw.cpm.CorpusManager.prototype.sync = function(){
+  vw.cpm.CorpusManager.prototype.fetch = function(){
     var me = this;
     $.ajax({
       type:"POST",
@@ -156,10 +149,36 @@
       data:{cmd:"corpus ls --json"},
       dataType : 'json',
       success:function(data,textStatus,jqXHR){
-        me.filetree = data;
+        me.filetree = {"/":data.corpus}; // because...
         me.view.refresh();
       }
     })
+  }
+
+
+
+}(window.vw = window.vw || {}));
+(function(vw){
+
+  vw.cpm.CPMSettingsManager = function(app,$el,options){
+    this.options = options;
+    this.app = app;
+    this.view = new vw.cpm.CPMSettingsManagerView(this,$el);
+    this.cpmsettings = {};
+    this.init();
+  }
+
+  vw.cpm.CPMSettingsManager.prototype.init = function(){
+    var me = this;
+    me.fetch();
+  }
+
+  vw.cpm.CPMSettingsManager.prototype.fetch = function(){
+    var me = this;
+    this.app.cpmCall("settings",function(data){
+      me.cpmsettings = data;
+      me.view.render();
+    });
   }
 
 
@@ -188,13 +207,52 @@
     this.def = moduledef;
     this.app = app;
     this.view = new vw.cpm.ModuleView(this,$el);
+    this.synced = false;
   }
 
   vw.cpm.Module.prototype.init = function(){
     
   }
 
+  vw.cpm.Module.prototype.fetch = function(){
+    
+  }
 
+  vw.cpm.Module.prototype.sync = function(success,error){
+    alert('no save function yet, you have to modify the source file by directly in the server files');
+  }
+
+  vw.cpm.Module.confToYaml = function(conf){
+    var out = "";
+    for(var confname in conf){
+      out += confname+" : "+conf[confname]+"\n";
+    }
+    return out;
+  }
+
+  vw.cpm.Module.prototype.run = function(conf,success,error){
+    var me = this;
+    console.log(conf);
+    $.ajax({
+      type: "POST",
+      data : {
+        cmd: "module run "+me.def.modulename,
+        data:vw.cpm.Module.confToYaml(conf)
+      },
+      url: me.app.options.cpmbaseurl+"rest/cmd",
+      dataType : "text",
+      success: function(data, textStatus, jqXHR) {
+        var runid = data;
+        var $panel = me.app.view.createPanel(me.def.modulename+" (+ "+runid+")");
+        var process = new vw.cpm.Process(me.app,$panel.find(".frame-body"),{moduledef:me.def.module,runconf:conf,runid:runid});
+        success.call(me.view);
+      },
+      error:function(){
+
+      }
+    });
+  
+  }
 
 }(window.vw = window.vw || {}));
 (function(vw){
@@ -263,6 +321,38 @@
 }(window.vw = window.vw || {}));
 (function(vw){
 
+  vw.cpm.Process = function(app,$el,conf){
+    this.app = app;
+    this.init(conf);
+    this.view = new vw.cpm.ProcessView(this,$el);
+    this.synced = false;
+  }
+
+  vw.cpm.Process.prototype.init = function(conf){
+    this.moduledef = conf.moduledef;
+    this.conf = conf.runconf;
+    this.runid = conf.runid;
+  }
+
+  vw.cpm.Process.prototype.fetch = function(){
+    
+  }
+
+  vw.cpm.Process.prototype.sync = function(success,error){
+    alert('no save function yet, you have to modify the source file by directly in the server files');
+  }
+
+  vw.cpm.Process.prototype.run = function(conf,success,error){
+    var me = this;
+    console.log(conf);
+    if(success){
+      success.call(me.view);
+    }
+  }
+
+}(window.vw = window.vw || {}));
+(function(vw){
+
   vw.cpm.CLIView = function(model,$el){
     this.$el = $el;
     this.el = $el[0];
@@ -309,6 +399,13 @@
           console.log(arguments);
           console.log(this);
         }*/
+    });
+
+    $('#cmdbar').on("mousedown",function(e){
+      if(e.which == 2 && vw.cpm.currentTextSelection){
+        me.cmdbar.insert(vw.cpm.currentTextSelection);
+        me.toggleCLI(true);
+      }
     });
 
     // Menu animations
@@ -408,6 +505,12 @@
     }
 
     this.panels.push($el);
+
+
+    $el.find(".frame-title").mouseup(function (e){
+       vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
+     });
+ 
     $el.find('.frame-tool-pin').click(function(){
       me.stick($el);
 
@@ -447,7 +550,7 @@
 
   vw.cpm.CorpusManagerView.prototype.refresh = function(){
     var me = this;
-    this.$el.html(vw.cpm.CorpusManagerView.renderSubTree(this.model.filetree,0));
+    this.$el.html(vw.cpm.CorpusManagerView.renderSubTree(this.model.filetree,0,me.model.app.cpmsettingsmanager.cpmsettings.corpus_dir));
     this.$el.find('.treeview-node').on("click",function(){
       var parent = $(this).parent();
       if(parent.hasClass("treeview-fold")){
@@ -464,7 +567,6 @@
       }
     });
     this.$el.find('.treeview-node').draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
-    this.$el.find('.treeview-node').droppable();
   }
 
   function compareTreeView(a,b){
@@ -488,21 +590,21 @@
     }
   }
 
-  vw.cpm.CorpusManagerView.renderSubTree = function(tree,offset){
+  vw.cpm.CorpusManagerView.renderSubTree = function(tree,offset,parentpath){
     var html = "";
     if(typeof tree == "object"){
       if(tree.constructor === Array){
         tree = tree.sort(compareTreeView);
         for (var i = tree.length - 1; i >= 0; i--) {
-          html += vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset)
+          html += vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset,parentpath)
         };  
       }else{
         for (var i in tree) {
           if(i=="..."){
             if(tree[i] == "file"){
-              html += '<div class="treeview-leaf treeview-more" style="margin-left:'+offset+'px;">'+i+'</div>';
+              html += '<div class="treeview-leaf treeview-more" style="margin-left:'+offset+'px;" filepath="'+parentpath+'">'+i+'</div>';
             }else{
-              html += '<div class="treeview-node treeview-more" style="margin-left:'+offset+'px;">'+i+'</div>';
+              html += '<div class="treeview-node treeview-more" style="margin-left:'+offset+'px;" filepath="'+parentpath+'">'+i+'</div>';
             }
           }else{
             var folded = "treeview-folded";
@@ -511,16 +613,58 @@
               folded = "treeview-unfolded";
               hidden = "";
             }
-            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node" style="margin-left:'+offset+'px;">'+i+'</div><div '+hidden+'>' + vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset + 14)+'</div></div>';
+            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node" style="margin-left:'+offset+'px;" filepath="'+parentpath+i+'">'+i+'</div><div '+hidden+'>' + vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset + 14,parentpath+i+"/")+'</div></div>';
           }
         };
       }
 
     }else if(typeof tree == "string"){
-      html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;">'+tree+'</div>';
+      html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;" filepath="'+parentpath+tree+'">'+tree+'</div>';
     }
     return html;
   }
+
+
+
+}(window.vw = window.vw || {}));
+
+(function(vw){
+
+  vw.cpm.CPMSettingsManagerView = function(model,$el){
+    this.id = vw.cpm.utils.guid();
+    this.$el = $el || $('<div></div>');
+    this.el = this.$el[0];
+    this.model = model;
+    this.init();
+  };
+
+  vw.cpm.CPMSettingsManagerView.prototype.init=function(){
+    var me = this;
+    
+  }
+
+  vw.cpm.CPMSettingsManagerView.prototype.render = function(){
+    var data = this.model.cpmsettings;
+    var html ="";
+    html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
+    html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
+    var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'
+    for (var i = data.modules.length - 1; i >= 0; i--) {
+      moduledir += "<li ";
+      if(data.modules[i].exist){
+        moduledir += '>';
+      }else{
+        moduledir += 'class="warning-field">';
+      }
+      moduledir+= data.modules[i].name+'</li>';
+    };
+    moduledir += '</ul></div>';
+    html += moduledir;
+    this.$el.append(html);
+  }
+
+ 
+  
 
 
 
@@ -674,21 +818,80 @@
     }else{
       me.$el.find(".module-content-view").append(me.model.def.source.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;"));
     }
+    me.setActiveMenu(".module-view-graphic");
+
     this.$el.find(".module-view-source").on("click",function(){
       me.$el.find(".module-content-view").empty();
       me.$el.find(".module-content-view").append(me.model.def.source.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;"));
+      me.setActiveMenu(".module-view-source");
     });
     this.$el.find(".module-view-graphic").on("click",function(){
+      me.showGraphical();
+      me.setActiveMenu(".module-view-graphic");
+    });
+    this.$el.find(".module-save").on("click",function(){
+      me.model.sync(function(){
+
+      },function(){
+
+      });
+    });
+    this.$el.find(".module-run").on("click",function(){
       me.$el.find(".module-content-view").empty();
-      if(me.model.def.hasOwnProperty("module")){
-        me.renderGraphical();
-      }else{
-        me.$el.find(".module-content-view").append("Unable to display graphical view of this module, definition contains error, please correct source file before");
-      }
+      // first sync to see if current module def is validated by server
+      // then render run configuration form
+      me.renderRunConfForm();
+      me.setActiveMenu(".module-run");
     });
   }
 
+  vw.cpm.ModuleView.prototype.setActiveMenu = function(activemenuclass){
+    this.$el.find(".module-header-item").removeClass("active");
+    this.$el.find(activemenuclass).addClass("active");
+  }
+
   vw.cpm.ModuleView.prototype.render=function(){
+  }
+
+
+  vw.cpm.ModuleView.prototype.renderRunConfForm=function(){
+    var me = this;
+
+    $form = $('<div></div>');
+    var inputs = me.model.def.module.input;
+    for(var inputname in inputs){
+      $form.append('<div class="module-run-conf-form-field"><span style="font-weight:bold">'+inputname+'</span><span style="font-style:italic;"> ('+inputs[inputname].type+')</span><input type="text" value="" name="'+inputname+'"></div>')
+    }
+    $form.append('<center><button class="submit" type="button">Run</button></center>');
+
+    this.$el.find(".module-content-view").append($form);
+
+    $form.find("input").droppable({
+      drop: function( event, ui ) {
+        $(this).val(ui.draggable.attr("filepath"));
+      }
+    });
+
+    $form.find(".submit").on("click",function(){
+      var conf = {}
+      for(var inputname in inputs){
+        conf[inputname] = $form.find('input[name="'+inputname+'"]').val()
+      } 
+      me.model.run(conf,function(){
+        me.showGraphical();
+        me.setActiveMenu(".module-view-graphic");
+      });
+    })
+  }
+
+  vw.cpm.ModuleView.prototype.showGraphical = function(){
+    var me = this;
+    me.$el.find(".module-content-view").empty();
+    if(me.model.def.hasOwnProperty("module")){
+      me.renderGraphical();
+    }else{
+      me.$el.find(".module-content-view").append("Unable to display graphical view of this module, definition contains error, please correct source file before");
+    }
   }
 
   vw.cpm.ModuleView.prototype.renderGraphical=function(){
@@ -700,7 +903,41 @@
        canvas.add(rect,100,10);
   }
 
-  vw.cpm.ModuleView.template = '<div class="module-header"><span class="module-view-source" style="float:left; margin-right:20px;">source</span><span class="module-view-graphic" style="float:left;">view</span></div><div class="module-content-view"></div>';
+  vw.cpm.ModuleView.template = '<div class="module-header">'+
+  '<span class="module-view-source module-header-item" style="float:left; margin-left:8px;">source</span>'+
+  '<span class="module-view-graphic module-header-item" style="float:left; margin-left:20px;">view</span>'+
+  '<span class="module-run module-header-item" style="float:right; margin-right:8px;">run</span>'+
+  '<span class="module-save module-header-item" style="float:right; margin-right:20px;">save</span>'+
+  '</div>'+
+  '<div class="module-content-view"></div>';
+
+
+
+}(window.vw = window.vw || {}));
+
+(function(vw){
+
+  vw.cpm.ProcessView = function(model,$el){
+    this.$el = $el || $('<div></div>');
+    this.el = this.$el[0];
+    this.model = model;
+    this.init();
+  };
+
+  vw.cpm.ProcessView.prototype.init=function(){
+    var me = this;
+    this.$el.append(vw.cpm.ProcessView.template);
+    
+  }
+
+  
+  vw.cpm.ProcessView.prototype.render=function(){
+    console.log(this.model);
+  }
+
+
+
+  vw.cpm.ProcessView.template = 'Hello World!';
 
 
 

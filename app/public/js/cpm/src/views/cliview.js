@@ -48,6 +48,13 @@
         }*/
     });
 
+    $('#cmdbar').on("mousedown",function(e){
+      if(e.which == 2 && vw.cpm.currentTextSelection){
+        me.cmdbar.insert(vw.cpm.currentTextSelection);
+        me.toggleCLI(true);
+      }
+    });
+
     // Menu animations
     jQuery("#menu").click(function(){
       me.toggleCLI(false);
@@ -145,6 +152,12 @@
     }
 
     this.panels.push($el);
+
+
+    $el.find(".frame-title").mouseup(function (e){
+       vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
+     });
+ 
     $el.find('.frame-tool-pin').click(function(){
       me.stick($el);
 

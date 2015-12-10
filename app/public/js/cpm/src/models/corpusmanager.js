@@ -10,10 +10,10 @@
 
   vw.cpm.CorpusManager.prototype.init = function(){
     var me = this;
-    me.sync();
+    me.fetch();
   }
 
-  vw.cpm.CorpusManager.prototype.sync = function(){
+  vw.cpm.CorpusManager.prototype.fetch = function(){
     var me = this;
     $.ajax({
       type:"POST",
@@ -21,7 +21,7 @@
       data:{cmd:"corpus ls --json"},
       dataType : 'json',
       success:function(data,textStatus,jqXHR){
-        me.filetree = data;
+        me.filetree = {"/":data.corpus}; // because...
         me.view.refresh();
       }
     })

@@ -1,4 +1,15 @@
 /*******************************************************************
+*      Reset
+********************************************************************/
+
+ul{
+  margin: 0;  
+  margin-left: 12px;
+
+  padding: 0;
+}
+
+/*******************************************************************
 *      Main Layout
 ********************************************************************/
 
@@ -164,7 +175,24 @@ ul.main-menu{
 #menu-content-body{
   padding: 12px;
   position: relative;
+  color:#ffffff;
 }
+
+.settings-field-title{
+  background: #d4d4d4 none repeat scroll 0 0;
+  color: #4e5c72;
+  font-size: 16px !important;
+  font-weight: bold;
+  margin-top: 4px;
+  padding: 4px;
+}
+
+.settings-field-body{
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding: 8px;
+}
+
 
 /*******************************************************************
 *      Frames Layout
@@ -216,6 +244,7 @@ ul.main-menu{
   float:right;
   margin-right: 4px;
   margin-top: 4px;
+  cursor: pointer;
 }
 
 .frame-tool-pin{
@@ -256,8 +285,33 @@ ul.main-menu{
 
 .module-header{
   height: 32px;
+  left: 0;
+  position: absolute;
+  top: 32px;
   width: 100%;
+  background: rgba(79, 93, 115,0.85);
+
 }
+
+.module-content-view{
+  margin-top:32px;
+}
+
+.module-header-item{
+  padding-top:2px;
+  color:#ffffff;
+  font-weight: bold;
+  cursor:pointer;
+}
+
+.module-header-item:hover{
+  color:yellow;
+}
+
+.module-header-item.active{
+  color:yellow;
+}
+
 
 
 
@@ -271,7 +325,7 @@ ul.main-menu{
   padding-left:40px;
   min-height: 32px;
   background-repeat: no-repeat;
-  background-position: middle;
+  background-position: left top;
   margin-top: 2px;
   padding-top: 6px;
   font-size: 14px;
@@ -285,10 +339,17 @@ ul.main-menu{
   padding-left:40px;
   min-height: 32px;
   background-repeat: no-repeat;
-  background-position: middle;
+  background-position: left top;
   margin-top: 2px;
   font-size: 14px;
   padding-top: 6px;
   cursor: pointer;
   color:#ffffff;
+}
+
+.warning-field{
+  background-image:url('../img/system/warning-icon.png');
+  padding-right: 20px;
+  background-repeat: no-repeat;
+  background-position: right;
 }

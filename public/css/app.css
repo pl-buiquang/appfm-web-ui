@@ -22,18 +22,27 @@ body {
 }
 
 #menu{
-  background-color: #444444;
+  background-color: #4f5d73;
+  /*background: rgb(54, 70, 94);
+/*background: -moz-linear-gradient(90deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
+background: -webkit-linear-gradient(90deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
+background: -o-linear-gradient(90deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
+background: -ms-linear-gradient(90deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
+background: linear-gradient(180deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
+*/
+
   position: absolute;
   width:80px;
   left:0;
   top:0;
   bottom: 0;
+  z-index:100;
 }
 
 #menu-content{
+  background-color: #9199A6;
   top:0;
   bottom: 0;
-  background-color: #555555;
   position: absolute;
   width:300px;
   left:80px;
@@ -69,7 +78,7 @@ body {
 #app-title{
   /*text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
   color:black;*/
-  color:orange;
+  color:#ffffff;
   font-weight: bolder;
   font-size: 18px;
   cursor: pointer;
@@ -141,7 +150,8 @@ ul.main-menu{
 }
 
 #menu-content-title{
-  background-color: #444444;
+  /*background-color: #36465E;*/
+  background-color: #4f5d73;
   font-size: 24px;
   padding: 6px 12px;
     -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
@@ -223,6 +233,7 @@ ul.main-menu{
   right:0;
   left: 0;
   background-color: #fafafa;
+  z-index: 9999;
 }
 
 #active-content{

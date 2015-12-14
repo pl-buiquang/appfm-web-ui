@@ -47,5 +47,10 @@
 <!--Main application script entry point-->
 <script>
   var cli = new vw.cpm.CLI(jQuery("body"),{cpmbaseurl:"[[BASE_URL]]"});
+
+ 
+   
+
+    
 </script>
 

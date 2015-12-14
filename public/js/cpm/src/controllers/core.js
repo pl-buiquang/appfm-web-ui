@@ -46,6 +46,17 @@
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
     this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
+
+    var firstrun = store.get('firstrun')
+    if(!firstrun){
+      var panel = this.view.createPanel('Intro',this.helpmanager.slides);  
+      this.view.fullscreen(panel);
+      store.set('firstrun','done');
+    }else{
+      var panel = this.view.createPanel('Intro',this.helpmanager.slides);
+      
+    }
+  
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){

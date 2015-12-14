@@ -51,6 +51,17 @@
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
     this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
+
+    var firstrun = store.get('firstrun')
+    if(!firstrun){
+      var panel = this.view.createPanel('Intro',this.helpmanager.slides);  
+      this.view.fullscreen(panel);
+      store.set('firstrun','done');
+    }else{
+      var panel = this.view.createPanel('Intro',this.helpmanager.slides);
+      
+    }
+  
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){
@@ -250,7 +261,11 @@
 
   vw.cpm.HelpManager.prototype.init = function(){
     var me = this;
+
+    this.slides = '<iframe style="border-style:none;border:0;margin:0;padding:0;" height="500px" width="100%" src="http://localhost/cpm/public/vendor/reveal.js-3.2.0/index.html"></iframe>';
   }
+
+  
 
 
 

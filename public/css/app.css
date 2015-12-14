@@ -22,7 +22,7 @@ body {
 }
 
 #menu{
-  background-color: #4f5d73;
+  background-color: #373E48;
   /*background: rgb(54, 70, 94);
 /*background: -moz-linear-gradient(90deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
 background: -webkit-linear-gradient(90deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
@@ -40,7 +40,7 @@ background: linear-gradient(180deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
 }
 
 #menu-content{
-  background-color: #9199A6;
+  background-color: #687486;
   top:0;
   bottom: 0;
   position: absolute;
@@ -151,7 +151,7 @@ ul.main-menu{
 
 #menu-content-title{
   /*background-color: #36465E;*/
-  background-color: #4f5d73;
+  background-color: #373E48;
   font-size: 24px;
   padding: 6px 12px;
     -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);

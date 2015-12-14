@@ -136,7 +136,7 @@
     });
   }
 
-  vw.cpm.CLIView.prototype.getPanel = function(title,create_new_if_not_found){
+  vw.cpm.CLIView.prototype.getPanel = function(title,do_not_create_new_if_not_found){
     var me = this;
     var index = -1;
     for(var i in me.panels){
@@ -147,10 +147,10 @@
     }
     if(index!=-1){
       return me.panels[i];
-    }else if(create_new_if_not_found){
-      return me.createPanel(title);
-    }else{
+    }else if(do_not_create_new_if_not_found){
       return undefined;
+    }else{
+      return me.createPanel(title);
     }
 
   }

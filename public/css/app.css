@@ -59,42 +59,26 @@ body {
 
 
 
-/*******************************************************************
-*      Command bar
-********************************************************************/
 
-#cmdbar{
- width: 100%; 
-  min-height:30px;
-  word-wrap:break-word;
-    outline:0px solid transparent;
-    height:auto;
-    overflow: hidden;
-    margin-bottom: 10px;
-    padding-left:20px;
-    cursor: text;
-}
-
-
-#cmdbar:focus{
-  outline:0px solid transparent;
-}
-
-#cmd-bar-container{
-  padding-top: 10px;
-  background-color: #fff;
-  width:100%;
-   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
-   min-height: 40px;
-   max-height: 40px;
-   /*max-height: 100px;*/
-   position:relative;
-}
 
 /*******************************************************************
 *      Menu 
 ********************************************************************/
 
+#app-title{
+  /*text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+  color:black;*/
+  color:orange;
+  font-weight: bolder;
+  font-size: 18px;
+  cursor: pointer;
+  height:38px;
+  /*-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow:    0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  box-shadow:         0 1px 2px 0 rgba(0, 0, 0, 0.5);*/
+  padding-left: 10px;
+  padding-top: 12px;
+}
 
 .menu-open{
   left:380px;
@@ -140,7 +124,7 @@ ul.main-menu, .main-menu li{
 }
 
 ul.main-menu{
-  margin-top:12px;
+  margin-top:8px;
   margin-left:8px;
 }
 
@@ -148,19 +132,7 @@ ul.main-menu{
   margin-bottom:10px;
 }
 
-#app-title{
-  text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
-  color:black;
-  font-weight: bolder;
-  font-size: 1.6rem;
-  cursor: pointer;
-  height:46px;
-  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  -moz-box-shadow:    0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  box-shadow:         0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  padding-left: 8px;
-  padding-top: 4px;
-}
+
 
 .bottom-menu{
   position: absolute;
@@ -199,6 +171,38 @@ ul.main-menu{
   font-size: 14px;
   margin-bottom: 8px;
   padding: 8px;
+}
+
+/*******************************************************************
+*      Command bar
+********************************************************************/
+
+#cmdbar{
+ width: 100%; 
+  min-height:30px;
+  word-wrap:break-word;
+    outline:0px solid transparent;
+    height:auto;
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding-left:20px;
+    cursor: text;
+}
+
+
+#cmdbar:focus{
+  outline:0px solid transparent;
+}
+
+#cmd-bar-container{
+  padding-top: 10px;
+  background-color: #fff;
+  width:100%;
+   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+   min-height: 40px;
+   max-height: 40px;
+   /*max-height: 100px;*/
+   position:relative;
 }
 
 

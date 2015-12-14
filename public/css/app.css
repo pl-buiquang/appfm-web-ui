@@ -37,6 +37,7 @@ body {
   position: absolute;
   width:300px;
   left:80px;
+
 }
 
 #main{
@@ -150,12 +151,14 @@ ul.main-menu{
   overflow: hidden;
   text-overflow:ellipsis;
   color:#ffffff;
+  text-align: center;
 }
 
 #menu-content-body{
   padding: 12px;
   position: relative;
   color:#ffffff;
+  overflow-wrap: break-word;
 }
 
 .settings-field-title{
@@ -291,6 +294,13 @@ ul.main-menu{
   background-image:url('../img/system/quitfs.png');
 }
 
+.frame-tool-hide{
+  background-image:url('../img/system/hide.png'); 
+}
+
+.frame-tool-show{
+  background-image:url('../img/system/show.png'); 
+}
 
 .frame-body{
   padding:8px; 

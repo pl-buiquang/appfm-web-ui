@@ -25,6 +25,9 @@ function cpm_main(){
 
   $page->addJS(BASE_URL."public/js/vendor/underscore-min.js");
   $page->addJS(BASE_URL."public/js/vendor/backbone-min.js");
+
+  $page->addJS(BASE_URL."public/js/vendor/store.min.js");
+
   $page->addJS(BASE_URL."public/js/cpm/build/cpmui.js");
   $page->addCSS(BASE_URL."public/js/cpm/build/style/style.css");
 

@@ -25,10 +25,10 @@
     $("#active-content").perfectScrollbar();
 
     $("#menu-content-body").css('height',window.innerHeight-80);
-    $("#menu-content-body").perfectScrollbar();
+    $("#menu-content-body").perfectScrollbar({suppressScrollX:true});
     $(window).on('resize',function(){
       $("#menu-content-body").css('height',window.innerHeight-80);
-      $("#menu-content-body").perfectScrollbar();
+      $("#menu-content-body").perfectScrollbar({suppressScrollX:true});
       $("#active-content").css('height',window.innerHeight-94);
       $("#active-content").perfectScrollbar();
       vw.cpm.CLIView.maxFrameHeight = $(window).height()-178 ;
@@ -190,6 +190,32 @@
     });
   }
 
+  vw.cpm.CLIView.prototype.show = function($panel){
+    var me = this;
+    var button = $panel.find('.frame-tool-show');
+    button.removeClass('frame-tool-show');
+    button.addClass('frame-tool-hide');
+    button.unbind("click");
+    $panel.find(".frame-body").slideDown({complete:function(){
+      button.on("click",function(){
+        me.hide($panel);
+      });
+    }});
+  }
+
+  vw.cpm.CLIView.prototype.hide = function($panel){
+    var me = this;
+    var button = $panel.find('.frame-tool-hide');
+    button.removeClass('frame-tool-hide');
+    button.addClass('frame-tool-show');
+    button.unbind("click");
+    $panel.find(".frame-body").slideUp({complete:function(){
+      button.on("click",function(){
+        me.show($panel);
+      });
+    }});
+  }
+
   vw.cpm.CLIView.prototype.createPanel = function(title,data){
     var me = this;
     var html = vw.cpm.CLIView.frametemplate;
@@ -231,11 +257,15 @@
 
     });
 
+    $el.find('.frame-tool-hide').click(function(){
+      me.hide($el);
+    });
+
 
     return $el;
   }
 
-  vw.cpm.CLIView.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div></div></div><div class="frame-body"></div></div>';
+  vw.cpm.CLIView.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div><div class="frame-tool frame-tool-hide"></div></div></div><div class="frame-body"></div></div>';
   vw.cpm.CLIView.fullscreentemplate = '<div id="fullscreen-container"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-quitfs"></div></div></div><div class="frame-body"></div></div>';
 
 

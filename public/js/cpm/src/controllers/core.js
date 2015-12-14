@@ -14,6 +14,18 @@
   vw.cpm.CLI.prototype.init = function(){
     var me = this;
 
+    this.foo = "bar";
+
+    if (!store.enabled) {
+      alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser. Your session won\'t be saved across page reloads');
+      
+    }
+    console.log(store.get('test'));
+
+    store.set('test',this.view.panels);  
+
+
+
     this.activemenu = "";
 
     this.menus = {
@@ -84,11 +96,10 @@
   vw.cpm.CLI.prototype.request = function(command){
     var me = this;
 
-    if(command == "test"){
-      var panel = this.view.createPanel();
-      var module = new vw.cpm.Module(this,panel.find('.frame-body'),{name:"pipeline-test"});
-      
-      
+    if(command == "brat"){
+      $panel = me.view.getPanel("brat");
+      $panel.find('.frame-body').empty();
+      $panel.find('.frame-body').append('<iframe width="100%" height="500px" src="http://192.168.1.27:8001/index.xhtml"></iframe>');
       return;
     }
 

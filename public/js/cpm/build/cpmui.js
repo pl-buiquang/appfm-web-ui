@@ -19,6 +19,18 @@
   vw.cpm.CLI.prototype.init = function(){
     var me = this;
 
+    this.foo = "bar";
+
+    if (!store.enabled) {
+      alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser. Your session won\'t be saved across page reloads');
+      
+    }
+    console.log(store.get('test'));
+
+    store.set('test',this.view.panels);  
+
+
+
     this.activemenu = "";
 
     this.menus = {
@@ -89,11 +101,10 @@
   vw.cpm.CLI.prototype.request = function(command){
     var me = this;
 
-    if(command == "test"){
-      var panel = this.view.createPanel();
-      var module = new vw.cpm.Module(this,panel.find('.frame-body'),{name:"pipeline-test"});
-      
-      
+    if(command == "brat"){
+      $panel = me.view.getPanel("brat");
+      $panel.find('.frame-body').empty();
+      $panel.find('.frame-body').append('<iframe width="100%" height="500px" src="http://192.168.1.27:8001/index.xhtml"></iframe>');
       return;
     }
 
@@ -287,7 +298,7 @@
       dataType : "text",
       success: function(data, textStatus, jqXHR) {
         var runid = data;
-        var $panel = me.app.view.createPanel(me.def.modulename+" (+ "+runid+")");
+        var $panel = me.app.view.createPanel(me.def.modulename+" (run "+runid+")");
         var process = new vw.cpm.Process(me.app,$panel.find(".frame-body"),{moduledef:me.def.module,runconf:conf,runid:runid});
         success.call(me.view);
       },
@@ -308,6 +319,7 @@
     this.init();
     this.moduletree = {};
     this.modules = {};
+    this.modulesobj = [];
   }
 
   vw.cpm.ModuleManager.prototype.init = function(){
@@ -466,10 +478,10 @@
     $("#active-content").perfectScrollbar();
 
     $("#menu-content-body").css('height',window.innerHeight-80);
-    $("#menu-content-body").perfectScrollbar();
+    $("#menu-content-body").perfectScrollbar({suppressScrollX:true});
     $(window).on('resize',function(){
       $("#menu-content-body").css('height',window.innerHeight-80);
-      $("#menu-content-body").perfectScrollbar();
+      $("#menu-content-body").perfectScrollbar({suppressScrollX:true});
       $("#active-content").css('height',window.innerHeight-94);
       $("#active-content").perfectScrollbar();
       vw.cpm.CLIView.maxFrameHeight = $(window).height()-178 ;
@@ -577,7 +589,7 @@
     });
   }
 
-  vw.cpm.CLIView.prototype.getPanel = function(title,create_new_if_not_found){
+  vw.cpm.CLIView.prototype.getPanel = function(title,do_not_create_new_if_not_found){
     var me = this;
     var index = -1;
     for(var i in me.panels){
@@ -588,10 +600,10 @@
     }
     if(index!=-1){
       return me.panels[i];
-    }else if(create_new_if_not_found){
-      return me.createPanel(title);
-    }else{
+    }else if(do_not_create_new_if_not_found){
       return undefined;
+    }else{
+      return me.createPanel(title);
     }
 
   }
@@ -629,6 +641,32 @@
     me.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
       me.quitFullscreen($panel);
     });
+  }
+
+  vw.cpm.CLIView.prototype.show = function($panel){
+    var me = this;
+    var button = $panel.find('.frame-tool-show');
+    button.removeClass('frame-tool-show');
+    button.addClass('frame-tool-hide');
+    button.unbind("click");
+    $panel.find(".frame-body").slideDown({complete:function(){
+      button.on("click",function(){
+        me.hide($panel);
+      });
+    }});
+  }
+
+  vw.cpm.CLIView.prototype.hide = function($panel){
+    var me = this;
+    var button = $panel.find('.frame-tool-hide');
+    button.removeClass('frame-tool-hide');
+    button.addClass('frame-tool-show');
+    button.unbind("click");
+    $panel.find(".frame-body").slideUp({complete:function(){
+      button.on("click",function(){
+        me.show($panel);
+      });
+    }});
   }
 
   vw.cpm.CLIView.prototype.createPanel = function(title,data){
@@ -672,11 +710,15 @@
 
     });
 
+    $el.find('.frame-tool-hide').click(function(){
+      me.hide($el);
+    });
+
 
     return $el;
   }
 
-  vw.cpm.CLIView.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div></div></div><div class="frame-body"></div></div>';
+  vw.cpm.CLIView.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div><div class="frame-tool frame-tool-hide"></div></div></div><div class="frame-body"></div></div>';
   vw.cpm.CLIView.fullscreentemplate = '<div id="fullscreen-container"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-quitfs"></div></div></div><div class="frame-body"></div></div>';
 
 
@@ -885,6 +927,7 @@
       var modulename = $(this).html();
       var $panel = me.model.app.view.createPanel(modulename);
       var module = new vw.cpm.Module(me.model.app,$panel.find(".frame-body"),me.model.modules[modulename]);
+      me.model.modulesobj.push(module);
       module.view.render();
     });
     this.$el.find('.treeview-leaf').draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
@@ -1046,9 +1089,22 @@
     var me = this;
     this.$el.find(".module-content-view").append('<div id="'+this.id+'" class="canvas-view"></div>');
 
-    var canvas = new draw2d.Canvas(me.id);
+    me.canvas = new draw2d.Canvas(me.id);
+
+    me.canvas.onDrop = function(droppedDomNode, x, y, shiftKey, ctrlKey)
+    {
+        var rect =  new draw2d.shape.basic.Rectangle();
+      me.canvas.add(rect,100,10);
+        /*var type = $(droppedDomNode).data("shape");
+        var figure = eval("new "+type+"();");
+        // create a command for the undo/redo support
+        var command = new draw2d.command.CommandAdd(this, figure, x, y);
+        this.getCommandStack().execute(command);*/
+    }
+
+    
     var rect =  new draw2d.shape.basic.Rectangle();
-       canvas.add(rect,100,10);
+    me.canvas.add(rect,100,10);
   }
 
   vw.cpm.ModuleView.template = '<div class="module-header">'+

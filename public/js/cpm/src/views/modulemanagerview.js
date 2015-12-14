@@ -34,6 +34,7 @@
       var modulename = $(this).html();
       var $panel = me.model.app.view.createPanel(modulename);
       var module = new vw.cpm.Module(me.model.app,$panel.find(".frame-body"),me.model.modules[modulename]);
+      me.model.modulesobj.push(module);
       module.view.render();
     });
     this.$el.find('.treeview-leaf').draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });

@@ -9,6 +9,11 @@ ul{
   padding: 0;
 }
 
+ul.nostyle{
+  list-style: none;
+  margin-left: 0;
+}
+
 /*******************************************************************
 *      Main Layout
 ********************************************************************/
@@ -187,6 +192,18 @@ ul.main-menu{
 }
 
 /*******************************************************************
+*      Process/Run Manager
+********************************************************************/
+
+.run-list li{
+  cursor: pointer;
+}
+
+.run-list li:hover{
+  text-decoration: underline;
+}
+
+/*******************************************************************
 *      Command bar
 ********************************************************************/
 
@@ -216,6 +233,7 @@ ul.main-menu{
    max-height: 40px;
    /*max-height: 100px;*/
    position:relative;
+   z-index: 20;
 }
 
 
@@ -373,6 +391,24 @@ ul.main-menu{
 /*******************************************************************
 *      UI widgets
 ********************************************************************/
+
+
+.info-box{
+  /*border: 1px solid rgba(79, 93, 115, 0.85);*/
+  margin-bottom: 12px;
+}
+
+.info-box-title{
+  background: rgba(79, 93, 115, 0.85) none repeat scroll 0 0;
+  color: #fff;
+  font-weight: bold;
+  padding: 4px;
+}
+
+.info-box-content{
+  padding: 8px;
+}
+
 
 .treeview-node{
   background-image:url('../img/system/folder.png');

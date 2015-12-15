@@ -68,7 +68,7 @@ function cpm_main(){
 
 
 
-function cpm_command_call($command,$data=""){
+function cpm_command_call($command,$data=NULL){
   global $context;
 
   set_time_limit ( 30);
@@ -76,8 +76,12 @@ function cpm_command_call($command,$data=""){
 
   $socket->connect("tcp://".CPM_HOST.":".CPM_PORT);
 
+  $dataframe = "";
+  if(isset($data) && !empty($data)){
+    $dataframe = "==DATA==".$data."==END_DATA==";
+  }
   /* Send a request */
-  $socket->send("==CMD==".$_POST['cmd']."==END_CMD====DATA==".$data."==END_DATA==");
+  $socket->send("==CMD==".$_POST['cmd']."==END_CMD==".$dataframe);
 
   $poll = new ZMQPoll();
 

@@ -42,6 +42,7 @@
         var runid = data;
         var $panel = me.app.view.createPanel(me.def.modulename+" (run "+runid+")");
         var process = new vw.cpm.Process(me.app,$panel.find(".frame-body"),{moduledef:me.def.module,runconf:conf,runid:runid});
+        process.sync();
         success.call(me.view);
       },
       error:function(){

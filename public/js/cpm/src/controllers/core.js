@@ -29,7 +29,7 @@
     this.activemenu = "";
 
     this.menus = {
-      "default":{title:"Corpus & Process Manager",body:$('<div></div>')},
+      "default":{title:"Application Frame Mngr",body:$('<div></div>')},
       "corpus-menu":{title:"Corpora",body:$('<div></div>')},
       "module-menu":{title:"Modules",body:$('<div></div>')},
       "process-menu":{title:"Process",body:$('<div></div>')},
@@ -54,7 +54,7 @@
       store.set('firstrun','done');
     }else{
       var panel = this.view.createPanel('Intro',this.helpmanager.slides);
-      
+
     }
   
   }
@@ -106,6 +106,11 @@
 
   vw.cpm.CLI.prototype.request = function(command){
     var me = this;
+
+    if(command == "test"){
+      var $panel = this.view.createPanel("test");
+      var process = new vw.cpm.Process(this,$panel.find('.frame-body'),{moduledef:me.modulesmanager.modules['stanford-parser'],runconf:{IN:'/home/paul/custom/cpm/data/testcorpus/humanism.txt'},runid:"some run id"});
+    }
 
     if(command == "brat"){
       $panel = me.view.getPanel("brat");

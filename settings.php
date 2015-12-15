@@ -10,5 +10,5 @@ define("BASE_URL","http://localhost/cpm/");
 define("CALLER_DEFAULT_MAIN_TEMPLATE",'front_default_main_template');
 
 
-define("CPM_HOST","192.168.1.27");
+define("CPM_HOST","localhost");
 define("CPM_PORT","5555");

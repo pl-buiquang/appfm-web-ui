@@ -34,7 +34,7 @@
     this.activemenu = "";
 
     this.menus = {
-      "default":{title:"Corpus & Process Manager",body:$('<div></div>')},
+      "default":{title:"Application Frame Mngr",body:$('<div></div>')},
       "corpus-menu":{title:"Corpora",body:$('<div></div>')},
       "module-menu":{title:"Modules",body:$('<div></div>')},
       "process-menu":{title:"Process",body:$('<div></div>')},
@@ -59,7 +59,7 @@
       store.set('firstrun','done');
     }else{
       var panel = this.view.createPanel('Intro',this.helpmanager.slides);
-      
+
     }
   
   }
@@ -111,6 +111,11 @@
 
   vw.cpm.CLI.prototype.request = function(command){
     var me = this;
+
+    if(command == "test"){
+      var $panel = this.view.createPanel("test");
+      var process = new vw.cpm.Process(this,$panel.find('.frame-body'),{moduledef:me.modulesmanager.modules['stanford-parser'],runconf:{IN:'/home/paul/custom/cpm/data/testcorpus/humanism.txt'},runid:"some run id"});
+    }
 
     if(command == "brat"){
       $panel = me.view.getPanel("brat");
@@ -315,6 +320,7 @@
         var runid = data;
         var $panel = me.app.view.createPanel(me.def.modulename+" (run "+runid+")");
         var process = new vw.cpm.Process(me.app,$panel.find(".frame-body"),{moduledef:me.def.module,runconf:conf,runid:runid});
+        process.sync();
         success.call(me.view);
       },
       error:function(){
@@ -396,22 +402,37 @@
     this.app = app;
     this.init(conf);
     this.view = new vw.cpm.ProcessView(this,$el);
-    this.synced = false;
   }
 
   vw.cpm.Process.prototype.init = function(conf){
     this.moduledef = conf.moduledef;
     this.conf = conf.runconf;
     this.runid = conf.runid;
+    this.info = {};
+    this.synced = false;
   }
 
-  vw.cpm.Process.prototype.fetch = function(){
-    
+  vw.cpm.Process.prototype.sync = function(){
+    var me = this;
+    $.ajax({
+      type: "POST",
+      data : {
+        cmd: "process get "+me.runid,
+      },
+      url: me.app.options.cpmbaseurl+"rest/cmd",
+      dataType : "json",
+      success: function(data, textStatus, jqXHR) {
+        me.info = data;
+        me.synced = true;
+        me.view.refresh();
+      },
+      error:function(){
+        alert('could not parse process info json (run id = '+me.runid+')');
+      }
+    });
   }
 
-  vw.cpm.Process.prototype.sync = function(success,error){
-    alert('no save function yet, you have to modify the source file by directly in the server files');
-  }
+  
 
   vw.cpm.Process.prototype.run = function(conf,success,error){
     var me = this;
@@ -437,6 +458,13 @@
     me.fetchAll();
   }
 
+  vw.cpm.ProcessManager.prototype.showRun = function(modulename,runid){
+    var me = this;
+    var $panel = this.app.view.createPanel(modulename + " ( "+runid+" )");
+    var process = new vw.cpm.Process(this.app,$panel.find(".frame-body"),{moduledef:me.app.modulesmanager.modules[modulename].module,runconf:{},runid:runid});
+    process.sync();
+  }
+
   vw.cpm.ProcessManager.prototype.fetchAll = function(modulename,callback){
     var me = this;
     $.ajax({
@@ -445,6 +473,7 @@
       data:{cmd:"process ls -a"},
       dataType : 'text',
       success:function(data,textStatus,jqXHR){
+        me.runs = {};
         var processes = data.split("\n");
         for (var i in processes){
           var process = processes[i].trim();
@@ -1149,16 +1178,23 @@
 
   vw.cpm.ProcessManagerView.prototype.refresh = function(){
     var me = this;
-    var html = "";
+    var html ="";
+    
     for (var modulename in me.model.runs){
-      html += '<div>'+modulename+'</div><ul>';
+      html += '<div><div class="settings-field-title">'+modulename+'</div><div class="settings-field-body"><ul class="run-list" style="font-size:12px;">'
       for(var i in me.model.runs[modulename]){
         html += '<li>'+me.model.runs[modulename][i]+'</li>';
       }
-      html+= '</ul>';
+      html+= '</ul></div></div>';
     }
     me.$el.empty();
     me.$el.append(html);
+    me.$el.find(".settings-field-title").on("click",function(){
+      $(this).parent().find(".settings-field-body").toggle();
+    });
+    me.$el.find(".settings-field-body li").on("click",function(){
+      me.model.showRun($(this).parents(".settings-field-body").prev().html().trim(),$(this).html().trim());
+    });
   }
 
 
@@ -1186,13 +1222,48 @@
   }
 
   
-  vw.cpm.ProcessView.prototype.render=function(){
-    console.log(this.model);
+  vw.cpm.ProcessView.prototype.refresh=function(){
+    var me = this;
+    if(me.model.synced){
+      me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><button type="button">refresh</button>');
+      me.$el.find('.run-status .info-box-content button').on("click",function(){
+        me.model.sync();
+      });
+
+      var config = "<ul>";
+      for(var key in me.model.info.runconf){
+        config += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.runconf[key].value)+'</span></li>';
+      }
+      config += "</ul>";
+      me.$el.find('.run-config .info-box-content').html(config);
+
+      var results = "<ul>";
+      for(var key in me.model.info.env){
+        if(me.model.info.runconf.hasOwnProperty(key)){
+          continue;
+        }
+        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.env[key].value)+'</span></li>';
+      }
+      for(var key in me.model.info.parentEnv){
+        if(me.model.info.runconf.hasOwnProperty(key)){
+          continue;
+        }
+        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.parentEnv[key].value)+'</span></li>';
+      }
+      results += "</ul>";
+      me.$el.find('.run-results .info-box-content').html(results);
+    }
+  }
+
+  vw.cpm.ProcessView.printVar = function(variable,type){
+    return JSON.stringify(variable).replace("/\n/","<br>").replace("/\s/","&nbsp;");
   }
 
 
 
-  vw.cpm.ProcessView.template = 'Hello World!';
+  vw.cpm.ProcessView.template = '<div class="run-status info-box"><div class="info-box-title">Status</div> <div class="info-box-content"></div></div>'+
+    '<div class="run-config info-box"><div class="info-box-title">Config</div><div class="info-box-content"></div></div>'+
+    '<div class="run-results info-box"><div class="info-box-title">Results</div> <div class="info-box-content"></div></div>';
 
 
 

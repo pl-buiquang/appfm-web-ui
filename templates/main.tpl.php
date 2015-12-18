@@ -2,7 +2,7 @@
 <div id="left-panel">
 <!--Main menu bar-->
   <div id="menu">
-    <div id="app-title">CPM</div>
+    <div id="app-title">AppFM</div>
   <!--Top Menu links-->
     <ul class="main-menu">
       <li><div id="corpus-menu" class=" main-menu-item"></div>
@@ -47,5 +47,10 @@
 <!--Main application script entry point-->
 <script>
   var cli = new vw.cpm.CLI(jQuery("body"),{cpmbaseurl:"[[BASE_URL]]"});
+
+ 
+   
+
+    
 </script>
 

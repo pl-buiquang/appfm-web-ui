@@ -7,6 +7,7 @@
     this.init();
     this.moduletree = {};
     this.modules = {};
+    this.modulesobj = [];
   }
 
   vw.cpm.ModuleManager.prototype.init = function(){

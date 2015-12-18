@@ -13,6 +13,13 @@
     me.fetchAll();
   }
 
+  vw.cpm.ProcessManager.prototype.showRun = function(modulename,runid){
+    var me = this;
+    var $panel = this.app.view.createPanel(modulename + " ( "+runid+" )");
+    var process = new vw.cpm.Process(this.app,$panel.find(".frame-body"),{moduledef:me.app.modulesmanager.modules[modulename].module,runconf:{},runid:runid});
+    process.sync();
+  }
+
   vw.cpm.ProcessManager.prototype.fetchAll = function(modulename,callback){
     var me = this;
     $.ajax({
@@ -21,6 +28,7 @@
       data:{cmd:"process ls -a"},
       dataType : 'text',
       success:function(data,textStatus,jqXHR){
+        me.runs = {};
         var processes = data.split("\n");
         for (var i in processes){
           var process = processes[i].trim();

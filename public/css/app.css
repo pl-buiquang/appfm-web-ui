@@ -9,6 +9,11 @@ ul{
   padding: 0;
 }
 
+ul.nostyle{
+  list-style: none;
+  margin-left: 0;
+}
+
 /*******************************************************************
 *      Main Layout
 ********************************************************************/
@@ -22,21 +27,31 @@ body {
 }
 
 #menu{
-  background-color: #444444;
+  background-color: #373E48;
+  /*background: rgb(54, 70, 94);
+/*background: -moz-linear-gradient(90deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
+background: -webkit-linear-gradient(90deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
+background: -o-linear-gradient(90deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
+background: -ms-linear-gradient(90deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
+background: linear-gradient(180deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
+*/
+
   position: absolute;
   width:80px;
   left:0;
   top:0;
   bottom: 0;
+  z-index:100;
 }
 
 #menu-content{
+  background-color: #687486;
   top:0;
   bottom: 0;
-  background-color: #555555;
   position: absolute;
   width:300px;
   left:80px;
+
 }
 
 #main{
@@ -59,42 +74,26 @@ body {
 
 
 
-/*******************************************************************
-*      Command bar
-********************************************************************/
 
-#cmdbar{
- width: 100%; 
-  min-height:30px;
-  word-wrap:break-word;
-    outline:0px solid transparent;
-    height:auto;
-    overflow: hidden;
-    margin-bottom: 10px;
-    padding-left:20px;
-    cursor: text;
-}
-
-
-#cmdbar:focus{
-  outline:0px solid transparent;
-}
-
-#cmd-bar-container{
-  padding-top: 10px;
-  background-color: #fff;
-  width:100%;
-   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
-   min-height: 40px;
-   max-height: 40px;
-   /*max-height: 100px;*/
-   position:relative;
-}
 
 /*******************************************************************
 *      Menu 
 ********************************************************************/
 
+#app-title{
+  /*text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
+  color:black;*/
+  color:#ffffff;
+  font-weight: bolder;
+  font-size: 18px;
+  cursor: pointer;
+  height:38px;
+  /*-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow:    0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  box-shadow:         0 1px 2px 0 rgba(0, 0, 0, 0.5);*/
+  padding-left: 10px;
+  padding-top: 12px;
+}
 
 .menu-open{
   left:380px;
@@ -140,7 +139,7 @@ ul.main-menu, .main-menu li{
 }
 
 ul.main-menu{
-  margin-top:12px;
+  margin-top:8px;
   margin-left:8px;
 }
 
@@ -148,19 +147,7 @@ ul.main-menu{
   margin-bottom:10px;
 }
 
-#app-title{
-  text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);
-  color:black;
-  font-weight: bolder;
-  font-size: 1.6rem;
-  cursor: pointer;
-  height:46px;
-  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  -moz-box-shadow:    0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  box-shadow:         0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  padding-left: 8px;
-  padding-top: 4px;
-}
+
 
 .bottom-menu{
   position: absolute;
@@ -168,7 +155,8 @@ ul.main-menu{
 }
 
 #menu-content-title{
-  background-color: #444444;
+  /*background-color: #36465E;*/
+  background-color: #373E48;
   font-size: 24px;
   padding: 6px 12px;
     -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
@@ -178,12 +166,14 @@ ul.main-menu{
   overflow: hidden;
   text-overflow:ellipsis;
   color:#ffffff;
+  text-align: center;
 }
 
 #menu-content-body{
   padding: 12px;
   position: relative;
   color:#ffffff;
+  overflow-wrap: break-word;
 }
 
 .settings-field-title{
@@ -201,6 +191,51 @@ ul.main-menu{
   padding: 8px;
 }
 
+/*******************************************************************
+*      Process/Run Manager
+********************************************************************/
+
+.run-list li{
+  cursor: pointer;
+}
+
+.run-list li:hover{
+  text-decoration: underline;
+}
+
+/*******************************************************************
+*      Command bar
+********************************************************************/
+
+#cmdbar{
+ width: 100%; 
+  min-height:30px;
+  word-wrap:break-word;
+    outline:0px solid transparent;
+    height:auto;
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding-left:20px;
+    cursor: text;
+}
+
+
+#cmdbar:focus{
+  outline:0px solid transparent;
+}
+
+#cmd-bar-container{
+  padding-top: 10px;
+  background-color: #fff;
+  width:100%;
+   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+   min-height: 40px;
+   max-height: 40px;
+   /*max-height: 100px;*/
+   position:relative;
+   z-index: 20;
+}
+
 
 /*******************************************************************
 *      Frames Layout
@@ -216,6 +251,7 @@ ul.main-menu{
   right:0;
   left: 0;
   background-color: #fafafa;
+  z-index: 9999;
 }
 
 #active-content{
@@ -287,6 +323,13 @@ ul.main-menu{
   background-image:url('../img/system/quitfs.png');
 }
 
+.frame-tool-hide{
+  background-image:url('../img/system/hide.png'); 
+}
+
+.frame-tool-show{
+  background-image:url('../img/system/show.png'); 
+}
 
 .frame-body{
   padding:8px; 
@@ -348,6 +391,24 @@ ul.main-menu{
 /*******************************************************************
 *      UI widgets
 ********************************************************************/
+
+
+.info-box{
+  /*border: 1px solid rgba(79, 93, 115, 0.85);*/
+  margin-bottom: 12px;
+}
+
+.info-box-title{
+  background: rgba(79, 93, 115, 0.85) none repeat scroll 0 0;
+  color: #fff;
+  font-weight: bold;
+  padding: 4px;
+}
+
+.info-box-content{
+  padding: 8px;
+}
+
 
 .treeview-node{
   background-image:url('../img/system/folder.png');

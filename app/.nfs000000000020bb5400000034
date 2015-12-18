@@ -25,9 +25,6 @@ function cpm_main(){
 
   $page->addJS(BASE_URL."public/js/vendor/underscore-min.js");
   $page->addJS(BASE_URL."public/js/vendor/backbone-min.js");
-
-  $page->addJS(BASE_URL."public/js/vendor/store.min.js");
-
   $page->addJS(BASE_URL."public/js/cpm/build/cpmui.js");
   $page->addCSS(BASE_URL."public/js/cpm/build/style/style.css");
 
@@ -68,7 +65,7 @@ function cpm_main(){
 
 
 
-function cpm_command_call($command,$data=NULL){
+function cpm_command_call($command,$data=""){
   global $context;
 
   set_time_limit ( 30);
@@ -76,12 +73,8 @@ function cpm_command_call($command,$data=NULL){
 
   $socket->connect("tcp://".CPM_HOST.":".CPM_PORT);
 
-  $dataframe = "";
-  if(isset($data) && !empty($data)){
-    $dataframe = "==DATA==".$data."==END_DATA==";
-  }
   /* Send a request */
-  $socket->send("==CMD==".$_POST['cmd']."==END_CMD==".$dataframe);
+  $socket->send("==CMD==".$_POST['cmd']."==END_CMD====DATA==".$data."==END_DATA==");
 
   $poll = new ZMQPoll();
 

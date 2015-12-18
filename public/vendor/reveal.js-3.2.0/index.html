@@ -375,6 +375,11 @@ Reveal.addEventListener( 'customevent', function() {
 					</p>
 				</section>
 
+				<script>
+				var panel = window.parent.cli.view.createPanel("yo","<h1>it works!</h1>")
+				console.log(panel);
+				</script>
+
 			</div>
 
 		</div>
@@ -387,7 +392,7 @@ Reveal.addEventListener( 'customevent', function() {
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
-				controls: true,
+				controls: false,
 				progress: true,
 				history: true,
 				center: true,

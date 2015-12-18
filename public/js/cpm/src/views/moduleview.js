@@ -96,9 +96,22 @@
     var me = this;
     this.$el.find(".module-content-view").append('<div id="'+this.id+'" class="canvas-view"></div>');
 
-    var canvas = new draw2d.Canvas(me.id);
+    me.canvas = new draw2d.Canvas(me.id);
+
+    me.canvas.onDrop = function(droppedDomNode, x, y, shiftKey, ctrlKey)
+    {
+        var rect =  new draw2d.shape.basic.Rectangle();
+      me.canvas.add(rect,100,10);
+        /*var type = $(droppedDomNode).data("shape");
+        var figure = eval("new "+type+"();");
+        // create a command for the undo/redo support
+        var command = new draw2d.command.CommandAdd(this, figure, x, y);
+        this.getCommandStack().execute(command);*/
+    }
+
+    
     var rect =  new draw2d.shape.basic.Rectangle();
-       canvas.add(rect,100,10);
+    me.canvas.add(rect,100,10);
   }
 
   vw.cpm.ModuleView.template = '<div class="module-header">'+

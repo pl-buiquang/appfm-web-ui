@@ -19,10 +19,22 @@
   vw.cpm.CLI.prototype.init = function(){
     var me = this;
 
+    this.foo = "bar";
+
+    if (!store.enabled) {
+      alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser. Your session won\'t be saved across page reloads');
+      
+    }
+    console.log(store.get('test'));
+
+    store.set('test',this.view.panels);  
+
+
+
     this.activemenu = "";
 
     this.menus = {
-      "default":{title:"Corpus & Process Manager",body:$('<div></div>')},
+      "default":{title:"Application Frame Mngr",body:$('<div></div>')},
       "corpus-menu":{title:"Corpora",body:$('<div></div>')},
       "module-menu":{title:"Modules",body:$('<div></div>')},
       "process-menu":{title:"Process",body:$('<div></div>')},
@@ -39,6 +51,17 @@
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
     this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
+
+    var firstrun = store.get('firstrun')
+    if(!firstrun){
+      var panel = this.view.createPanel('Intro',this.helpmanager.slides);  
+      this.view.fullscreen(panel);
+      store.set('firstrun','done');
+    }else{
+      var panel = this.view.createPanel('Intro',this.helpmanager.slides);
+
+    }
+  
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){
@@ -90,10 +113,14 @@
     var me = this;
 
     if(command == "test"){
-      var panel = this.view.createPanel();
-      var module = new vw.cpm.Module(this,panel.find('.frame-body'),{name:"pipeline-test"});
-      
-      
+      var $panel = this.view.createPanel("test");
+      var process = new vw.cpm.Process(this,$panel.find('.frame-body'),{moduledef:me.modulesmanager.modules['stanford-parser'],runconf:{IN:'/home/paul/custom/cpm/data/testcorpus/humanism.txt'},runid:"some run id"});
+    }
+
+    if(command == "brat"){
+      $panel = me.view.getPanel("brat");
+      $panel.find('.frame-body').empty();
+      $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="500px" src="http://localhost:8001/index.xhtml"></iframe>');
       return;
     }
 
@@ -239,7 +266,11 @@
 
   vw.cpm.HelpManager.prototype.init = function(){
     var me = this;
+
+    this.slides = '<iframe style="border-style:none;border:0;margin:0;padding:0;" height="500px" width="100%" src="http://localhost:8080/public/doc/slides/index.html"></iframe>';
   }
+
+  
 
 
 
@@ -287,8 +318,9 @@
       dataType : "text",
       success: function(data, textStatus, jqXHR) {
         var runid = data;
-        var $panel = me.app.view.createPanel(me.def.modulename+" (+ "+runid+")");
+        var $panel = me.app.view.createPanel(me.def.modulename+" (run "+runid+")");
         var process = new vw.cpm.Process(me.app,$panel.find(".frame-body"),{moduledef:me.def.module,runconf:conf,runid:runid});
+        process.sync();
         success.call(me.view);
       },
       error:function(){
@@ -308,6 +340,7 @@
     this.init();
     this.moduletree = {};
     this.modules = {};
+    this.modulesobj = [];
   }
 
   vw.cpm.ModuleManager.prototype.init = function(){
@@ -369,22 +402,37 @@
     this.app = app;
     this.init(conf);
     this.view = new vw.cpm.ProcessView(this,$el);
-    this.synced = false;
   }
 
   vw.cpm.Process.prototype.init = function(conf){
     this.moduledef = conf.moduledef;
     this.conf = conf.runconf;
     this.runid = conf.runid;
+    this.info = {};
+    this.synced = false;
   }
 
-  vw.cpm.Process.prototype.fetch = function(){
-    
+  vw.cpm.Process.prototype.sync = function(){
+    var me = this;
+    $.ajax({
+      type: "POST",
+      data : {
+        cmd: "process get "+me.runid,
+      },
+      url: me.app.options.cpmbaseurl+"rest/cmd",
+      dataType : "json",
+      success: function(data, textStatus, jqXHR) {
+        me.info = data;
+        me.synced = true;
+        me.view.refresh();
+      },
+      error:function(){
+        alert('could not parse process info json (run id = '+me.runid+')');
+      }
+    });
   }
 
-  vw.cpm.Process.prototype.sync = function(success,error){
-    alert('no save function yet, you have to modify the source file by directly in the server files');
-  }
+  
 
   vw.cpm.Process.prototype.run = function(conf,success,error){
     var me = this;
@@ -410,6 +458,13 @@
     me.fetchAll();
   }
 
+  vw.cpm.ProcessManager.prototype.showRun = function(modulename,runid){
+    var me = this;
+    var $panel = this.app.view.createPanel(modulename + " ( "+runid+" )");
+    var process = new vw.cpm.Process(this.app,$panel.find(".frame-body"),{moduledef:me.app.modulesmanager.modules[modulename].module,runconf:{},runid:runid});
+    process.sync();
+  }
+
   vw.cpm.ProcessManager.prototype.fetchAll = function(modulename,callback){
     var me = this;
     $.ajax({
@@ -418,6 +473,7 @@
       data:{cmd:"process ls -a"},
       dataType : 'text',
       success:function(data,textStatus,jqXHR){
+        me.runs = {};
         var processes = data.split("\n");
         for (var i in processes){
           var process = processes[i].trim();
@@ -466,10 +522,10 @@
     $("#active-content").perfectScrollbar();
 
     $("#menu-content-body").css('height',window.innerHeight-80);
-    $("#menu-content-body").perfectScrollbar();
+    $("#menu-content-body").perfectScrollbar({suppressScrollX:true});
     $(window).on('resize',function(){
       $("#menu-content-body").css('height',window.innerHeight-80);
-      $("#menu-content-body").perfectScrollbar();
+      $("#menu-content-body").perfectScrollbar({suppressScrollX:true});
       $("#active-content").css('height',window.innerHeight-94);
       $("#active-content").perfectScrollbar();
       vw.cpm.CLIView.maxFrameHeight = $(window).height()-178 ;
@@ -498,10 +554,7 @@
       }
     });
 
-    // Menu animations
-    jQuery("#menu").click(function(){
-      me.toggleCLI(false);
-    });
+    
 
     jQuery("#app-title").click(function(){
       me.toggleCLI(false);
@@ -528,6 +581,14 @@
       }
     });
 
+    // Menu animations
+    jQuery("#menu").click(function(){
+      me.toggleCLI(false);
+    });
+
+    jQuery("#menu-content").on("click",function(){
+      me.toggleCLI(false);
+    });
 
     jQuery("#active-content").on("click",function(){
       me.toggleCLI(false);
@@ -553,7 +614,7 @@
 
   vw.cpm.CLIView.prototype.stick = function(panel){
     var me = this;
-    panel.detach();
+    //panel.detach();
     this.contentpanel.find('#active-content-sticky').append(panel); 
     var button = panel.find('.frame-tool-pin');
     button.removeClass('frame-tool-pin');
@@ -566,7 +627,7 @@
 
   vw.cpm.CLIView.prototype.unstick = function(panel){
     var me = this;
-    panel.detach();
+    //panel.detach();
     this.contentpanel.find('#active-content-flow').append(panel);
     var button = panel.find('.frame-tool-unpin');
     button.removeClass('frame-tool-unpin');
@@ -577,7 +638,7 @@
     });
   }
 
-  vw.cpm.CLIView.prototype.getPanel = function(title,create_new_if_not_found){
+  vw.cpm.CLIView.prototype.getPanel = function(title,do_not_create_new_if_not_found){
     var me = this;
     var index = -1;
     for(var i in me.panels){
@@ -588,10 +649,10 @@
     }
     if(index!=-1){
       return me.panels[i];
-    }else if(create_new_if_not_found){
-      return me.createPanel(title);
-    }else{
+    }else if(do_not_create_new_if_not_found){
       return undefined;
+    }else{
+      return me.createPanel(title);
     }
 
   }
@@ -605,6 +666,10 @@
     }
     var content = me.$fullscreencontainer.find(".frame-body").children()
     if(content.length != 0){
+      if(content.length == 1){
+        if(content.prop("originalHeight"))
+          content.height(content.prop("originalHeight"));
+      }
       $panel.find(".frame-body").append(content);
     }
     
@@ -618,8 +683,12 @@
       title = $panel.find(".frame-title").html();
     }
     var content = $panel.find(".frame-body").children();
+
     if(content.length==0){
       content = $panel.find(".frame-body").html();
+    }else if(content.length == 1){
+      content.prop("originalHeight",content.height());
+      content.height($(window).height()-100);
     }
     me.$fullscreencontainer.find(".frame-title").empty();
     me.$fullscreencontainer.find(".frame-body").empty();
@@ -629,6 +698,32 @@
     me.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
       me.quitFullscreen($panel);
     });
+  }
+
+  vw.cpm.CLIView.prototype.show = function($panel){
+    var me = this;
+    var button = $panel.find('.frame-tool-show');
+    button.removeClass('frame-tool-show');
+    button.addClass('frame-tool-hide');
+    button.unbind("click");
+    $panel.find(".frame-body").slideDown({complete:function(){
+      button.on("click",function(){
+        me.hide($panel);
+      });
+    }});
+  }
+
+  vw.cpm.CLIView.prototype.hide = function($panel){
+    var me = this;
+    var button = $panel.find('.frame-tool-hide');
+    button.removeClass('frame-tool-hide');
+    button.addClass('frame-tool-show');
+    button.unbind("click");
+    $panel.find(".frame-body").slideUp({complete:function(){
+      button.on("click",function(){
+        me.show($panel);
+      });
+    }});
   }
 
   vw.cpm.CLIView.prototype.createPanel = function(title,data){
@@ -672,11 +767,15 @@
 
     });
 
+    $el.find('.frame-tool-hide').click(function(){
+      me.hide($el);
+    });
+
 
     return $el;
   }
 
-  vw.cpm.CLIView.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div></div></div><div class="frame-body"></div></div>';
+  vw.cpm.CLIView.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div><div class="frame-tool frame-tool-hide"></div></div></div><div class="frame-body"></div></div>';
   vw.cpm.CLIView.fullscreentemplate = '<div id="fullscreen-container"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-quitfs"></div></div></div><div class="frame-body"></div></div>';
 
 
@@ -885,6 +984,7 @@
       var modulename = $(this).html();
       var $panel = me.model.app.view.createPanel(modulename);
       var module = new vw.cpm.Module(me.model.app,$panel.find(".frame-body"),me.model.modules[modulename]);
+      me.model.modulesobj.push(module);
       module.view.render();
     });
     this.$el.find('.treeview-leaf').draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
@@ -1046,9 +1146,22 @@
     var me = this;
     this.$el.find(".module-content-view").append('<div id="'+this.id+'" class="canvas-view"></div>');
 
-    var canvas = new draw2d.Canvas(me.id);
+    me.canvas = new draw2d.Canvas(me.id);
+
+    me.canvas.onDrop = function(droppedDomNode, x, y, shiftKey, ctrlKey)
+    {
+        var rect =  new draw2d.shape.basic.Rectangle();
+      me.canvas.add(rect,100,10);
+        /*var type = $(droppedDomNode).data("shape");
+        var figure = eval("new "+type+"();");
+        // create a command for the undo/redo support
+        var command = new draw2d.command.CommandAdd(this, figure, x, y);
+        this.getCommandStack().execute(command);*/
+    }
+
+    
     var rect =  new draw2d.shape.basic.Rectangle();
-       canvas.add(rect,100,10);
+    me.canvas.add(rect,100,10);
   }
 
   vw.cpm.ModuleView.template = '<div class="module-header">'+
@@ -1078,16 +1191,23 @@
 
   vw.cpm.ProcessManagerView.prototype.refresh = function(){
     var me = this;
-    var html = "";
+    var html ="";
+    
     for (var modulename in me.model.runs){
-      html += '<div>'+modulename+'</div><ul>';
+      html += '<div><div class="settings-field-title">'+modulename+'</div><div class="settings-field-body"><ul class="run-list" style="font-size:12px;">'
       for(var i in me.model.runs[modulename]){
-        html += '<li>'+me.model.runs[modulename][i]+'</li>';
+        html += '<li runid="">'+me.model.runs[modulename][i]+'</li>';
       }
-      html+= '</ul>';
+      html+= '</ul></div></div>';
     }
     me.$el.empty();
     me.$el.append(html);
+    me.$el.find(".settings-field-title").on("click",function(){
+      $(this).parent().find(".settings-field-body").toggle();
+    });
+    me.$el.find(".settings-field-body li").on("click",function(){
+      me.model.showRun($(this).parents(".settings-field-body").prev().html().trim(),$(this).html().trim());
+    });
   }
 
 
@@ -1115,13 +1235,48 @@
   }
 
   
-  vw.cpm.ProcessView.prototype.render=function(){
-    console.log(this.model);
+  vw.cpm.ProcessView.prototype.refresh=function(){
+    var me = this;
+    if(me.model.synced){
+      me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><button type="button">refresh</button>');
+      me.$el.find('.run-status .info-box-content button').on("click",function(){
+        me.model.sync();
+      });
+
+      var config = "<ul>";
+      for(var key in me.model.info.runconf){
+        config += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.runconf[key].value)+'</span></li>';
+      }
+      config += "</ul>";
+      me.$el.find('.run-config .info-box-content').html(config);
+
+      var results = "<ul>";
+      for(var key in me.model.info.env){
+        if(me.model.info.runconf.hasOwnProperty(key)){
+          continue;
+        }
+        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.env[key].value)+'</span></li>';
+      }
+      for(var key in me.model.info.parentEnv){
+        if(me.model.info.runconf.hasOwnProperty(key)){
+          continue;
+        }
+        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.parentEnv[key].value)+'</span></li>';
+      }
+      results += "</ul>";
+      me.$el.find('.run-results .info-box-content').html(results);
+    }
+  }
+
+  vw.cpm.ProcessView.printVar = function(variable,type){
+    return JSON.stringify(variable).replace("/\n/","<br>").replace("/\s/","&nbsp;");
   }
 
 
 
-  vw.cpm.ProcessView.template = 'Hello World!';
+  vw.cpm.ProcessView.template = '<div class="run-status info-box"><div class="info-box-title">Status</div> <div class="info-box-content"></div></div>'+
+    '<div class="run-config info-box"><div class="info-box-title">Config</div><div class="info-box-content"></div></div>'+
+    '<div class="run-results info-box"><div class="info-box-title">Results</div> <div class="info-box-content"></div></div>';
 
 
 

@@ -53,6 +53,14 @@ function cpm_main(){
   $page->addJS(BASE_URL.'public/js/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js');
 
 
+  $page->addJS(BASE_URL.'public/js/vendor/ace-builds-master/src-noconflict/ace.js');
+
+  $page->addJS(BASE_URL.'public/js/vendor/ace-builds-master/src-noconflict/theme-twilight.js');
+
+  $page->addJS(BASE_URL.'public/js/vendor/ace-builds-master/src-noconflict/mode-yaml.js');
+  
+
+
   $html = tplset(array(
     "BASE_URL"=>BASE_URL
     ),tpl("main"));
@@ -62,7 +70,6 @@ function cpm_main(){
   
 
   $page->addToBody($html);
-
 
 }
 

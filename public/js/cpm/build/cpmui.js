@@ -120,7 +120,7 @@
     if(command == "brat"){
       $panel = me.view.getPanel("brat");
       $panel.find('.frame-body').empty();
-      $panel.find('.frame-body').append('<iframe width="100%" height="500px" src="http://192.168.1.27:8001/index.xhtml"></iframe>');
+      $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="500px" src="http://192.168.1.27:8001/index.xhtml"></iframe>');
       return;
     }
 
@@ -267,7 +267,7 @@
   vw.cpm.HelpManager.prototype.init = function(){
     var me = this;
 
-    this.slides = '<iframe style="border-style:none;border:0;margin:0;padding:0;" height="500px" width="100%" src="http://localhost/cpm/public/vendor/reveal.js-3.2.0/index.html"></iframe>';
+    this.slides = '<iframe style="border-style:none;border:0;margin:0;padding:0;" height="500px" width="100%" src="'+this.app.options.cpmbaseurl+'public/doc/slides/index.html"></iframe>';
   }
 
   
@@ -554,10 +554,7 @@
       }
     });
 
-    // Menu animations
-    jQuery("#menu").click(function(){
-      me.toggleCLI(false);
-    });
+    
 
     jQuery("#app-title").click(function(){
       me.toggleCLI(false);
@@ -584,6 +581,14 @@
       }
     });
 
+    // Menu animations
+    jQuery("#menu").click(function(){
+      me.toggleCLI(false);
+    });
+
+    jQuery("#menu-content").on("click",function(){
+      me.toggleCLI(false);
+    });
 
     jQuery("#active-content").on("click",function(){
       me.toggleCLI(false);
@@ -609,7 +614,7 @@
 
   vw.cpm.CLIView.prototype.stick = function(panel){
     var me = this;
-    panel.detach();
+    //panel.detach();
     this.contentpanel.find('#active-content-sticky').append(panel); 
     var button = panel.find('.frame-tool-pin');
     button.removeClass('frame-tool-pin');
@@ -622,7 +627,7 @@
 
   vw.cpm.CLIView.prototype.unstick = function(panel){
     var me = this;
-    panel.detach();
+    //panel.detach();
     this.contentpanel.find('#active-content-flow').append(panel);
     var button = panel.find('.frame-tool-unpin');
     button.removeClass('frame-tool-unpin');
@@ -661,6 +666,10 @@
     }
     var content = me.$fullscreencontainer.find(".frame-body").children()
     if(content.length != 0){
+      if(content.length == 1){
+        if(content.prop("originalHeight"))
+          content.height(content.prop("originalHeight"));
+      }
       $panel.find(".frame-body").append(content);
     }
     
@@ -674,8 +683,12 @@
       title = $panel.find(".frame-title").html();
     }
     var content = $panel.find(".frame-body").children();
+
     if(content.length==0){
       content = $panel.find(".frame-body").html();
+    }else if(content.length == 1){
+      content.prop("originalHeight",content.height());
+      content.height($(window).height()-100);
     }
     me.$fullscreencontainer.find(".frame-title").empty();
     me.$fullscreencontainer.find(".frame-body").empty();
@@ -717,7 +730,10 @@
     var me = this;
     var html = vw.cpm.CLIView.frametemplate;
     var $el = $(html);
+    //$el.hide();
+    //$el.show('drop');
     this.contentpanel.find('#active-content-flow').prepend($el);
+    
     if(title != 'undefined'){
       $el.find(".frame-title").append(title);
     }
@@ -745,7 +761,17 @@
       if(index!=-1){
         me.panels.splice(index,1);
       }
-      $el.remove();
+      $el.animate({
+          opacity: 0.25,
+          height: "toggle"
+        },{
+        complete:function(){
+          $el.remove();
+        },
+        duration : 200
+      }
+    );
+      
 
     });
 
@@ -1015,11 +1041,11 @@
               folded = "treeview-unfolded";
               hidden = "";
             }
-            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + 14)+'</div></div>';
+            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + 14)+'</div></div>';
         }else if(tree.hasOwnProperty("module")){
-          html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;">'+tree.module.name+'</div>';
+          html += '<div class="treeview-leaf treeview-module-item" style="margin-left:'+offset+'px;">'+tree.module.name+'</div>';
         }else{
-          html += '<div class="treeview-leaf" style="margin-left:'+offset+'px; color:red;">'+tree.modulename+'</div>';
+          html += '<div class="treeview-leaf treeview-module-item" style="margin-left:'+offset+'px; color:red;">'+tree.modulename+'</div>';
         }
         
       }
@@ -1051,13 +1077,13 @@
     if(me.model.def.hasOwnProperty("module")){
       me.renderGraphical();
     }else{
-      me.$el.find(".module-content-view").append(me.model.def.source.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;"));
+      me.renderSource();
     }
     me.setActiveMenu(".module-view-graphic");
 
     this.$el.find(".module-view-source").on("click",function(){
       me.$el.find(".module-content-view").empty();
-      me.$el.find(".module-content-view").append(me.model.def.source.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;"));
+      me.renderSource();
       me.setActiveMenu(".module-view-source");
     });
     this.$el.find(".module-view-graphic").on("click",function(){
@@ -1088,6 +1114,17 @@
   vw.cpm.ModuleView.prototype.render=function(){
   }
 
+  vw.cpm.ModuleView.prototype.renderSource = function(){
+    var me = this;
+    var content = me.model.def.source;//.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;");
+
+    
+    this.$el.find(".module-content-view").append('<div id="source-'+this.id+'" class="module-source-editor"></div>');
+    this.$el.find('#source-'+this.id).append(content);
+    var editor = ace.edit("source-"+this.id);
+    var YamlMode = ace.require("ace/mode/yaml").Mode;
+    editor.session.setMode(new YamlMode());
+  }
 
   vw.cpm.ModuleView.prototype.renderRunConfForm=function(){
     var me = this;
@@ -1183,7 +1220,7 @@
     for (var modulename in me.model.runs){
       html += '<div><div class="settings-field-title">'+modulename+'</div><div class="settings-field-body"><ul class="run-list" style="font-size:12px;">'
       for(var i in me.model.runs[modulename]){
-        html += '<li>'+me.model.runs[modulename][i]+'</li>';
+        html += '<li runid="">'+me.model.runs[modulename][i]+'</li>';
       }
       html+= '</ul></div></div>';
     }

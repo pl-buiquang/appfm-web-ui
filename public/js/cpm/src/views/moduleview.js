@@ -14,13 +14,13 @@
     if(me.model.def.hasOwnProperty("module")){
       me.renderGraphical();
     }else{
-      me.$el.find(".module-content-view").append(me.model.def.source.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;"));
+      me.renderSource();
     }
     me.setActiveMenu(".module-view-graphic");
 
     this.$el.find(".module-view-source").on("click",function(){
       me.$el.find(".module-content-view").empty();
-      me.$el.find(".module-content-view").append(me.model.def.source.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;"));
+      me.renderSource();
       me.setActiveMenu(".module-view-source");
     });
     this.$el.find(".module-view-graphic").on("click",function(){
@@ -51,6 +51,17 @@
   vw.cpm.ModuleView.prototype.render=function(){
   }
 
+  vw.cpm.ModuleView.prototype.renderSource = function(){
+    var me = this;
+    var content = me.model.def.source;//.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;");
+
+    
+    this.$el.find(".module-content-view").append('<div id="source-'+this.id+'" class="module-source-editor"></div>');
+    this.$el.find('#source-'+this.id).append(content);
+    var editor = ace.edit("source-"+this.id);
+    var YamlMode = ace.require("ace/mode/yaml").Mode;
+    editor.session.setMode(new YamlMode());
+  }
 
   vw.cpm.ModuleView.prototype.renderRunConfForm=function(){
     var me = this;

@@ -115,7 +115,7 @@
     if(command == "brat"){
       $panel = me.view.getPanel("brat");
       $panel.find('.frame-body').empty();
-      $panel.find('.frame-body').append('<iframe width="100%" height="500px" src="http://192.168.1.27:8001/index.xhtml"></iframe>');
+      $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="500px" src="http://192.168.1.27:8001/index.xhtml"></iframe>');
       return;
     }
 

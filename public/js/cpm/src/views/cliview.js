@@ -57,10 +57,7 @@
       }
     });
 
-    // Menu animations
-    jQuery("#menu").click(function(){
-      me.toggleCLI(false);
-    });
+    
 
     jQuery("#app-title").click(function(){
       me.toggleCLI(false);
@@ -87,6 +84,14 @@
       }
     });
 
+    // Menu animations
+    jQuery("#menu").click(function(){
+      me.toggleCLI(false);
+    });
+
+    jQuery("#menu-content").on("click",function(){
+      me.toggleCLI(false);
+    });
 
     jQuery("#active-content").on("click",function(){
       me.toggleCLI(false);
@@ -112,7 +117,7 @@
 
   vw.cpm.CLIView.prototype.stick = function(panel){
     var me = this;
-    panel.detach();
+    //panel.detach();
     this.contentpanel.find('#active-content-sticky').append(panel); 
     var button = panel.find('.frame-tool-pin');
     button.removeClass('frame-tool-pin');
@@ -125,7 +130,7 @@
 
   vw.cpm.CLIView.prototype.unstick = function(panel){
     var me = this;
-    panel.detach();
+    //panel.detach();
     this.contentpanel.find('#active-content-flow').append(panel);
     var button = panel.find('.frame-tool-unpin');
     button.removeClass('frame-tool-unpin');
@@ -164,6 +169,10 @@
     }
     var content = me.$fullscreencontainer.find(".frame-body").children()
     if(content.length != 0){
+      if(content.length == 1){
+        if(content.prop("originalHeight"))
+          content.height(content.prop("originalHeight"));
+      }
       $panel.find(".frame-body").append(content);
     }
     
@@ -177,8 +186,12 @@
       title = $panel.find(".frame-title").html();
     }
     var content = $panel.find(".frame-body").children();
+
     if(content.length==0){
       content = $panel.find(".frame-body").html();
+    }else if(content.length == 1){
+      content.prop("originalHeight",content.height());
+      content.height($(window).height()-100);
     }
     me.$fullscreencontainer.find(".frame-title").empty();
     me.$fullscreencontainer.find(".frame-body").empty();
@@ -220,7 +233,10 @@
     var me = this;
     var html = vw.cpm.CLIView.frametemplate;
     var $el = $(html);
+    //$el.hide();
+    //$el.show('drop');
     this.contentpanel.find('#active-content-flow').prepend($el);
+    
     if(title != 'undefined'){
       $el.find(".frame-title").append(title);
     }
@@ -248,7 +264,17 @@
       if(index!=-1){
         me.panels.splice(index,1);
       }
-      $el.remove();
+      $el.animate({
+          opacity: 0.25,
+          height: "toggle"
+        },{
+        complete:function(){
+          $el.remove();
+        },
+        duration : 200
+      }
+    );
+      
 
     });
 

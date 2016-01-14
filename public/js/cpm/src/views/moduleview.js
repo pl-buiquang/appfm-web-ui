@@ -14,13 +14,13 @@
     if(me.model.def.hasOwnProperty("module")){
       me.renderGraphical();
     }else{
-      me.$el.find(".module-content-view").append(me.model.def.source.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;"));
+      me.renderSource();
     }
     me.setActiveMenu(".module-view-graphic");
 
     this.$el.find(".module-view-source").on("click",function(){
       me.$el.find(".module-content-view").empty();
-      me.$el.find(".module-content-view").append(me.model.def.source.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;"));
+      me.renderSource();
       me.setActiveMenu(".module-view-source");
     });
     this.$el.find(".module-view-graphic").on("click",function(){
@@ -51,6 +51,17 @@
   vw.cpm.ModuleView.prototype.render=function(){
   }
 
+  vw.cpm.ModuleView.prototype.renderSource = function(){
+    var me = this;
+    var content = me.model.def.source;//.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;");
+
+    
+    this.$el.find(".module-content-view").append('<div id="source-'+this.id+'" class="module-source-editor"></div>');
+    this.$el.find('#source-'+this.id).append(content);
+    var editor = ace.edit("source-"+this.id);
+    var YamlMode = ace.require("ace/mode/yaml").Mode;
+    editor.session.setMode(new YamlMode());
+  }
 
   vw.cpm.ModuleView.prototype.renderRunConfForm=function(){
     var me = this;
@@ -96,12 +107,17 @@
     var me = this;
     this.$el.find(".module-content-view").append('<div id="'+this.id+'" class="canvas-view"></div>');
 
+    if(me.canvas){
+      me.canvas.destroy();
+    }
     me.canvas = new draw2d.Canvas(me.id);
 
     me.canvas.onDrop = function(droppedDomNode, x, y, shiftKey, ctrlKey)
     {
-        var rect =  new draw2d.shape.basic.Rectangle();
-      me.canvas.add(rect,100,10);
+        console.log();
+        var module = me.model.app.modulesmanager.modules[droppedDomNode.data("modname")];
+        var rect =  new vw.cpm.ModuleBoxView(module.module,module.module.name);
+        me.canvas.add(rect,x,y);
         /*var type = $(droppedDomNode).data("shape");
         var figure = eval("new "+type+"();");
         // create a command for the undo/redo support
@@ -109,9 +125,23 @@
         this.getCommandStack().execute(command);*/
     }
 
+    me.canvas.on("select", function(emitter, figure){
+      console.log(emitter);
+      console.log(figure);
+    });
     
-    var rect =  new draw2d.shape.basic.Rectangle();
-    me.canvas.add(rect,100,10);
+    for (var i = 0; i < me.model.def.module.exec.length ; i++) {
+      var execname = _.first(_.keys(me.model.def.module.exec[i]));
+      regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#(?:\w|-)+)?/;
+      var match = regex.exec(execname);
+      if(!match){
+        alert("error when fetching execution modules pipeline ! ");
+      }
+      var module = me.model.app.modulesmanager.modules[match[1]];
+      var rect =  new vw.cpm.ModuleBoxView(me.model.def.module.exec[i],execname);
+      me.canvas.add(rect,150*i+50,50);
+    };
+    
   }
 
   vw.cpm.ModuleView.template = '<div class="module-header">'+

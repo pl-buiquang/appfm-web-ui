@@ -9,12 +9,8 @@
 
   vw.cpm.CorpusManagerView.prototype.init=function(){
     var me = this;
-
-  }
-
-  vw.cpm.CorpusManagerView.prototype.refresh = function(){
-    var me = this;
-    this.$el.html(vw.cpm.CorpusManagerView.renderSubTree(this.model.filetree,0,me.model.app.cpmsettingsmanager.cpmsettings.corpus_dir));
+    var template = '<div class="treeview-fold treeview-unfolded" depth="0"><div class="treeview-node">Corpora</div><div id="corpora-corpora-container"></div></div><div class="treeview-fold treeview-unfolded" depth="0"><div class="treeview-node">Results</div><div id="corpora-results-container"></div></div>';
+    this.$el.append(template);
     this.$el.find('.treeview-node').on("click",function(){
       var parent = $(this).parent();
       if(parent.hasClass("treeview-fold")){
@@ -30,7 +26,43 @@
         }
       }
     });
-    this.$el.find('.treeview-node').draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
+  }
+
+  vw.cpm.CorpusManagerView.prototype.renderCorpora = function(data){
+    var me = this;
+    var $html = me.renderDirectory(data,me.model.app.cpmsettingsmanager.cpmsettings.corpus_dir,1);
+    this.$el.find("#corpora-corpora-container").append($html);
+  }
+
+  vw.cpm.CorpusManagerView.prototype.renderResults = function(data){
+    var me = this;
+    var $html = me.renderDirectory(data,me.model.app.cpmsettingsmanager.cpmsettings.result_dir,1);
+    this.$el.find("#corpora-results-container").append($html);
+  }
+
+  vw.cpm.CorpusManagerView.prototype.refresh = function(){
+    var me = this;
+    var corpus = vw.cpm.CorpusManagerView.renderSubTree(this.model.filetree.corpus,0,me.model.app.cpmsettingsmanager.cpmsettings.corpus_dir);
+    var results = vw.cpm.CorpusManagerView.renderSubTree(this.model.filetree.results,0,me.model.app.cpmsettingsmanager.cpmsettings.result_dir);
+    this.$el.html(corpus+results);
+
+    this.$el.find('.treeview-node').on("click",function(){
+      var parent = $(this).parent();
+      if(parent.hasClass("treeview-fold")){
+        var children = parent.children();
+        if(parent.hasClass("treeview-folded")){
+          $(children[1]).slideDown();
+          parent.removeClass("treeview-folded");
+          parent.addClass("treeview-unfolded");
+        }else{
+          $(children[1]).slideUp();
+          parent.removeClass("treeview-unfolded");
+          parent.addClass("treeview-folded");
+        }
+      }
+    });
+    this.$el.find('.treeview-node').not(".treeview-more").draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
+    this.$el.find('.treeview-leaf').not(".treeview-more").draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
   }
 
   function compareTreeView(a,b){
@@ -73,11 +105,13 @@
           }else{
             var folded = "treeview-folded";
             var hidden = 'style="display:none;"';
+            var name = i;
             if(offset == 0){
               folded = "treeview-unfolded";
               hidden = "";
+              name = "";
             }
-            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node" style="margin-left:'+offset+'px;" filepath="'+parentpath+i+'">'+i+'</div><div '+hidden+'>' + vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset + 14,parentpath+i+"/")+'</div></div>';
+            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node" style="margin-left:'+offset+'px;" filepath="'+parentpath+name+'">'+i+'</div><div '+hidden+'>' + vw.cpm.CorpusManagerView.renderSubTree(tree[i],offset + 14,parentpath+name+"/")+'</div></div>';
           }
         };
       }
@@ -88,6 +122,87 @@
     return html;
   }
 
+  vw.cpm.CorpusManagerView.prototype.renderDirectory = function(data,parentpath,depth){
+    var me = this;
+    var offset = depth*14;
+    var html = "<div>";
+    for (var i = 0; i < data.length; i++) {
+      if(typeof data[i] == "object"){
+        var filename = _.first(_.keys(data[i]));
+        if(filename == "..."){
+          html += '<div class="treeview-leaf treeview-more" style="margin-left:'+offset+'px;" filepath="'+parentpath+'" next="'+data[i][filename]+'">'+filename+'</div>';
+        }else{
+          html += '<div class="treeview-fold treeview-folded" depth="'+depth+'"><div class="treeview-node" style="margin-left:'+offset+'px;" filepath="'+parentpath+"/"+filename+'">'+filename+'</div><div style="display:none;"></div></div>';
+        }
+      }else{
+        var filename = data[i];
+        html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;" filepath="'+parentpath+"/"+filename+'">'+filename+'</div>';
+      }
+    };
+    html+="</div>";
+    var $html = $(html);
+    $html.find('.treeview-leaf').not(".treeview-more").click(function(){
+      var that = this;
+      var filepath = $(this).attr("filepath");
+      me.model.app.openFile(filepath);
+    });
+    $html.find('.treeview-more').click(function(){
+      var that = this;
+      var filepath = $(this).attr("filepath");
+      var parent = $(this).parent();
+      var offset = $(this).attr("next");
+      var depth = 0;
+      $(that).addClass("treeview-leaf-waiting");
+      if(parent.parent().hasClass("treeview-fold")){
+        depth = parent.parent().attr("depth");
+      }
+      me.model.lsDir(filepath,offset,function(newdata,parentpath){
+        var addedhtml = me.renderDirectory(newdata,parentpath,parseInt(depth)+1);
+        $(that).removeClass("treeview-leaf-waiting");
+        $(that).replaceWith(addedhtml);
+      });
+    });
+    $html.find('.treeview-node').click(function(){
+      var that = this;
+      var filepath = $(this).attr("filepath");
+      var parent = $(this).parent();
+      var offset = 0;
+      var depth = 0;
+      $(that).addClass("treeview-node-waiting");
+      if(parent.hasClass("treeview-fold")){
+        depth = parent.attr("depth");
+      }
+      $(that).unbind("click");
+      me.model.lsDir(filepath,offset,function(newdata,parentpath){
+        var addedhtml = me.renderDirectory(newdata,parentpath,parseInt(depth)+1);
+        var parent = $(that).parent(".treeview-fold");
+        var children = parent.children();
+        parent.removeClass("treeview-folded");
+        parent.addClass("treeview-unfolded");
+        $(that).removeClass("treeview-node-waiting");
+        $(children[1]).append(addedhtml);
+        $(children[1]).slideDown();
+        $(that).on("click",function(){
+          var parent = $(this).parent();
+          if(parent.hasClass("treeview-fold")){
+            var children = parent.children();
+            if(parent.hasClass("treeview-folded")){
+              $(children[1]).slideDown();
+              parent.removeClass("treeview-folded");
+              parent.addClass("treeview-unfolded");
+            }else{
+              $(children[1]).slideUp();
+              parent.removeClass("treeview-unfolded");
+              parent.addClass("treeview-folded");
+            }
+          }
+        });
+      });
+    });
+    $html.find('.treeview-node').not(".treeview-more").draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
+    $html.find('.treeview-leaf').not(".treeview-more").draggable({ appendTo: "body",opacity: 0.7, helper: "clone" });
+    return $html.children();
+  }
 
 
 }(window.vw = window.vw || {}));

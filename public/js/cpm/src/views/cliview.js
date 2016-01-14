@@ -125,7 +125,9 @@
     button.unbind('click');
     button.click(function(){
       me.unstick(panel);
-    }); 
+    });
+    me.contentpanel[0].scrollTop = 0;
+    me.contentpanel.perfectScrollbar("update");
   }
 
   vw.cpm.CLIView.prototype.unstick = function(panel){
@@ -158,6 +160,10 @@
       return me.createPanel(title);
     }
 
+  }
+
+  vw.cpm.CLIView.prototype.getPanelFromContent = function($el){
+    return $el.parents(".frame");
   }
 
   vw.cpm.CLIView.prototype.quitFullscreen = function($panel){
@@ -229,11 +235,32 @@
     }});
   }
 
+  vw.cpm.CLIView.prototype.deletePanel = function($panel){
+    var me = this;
+    var index = me.panels.indexOf($panel);
+      if(index!=-1){
+        me.panels.splice(index,1);
+      }
+      $panel.animate({
+          opacity: 0.25,
+          height: "toggle"
+        },{
+        complete:function(){
+          $panel.remove();
+        },
+        duration : 200
+      }
+    );
+  }
+
   vw.cpm.CLIView.prototype.createPanel = function(title,data){
     var me = this;
     var html = vw.cpm.CLIView.frametemplate;
     var $el = $(html);
+    //$el.hide();
+    //$el.show('drop');
     this.contentpanel.find('#active-content-flow').prepend($el);
+    
     if(title != 'undefined'){
       $el.find(".frame-title").append(title);
     }
@@ -257,12 +284,7 @@
     });
 
     $el.find('.frame-tool-close').click(function(){
-      var index = me.panels.indexOf($el);
-      if(index!=-1){
-        me.panels.splice(index,1);
-      }
-      $el.remove();
-
+      me.deletePanel($el)
     });
 
     $el.find('.frame-tool-openfs').click(function(){
@@ -274,6 +296,8 @@
       me.hide($el);
     });
 
+    me.contentpanel[0].scrollTop = 0;
+    me.contentpanel.perfectScrollbar("update");
 
     return $el;
   }

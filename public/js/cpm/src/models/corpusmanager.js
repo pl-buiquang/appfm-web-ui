@@ -15,17 +15,38 @@
 
   vw.cpm.CorpusManager.prototype.fetch = function(){
     var me = this;
+    me.lsDir(me.app.cpmsettingsmanager.cpmsettings.corpus_dir,0,function(data){
+      me.view.renderCorpora(data);
+    });
+    me.lsDir(me.app.cpmsettingsmanager.cpmsettings.result_dir,0,function(data){
+      me.view.renderResults(data);
+    });
+    /*$.ajax({
+      type:"POST",
+      url : me.app.options.cpmbaseurl + "rest/cmd",
+      data:{cmd:"corpus ls --json --all"},
+      dataType : 'json',
+      success:function(data,textStatus,jqXHR){
+        me.filetree = {"corpus":{"corpora":data.corpus},"results":{"results":data.results}}; // because...
+        me.view.refresh();
+      }
+    })*/
+  }
+
+  vw.cpm.CorpusManager.prototype.lsDir = function(filepath,offset,onsuccess){
+    var me = this;
     $.ajax({
       type:"POST",
       url : me.app.options.cpmbaseurl + "rest/cmd",
-      data:{cmd:"corpus ls --json"},
+      data:{cmd:"corpus lsdir "+filepath+" "+offset},
       dataType : 'json',
       success:function(data,textStatus,jqXHR){
-        me.filetree = {"/":data.corpus}; // because...
-        me.view.refresh();
+        //me.filetree = {"corpus":{"corpora":data.corpus},"results":{"results":data.results}}; // because...
+        onsuccess.call(me,data,filepath);
       }
-    })
+    });
   }
+
 
 
 

@@ -18,10 +18,14 @@
     this.$el.find("#help-main-wiki-page").on("click",function(){
       me.model.app.view.createPanel("Main wiki page",'<iframe width="100%" height="'+vw.cpm.CLIView.maxFrameHeight+'px;" style="border:none;" src="https://versatile-world.net/wiki/work/cpm">');
     });
+    this.$el.find("#help-presa-slides").on("click",function(){
+      var $panel = me.model.app.view.getPanel("Intro");
+      $panel.find(".frame-body").html(me.model.slides);
+    });
     
   }
 
-  vw.cpm.HelpManagerView.template = '<div id="help-main-wiki-page" style="cursor:pointer;">Main wiki</div><div id="help-module-doc" style="cursor:pointer;">Modules</div>';
+  vw.cpm.HelpManagerView.template = '<div id="help-presa-slides" style="cursor:pointer;">Introduction slides</div><div id="help-main-wiki-page" style="cursor:pointer;">Main wiki</div><div id="help-module-doc" style="cursor:pointer;">Modules</div>';
 
   
 

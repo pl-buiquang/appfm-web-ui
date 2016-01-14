@@ -10,9 +10,14 @@
   vw.cpm.HelpManager.prototype.init = function(){
     var me = this;
 
-    this.slides = '<iframe style="border-style:none;border:0;margin:0;padding:0;" height="500px" width="100%" src="http://localhost:8080/public/doc/slides/index.html"></iframe>';
+    this.slides = '<iframe style="border-style:none;border:0;margin:0;padding:0;" height="500px" width="100%" src="'+this.app.options.cpmbaseurl+'public/doc/slides/index.html"></iframe>';
   }
 
+
+  vw.cpm.HelpManager.prototype.displayCLIHelp = function(){
+    var helpcontent = 'todo.. :/';
+    this.app.view.createPanel("help",helpcontent);
+  }
   
 
 

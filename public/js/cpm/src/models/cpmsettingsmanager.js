@@ -8,16 +8,19 @@
     this.init();
   }
 
-  vw.cpm.CPMSettingsManager.prototype.init = function(){
+  vw.cpm.CPMSettingsManager.prototype.init = function(callback){
     var me = this;
     me.fetch();
   }
 
-  vw.cpm.CPMSettingsManager.prototype.fetch = function(){
+  vw.cpm.CPMSettingsManager.prototype.fetch = function(callback){
     var me = this;
     this.app.cpmCall("settings",function(data){
       me.cpmsettings = data;
       me.view.render();
+      if(me.options.init){
+        me.options.init.call(me.app);
+      }
     });
   }
 

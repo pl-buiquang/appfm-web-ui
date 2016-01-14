@@ -4,6 +4,8 @@
     this.options = options;
     this.view = new vw.cpm.CLIView(this,$el);
     this.init();
+    
+    
   }
 
   
@@ -37,15 +39,13 @@
       "help-menu":{title:"Help",body:$('<div></div>')}
     }
 
-    this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body);
+    this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body,{init:function(){
+      me.initmodules();
+    }});
 
     this.helpmanager = new vw.cpm.HelpManager(this,this.menus['help-menu'].body);
 
-    this.modulesmanager = new vw.cpm.ModuleManager(this,this.menus['module-menu'].body);
-
-    this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
-
-    this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
+    
 
     var firstrun = store.get('firstrun')
     if(!firstrun){
@@ -57,6 +57,14 @@
 
     }
   
+  }
+
+  vw.cpm.CLI.prototype.initmodules = function(){
+    this.modulesmanager = new vw.cpm.ModuleManager(this,this.menus['module-menu'].body);
+
+    this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
+
+    this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){
@@ -107,33 +115,27 @@
   vw.cpm.CLI.prototype.request = function(command){
     var me = this;
 
+    command = command.trim();
+
     if(command == "test"){
       var $panel = this.view.createPanel("test");
       var process = new vw.cpm.Process(this,$panel.find('.frame-body'),{moduledef:me.modulesmanager.modules['stanford-parser'],runconf:{IN:'/home/paul/custom/cpm/data/testcorpus/humanism.txt'},runid:"some run id"});
     }
 
+    if(command == "help"){
+      me.helpmanager.displayCLIHelp();
+    }
+
     if(command == "brat"){
       $panel = me.view.getPanel("brat");
       $panel.find('.frame-body').empty();
-      $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="500px" src="http://localhost:8001/index.xhtml"></iframe>');
+      $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="500px" src="http://'+me.options.hostname+':8001/index.xhtml"></iframe>');
       return;
     }
 
     if(command.startsWith("file")){
       var elts = command.split(" ");
-      $.ajax({
-        type: "POST",
-        data : {
-          file: elts[1]
-        },
-        url: me.options.cpmbaseurl+"rest/file",
-        success: function(data, textStatus, jqXHR) {
-          me.view.createPanel(command,data);
-        },
-        error:function(){
-
-        }
-      });
+      me.openFile(elts[1]);
       return ;
     }
 
@@ -143,6 +145,41 @@
     });
 
     
+  }
+
+  vw.cpm.CLI.prototype.openFile = function(filepath){
+    var me = this;
+    $.ajax({
+      type: "POST",
+      data : {
+        file:filepath
+      },
+      url: me.options.cpmbaseurl+"rest/file",
+      success: function(data, textStatus, jqXHR) {
+        data = '<code><pre>'+data+'</pre></code>';
+        me.view.createPanel(filepath,data);
+      },
+      error:function(){
+
+      }
+    });
+  }
+
+  vw.cpm.CLI.prototype.getFileContent = function(filepath,callback){
+    var me = this;
+    $.ajax({
+      type: "POST",
+      data : {
+        file:filepath
+      },
+      url: me.options.cpmbaseurl+"rest/file",
+      success: function(data, textStatus, jqXHR) {
+        callback.call(me,data);
+      },
+      error:function(){
+
+      }
+    });
   }
 
 

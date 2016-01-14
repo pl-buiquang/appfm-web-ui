@@ -385,7 +385,11 @@ ul.main-menu{
 }
 
 
-
+.module-source-editor{
+  position: relative;
+  height:500px;
+  width: 100%;
+}
 
 
 /*******************************************************************
@@ -411,7 +415,7 @@ ul.main-menu{
 
 
 .treeview-node{
-  background-image:url('../img/system/folder.png');
+  background-image:url('../img/system/folder4.png');
   padding-left:40px;
   min-height: 32px;
   background-repeat: no-repeat;
@@ -442,4 +446,26 @@ ul.main-menu{
   padding-right: 20px;
   background-repeat: no-repeat;
   background-position: right;
+}
+
+.treeview-module-folder{
+  background-image:url('../img/system/folder5.png');
+}
+
+.treeview-module-item{
+  background-image:url('../img/system/module.png');
+}
+
+.treeview-node-waiting{
+  background-image: url('../img/system/ajax-loader-orange.gif') !important;
+}
+
+.treeview-leaf-waiting{
+  background-image: url('../img/system/ajax-loader-white.gif') !important;
+}
+
+
+.file-var{
+  cursor: pointer;
+  color:#134E7A;
 }

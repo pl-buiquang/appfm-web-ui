@@ -28,10 +28,6 @@ function cpm_main(){
 
   $page->addJS(BASE_URL."public/js/vendor/store.min.js");
 
-  $page->addJS(BASE_URL."public/js/cpm/build/cpmui.js");
-  $page->addCSS(BASE_URL."public/js/cpm/build/style/style.css");
-
-  $page->addCSS(BASE_URL."public/css/app.css");
 
   $page->addJS(BASE_URL."public/vendor/draw2d/prod/lib/jquery.autoresize.js");
   $page->addJS(BASE_URL."public/vendor/draw2d/prod/lib/jquery-touch_punch.js");
@@ -53,8 +49,21 @@ function cpm_main(){
   $page->addJS(BASE_URL.'public/js/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js');
 
 
+  $page->addJS(BASE_URL.'public/js/vendor/ace-builds-master/src-noconflict/ace.js');
+
+  $page->addJS(BASE_URL.'public/js/vendor/ace-builds-master/src-noconflict/theme-twilight.js');
+
+  $page->addJS(BASE_URL.'public/js/vendor/ace-builds-master/src-noconflict/mode-yaml.js');
+  
+  $page->addJS(BASE_URL."public/js/cpm/build/cpmui.js");
+  $page->addCSS(BASE_URL."public/js/cpm/build/style/style.css");
+
+  $page->addCSS(BASE_URL."public/css/app.css");
+
+
   $html = tplset(array(
-    "BASE_URL"=>BASE_URL
+    "BASE_URL"=>BASE_URL,
+    "HOSTNAME" => CPM_HOST
     ),tpl("main"));
 
 
@@ -62,7 +71,6 @@ function cpm_main(){
   
 
   $page->addToBody($html);
-
 
 }
 
@@ -90,7 +98,7 @@ function cpm_command_call($command,$data=NULL){
   $writable = array();
   try {
      /* Bloc le Poll tant qu'il y a quelque chose à faire */
-     $events = $poll->poll($readable, $writable, 20000);
+     $events = $poll->poll($readable, $writable, 60000);
      $errors = $poll->getLastErrors();
 
      if (count($errors) > 0) {

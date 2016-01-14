@@ -78,11 +78,11 @@
               folded = "treeview-unfolded";
               hidden = "";
             }
-            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + 14)+'</div></div>';
+            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + 14)+'</div></div>';
         }else if(tree.hasOwnProperty("module")){
-          html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;">'+tree.module.name+'</div>';
+          html += '<div class="treeview-leaf treeview-module-item draw2d_droppable" data-modname="'+tree.module.name+'" style="margin-left:'+offset+'px;">'+tree.module.name+'</div>';
         }else{
-          html += '<div class="treeview-leaf" style="margin-left:'+offset+'px; color:red;">'+tree.modulename+'</div>';
+          html += '<div class="treeview-leaf treeview-module-item" style="margin-left:'+offset+'px; color:red;">'+tree.modulename+'</div>';
         }
         
       }

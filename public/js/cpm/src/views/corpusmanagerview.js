@@ -88,6 +88,9 @@
     return html;
   }
 
+  vw.cpm.CorpusManagerView.renderSubTree_v2 = function(tree){
+    
+  }
 
 
 }(window.vw = window.vw || {}));

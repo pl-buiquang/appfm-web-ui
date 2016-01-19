@@ -152,6 +152,8 @@
   '</div>'+
   '<div class="module-content-view"></div>';
 
+  vw.cpm.ModuleView.templateGraphic = '<div class="module-graphical-view"><div ></div>';
+
 
 
 }(window.vw = window.vw || {}));

@@ -14,6 +14,11 @@ ul.nostyle{
   margin-left: 0;
 }
 
+body{
+  margin: 0;
+  padding: 0;
+}
+
 /*******************************************************************
 *      Main Layout
 ********************************************************************/
@@ -192,6 +197,31 @@ ul.main-menu{
 }
 
 /*******************************************************************
+*      Modules Manager
+********************************************************************/
+
+#modulemanager-list{
+  background-color: rgb(133, 146, 165);
+  padding: 8px;
+  -webkit-box-shadow: inset 0px 0px 1px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    inset 0px 0px 1px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 0px 0px 1px 0px rgba(50, 50, 50, 0.75) inset;
+}
+
+#modulemanager-menu{
+  margin-bottom: 12px;
+}
+
+#modulemanager-add-new{
+  background-image:url('../img/system/add.png');
+  padding-left:32px;
+  min-height: 28px;
+  background-repeat: no-repeat;
+  background-position: left middle;
+  cursor:pointer;
+}
+
+/*******************************************************************
 *      Process/Run Manager
 ********************************************************************/
 
@@ -202,6 +232,8 @@ ul.main-menu{
 .run-list li:hover{
   text-decoration: underline;
 }
+
+
 
 /*******************************************************************
 *      Command bar
@@ -340,7 +372,7 @@ ul.main-menu{
 ********************************************************************/
 
 .canvas-view{
-  height:400px;
+  height:450px;
   width: 100%;
   background: #efefef url('../img/backgrounds/fabric_of_squares_gray/fabric_of_squares_gray.png') repeat;
   -webkit-box-shadow: 0 1px 2px rgba(50, 50, 50, 0.25);
@@ -354,6 +386,13 @@ ul.main-menu{
 /*******************************************************************
 *      Module viewer
 ********************************************************************/
+
+.module-view-infos-panel{
+  height:200px;
+  width: 100%;
+  position: relative;
+  padding: 4px;
+}
 
 .module-header{
   height: 32px;
@@ -454,4 +493,63 @@ ul.main-menu{
 
 .treeview-module-item{
   background-image:url('../img/system/module.png');
+}
+
+.treeview-node-waiting{
+  background-image: url('../img/system/ajax-loader-orange.gif') !important;
+}
+
+.treeview-leaf-waiting{
+  background-image: url('../img/system/ajax-loader-white.gif') !important;
+}
+
+
+.file-var{
+  cursor: pointer;
+  color:#134E7A;
+}
+
+
+/*******************************************************************
+*      UI widgets // Modal
+********************************************************************/
+
+.cpm-modal-header{
+  height:32px;
+}
+
+#cpm-modal-bg{
+  position: fixed;
+  background-color:rgba(0,0,0,0.65);
+  z-index:2000;
+  width: 100%;
+  height: 100%;
+}
+
+.cpm-modal{
+  z-index: 2001;
+  background-color: #fafafa;
+  margin: 5% auto;
+  width: 75%;
+  z-index: 2001;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.cpm-modal-content{
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.cpm-modal-close{
+  background-image: url("../img/system/close.png");
+  width:24px;
+  height: 24px;
+  float:right;
+  cursor: pointer;
+  margin-right:4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }

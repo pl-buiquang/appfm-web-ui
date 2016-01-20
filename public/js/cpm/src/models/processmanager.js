@@ -20,6 +20,27 @@
     process.sync();
   }
 
+  vw.cpm.ProcessManager.prototype.remove = function(runid){
+    var me = this;
+    var found = false;
+    for (runmodulename in me.runs){
+      for(var i = 0 ; i < me.runs[runmodulename].length ; i++){
+        if(me.runs[runmodulename][i].runid == runid){
+          me.runs[runmodulename].splice(i,1);
+          if(me.runs[runmodulename].length == 0){
+            delete me.runs[runmodulename];
+          }
+          found = true;
+          break;
+        }
+      }
+      if(found){
+        break;
+      }
+    }
+    me.view.refresh();
+  }
+
   vw.cpm.ProcessManager.prototype.fetchAll = function(modulename,callback){
     var me = this;
     $.ajax({
@@ -34,10 +55,18 @@
           var process = processes[i].trim();
           if(process!=""){
             var pinfo = process.split(":");
-            if(me.runs.hasOwnProperty(pinfo[0])){
-              me.runs[pinfo[0]].push(pinfo[1]);
+            var runmodulename = pinfo[0].trim();
+            regex = /(.*?)\((.*?)\)/;
+            var match = regex.exec(pinfo.slice(1).join(":").trim());
+            if(!match){
+              continue;
+            }
+            var runid = match[1].trim();
+            var date = match[2].trim();
+            if(me.runs.hasOwnProperty(runmodulename)){
+              me.runs[runmodulename].push({runid:runid,datecreated:date});
             }else{
-              me.runs[pinfo[0]] = [pinfo[1]];
+              me.runs[runmodulename] = [{runid:runid,datecreated:date}];
             }
           }
         }

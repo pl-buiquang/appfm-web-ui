@@ -1,0 +1,13 @@
+====== Web interface ======
+
+===== Features =====
+
+- graphic pipeline creation / management
+
+- graphic corpus management
+
+- pipeline run management + view outputs
+
+- concordancier
+
+- ...

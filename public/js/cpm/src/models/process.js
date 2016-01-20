@@ -34,6 +34,27 @@
     });
   }
 
+  vw.cpm.Process.prototype.delete = function(){
+    var me = this;
+    $.ajax({
+      type : "POST",
+      data : {
+        cmd : "process del "+me.runid
+      },
+      url : me.app.options.cpmbaseurl+"rest/cmd",
+      success : function(data){
+        if(data == "ok"){
+          var $panel = me.app.view.getPanelFromContent(me.view.$el);
+          me.app.view.deletePanel($panel);
+          me.app.processmanager.remove(me.runid);
+        }
+      },
+      error : function(){
+        console.log("error when trying to delete process result "+me.runid);
+      }
+    });
+  }
+
   
 
   vw.cpm.Process.prototype.run = function(conf,success,error){

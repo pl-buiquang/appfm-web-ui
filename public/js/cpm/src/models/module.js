@@ -43,6 +43,7 @@
         var $panel = me.app.view.createPanel(me.def.modulename+" (run "+runid+")");
         var process = new vw.cpm.Process(me.app,$panel.find(".frame-body"),{moduledef:me.def.module,runconf:conf,runid:runid});
         process.sync();
+        me.app.processmanager.fetchAll(); // very unoptimized
         success.call(me.view);
       },
       error:function(){
@@ -50,6 +51,14 @@
       }
     });
   
+  }
+
+  vw.cpm.Module.prototype.internalSyncToSource = function(){
+    this.def.source = YAML.stringify(this.def.module);
+  }
+
+  vw.cpm.Module.prototype.internalSyncToModel = function(){
+    this.def.module = YAML.parse(this.def.source);
   }
 
 }(window.vw = window.vw || {}));

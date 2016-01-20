@@ -10,7 +10,9 @@
   if(strpos($fileName, ".json", strlen($fileName) - strlen(".json")) == false){
  	$fileName = $fileName .".json";
   }
+
   $filePath = $PHPBLOCKS_DATADIR.$fileName;
+  
   $fileContent ="";
    
   $fileContent = file_get_contents($filePath);

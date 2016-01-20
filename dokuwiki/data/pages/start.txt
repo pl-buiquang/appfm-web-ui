@@ -1,0 +1,45 @@
+====== Application Frame Manager - AppFM ======
+(previously CPM)
+
+AppFM (previously CPM) is a platform that manage applications defined within a frame that we will further refer as [[:spec_draft|modules]].
+
+The initial main purpose of AppFM was to be able to :
+  * facilitate the use of already developped applications for testing purpose
+  * design applications pipeline
+  * provide useful built-in tools and views for common nlp process (POS tagging, dependency parser, corpus statistics, etc.)
+
+In order to achieve these purpose, the AppFM platform is built around :
+  * a [[:spec_draft|module implementation guide]]
+  * a core server handling the execution and management of module and modules pipeline (both are actually the same kind of object)
+  * a command line interface for basic interaction with the core
+  * a web interface for advanced viewing of module execution results and creation
+
+===== Background =====
+
+Existing solutions :
+  * Enterprise Integration Pattern, Enterprise Service Bus (camel, talend, etc.)
+  * NLP Frameworks (UIMA, Gate)
+
+===== Global Project Information =====
+
+[[:quick_start|Getting started]]
+
+[[:roadmap|Roadmap]]
+
+[[:arch|architecture générale]]
+
+[[:dependencies|Dépendances]]
+
+==== Core Server/Kernel ====
+
+[[:spec_draft|Documentation modules]]
+
+==== Clients ====
+
+=== CLI ===
+
+[[:cli|CLI manual]]
+
+=== Web ===
+
+[[:web|Web interface]]

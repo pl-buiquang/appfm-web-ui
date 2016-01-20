@@ -78,9 +78,7 @@
         jQuery(".menu-open").switchClass("menu-open","menu-closed");
         jQuery(".menu-closed").switchClass("menu-closed","menu-open");
       }else{
-        jQuery(".menu-closed").switchClass("menu-closed","menu-open");
-        me.model.setActiveMenu(this.id);
-        me.model.activemenu = this.id;
+        me.openMenu(this.id);
       }
     });
 
@@ -100,6 +98,20 @@
     jQuery("#cmd-bar-container").on("click",function(){
       me.toggleCLI(true);
     });
+  }
+
+  vw.cpm.CLIView.prototype.closeMenu = function(){
+    var me = this;
+    me.model.activemenu = "default";
+    me.model.setActiveMenu("default");
+    jQuery(".menu-open").switchClass("menu-open","menu-closed");
+  }
+
+  vw.cpm.CLIView.prototype.openMenu = function(id){
+    var me = this;
+    jQuery(".menu-closed").switchClass("menu-closed","menu-open");
+    me.model.setActiveMenu(id);
+    me.model.activemenu = id;
   }
 
   vw.cpm.CLIView.prototype.toggleCLI = function(activate){
@@ -125,7 +137,9 @@
     button.unbind('click');
     button.click(function(){
       me.unstick(panel);
-    }); 
+    });
+    me.contentpanel[0].scrollTop = 0;
+    me.contentpanel.perfectScrollbar("update");
   }
 
   vw.cpm.CLIView.prototype.unstick = function(panel){
@@ -158,6 +172,10 @@
       return me.createPanel(title);
     }
 
+  }
+
+  vw.cpm.CLIView.prototype.getPanelFromContent = function($el){
+    return $el.parents(".frame");
   }
 
   vw.cpm.CLIView.prototype.quitFullscreen = function($panel){
@@ -229,6 +247,24 @@
     }});
   }
 
+  vw.cpm.CLIView.prototype.deletePanel = function($panel){
+    var me = this;
+    var index = me.panels.indexOf($panel);
+      if(index!=-1){
+        me.panels.splice(index,1);
+      }
+      $panel.animate({
+          opacity: 0.25,
+          height: "toggle"
+        },{
+        complete:function(){
+          $panel.remove();
+        },
+        duration : 200
+      }
+    );
+  }
+
   vw.cpm.CLIView.prototype.createPanel = function(title,data){
     var me = this;
     var html = vw.cpm.CLIView.frametemplate;
@@ -260,22 +296,7 @@
     });
 
     $el.find('.frame-tool-close').click(function(){
-      var index = me.panels.indexOf($el);
-      if(index!=-1){
-        me.panels.splice(index,1);
-      }
-      $el.animate({
-          opacity: 0.25,
-          height: "toggle"
-        },{
-        complete:function(){
-          $el.remove();
-        },
-        duration : 200
-      }
-    );
-      
-
+      me.deletePanel($el)
     });
 
     $el.find('.frame-tool-openfs').click(function(){
@@ -287,6 +308,8 @@
       me.hide($el);
     });
 
+    me.contentpanel[0].scrollTop = 0;
+    me.contentpanel.perfectScrollbar("update");
 
     return $el;
   }

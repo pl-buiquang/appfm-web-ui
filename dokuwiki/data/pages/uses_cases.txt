@@ -1,0 +1,54 @@
+====== Use Cases ======
+
+===== Examples =====
+
+take one text file, parse it with bonsai, get the result, view parse graphs
+
+take folder with pdfs, transform them into text files, save the resulting collection
+
+from parsed graphs, filter some depending on whatever, get context of filtered graphs
+
+from text files, annotate with wolf, get context of file with matched query
+
+from text files, parse them, apply ner, apply dbpedia ids/refs
+
+from one sentence, parse it, apply ner + dbpedia, answer question
+
+===== Information Extraction =====
+
+===== Information Research =====
+
+Pipeline1 : use doc collection, parse, apply ontology mapping, apply tf-idf, store in elasticsearch
+
+<code>
+$ cpm run pipeline_index --in collection_id --lazy
+</code>
+
+lazy : don't process already processed documents (or watch for changes)
+
+Pipeline2 : launch elasticsearch service, use text input, tokenize, lemmatize, query elasticsearch, output result
+
+<code>
+$ cpm run pipeline_query "keyword1 keyword2"
+</code>
+
+===== Q&A =====
+
+Start cpm
+
+<code>
+$ service cpm start
+cpm started, pid 1234
+</code>
+
+Launch registered pipeline, with unregistred data/corpus
+
+<code>
+$ cpm run my_pipeline --if ~/data/question.txt --of ~/data/output/answer.txt
+</code>
+
+Launch unregistered pipeline
+
+<code>
+$ cpm run pipeline_name --config ~/data/pipeline.conf --if ~/data/question.txt --of ~/data/output/answer.txt
+</code>

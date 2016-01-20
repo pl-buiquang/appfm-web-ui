@@ -1,0 +1,44 @@
+====== Architecture ======
+
+===== Deploiement =====
+
+Dépendances :
+
+- Vagrant debian vm
+
+- pyzmq + click (cpm-cli)
+
+- java (jre 8)+ scala (2.11) + sbt (?)
+
+scripts :
+
+  * install.sh : install vagrant and necessary libs (pyzmq), copy necessary libs, export path to bashrc
+  * start.sh (→ transform to init.d script) : start cpm-core (and webserver)
+
+===== Serveur =====
+
+**Gestionnaire de corpus**
+
+**Serveur de commandes**
+
+**Serveur web**
+
+**Rest API**
+
+**Pipeline run hyperviseur**
+
+**Gestionnaire de composants**
+
+Modules, pipelines
+
+**Gestionnaire de runs**
+
+====   ====
+
+===== Clients =====
+
+**CLI**
+
+**Web interface**
+
+**Python module**

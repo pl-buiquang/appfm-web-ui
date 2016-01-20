@@ -10,11 +10,21 @@
 
   vw.cpm.ModuleManagerView.prototype.init=function(){
     var me = this;
+
+    $mastercontainer = $(vw.cpm.ModuleManagerView.template);
+    me.$el.empty();
+    me.$el.append($mastercontainer);
+
+    me.$el.find("#modulemanager-menu").append('<div id="modulemanager-add-new">Create a new module</div>');
+    me.$el.find("#modulemanager-add-new").click(function(){
+      me.model.prepareCreateNewModule();
+    });
   }
 
   vw.cpm.ModuleManagerView.prototype.refresh = function(){
     var me = this;
-    this.$el.html(vw.cpm.ModuleManagerView.renderSubTree(this.model.moduletree,0));
+
+    this.$el.find("#modulemanager-list").html(vw.cpm.ModuleManagerView.renderSubTree(this.model.moduletree,0));
     this.$el.find('.treeview-node').on("click",function(){
       var parent = $(this).parent();
       if(parent.hasClass("treeview-fold")){
@@ -80,7 +90,7 @@
             }
             html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + 14)+'</div></div>';
         }else if(tree.hasOwnProperty("module")){
-          html += '<div class="treeview-leaf treeview-module-item" style="margin-left:'+offset+'px;">'+tree.module.name+'</div>';
+          html += '<div class="treeview-leaf treeview-module-item draw2d_droppable" data-modname="'+tree.module.name+'" style="margin-left:'+offset+'px;">'+tree.module.name+'</div>';
         }else{
           html += '<div class="treeview-leaf treeview-module-item" style="margin-left:'+offset+'px; color:red;">'+tree.modulename+'</div>';
         }
@@ -91,6 +101,8 @@
     return html;
   }
 
+
+  vw.cpm.ModuleManagerView.template = '<div><div id="modulemanager-menu"></div><div id="modulemanager-list"></div></div>';
 
   
 

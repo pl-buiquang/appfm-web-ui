@@ -1,0 +1,125 @@
+====== Main ideas ======
+
+===== Ideas =====
+
+Select start/end running segment (like reason) ⇒ get inspired by music producing software
+
+===== Questions =====
+
+How is the full stuff packaged???
+
+How are the modules packaged? Plugin system??
+
+Python, C/C++, Java, Perl, bash+binaries, … : Packaging/Integration ? (docker, tarball, EIP, …?)
+
+===== Assumptions =====
+
+==== Initial Input : Collection of documents ====
+
+INPUT ORIGINAL FORMATS : pdf, xml/html, txt, doc, docx
+
+NORMALIZED INPUT : txt
+
+⇒ Document : CollectionID, DocumentID, Attributes, URI
+
+==== Normalisation ====
+
+XML + DTD/XSD
+
+JSON ~= CAS
+
+==== Processes ====
+
+Programs ⇒ Annotation
+
+Framework ⇒ Routing, DAL, CollectionReaders
+
+===== Features =====
+
+  * Interfaces
+      * Graphical Web Interface
+      * CLI
+      * API (python, java)
+  * Execution
+      * Service mode
+      * Standalone mode
+  * Tools
+      * Components (Parser, NER, Unitex, …?)
+        * Default Views (graphical web interface (parser ⇒ graphviz | depgraph))
+      * Pipeline management
+        * Creation
+        * Monitoring
+  * Module integration pattern
+      * Standardized I/O, Description
+      * Pipeline connectors
+        * Router
+        * Document reader
+        * CAS export
+        * DB writer
+        * Splitter/Aggregator
+  * Scalability / Multi processor
+
+^ID ^Name ^Description ^Catégorie ^Divers |
+|1 |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+
+===== Integration =====
+
+API : java, python, (c++)
+
+===== Pipeline =====
+
+A chain of processes (possibly pipelines<font inherit/inherit;;inherit;;inherit>) that takes</font>    specified input type and produce specified output type
+
+==== Configuration ====
+
+==== Run ====
+
+===== Data/Collection/Input =====
+
+Possible to add hadoop support after.
+
+Corpus manager plugin to handle saving/retrieving corpus over hdfs
+
+Corpus reader module plugin to read corpus stored over hadoop
+
+(MapReduce/Splitter/LoadBalancing already designed into cpm via docker containers/swarm?)
+
+===== I/O =====
+
+Annotated text : File, Python/Java(Scala) Object Api ⇒ l'objet abstrait le format
+
+Graphs
+
+Views
+
+Custom Data
+
+===== Modules =====
+
+Modules are the most stateless possible and follow simple program specifications :
+
+- easy to fix, update them, independtly of the plateform
+
+IN (DTD, doc) → Program/Module → OUT (DTD, doc)
+
+they should be stateless pure functions
+
+==== Built-in modules ====
+
+Collection reader (CAS_init): read data / collection / user input
+
+CAS_writer : write output in files / databases ⇒ create new data resource
+
+===== Services =====
+
+A service is a module (that is launched) which provides internal and external (rest api) endpoint to communicate with. A pipeline can be launched as a service when the initial data, is user input.
+
+\\

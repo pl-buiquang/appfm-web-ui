@@ -22,7 +22,7 @@
     $("#cmd-bar-container").perfectScrollbar({suppressScrollX:true});  
 
     $("#active-content").css('height',window.innerHeight-94);
-    $("#active-content").perfectScrollbar();
+    $("#active-content").perfectScrollbar({suppressScrollX:true});
 
     $("#menu-content-body").css('height',window.innerHeight-80);
     $("#menu-content-body").perfectScrollbar({suppressScrollX:true});
@@ -30,7 +30,7 @@
       $("#menu-content-body").css('height',window.innerHeight-80);
       $("#menu-content-body").perfectScrollbar({suppressScrollX:true});
       $("#active-content").css('height',window.innerHeight-94);
-      $("#active-content").perfectScrollbar();
+      $("#active-content").perfectScrollbar({suppressScrollX:true});
       vw.cpm.CLIView.maxFrameHeight = $(window).height()-178 ;
     });
 
@@ -272,7 +272,7 @@
     //$el.hide();
     //$el.show('drop');
     this.contentpanel.find('#active-content-flow').prepend($el);
-    
+
     if(title != 'undefined'){
       $el.find(".frame-title").append(title);
     }

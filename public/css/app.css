@@ -364,7 +364,8 @@ ul.main-menu{
 }
 
 .frame-body{
-  padding:8px; 
+  padding:8px;
+  word-wrap: break-word;
 }
 
 /*******************************************************************
@@ -552,4 +553,11 @@ ul.main-menu{
   margin-right:4px;
   margin-top: 4px;
   margin-bottom: 4px;
+
+pre {
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }

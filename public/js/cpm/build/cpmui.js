@@ -168,6 +168,9 @@
       },
       url: me.options.cpmbaseurl+"rest/file",
       success: function(data, textStatus, jqXHR) {
+        data = jQuery('<div />').text(data).html();
+        //data = data.replace(/\s/g,'&nbsp;');
+        //data = data.replace(/\n|\r|\r\n/g,'<br>');
         data = '<code><pre>'+data+'</pre></code>';
         me.view.createPanel(filepath,data);
       },
@@ -833,7 +836,7 @@
     $("#cmd-bar-container").perfectScrollbar({suppressScrollX:true});  
 
     $("#active-content").css('height',window.innerHeight-94);
-    $("#active-content").perfectScrollbar();
+    $("#active-content").perfectScrollbar({suppressScrollX:true});
 
     $("#menu-content-body").css('height',window.innerHeight-80);
     $("#menu-content-body").perfectScrollbar({suppressScrollX:true});
@@ -841,7 +844,7 @@
       $("#menu-content-body").css('height',window.innerHeight-80);
       $("#menu-content-body").perfectScrollbar({suppressScrollX:true});
       $("#active-content").css('height',window.innerHeight-94);
-      $("#active-content").perfectScrollbar();
+      $("#active-content").perfectScrollbar({suppressScrollX:true});
       vw.cpm.CLIView.maxFrameHeight = $(window).height()-178 ;
     });
 
@@ -1083,7 +1086,7 @@
     //$el.hide();
     //$el.show('drop');
     this.contentpanel.find('#active-content-flow').prepend($el);
-    
+
     if(title != 'undefined'){
       $el.find(".frame-title").append(title);
     }
@@ -1755,6 +1758,8 @@
   '<span class="module-save module-header-item" style="float:right; margin-right:20px;">save</span>'+
   '</div>'+
   '<div class="module-content-view"></div>';
+
+  vw.cpm.ModuleView.templateGraphic = '<div class="module-graphical-view"><div ></div>';
 
 
 

@@ -132,6 +132,16 @@
       console.log(figure);
     });
     
+    for(var inputname in me.model.def.module.input){
+      var inputview = new vw.cpm.ModuleInputView();
+      me.canvas.add(inputview);
+    }
+
+    for(var outputname in me.model.def.module.output){
+      var outputview = new vw.cpm.ModuleOutputView();
+      me.canvas.add(outputview);
+    }
+
     for (var i = 0; i < me.model.def.module.exec.length ; i++) {
       var execname = _.first(_.keys(me.model.def.module.exec[i]));
       regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#(?:\w|-)+)?/;
@@ -140,7 +150,7 @@
         alert("error when fetching execution modules pipeline ! ");
       }
       var module = me.model.app.modulesmanager.modules[match[1]];
-      var moduleboxview =  new vw.cpm.ModuleBoxView(me.model.def.module.exec[i],execname);
+      var moduleboxview =  new vw.cpm.ModuleBoxView(module,execname,me.model.def.module.exec[i]);
       me.canvas.add(moduleboxview,150*i+50,50);
     };
     

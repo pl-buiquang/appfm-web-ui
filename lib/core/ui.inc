@@ -480,7 +480,6 @@ function tplclean($instance,$templatename){
 function tplset_item($varname,$content,$template){
   $newtemplate = preg_replace("/\[\[$varname\]\]/", $content, $template);
   if($newtemplate == NULL){
-    Logger::Debug("error while setting element in template :".$template);
     return $template;
   }
   return $newtemplate;

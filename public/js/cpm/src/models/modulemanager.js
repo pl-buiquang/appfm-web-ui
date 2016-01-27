@@ -26,9 +26,67 @@
         me.moduletree = data;
         me.modules = {};
         me.parseModuleTree(data);
+        me.addDefaultModules();
         me.view.refresh();
       }
     })
+  }
+
+  vw.cpm.ModuleManager.prototype.addDefaultModules = function(){
+    this.modules["_CMD"]={
+      module:{
+        name:"_CMD",
+        desc:"CMD",
+        input:{
+          CMD:{
+            type:"VAL"
+          },
+          DOCKERFILE:{
+            type:"VAL",
+            value:"false"
+          },
+          CONTAINED:{
+            type:"VAL",
+            value:"false"
+          }
+        },
+        output:{
+          STDOUT:{
+            type:"VAL"
+          }
+        },
+        exec:[]
+      },
+      modulename:"_CMD",
+      source:"",
+      sourcepath:"/no/path"
+    };
+    this.modules["_MAP"]={
+      module:{
+        name:"_MAP",
+        desc:"MAP",
+        input:{
+          IN:{
+            type:"DIR"
+          },
+          RUN:{
+            type:"MODVAL+"
+          },
+          REGEX:{
+            type:"VAL"
+          },
+          CHUNK_SIZE:{
+            type:"VAL",
+            value:"10"
+          }
+        },
+        output:{},
+        exec:[]
+      },
+      modulename:"_MAP",
+      source:"",
+      sourcepath:"/no/path"
+    };
   }
 
   vw.cpm.ModuleManager.prototype.parseModuleTree = function(tree){

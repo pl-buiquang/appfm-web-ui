@@ -80,6 +80,8 @@
   
   }
 
+  
+
   vw.cpm.Module.prototype.internalSyncToSource = function(){
     this.def.source = YAML.stringify(this.def.module);
   }
@@ -87,5 +89,7 @@
   vw.cpm.Module.prototype.internalSyncToModel = function(){
     this.def.module = YAML.parse(this.def.source);
   }
+
+  
 
 }(window.vw = window.vw || {}));

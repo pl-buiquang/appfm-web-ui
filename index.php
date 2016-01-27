@@ -4,15 +4,12 @@
   
   Utils::fetchModules("app");
   
-
-  Logger::Log("hello");
-  
   global $page;
   $page = new PageBuilder();
 
   Router::dispach();
-  
-  Logger::Log($_SERVER);
+
+  Logger::Log("spam to test log rotate") ;
   
 
 ?>

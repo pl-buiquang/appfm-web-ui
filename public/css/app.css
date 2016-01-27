@@ -372,13 +372,19 @@ ul.main-menu{
 *      Draw2d Module Canvas
 ********************************************************************/
 
-.canvas-view{
-  height:450px;
+.canvas-container{
+  position:relative;
+  height:500px;
   width: 100%;
-  background: #efefef url('../img/backgrounds/fabric_of_squares_gray/fabric_of_squares_gray.png') repeat;
   -webkit-box-shadow: 0 1px 2px rgba(50, 50, 50, 0.25);
   -moz-box-shadow:    0 1px 2px rgba(50, 50, 50, 0.25);
   box-shadow:         0 1px 2px rgba(50, 50, 50, 0.25);
+}
+
+.canvas-view{
+  height:1000px;
+  width:2000px;
+  background: #efefef url('../img/backgrounds/fabric_of_squares_gray/fabric_of_squares_gray.png') repeat;
 }
 
 
@@ -431,6 +437,15 @@ ul.main-menu{
   width: 100%;
 }
 
+.module-view-toolbox{
+  height:32px;
+  width: 100%;
+}
+
+.module-view-toolbox-item{
+  margin-left:12px;
+  cursor: pointer;
+}
 
 /*******************************************************************
 *      UI widgets

@@ -116,7 +116,6 @@ abstract class DBObject implements IDBObject{
       if(isset($values[$field])){
         // prevent some xss attack
         $values[$field] = $purifier->purify($values[$field]);
-        Logger::Debug($values[$field]);
         if(isset($options['validate'])){
           $test = call_user_func($options['validate'],$values[$field]);
           if(!$test){
@@ -160,7 +159,6 @@ abstract class DBObject implements IDBObject{
 
   public function save(){
     $class = $this->objectclass;
-    Logger::Debug($this);
     if(isset($this->id)){
       $updatevals = array();
       $fields = $class::fields();

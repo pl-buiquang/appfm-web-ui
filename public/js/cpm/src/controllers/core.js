@@ -161,7 +161,7 @@
         data = jQuery('<div />').text(data).html();
         //data = data.replace(/\s/g,'&nbsp;');
         //data = data.replace(/\n|\r|\r\n/g,'<br>');
-        data = '<code><pre>'+data+'</pre></code>';
+        data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
         me.view.createPanel(filepath,data);
       },
       error:function(){

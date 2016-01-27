@@ -16,7 +16,35 @@
   }
 
   vw.cpm.Module.prototype.sync = function(success,error){
-    alert('no save function yet, you have to modify the source file by directly in the server files');
+    var me = this;
+    me.def.source = me.view.editor.getValue();
+    var synctype = "update "+me.def.modulename;
+    if(me.def.creation){
+      synctype = "create "+me.def.modulename+" "+vw.cpm.utils.getParentDir(me.def.sourcepath);
+    }
+    console.log(me.def);
+    $.ajax({
+      type: "POST",
+      data : {
+        cmd: "module "+synctype,
+        data:me.def.source
+      },
+      url: me.app.options.cpmbaseurl+"rest/cmd",
+      dataType : "json",
+      success: function(data, textStatus, jqXHR) {
+        if(data.success){
+          if(me.def.creation){
+            me.app.modulesmanager.fetchAll();
+            delete me.def.creation;  
+          }
+        }else{
+          alert(me.error);
+        }
+      },
+      error:function(){
+
+      }
+    });
   }
 
   vw.cpm.Module.confToYaml = function(conf){
@@ -29,7 +57,6 @@
 
   vw.cpm.Module.prototype.run = function(conf,success,error){
     var me = this;
-    console.log(conf);
     $.ajax({
       type: "POST",
       data : {

@@ -58,9 +58,18 @@
     
     this.$el.find(".module-content-view").append('<div id="source-'+this.id+'" class="module-source-editor"></div>');
     this.$el.find('#source-'+this.id).append(content);
-    var editor = ace.edit("source-"+this.id);
+    this.editor = ace.edit("source-"+this.id);
     var YamlMode = ace.require("ace/mode/yaml").Mode;
-    editor.session.setMode(new YamlMode());
+
+    // for built-in modules set read only
+    if(me.model.def.modulename.indexOf("_")==0){
+      this.setReadOnly(true);
+    }
+    
+    
+    this.editor.getSession().setTabSize(2);
+    this.editor.getSession().setUseSoftTabs(true);
+    this.editor.session.setMode(new YamlMode());
   }
 
   vw.cpm.ModuleView.prototype.renderRunConfForm=function(){
@@ -109,6 +118,12 @@
     this.$el.find(".canvas-view").attr('id',this.id);
 
     this.$el.find('.module-view-infos-panel').html(me.model.def.module.desc);
+
+    // for built in module, disallow view
+    if(me.model.def.modulename.indexOf("_")==0){
+      return;
+    }
+
     if(me.canvas){
       me.canvas.destroy();
     }

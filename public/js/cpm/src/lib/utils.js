@@ -29,6 +29,16 @@
     }
     return text;
   }
+
+  vw.cpm.utils.getParentDir = function(filepath){
+    var index = filepath.lastIndexOf("/")
+    if(index!=-1){
+      return filepath.substring(0,index);
+    }else{
+      return filepath;
+    }
+    
+  }
     
 
 }(window.vw = window.vw || {}));

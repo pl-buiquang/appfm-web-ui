@@ -171,7 +171,7 @@
         data = jQuery('<div />').text(data).html();
         //data = data.replace(/\s/g,'&nbsp;');
         //data = data.replace(/\n|\r|\r\n/g,'<br>');
-        data = '<code><pre>'+data+'</pre></code>';
+        data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
         me.view.createPanel(filepath,data);
       },
       error:function(){
@@ -348,6 +348,53 @@
     }
     return text;
   }
+
+  vw.cpm.utils.getParentDir = function(filepath){
+    var index = filepath.lastIndexOf("/")
+    if(index!=-1){
+      return filepath.substring(0,index);
+    }else{
+      return filepath;
+    }
+    
+  }
+
+  vw.cpm.utils.extractVars = function(value,ref){
+    var variables = [];
+
+    if(typeof value == "object"){
+      if(value.constructor === Array){
+        for (var i = 0; i < value.length; i++) {
+          variables = variables.concat(vw.cpm.utils.extractVars(value[i],ref));
+        };
+      }else{
+        for (var i in value){
+          variables = variables.concat(vw.cpm.utils.extractVars(value[i],ref));
+        }
+      }
+    }else{
+      var escapeddollar = value.replace("\\$","__DOLLAR_ESCAPED__");
+      var regex = /\$(?:(?:\{(([a-zA-Z_\-\.@]+)(:.+)?)\})|([a-zA-Z_\-]+))/g;
+      var match;
+      while (match = regex.exec(escapeddollar)){
+        var variable = {ref:ref,raw:value};
+        if(match[1]){
+          variable.name = match[2];
+          if(match[3]){
+            variable.attr = match[3].substring(1);
+          }
+        }else{
+          variable.name = match[4];
+        }
+        variables.push(variable);
+      }
+      
+    }
+
+    return variables;
+
+    
+  }
     
 
 }(window.vw = window.vw || {}));
@@ -452,7 +499,7 @@
   vw.cpm.HelpManager.prototype.init = function(){
     var me = this;
 
-    this.slides = '<iframe style="border-style:none;border:0;margin:0;padding:0;" height="500px" width="100%" src="'+this.app.options.cpmbaseurl+'public/doc/slides/index.html"></iframe>';
+    this.slides = '<iframe style="border-style:none;border:0;margin:0;padding:0;" height="500px" width="100%" src="'+this.app.options.cpmbaseurl+'introslides"></iframe>';
   }
 
 
@@ -484,7 +531,35 @@
   }
 
   vw.cpm.Module.prototype.sync = function(success,error){
-    alert('no save function yet, you have to modify the source file by directly in the server files');
+    var me = this;
+    me.def.source = me.view.editor.getValue();
+    var synctype = "update "+me.def.modulename;
+    if(me.def.creation){
+      synctype = "create "+me.def.modulename+" "+vw.cpm.utils.getParentDir(me.def.sourcepath);
+    }
+    console.log(me.def);
+    $.ajax({
+      type: "POST",
+      data : {
+        cmd: "module "+synctype,
+        data:me.def.source
+      },
+      url: me.app.options.cpmbaseurl+"rest/cmd",
+      dataType : "json",
+      success: function(data, textStatus, jqXHR) {
+        if(data.success){
+          if(me.def.creation){
+            me.app.modulesmanager.fetchAll();
+            delete me.def.creation;  
+          }
+        }else{
+          alert(me.error);
+        }
+      },
+      error:function(){
+
+      }
+    });
   }
 
   vw.cpm.Module.confToYaml = function(conf){
@@ -497,7 +572,6 @@
 
   vw.cpm.Module.prototype.run = function(conf,success,error){
     var me = this;
-    console.log(conf);
     $.ajax({
       type: "POST",
       data : {
@@ -521,6 +595,8 @@
   
   }
 
+  
+
   vw.cpm.Module.prototype.internalSyncToSource = function(){
     this.def.source = YAML.stringify(this.def.module);
   }
@@ -528,6 +604,8 @@
   vw.cpm.Module.prototype.internalSyncToModel = function(){
     this.def.module = YAML.parse(this.def.source);
   }
+
+  
 
 }(window.vw = window.vw || {}));
 (function(vw){
@@ -556,6 +634,7 @@
       dataType : 'json',
       success:function(data,textStatus,jqXHR){
         me.moduletree = data;
+        me.modules = {};
         me.parseModuleTree(data);
         me.addDefaultModules();
         me.view.refresh();
@@ -611,9 +690,7 @@
             value:"10"
           }
         },
-        output:{
-          
-        },
+        output:{},
         exec:[]
       },
       modulename:"_MAP",
@@ -684,7 +761,7 @@
   vw.cpm.ModuleManager.prototype.prepareCreateNewModule = function(){
     var me = this;
     var modal = new vw.cpm.ui.Modal();
-    $preconfig = $('<div><div style="padding:12px;"><div>Choose folder in which to create new module</div><div>Name : <input type="text"></div></div><button class="create-module-preconfig-submit" type="button">Ok</div></div></div>');
+    $preconfig = $(vw.cpm.ModuleManagerView.templatePreConfigAddNew);
     $preconfig.find('.create-module-preconfig-submit').click(function(){
       var modulename = $preconfig.find('input').val();
       var dirpath = "custom";
@@ -693,8 +770,8 @@
         me.createNewModule(modulename,dirpath);
       },function(){
         var modalcontent = modal.getContainer();
-        modalcontent.find(".module-creation-error").remove();
-        modalcontent.prepend('<div class="module-creation-error">Module name already exist or isn\'t allowed, please choose another name</div>');
+        modalcontent.find(".error-message").remove();
+        modalcontent.prepend('<div class="error-message">Module name already exist or isn\'t allowed, please choose another name</div>');
       });
     });
     modal.open($preconfig);
@@ -709,14 +786,14 @@
         desc:"please fill in a brief description",
         input:{},
         output:{},
-        exec:[]
+        exec:[],
       },
       modulename:modulename,
-      source:"name : "+modulename+"\n\ndesc : > \n\tplease fill in a brief description",
-      sourcepath:me.app.cpmsettingsmanager.defaultModulesDir+"/"+modulename+".module"
+      source:"name : "+modulename+"\n\ndesc : > \n  please fill in a brief description",
+      sourcepath:me.app.cpmsettingsmanager.defaultModulesDir+"/custom/"+modulename+".module",
+      creation:true
     };
     var module = new vw.cpm.Module(me.app,$panel.find(".frame-body"),newmoduledef);
-    //me.model.modulesobj.push(module);
     module.view.render();
   }
 
@@ -1481,24 +1558,69 @@
 
   vw.cpm.ModuleInputView = draw2d.shape.basic.Circle.extend({
 
-    init : function(){
-      this._super({
-        stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"
-      });
+    NAME : "Input",
 
-      this.createPort("output", new draw2d.layout.locator.RightLocator(this));
+    init : function(inputname){
+      this._super({stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"});
+
+      this.port = this.createPort("output", new draw2d.layout.locator.RightLocator(this));
+
+      
+      this.label = new draw2d.shape.basic.Label({text:inputname});
+
+      //this.label.setStroke(0);
+      this.add(this.label, new draw2d.layout.locator.BottomLocator(this)); 
     }
   });
 
   vw.cpm.ModuleOutputView = draw2d.shape.basic.Circle.extend({
 
-    init : function(){
-      this._super({
-        stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"
-      });
+    NAME : "Output",
 
-      this.createPort("input", new draw2d.layout.locator.LeftLocator(this));
+    init : function(outputname){
+      this._super({stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"});
+
+      this.port = this.createPort("input", new draw2d.layout.locator.LeftLocator(this));
+
+      
+      this.label = new draw2d.shape.basic.Label({text:outputname});
+
+      //this.label.setStroke(0);
+      this.add(this.label, new draw2d.layout.locator.BottomLocator(this)); 
+
     }
+  });
+
+  vw.cpm.ModuleConnectionView = function(start,end,labelname){
+    var connection = new draw2d.Connection();
+    var label = new draw2d.shape.basic.Label({text:labelname, stroke:1, color:"#FF0000", fontColor:"#0d0d0d"});
+
+
+    connection.add(label, new draw2d.layout.locator.ParallelMidpointLocator());
+    connection.setStroke(2);
+    connection.setOutlineStroke(1);
+    connection.setOutlineColor("#303030");
+    connection.setRouter(null);
+    connection.setColor("#91B93E");
+
+    connection.setSource(start);
+    connection.setTarget(end);
+    return connection;
+  }
+
+  vw.cpm.ModuleMapBoxView = draw2d.shape.composite.Raft.extend({
+    NAME : "ModuleMAP",
+
+    init : function(def,execname,moduleval){
+        this._super({width:200,height:200});
+
+        var port = this.createPort("hybrid", new draw2d.layout.locator.LeftLocator(this));
+          port.setName("input");
+
+
+    }
+
+
   });
 
   vw.cpm.ModuleBoxView = draw2d.shape.layout.VerticalLayout.extend({
@@ -1511,8 +1633,8 @@
         // init the object with some good defaults for the activity setting.
         this.setUserData({def:def,name:execname,moduleval:moduleval});
         
-        this.inputports = [];
-        this.outputports = [];
+        this.inputports = {};
+        this.outputports = {};
         
         console.log(def);
         console.log(moduleval);
@@ -1555,7 +1677,7 @@
           input.setFontColor("#a0a0a0");
           var port = input.createPort("input", new draw2d.layout.locator.LeftLocator(input));
           port.setName("input_"+execname+"_"+inputname);
-          this.inputports.push(port);
+          this.inputports[inputname]=port;
           this.add(input);
         }
 
@@ -1566,8 +1688,8 @@
           output.setBackgroundColor(null);
           output.setFontColor("#a0a0a0");
           var port = output.createPort("output", new draw2d.layout.locator.RightLocator(output));
-          port.setName("output_"+execname+"_"+inputname);
-          this.outputports.push(port);
+          port.setName("output_"+execname+"_"+outputname);
+          this.outputports[outputname]=port;
           this.add(output);
         }
         
@@ -1677,13 +1799,17 @@
         };  
       }else{
         if(tree.hasOwnProperty("folder") && tree.folder){
-          var folded = "treeview-folded";
+          if(tree.foldername!=""){
+            var folded = "treeview-folded";
             var hidden = 'style="display:none;"';
             if(true || offset == 0){
               folded = "treeview-unfolded";
               hidden = "";
             }
             html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + 14)+'</div></div>';
+          }else{
+            html += vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset)
+          }
         }else if(tree.hasOwnProperty("module")){
           html += '<div class="treeview-leaf treeview-module-item draw2d_droppable" data-modname="'+tree.module.name+'" style="margin-left:'+offset+'px;">'+tree.module.name+'</div>';
         }else{
@@ -1698,6 +1824,14 @@
 
 
   vw.cpm.ModuleManagerView.template = '<div><div id="modulemanager-menu"></div><div id="modulemanager-list"></div></div>';
+
+  vw.cpm.ModuleManagerView.templatePreConfigAddNew = '<div>'+
+    '<div style="padding:12px;">'+
+      '<div>Choose a name for your new module (allowed form : [a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)? ): <input type="text"></div>'+
+      '<button class="create-module-preconfig-submit" type="button">Ok</button>'+
+      '<div style="margin-top:24px; font-size:0.75em;">For more information about how to create modules refer to help pages.</div>'+
+    '</div>'+
+  '</div>';
 
   
 
@@ -1765,9 +1899,18 @@
     
     this.$el.find(".module-content-view").append('<div id="source-'+this.id+'" class="module-source-editor"></div>');
     this.$el.find('#source-'+this.id).append(content);
-    var editor = ace.edit("source-"+this.id);
+    this.editor = ace.edit("source-"+this.id);
     var YamlMode = ace.require("ace/mode/yaml").Mode;
-    editor.session.setMode(new YamlMode());
+
+    // for built-in modules set read only
+    if(me.model.def.modulename.indexOf("_")==0){
+      this.setReadOnly(true);
+    }
+    
+    
+    this.editor.getSession().setTabSize(2);
+    this.editor.getSession().setUseSoftTabs(true);
+    this.editor.session.setMode(new YamlMode());
   }
 
   vw.cpm.ModuleView.prototype.renderRunConfForm=function(){
@@ -1813,9 +1956,16 @@
   vw.cpm.ModuleView.prototype.renderGraphical=function(){
     var me = this;
     this.$el.find(".module-content-view").append(vw.cpm.ModuleView.templateGraphical);
+    this.$el.find('.canvas-container').perfectScrollbar();
     this.$el.find(".canvas-view").attr('id',this.id);
 
     this.$el.find('.module-view-infos-panel').html(me.model.def.module.desc);
+
+    // for built in module, disallow view
+    if(me.model.def.modulename.indexOf("_")==0){
+      return;
+    }
+
     if(me.canvas){
       me.canvas.destroy();
     }
@@ -1825,7 +1975,7 @@
     {
         console.log();
         var module = me.model.app.modulesmanager.modules[droppedDomNode.data("modname")];
-        var moduleboxview =  new vw.cpm.ModuleBoxView(module.module,module.module.name);
+        var moduleboxview =  new vw.cpm.ModuleBoxView(module,module.module.name,{});
         me.canvas.add(moduleboxview,x,y);
         /*var type = $(droppedDomNode).data("shape");
         var figure = eval("new "+type+"();");
@@ -1836,18 +1986,30 @@
 
     me.canvas.on("select", function(emitter, figure){
       console.log(emitter);
-      console.log(figure);
+      
+      if(figure){
+        console.log(figure);
+      }else{
+        console.log(me.model.def);
+      }
     });
+
     
+    this.availableVariables = {};
+    this.boundVariables = [];
+
     for(var inputname in me.model.def.module.input){
-      var inputview = new vw.cpm.ModuleInputView();
+      var inputview = new vw.cpm.ModuleInputView(inputname);
       me.canvas.add(inputview);
+      this.availableVariables[inputname] = inputview.port;
     }
 
     for(var outputname in me.model.def.module.output){
-      var outputview = new vw.cpm.ModuleOutputView();
+      var outputview = new vw.cpm.ModuleOutputView(outputname);
       me.canvas.add(outputview);
+      this.boundVariables = this.boundVariables.concat(vw.cpm.utils.extractVars(me.model.def.module.output[outputname].value,outputview.port));
     }
+
 
     for (var i = 0; i < me.model.def.module.exec.length ; i++) {
       var execname = _.first(_.keys(me.model.def.module.exec[i]));
@@ -1856,14 +2018,114 @@
       if(!match){
         alert("error when fetching execution modules pipeline ! ");
       }
-      var module = me.model.app.modulesmanager.modules[match[1]];
-      var moduleboxview =  new vw.cpm.ModuleBoxView(module,execname,me.model.def.module.exec[i]);
-      me.canvas.add(moduleboxview,150*i+50,50);
+
+      var moduleval = me.model.def.module.exec[i][execname];
+      
+      if(match[1] == "_MAP"){
+        var mapcontainer = new vw.cpm.ModuleMapBoxView(module,execname,moduleval);
+        me.canvas.add(mapcontainer,150*i+50,50);
+
+        for(var j =0;j<moduleval.input.RUN.length;j++){
+          var runitem = moduleval.input.RUN[j];
+          var runitemexecname = _.first(_.keys(runitem));
+          regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#(?:\w|-)+)?/;
+          var runitemmatch = regex.exec(runitemexecname);
+          if(!runitemmatch){
+            alert("error when fetching execution modules pipeline ! ");
+          }
+
+          var runitemmoduleval = runitem[runitemexecname];
+
+          var runitemmodule = me.model.app.modulesmanager.modules[runitemmatch[1]];
+          var runitemmoduleboxview =  new vw.cpm.ModuleBoxView(runitemmodule,runitemexecname,runitemmoduleval);
+
+          this.availableVariables = vw.cpm.ModuleView.getOutputVars(runitemmodule,runitemexecname,runitemmoduleboxview,this.availableVariables,runitemmoduleval,"_MAP");
+          this.availableVariables = vw.cpm.ModuleView.getOutputVars(runitemmodule,runitemexecname,runitemmoduleboxview,this.availableVariables,runitemmoduleval);
+          var boundvariables = vw.cpm.ModuleView.getInputVars(runitemmoduleval.input,runitemmodule,runitemmoduleboxview);
+          this.boundVariables = this.boundVariables.concat(boundvariables);
+          me.canvas.add(runitemmoduleboxview,150*i+60,50+j*200);
+        }
+        mapcontainer.setDimension(200,moduleval.input.RUN.length*200+50);
+      }else{
+        var module = me.model.app.modulesmanager.modules[match[1]];
+        var moduleboxview =  new vw.cpm.ModuleBoxView(module,execname,moduleval);
+
+        this.availableVariables = vw.cpm.ModuleView.getOutputVars(module,execname,moduleboxview,this.availableVariables,moduleval);
+        this.boundVariables = this.boundVariables.concat(vw.cpm.ModuleView.getInputVars(moduleval.input,module,moduleboxview));
+
+        me.canvas.add(moduleboxview,150*i+50,50);
+      }
+
     };
     
+    console.log(this.availableVariables);
+    console.log(this.boundVariables);
+
+    this.createConnections();
+
   }
 
-  vw.cpm.ModuleView.templateGraphical = '<div><div class="canvas-view"></div><div class="module-view-infos-panel"></div></div>';
+  vw.cpm.ModuleView.prototype.exportViewToModelObj = function(){
+    var me = this;
+    
+    for (var i = 0; i < me.canvas.figures.data.length; i++) {
+      me.canvas.figures.data[i]
+    };
+    for (var i = 0; i < me.canvas.lines.data.length; i++) {
+      me.canvas.lines.data[i]
+    };
+  }
+
+  vw.cpm.ModuleView.prototype.createConnections = function(){
+    for (var i = 0; i < this.boundVariables.length; i++) {
+      this.boundVariables[i]
+      
+      if(this.availableVariables[this.boundVariables[i].name]){
+        var entry = this.availableVariables[this.boundVariables[i].name];
+        var connection = new vw.cpm.ModuleConnectionView(entry,this.boundVariables[i].ref,this.boundVariables[i].raw);
+        this.canvas.add(connection);
+      }
+    };
+  }
+
+  vw.cpm.ModuleView.getInputVars = function(modulevalinputs,moduledefdata,moduleboxview){
+    var variablesadd = [];
+    for (var inputname in  modulevalinputs) {
+      var input = modulevalinputs[inputname];
+      if(typeof input == "object"){
+        if(input.constructor === Array){
+          for (var i = 0; i < input.length; i++) {
+            variablesadd = variablesadd.concat(vw.cpm.utils.extractVars(input[i],moduleboxview.inputports[inputname]));
+          };
+        }else{
+          for (var i in input){
+            variablesadd = variablesadd.concat(vw.cpm.utils.extractVars(input[i],moduleboxview.inputports[inputname]));
+          }
+        }
+      }else{
+        variablesadd = variablesadd.concat(vw.cpm.utils.extractVars(input,moduleboxview.inputports[inputname]));
+      }
+    };
+    return variablesadd;
+  }
+
+  vw.cpm.ModuleView.getOutputVars = function(moduledata,execname,moduleboxview,variables,moduleval,prefix){
+    var prepend = "";
+    if(prefix){
+      prepend = prefix+".";
+    }
+    for (var output in moduledata.module.output) {
+      variables[prepend+execname+"."+output] = moduleboxview.outputports[output];
+    };
+    return variables;    
+  }
+
+  vw.cpm.ModuleView.templateGraphical = '<div><div class="module-view-toolbox">'+
+    '<span class="module-view-toolbox-item">+ CMD</span>'+
+    '<span class="module-view-toolbox-item">+ MAP</span>'+
+    '<span class="module-view-toolbox-item">+ Input</span>'+
+    '<span class="module-view-toolbox-item">+ Output</span>'+
+    '</div><div class="canvas-container"><div class="canvas-view"></div></div><div class="module-view-infos-panel"></div></div>';
 
   vw.cpm.ModuleView.template = '<div class="module-header">'+
   '<span class="module-view-source module-header-item" style="float:left; margin-left:8px;">source</span>'+
@@ -1900,7 +2162,7 @@
     var html ="";
     // list process results 
     for (var modulename in me.model.runs){
-      html += '<div><div class="settings-field-title">'+modulename+'</div><div class="settings-field-body"><ul class="run-list" style="font-size:12px;">'
+      html += '<div><div class="settings-field-title" style="cursor:pointer;">'+modulename+'</div><div class="settings-field-body"><ul class="run-list" style="font-size:12px;">'
       for(var i in me.model.runs[modulename]){
         html += '<li runid="'+me.model.runs[modulename][i].runid+'">'+me.model.runs[modulename][i].datecreated+'</li>';
       }

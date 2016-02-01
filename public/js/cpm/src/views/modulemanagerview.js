@@ -82,13 +82,17 @@
         };  
       }else{
         if(tree.hasOwnProperty("folder") && tree.folder){
-          var folded = "treeview-folded";
+          if(tree.foldername!=""){
+            var folded = "treeview-folded";
             var hidden = 'style="display:none;"';
             if(true || offset == 0){
               folded = "treeview-unfolded";
               hidden = "";
             }
             html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + 14)+'</div></div>';
+          }else{
+            html += vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset)
+          }
         }else if(tree.hasOwnProperty("module")){
           html += '<div class="treeview-leaf treeview-module-item draw2d_droppable" data-modname="'+tree.module.name+'" style="margin-left:'+offset+'px;">'+tree.module.name+'</div>';
         }else{
@@ -103,6 +107,14 @@
 
 
   vw.cpm.ModuleManagerView.template = '<div><div id="modulemanager-menu"></div><div id="modulemanager-list"></div></div>';
+
+  vw.cpm.ModuleManagerView.templatePreConfigAddNew = '<div>'+
+    '<div style="padding:12px;">'+
+      '<div>Choose a name for your new module (allowed form : [a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)? ): <input type="text"></div>'+
+      '<button class="create-module-preconfig-submit" type="button">Ok</button>'+
+      '<div style="margin-top:24px; font-size:0.75em;">For more information about how to create modules refer to help pages.</div>'+
+    '</div>'+
+  '</div>';
 
   
 

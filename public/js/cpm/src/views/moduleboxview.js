@@ -2,24 +2,69 @@
 
   vw.cpm.ModuleInputView = draw2d.shape.basic.Circle.extend({
 
-    init : function(){
-      this._super({
-        stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"
-      });
+    NAME : "Input",
 
-      this.createPort("output", new draw2d.layout.locator.RightLocator(this));
+    init : function(inputname){
+      this._super({stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"});
+
+      this.port = this.createPort("output", new draw2d.layout.locator.RightLocator(this));
+
+      
+      this.label = new draw2d.shape.basic.Label({text:inputname});
+
+      //this.label.setStroke(0);
+      this.add(this.label, new draw2d.layout.locator.BottomLocator(this)); 
     }
   });
 
   vw.cpm.ModuleOutputView = draw2d.shape.basic.Circle.extend({
 
-    init : function(){
-      this._super({
-        stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"
-      });
+    NAME : "Output",
 
-      this.createPort("input", new draw2d.layout.locator.LeftLocator(this));
+    init : function(outputname){
+      this._super({stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"});
+
+      this.port = this.createPort("input", new draw2d.layout.locator.LeftLocator(this));
+
+      
+      this.label = new draw2d.shape.basic.Label({text:outputname});
+
+      //this.label.setStroke(0);
+      this.add(this.label, new draw2d.layout.locator.BottomLocator(this)); 
+
     }
+  });
+
+  vw.cpm.ModuleConnectionView = function(start,end,labelname){
+    var connection = new draw2d.Connection();
+    var label = new draw2d.shape.basic.Label({text:labelname, stroke:1, color:"#FF0000", fontColor:"#0d0d0d"});
+
+
+    connection.add(label, new draw2d.layout.locator.ParallelMidpointLocator());
+    connection.setStroke(2);
+    connection.setOutlineStroke(1);
+    connection.setOutlineColor("#303030");
+    connection.setRouter(null);
+    connection.setColor("#91B93E");
+
+    connection.setSource(start);
+    connection.setTarget(end);
+    return connection;
+  }
+
+  vw.cpm.ModuleMapBoxView = draw2d.shape.composite.Raft.extend({
+    NAME : "ModuleMAP",
+
+    init : function(def,execname,moduleval){
+        this._super({width:200,height:200});
+
+        var port = this.createPort("hybrid", new draw2d.layout.locator.LeftLocator(this));
+          port.setName("input");
+
+
+    }
+
+
   });
 
   vw.cpm.ModuleBoxView = draw2d.shape.layout.VerticalLayout.extend({
@@ -32,8 +77,8 @@
         // init the object with some good defaults for the activity setting.
         this.setUserData({def:def,name:execname,moduleval:moduleval});
         
-        this.inputports = [];
-        this.outputports = [];
+        this.inputports = {};
+        this.outputports = {};
         
         console.log(def);
         console.log(moduleval);
@@ -76,7 +121,7 @@
           input.setFontColor("#a0a0a0");
           var port = input.createPort("input", new draw2d.layout.locator.LeftLocator(input));
           port.setName("input_"+execname+"_"+inputname);
-          this.inputports.push(port);
+          this.inputports[inputname]=port;
           this.add(input);
         }
 
@@ -87,8 +132,8 @@
           output.setBackgroundColor(null);
           output.setFontColor("#a0a0a0");
           var port = output.createPort("output", new draw2d.layout.locator.RightLocator(output));
-          port.setName("output_"+execname+"_"+inputname);
-          this.outputports.push(port);
+          port.setName("output_"+execname+"_"+outputname);
+          this.outputports[outputname]=port;
           this.add(output);
         }
         

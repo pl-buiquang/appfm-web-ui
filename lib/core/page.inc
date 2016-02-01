@@ -110,11 +110,11 @@ class PageBuilder{
       $html .= $js;
     }
     $html .= "</script>\n";
-    foreach($this->headerExtras as $js){
-      $html .= $js;
-    }
     foreach($this->css as $css){
       $html .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$css."\">\n";
+    }
+    foreach($this->headerExtras as $js){
+      $html .= $js;
     }
     return $html;
   }

@@ -24,6 +24,7 @@
       dataType : 'json',
       success:function(data,textStatus,jqXHR){
         me.moduletree = data;
+        me.modules = {};
         me.parseModuleTree(data);
         me.addDefaultModules();
         me.view.refresh();
@@ -79,9 +80,7 @@
             value:"10"
           }
         },
-        output:{
-          
-        },
+        output:{},
         exec:[]
       },
       modulename:"_MAP",
@@ -152,7 +151,7 @@
   vw.cpm.ModuleManager.prototype.prepareCreateNewModule = function(){
     var me = this;
     var modal = new vw.cpm.ui.Modal();
-    $preconfig = $('<div><div style="padding:12px;"><div>Choose folder in which to create new module</div><div>Name : <input type="text"></div></div><button class="create-module-preconfig-submit" type="button">Ok</div></div></div>');
+    $preconfig = $(vw.cpm.ModuleManagerView.templatePreConfigAddNew);
     $preconfig.find('.create-module-preconfig-submit').click(function(){
       var modulename = $preconfig.find('input').val();
       var dirpath = "custom";
@@ -161,8 +160,8 @@
         me.createNewModule(modulename,dirpath);
       },function(){
         var modalcontent = modal.getContainer();
-        modalcontent.find(".module-creation-error").remove();
-        modalcontent.prepend('<div class="module-creation-error">Module name already exist or isn\'t allowed, please choose another name</div>');
+        modalcontent.find(".error-message").remove();
+        modalcontent.prepend('<div class="error-message">Module name already exist or isn\'t allowed, please choose another name</div>');
       });
     });
     modal.open($preconfig);
@@ -177,14 +176,14 @@
         desc:"please fill in a brief description",
         input:{},
         output:{},
-        exec:[]
+        exec:[],
       },
       modulename:modulename,
-      source:"name : "+modulename+"\n\ndesc : > \n\tplease fill in a brief description",
-      sourcepath:me.app.cpmsettingsmanager.defaultModulesDir+"/"+modulename+".module"
+      source:"name : "+modulename+"\n\ndesc : > \n  please fill in a brief description",
+      sourcepath:me.app.cpmsettingsmanager.defaultModulesDir+"/custom/"+modulename+".module",
+      creation:true
     };
     var module = new vw.cpm.Module(me.app,$panel.find(".frame-body"),newmoduledef);
-    //me.model.modulesobj.push(module);
     module.view.render();
   }
 

@@ -29,6 +29,53 @@
     }
     return text;
   }
+
+  vw.cpm.utils.getParentDir = function(filepath){
+    var index = filepath.lastIndexOf("/")
+    if(index!=-1){
+      return filepath.substring(0,index);
+    }else{
+      return filepath;
+    }
+    
+  }
+
+  vw.cpm.utils.extractVars = function(value,ref){
+    var variables = [];
+
+    if(typeof value == "object"){
+      if(value.constructor === Array){
+        for (var i = 0; i < value.length; i++) {
+          variables = variables.concat(vw.cpm.utils.extractVars(value[i],ref));
+        };
+      }else{
+        for (var i in value){
+          variables = variables.concat(vw.cpm.utils.extractVars(value[i],ref));
+        }
+      }
+    }else{
+      var escapeddollar = value.replace("\\$","__DOLLAR_ESCAPED__");
+      var regex = /\$(?:(?:\{(([a-zA-Z_\-\.@]+)(:.+)?)\})|([a-zA-Z_\-]+))/g;
+      var match;
+      while (match = regex.exec(escapeddollar)){
+        var variable = {ref:ref,raw:value};
+        if(match[1]){
+          variable.name = match[2];
+          if(match[3]){
+            variable.attr = match[3].substring(1);
+          }
+        }else{
+          variable.name = match[4];
+        }
+        variables.push(variable);
+      }
+      
+    }
+
+    return variables;
+
+    
+  }
     
 
 }(window.vw = window.vw || {}));

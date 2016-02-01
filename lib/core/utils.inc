@@ -175,6 +175,25 @@ class Logger {
     fwrite($fh, $time . " " . $user . $title . ' => ' . $message);
     fwrite($fh, "\n");
     fclose($fh);
+    if(filesize($myFile)>20000000){
+      Logger::rotate();
+    }
+  }
+
+  public static function rotate(){
+    $path = BASE_DIR.LOG_HOME_PATH;
+    $myFile = $path . "custom.log";
+    $i = 1;
+    $newlog = $path."custom.log.".$i;
+    while(file_exists($newlog)){
+      $i++;
+    }
+    for($j=($i-1);$j>=1;$j--){
+      if(file_exists($path."custom.log.".$j)){
+        rename($path."custom.log.".$j,$path."custom.log.".($j+1));
+      }
+    }
+    rename($myFile,$path."custom.log.1");
   }
 
   public static function SaveFile($data,$filename){

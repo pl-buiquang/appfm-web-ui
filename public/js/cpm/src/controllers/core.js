@@ -39,9 +39,7 @@
       "help-menu":{title:"Help",body:$('<div></div>')}
     }
 
-    this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body,{init:function(){
-      me.initmodules();
-    }});
+    this.reload();
 
     this.helpmanager = new vw.cpm.HelpManager(this,this.menus['help-menu'].body);
 
@@ -58,6 +56,13 @@
 
     }
   
+  }
+
+  vw.cpm.CLI.prototype.reload = function(){
+    var me = this;
+    this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body,{init:function(){
+      me.initmodules();
+    }});
   }
 
   vw.cpm.CLI.prototype.initmodules = function(){

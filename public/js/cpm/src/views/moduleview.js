@@ -11,6 +11,9 @@
   vw.cpm.ModuleView.prototype.init=function(){
     var me = this;
     this.$el.append(vw.cpm.ModuleView.template);
+
+    this.$el.find('.module-view-infos-panel').perfectScrollbar({suppressScrollX:true});
+
     if(me.model.def.hasOwnProperty("module")){
       me.renderGraphical();
     }else{
@@ -130,11 +133,12 @@
     }
     me.canvas = new draw2d.Canvas(me.id);
 
+    draw2d.Configuration.factory.createConnection = vw.cpm.ModuleConnectionView;
+
     me.canvas.onDrop = function(droppedDomNode, x, y, shiftKey, ctrlKey)
     {
-        console.log();
         var module = me.model.app.modulesmanager.modules[droppedDomNode.data("modname")];
-        var moduleboxview =  new vw.cpm.ModuleBoxView(module,module.module.name,{});
+        var moduleboxview =  new vw.cpm.ModuleBoxView(module,module.module.name,{},"");
         me.canvas.add(moduleboxview,x,y);
         /*var type = $(droppedDomNode).data("shape");
         var figure = eval("new "+type+"();");
@@ -143,13 +147,42 @@
         this.getCommandStack().execute(command);*/
     }
 
+    this.$el.find(".mvti-output").click(function(e){
+      var outputview = new vw.cpm.ModuleOutputView("new_output",{});
+      me.canvas.add(outputview,50,50);
+    });
+    this.$el.find(".mvti-input").click(function(e){
+      var inputview = new vw.cpm.ModuleInputView("new_input",{});
+      me.canvas.add(inputview,50,50);
+
+    });
+    this.$el.find(".mvti-cmd").click(function(e){
+      console.log(e);
+      var module = me.model.app.modulesmanager.modules["_CMD"];
+      var moduleboxview =  new vw.cpm.ModuleBoxView(module,module.module.name,{CMD:"",
+          DOCKERFILE:"false",
+          CONTAINED:"false"},"");
+      me.canvas.add(moduleboxview,50,50);
+    });
+    this.$el.find(".mvti-map").click(function(e){
+      var module = me.model.app.modulesmanager.modules["_MAP"];
+      var moduleboxview =  new vw.cpm.ModuleMapBoxView(module,module.module.name,{IN:"",
+          RUN:"",
+          REGEX:"",
+          CHUNK_SIZE:""},"");
+      me.canvas.add(moduleboxview,50,50);
+    });
+
     me.canvas.on("select", function(emitter, figure){
       console.log(emitter);
       
       if(figure){
         console.log(figure);
+        me.$el.find('.module-view-infos-panel').empty();
+        me.$el.find('.module-view-infos-panel').append(figure.info());
       }else{
         console.log(me.model.def);
+        me.$el.find('.module-view-infos-panel').html(JSON.stringify(me.model.def.module));
       }
     });
 
@@ -158,13 +191,21 @@
     this.boundVariables = [];
 
     for(var inputname in me.model.def.module.input){
-      var inputview = new vw.cpm.ModuleInputView(inputname);
+      var inputview = new vw.cpm.ModuleInputView(inputname,me.model.def.module.input[inputname]);
       me.canvas.add(inputview);
       this.availableVariables[inputname] = inputview.port;
     }
 
+    var rundirinput = new vw.cpm.ModuleInputView("_RUN_DIR",{type:"DIR"});
+    me.canvas.add(rundirinput);
+    this.availableVariables["_RUN_DIR"] = rundirinput.port;
+
+    var defdirinput = new vw.cpm.ModuleInputView("_DEF_DIR",{type:"DIR"});
+    me.canvas.add(defdirinput);
+    this.availableVariables["_DEF_DIR"] = defdirinput.port;
+
     for(var outputname in me.model.def.module.output){
-      var outputview = new vw.cpm.ModuleOutputView(outputname);
+      var outputview = new vw.cpm.ModuleOutputView(outputname,me.model.def.module.output[outputname]);
       me.canvas.add(outputview);
       this.boundVariables = this.boundVariables.concat(vw.cpm.utils.extractVars(me.model.def.module.output[outputname].value,outputview.port));
     }
@@ -172,7 +213,7 @@
 
     for (var i = 0; i < me.model.def.module.exec.length ; i++) {
       var execname = _.first(_.keys(me.model.def.module.exec[i]));
-      regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#(?:\w|-)+)?/;
+      regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#((?:\w|-)+))?/;
       var match = regex.exec(execname);
       if(!match){
         alert("error when fetching execution modules pipeline ! ");
@@ -187,7 +228,7 @@
         for(var j =0;j<moduleval.input.RUN.length;j++){
           var runitem = moduleval.input.RUN[j];
           var runitemexecname = _.first(_.keys(runitem));
-          regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#(?:\w|-)+)?/;
+          regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#((?:\w|-)+))?/;
           var runitemmatch = regex.exec(runitemexecname);
           if(!runitemmatch){
             alert("error when fetching execution modules pipeline ! ");
@@ -196,7 +237,7 @@
           var runitemmoduleval = runitem[runitemexecname];
 
           var runitemmodule = me.model.app.modulesmanager.modules[runitemmatch[1]];
-          var runitemmoduleboxview =  new vw.cpm.ModuleBoxView(runitemmodule,runitemexecname,runitemmoduleval);
+          var runitemmoduleboxview =  new vw.cpm.ModuleBoxView(runitemmodule,runitemexecname,runitemmoduleval,runitemmatch[4]);
 
           this.availableVariables = vw.cpm.ModuleView.getOutputVars(runitemmodule,runitemexecname,runitemmoduleboxview,this.availableVariables,runitemmoduleval,"_MAP");
           this.availableVariables = vw.cpm.ModuleView.getOutputVars(runitemmodule,runitemexecname,runitemmoduleboxview,this.availableVariables,runitemmoduleval);
@@ -207,7 +248,7 @@
         mapcontainer.setDimension(200,moduleval.input.RUN.length*200+50);
       }else{
         var module = me.model.app.modulesmanager.modules[match[1]];
-        var moduleboxview =  new vw.cpm.ModuleBoxView(module,execname,moduleval);
+        var moduleboxview =  new vw.cpm.ModuleBoxView(module,execname,moduleval,match[4]);
 
         this.availableVariables = vw.cpm.ModuleView.getOutputVars(module,execname,moduleboxview,this.availableVariables,moduleval);
         this.boundVariables = this.boundVariables.concat(vw.cpm.ModuleView.getInputVars(moduleval.input,module,moduleboxview));
@@ -224,20 +265,24 @@
 
   }
 
+  vw.cpm.ModuleView.prototype.showInfo = function(element){
+
+  }
+
   vw.cpm.ModuleView.prototype.exportViewToModelObj = function(){
     var me = this;
     
     for (var i = 0; i < me.canvas.figures.data.length; i++) {
-      me.canvas.figures.data[i]
+      me.canvas.figures.data[i];
     };
     for (var i = 0; i < me.canvas.lines.data.length; i++) {
-      me.canvas.lines.data[i]
+      me.canvas.lines.data[i];
     };
   }
 
   vw.cpm.ModuleView.prototype.createConnections = function(){
     for (var i = 0; i < this.boundVariables.length; i++) {
-      this.boundVariables[i]
+      console.log(this.boundVariables[i]);
       
       if(this.availableVariables[this.boundVariables[i].name]){
         var entry = this.availableVariables[this.boundVariables[i].name];
@@ -280,10 +325,10 @@
   }
 
   vw.cpm.ModuleView.templateGraphical = '<div><div class="module-view-toolbox">'+
-    '<span class="module-view-toolbox-item">+ CMD</span>'+
-    '<span class="module-view-toolbox-item">+ MAP</span>'+
-    '<span class="module-view-toolbox-item">+ Input</span>'+
-    '<span class="module-view-toolbox-item">+ Output</span>'+
+    '<span class="module-view-toolbox-item mvti-cmd">+ CMD</span>'+
+    '<span class="module-view-toolbox-item mvti-map">+ MAP</span>'+
+    '<span class="module-view-toolbox-item mvti-input">+ Input</span>'+
+    '<span class="module-view-toolbox-item mvti-output">+ Output</span>'+
     '</div><div class="canvas-container"><div class="canvas-view"></div></div><div class="module-view-infos-panel"></div></div>';
 
   vw.cpm.ModuleView.template = '<div class="module-header">'+

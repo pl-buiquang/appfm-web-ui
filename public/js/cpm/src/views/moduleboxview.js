@@ -4,16 +4,51 @@
 
     NAME : "Input",
 
-    init : function(inputname){
+    init : function(inputname,inputdata){
       this._super({stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"});
 
       this.port = this.createPort("output", new draw2d.layout.locator.RightLocator(this));
-
       
       this.label = new draw2d.shape.basic.Label({text:inputname});
 
       //this.label.setStroke(0);
-      this.add(this.label, new draw2d.layout.locator.BottomLocator(this)); 
+      this.add(this.label, new draw2d.layout.locator.BottomLocator(this));
+
+      var data = inputdata;
+      data.name = inputname;
+
+      this.setUserData(data);
+    },
+
+    info : function(){
+      var disabled = "";
+      if(this.userData.name == "_RUN_DIR" || this.userData.name == "_DEF_DIR"){
+        disabled = " disabled ";
+      }
+      var typevalue = "";
+      if(this.userData.type){
+        typevalue = this.userData.type;
+      }
+      var formatvalue = "";
+      if(this.userData.format){
+        formatvalue = this.userData.format;
+      }
+      var schemavalue = "";
+      if(this.userData.schema){
+        schemavalue = this.userData.schema;
+      }
+      var valuevalue = "";
+      if(this.userData.value){
+        valuevalue = this.userData.value;
+      }
+
+      var type = '<div>Type : <input class="mv-info-type" type="text" value="'+typevalue+'"'+disabled+'></div>';
+      var format = '<div>Format : <input class="mv-info-format" type="text" value="'+formatvalue+'"'+disabled+'></div>';
+      var schema = '<div>Schema : <input class="mv-info-schema" type="text" value="'+schemavalue+'"'+disabled+'></div>';
+      var value = '<div>Default value : <input class="mv-info-value" type="text" value="'+valuevalue+'"'+disabled+'></div>';
+
+      return $('<div><div>Name : <input class="mv-info-name" type="text" value="'+this.userData.name+'"'+disabled+'></div>'+type+format+schema+value+
+        '</div>');
     }
   });
 
@@ -21,7 +56,7 @@
 
     NAME : "Output",
 
-    init : function(outputname){
+    init : function(outputname,outputdata){
       this._super({stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"});
 
       this.port = this.createPort("input", new draw2d.layout.locator.LeftLocator(this));
@@ -32,15 +67,46 @@
       //this.label.setStroke(0);
       this.add(this.label, new draw2d.layout.locator.BottomLocator(this)); 
 
+      var data = outputdata;
+      data.name = outputname;
+
+      this.setUserData(data);
+    },
+
+    info : function(){
+      var typevalue = "";
+      if(this.userData.type){
+        typevalue = this.userData.type;
+      }
+      var formatvalue = "";
+      if(this.userData.format){
+        formatvalue = this.userData.format;
+      }
+      var schemavalue = "";
+      if(this.userData.schema){
+        schemavalue = this.userData.schema;
+      }
+      var valuevalue = "";
+      if(this.userData.value){
+        valuevalue = this.userData.value;
+      }
+
+      var type = '<div>Type : <input class="mv-info-type" type="text" value="'+typevalue+'"></div>';
+      var format = '<div>Format : <input class="mv-info-format" type="text" value="'+formatvalue+'"></div>';
+      var schema = '<div>Schema : <input class="mv-info-schema" type="text" value="'+schemavalue+'"></div>';
+      var value = '<div>Return value : <input class="mv-info-value" type="text" value="'+valuevalue+'"></div>';
+
+      return $('<div><div>Name : <input class="mv-info-name" type="text" value="'+this.userData.name+'"></div>'+type+format+schema+value+
+        '</div>');
     }
   });
 
   vw.cpm.ModuleConnectionView = function(start,end,labelname){
     var connection = new draw2d.Connection();
-    var label = new draw2d.shape.basic.Label({text:labelname, stroke:1, color:"#FF0000", fontColor:"#0d0d0d"});
+    //var label = new draw2d.shape.basic.Label({text:labelname, stroke:1, color:"#FF0000", fontColor:"#0d0d0d"});
 
 
-    connection.add(label, new draw2d.layout.locator.ParallelMidpointLocator());
+    //connection.add(label, new draw2d.layout.locator.ParallelMidpointLocator());
     connection.setStroke(2);
     connection.setOutlineStroke(1);
     connection.setOutlineColor("#303030");
@@ -49,19 +115,36 @@
 
     connection.setSource(start);
     connection.setTarget(end);
+
+    var value = labelname;
+    if(typeof labelname == "function"){
+      value = start.
+    }
+    connection.setUserData({
+      value:value
+    });
+
+    connection.info = function(){
+      return $('<div>'+this.userData.value+'</div>');
+    };
+
     return connection;
   }
 
   vw.cpm.ModuleMapBoxView = draw2d.shape.composite.Raft.extend({
     NAME : "ModuleMAP",
 
-    init : function(def,execname,moduleval){
+    init : function(def,execname,moduleval,namespace){
         this._super({width:200,height:200});
 
         var port = this.createPort("hybrid", new draw2d.layout.locator.LeftLocator(this));
           port.setName("input");
 
 
+    },
+
+    info : function(){
+      return $('<div>map</div>');
     }
 
 
@@ -71,11 +154,11 @@
 
     NAME: "Module",
   
-    init : function(def,execname,moduleval)
+    init : function(def,execname,moduleval,namespace)
     {
         this._super();
         // init the object with some good defaults for the activity setting.
-        this.setUserData({def:def,name:execname,moduleval:moduleval});
+        this.setUserData({def:def,name:execname,moduleval:moduleval,namespace:namespace});
         
         this.inputports = {};
         this.outputports = {};
@@ -138,9 +221,9 @@
         }
         
         
-     },
+    },
 
-     createLabel: function(txt){
+    createLabel: function(txt){
        var label =new draw2d.shape.basic.Label({text:txt,padding:{left:10, top:3, right:10, bottom:5},resizeable:true});
        label.setStroke(1);
        label.setRadius(0);
@@ -150,6 +233,30 @@
           
        return label;
      },
+
+    info : function(){
+      var inputs = "";
+      for(var inputname in this.userData.moduleval.input){
+        inputs += '<div>'+inputname+' : <input type="text" value="'+this.userData.moduleval.input[inputname]+'"></div>';
+      }
+      var outputs = "";
+      if(this.userData.def.modulename!="_CMD" && this.userData.def.modulename!="_MAP"){
+        for(var outputname in this.userData.def.module.output){
+          outputs += '<div>'+outputname+' : <input type="text" style="width:90%;" value="'+this.userData.def.module.output[outputname].value+'"></div>';
+        }
+      }
+      var namespace = "";
+      if(this.userData.namespace){
+        namespace = this.userData.namespace;
+      }
+      return $('<div><div class="mv-info-title">'+this.userData.def.modulename+'</div>'+
+        '<div>Namespace : <input type="text" value="'+namespace+'"></div>'+
+        '<div style="font-size:1.45em;">Inputs</div>'+
+        inputs+
+        '<div style="font-size:1.45em;">Outputs</div>'+
+        outputs+
+        '</div>');
+    }
 
    });
 

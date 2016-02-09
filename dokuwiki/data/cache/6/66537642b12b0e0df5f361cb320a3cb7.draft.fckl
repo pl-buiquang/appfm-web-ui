@@ -1,0 +1,23 @@
+a:6:{s:2:"id";s:10:"uses_cases";s:6:"prefix";s:0:"";s:4:"text";s:574:"====== Use Cases ======
+
+===== Examples =====
+
+take one text file, parse it with bonsai, get the result, view parse graphs
+
+take folder with pdfs, transform them into text files, save the resulting collection
+
+from parsed graphs, filter some depending on whatever, get context of filtered graphs
+
+from text files, annotate with wolf, get context of file with matched query
+
+from text files, parse them, apply ner, apply dbpedia ids/refs
+
+from one sentence, parse it, apply ner + dbpedia, answer question
+
+===== Todo... =====
+
+CLI examples for provi
+
+
+
+";s:6:"suffix";s:0:"";s:4:"date";i:1454917076;s:6:"client";s:5:"admin";}

@@ -14,8 +14,10 @@
   }
 
   vw.cpm.CPMSettingsManagerView.prototype.render = function(){
+    this.$el.empty();
+    
     var data = this.model.cpmsettings;
-    var html ="";
+    var html ='<div><button class="cpm-refresh">Refresh</button></div>';
     html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
     html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
     var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'
@@ -31,6 +33,11 @@
     moduledir += '</ul></div>';
     html += moduledir;
     this.$el.append(html);
+
+    var me = this;
+    this.$el.find(".cpm-refresh").click(function(){
+      me.model.app.reload();
+    });
   }
 
  

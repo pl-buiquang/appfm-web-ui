@@ -9,6 +9,7 @@
 
   vw.cpm.CorpusManagerView.prototype.init=function(){
     var me = this;
+    this.$el.empty();
     var template = '<div class="treeview-fold treeview-unfolded" depth="0"><div class="treeview-node">Corpora</div><div id="corpora-corpora-container"></div></div><div class="treeview-fold treeview-unfolded" depth="0"><div class="treeview-node">Results</div><div id="corpora-results-container"></div></div>';
     this.$el.append(template);
     this.$el.find('.treeview-node').on("click",function(){

@@ -9,7 +9,7 @@
 
   vw.cpm.ProcessManagerView.prototype.init=function(){
     var me = this;
-    
+    me.$el.empty();
   }
 
   vw.cpm.ProcessManagerView.prototype.refresh = function(){

@@ -49,9 +49,7 @@
       "help-menu":{title:"Help",body:$('<div></div>')}
     }
 
-    this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body,{init:function(){
-      me.initmodules();
-    }});
+    this.reload();
 
     this.helpmanager = new vw.cpm.HelpManager(this,this.menus['help-menu'].body);
 
@@ -68,6 +66,13 @@
 
     }
   
+  }
+
+  vw.cpm.CLI.prototype.reload = function(){
+    var me = this;
+    this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body,{init:function(){
+      me.initmodules();
+    }});
   }
 
   vw.cpm.CLI.prototype.initmodules = function(){
@@ -1282,6 +1287,7 @@
 
   vw.cpm.CorpusManagerView.prototype.init=function(){
     var me = this;
+    this.$el.empty();
     var template = '<div class="treeview-fold treeview-unfolded" depth="0"><div class="treeview-node">Corpora</div><div id="corpora-corpora-container"></div></div><div class="treeview-fold treeview-unfolded" depth="0"><div class="treeview-node">Results</div><div id="corpora-results-container"></div></div>';
     this.$el.append(template);
     this.$el.find('.treeview-node').on("click",function(){
@@ -1496,8 +1502,10 @@
   }
 
   vw.cpm.CPMSettingsManagerView.prototype.render = function(){
+    this.$el.empty();
+    
     var data = this.model.cpmsettings;
-    var html ="";
+    var html ='<div><button class="cpm-refresh">Refresh</button></div>';
     html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
     html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
     var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'
@@ -1513,6 +1521,11 @@
     moduledir += '</ul></div>';
     html += moduledir;
     this.$el.append(html);
+
+    var me = this;
+    this.$el.find(".cpm-refresh").click(function(){
+      me.model.app.reload();
+    });
   }
 
  
@@ -1560,7 +1573,7 @@
 
     NAME : "Input",
 
-    init : function(inputname){
+    init : function(inputname,inputdata){
       this._super({stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"});
 
       this.port = this.createPort("output", new draw2d.layout.locator.RightLocator(this));
@@ -1569,7 +1582,43 @@
       this.label = new draw2d.shape.basic.Label({text:inputname});
 
       //this.label.setStroke(0);
-      this.add(this.label, new draw2d.layout.locator.BottomLocator(this)); 
+      this.add(this.label, new draw2d.layout.locator.BottomLocator(this));
+
+      var data = inputdata;
+      data.name = inputname;
+
+      this.setUserData(data);
+    },
+
+    info : function(){
+      var disabled = "";
+      if(this.userData.name == "_RUN_DIR" || this.userData.name == "_DEF_DIR"){
+        disabled = " disabled ";
+      }
+      var typevalue = "";
+      if(this.userData.type){
+        typevalue = this.userData.type;
+      }
+      var formatvalue = "";
+      if(this.userData.format){
+        formatvalue = this.userData.format;
+      }
+      var schemavalue = "";
+      if(this.userData.schema){
+        schemavalue = this.userData.schema;
+      }
+      var valuevalue = "";
+      if(this.userData.value){
+        valuevalue = this.userData.value;
+      }
+
+      var type = '<div>Type : <input class="mv-info-type" type="text" value="'+typevalue+'"'+disabled+'></div>';
+      var format = '<div>Format : <input class="mv-info-format" type="text" value="'+formatvalue+'"'+disabled+'></div>';
+      var schema = '<div>Schema : <input class="mv-info-schema" type="text" value="'+schemavalue+'"'+disabled+'></div>';
+      var value = '<div>Default value : <input class="mv-info-value" type="text" value="'+valuevalue+'"'+disabled+'></div>';
+
+      return $('<div><div>Name : <input class="mv-info-name" type="text" value="'+this.userData.name+'"'+disabled+'></div>'+type+format+schema+value+
+        '</div>');
     }
   });
 
@@ -1577,7 +1626,7 @@
 
     NAME : "Output",
 
-    init : function(outputname){
+    init : function(outputname,outputdata){
       this._super({stroke:3, color:"#3d3d3d", bgColor:"#3dff3d"});
 
       this.port = this.createPort("input", new draw2d.layout.locator.LeftLocator(this));
@@ -1588,15 +1637,46 @@
       //this.label.setStroke(0);
       this.add(this.label, new draw2d.layout.locator.BottomLocator(this)); 
 
+      var data = outputdata;
+      data.name = outputname;
+
+      this.setUserData(data);
+    },
+
+    info : function(){
+      var typevalue = "";
+      if(this.userData.type){
+        typevalue = this.userData.type;
+      }
+      var formatvalue = "";
+      if(this.userData.format){
+        formatvalue = this.userData.format;
+      }
+      var schemavalue = "";
+      if(this.userData.schema){
+        schemavalue = this.userData.schema;
+      }
+      var valuevalue = "";
+      if(this.userData.value){
+        valuevalue = this.userData.value;
+      }
+
+      var type = '<div>Type : <input class="mv-info-type" type="text" value="'+typevalue+'"></div>';
+      var format = '<div>Format : <input class="mv-info-format" type="text" value="'+formatvalue+'"></div>';
+      var schema = '<div>Schema : <input class="mv-info-schema" type="text" value="'+schemavalue+'"></div>';
+      var value = '<div>Return value : <input class="mv-info-value" type="text" value="'+valuevalue+'"></div>';
+
+      return $('<div><div>Name : <input class="mv-info-name" type="text" value="'+this.userData.name+'"></div>'+type+format+schema+value+
+        '</div>');
     }
   });
 
   vw.cpm.ModuleConnectionView = function(start,end,labelname){
     var connection = new draw2d.Connection();
-    var label = new draw2d.shape.basic.Label({text:labelname, stroke:1, color:"#FF0000", fontColor:"#0d0d0d"});
+    //var label = new draw2d.shape.basic.Label({text:labelname, stroke:1, color:"#FF0000", fontColor:"#0d0d0d"});
 
 
-    connection.add(label, new draw2d.layout.locator.ParallelMidpointLocator());
+    //connection.add(label, new draw2d.layout.locator.ParallelMidpointLocator());
     connection.setStroke(2);
     connection.setOutlineStroke(1);
     connection.setOutlineColor("#303030");
@@ -1605,6 +1685,16 @@
 
     connection.setSource(start);
     connection.setTarget(end);
+
+
+    connection.setUserData({
+      value:labelname
+    });
+
+    connection.info = function(){
+      return $('<div>'+this.userData.value+'</div>');
+    };
+
     return connection;
   }
 
@@ -1618,6 +1708,10 @@
           port.setName("input");
 
 
+    },
+
+    info : function(){
+      return $('<div>map</div>');
     }
 
 
@@ -1627,11 +1721,11 @@
 
     NAME: "Module",
   
-    init : function(def,execname,moduleval)
+    init : function(def,execname,moduleval,namespace)
     {
         this._super();
         // init the object with some good defaults for the activity setting.
-        this.setUserData({def:def,name:execname,moduleval:moduleval});
+        this.setUserData({def:def,name:execname,moduleval:moduleval,namespace:namespace});
         
         this.inputports = {};
         this.outputports = {};
@@ -1694,9 +1788,9 @@
         }
         
         
-     },
+    },
 
-     createLabel: function(txt){
+    createLabel: function(txt){
        var label =new draw2d.shape.basic.Label({text:txt,padding:{left:10, top:3, right:10, bottom:5},resizeable:true});
        label.setStroke(1);
        label.setRadius(0);
@@ -1706,6 +1800,30 @@
           
        return label;
      },
+
+    info : function(){
+      var inputs = "";
+      for(var inputname in this.userData.moduleval.input){
+        inputs += '<div>'+inputname+' : <input type="text" value="'+this.userData.moduleval.input[inputname]+'"></div>';
+      }
+      var outputs = "";
+      if(this.userData.def.modulename!="_CMD" && this.userData.def.modulename!="_MAP"){
+        for(var outputname in this.userData.def.module.output){
+          outputs += '<div>'+outputname+' : <input type="text" style="width:90%;" value="'+this.userData.def.module.output[outputname].value+'"></div>';
+        }
+      }
+      var namespace = "";
+      if(this.userData.namespace){
+        namespace = this.userData.namespace;
+      }
+      return $('<div><div class="mv-info-title">'+this.userData.def.modulename+'</div>'+
+        '<div>Namespace : <input type="text" value="'+namespace+'"></div>'+
+        '<div style="font-size:1.45em;">Inputs</div>'+
+        inputs+
+        '<div style="font-size:1.45em;">Outputs</div>'+
+        outputs+
+        '</div>');
+    }
 
    });
 
@@ -1852,6 +1970,9 @@
   vw.cpm.ModuleView.prototype.init=function(){
     var me = this;
     this.$el.append(vw.cpm.ModuleView.template);
+
+    this.$el.find('.module-view-infos-panel').perfectScrollbar({suppressScrollX:true});
+
     if(me.model.def.hasOwnProperty("module")){
       me.renderGraphical();
     }else{
@@ -1971,11 +2092,12 @@
     }
     me.canvas = new draw2d.Canvas(me.id);
 
+    draw2d.Configuration.factory.createConnection = vw.cpm.ModuleConnectionView;
+
     me.canvas.onDrop = function(droppedDomNode, x, y, shiftKey, ctrlKey)
     {
-        console.log();
         var module = me.model.app.modulesmanager.modules[droppedDomNode.data("modname")];
-        var moduleboxview =  new vw.cpm.ModuleBoxView(module,module.module.name,{});
+        var moduleboxview =  new vw.cpm.ModuleBoxView(module,module.module.name,{},"");
         me.canvas.add(moduleboxview,x,y);
         /*var type = $(droppedDomNode).data("shape");
         var figure = eval("new "+type+"();");
@@ -1984,13 +2106,37 @@
         this.getCommandStack().execute(command);*/
     }
 
+    this.$el.find(".mvti-output").click(function(e){
+      var outputview = new vw.cpm.ModuleOutputView("new_output");
+      me.canvas.add(outputview,50,50);
+    });
+    this.$el.find(".mvti-input").click(function(e){
+      var inputview = new vw.cpm.ModuleInputView("new_input");
+      me.canvas.add(inputview,50,50);
+
+    });
+    this.$el.find(".mvti-cmd").click(function(e){
+      console.log(e);
+      var module = me.model.app.modulesmanager.modules["_CMD"];
+      var moduleboxview =  new vw.cpm.ModuleBoxView(module,module.module.name,{},"");
+      me.canvas.add(moduleboxview,50,50);
+    });
+    this.$el.find(".mvti-map").click(function(e){
+      var module = me.model.app.modulesmanager.modules["_MAP"];
+      var moduleboxview =  new vw.cpm.ModuleBoxView(module,module.module.name,{},"");
+      me.canvas.add(moduleboxview,50,50);
+    });
+
     me.canvas.on("select", function(emitter, figure){
       console.log(emitter);
       
       if(figure){
         console.log(figure);
+        me.$el.find('.module-view-infos-panel').empty();
+        me.$el.find('.module-view-infos-panel').append(figure.info());
       }else{
         console.log(me.model.def);
+        me.$el.find('.module-view-infos-panel').html(JSON.stringify(me.model.def.module));
       }
     });
 
@@ -1999,13 +2145,21 @@
     this.boundVariables = [];
 
     for(var inputname in me.model.def.module.input){
-      var inputview = new vw.cpm.ModuleInputView(inputname);
+      var inputview = new vw.cpm.ModuleInputView(inputname,me.model.def.module.input[inputname]);
       me.canvas.add(inputview);
       this.availableVariables[inputname] = inputview.port;
     }
 
+    var rundirinput = new vw.cpm.ModuleInputView("_RUN_DIR",{type:"DIR"});
+    me.canvas.add(rundirinput);
+    this.availableVariables["_RUN_DIR"] = rundirinput.port;
+
+    var defdirinput = new vw.cpm.ModuleInputView("_DEF_DIR",{type:"DIR"});
+    me.canvas.add(defdirinput);
+    this.availableVariables["_DEF_DIR"] = defdirinput.port;
+
     for(var outputname in me.model.def.module.output){
-      var outputview = new vw.cpm.ModuleOutputView(outputname);
+      var outputview = new vw.cpm.ModuleOutputView(outputname,me.model.def.module.output[outputname]);
       me.canvas.add(outputview);
       this.boundVariables = this.boundVariables.concat(vw.cpm.utils.extractVars(me.model.def.module.output[outputname].value,outputview.port));
     }
@@ -2013,7 +2167,7 @@
 
     for (var i = 0; i < me.model.def.module.exec.length ; i++) {
       var execname = _.first(_.keys(me.model.def.module.exec[i]));
-      regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#(?:\w|-)+)?/;
+      regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#((?:\w|-)+))?/;
       var match = regex.exec(execname);
       if(!match){
         alert("error when fetching execution modules pipeline ! ");
@@ -2028,7 +2182,7 @@
         for(var j =0;j<moduleval.input.RUN.length;j++){
           var runitem = moduleval.input.RUN[j];
           var runitemexecname = _.first(_.keys(runitem));
-          regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#(?:\w|-)+)?/;
+          regex = /(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#((?:\w|-)+))?/;
           var runitemmatch = regex.exec(runitemexecname);
           if(!runitemmatch){
             alert("error when fetching execution modules pipeline ! ");
@@ -2037,7 +2191,7 @@
           var runitemmoduleval = runitem[runitemexecname];
 
           var runitemmodule = me.model.app.modulesmanager.modules[runitemmatch[1]];
-          var runitemmoduleboxview =  new vw.cpm.ModuleBoxView(runitemmodule,runitemexecname,runitemmoduleval);
+          var runitemmoduleboxview =  new vw.cpm.ModuleBoxView(runitemmodule,runitemexecname,runitemmoduleval,runitemmatch[4]);
 
           this.availableVariables = vw.cpm.ModuleView.getOutputVars(runitemmodule,runitemexecname,runitemmoduleboxview,this.availableVariables,runitemmoduleval,"_MAP");
           this.availableVariables = vw.cpm.ModuleView.getOutputVars(runitemmodule,runitemexecname,runitemmoduleboxview,this.availableVariables,runitemmoduleval);
@@ -2048,7 +2202,7 @@
         mapcontainer.setDimension(200,moduleval.input.RUN.length*200+50);
       }else{
         var module = me.model.app.modulesmanager.modules[match[1]];
-        var moduleboxview =  new vw.cpm.ModuleBoxView(module,execname,moduleval);
+        var moduleboxview =  new vw.cpm.ModuleBoxView(module,execname,moduleval,match[4]);
 
         this.availableVariables = vw.cpm.ModuleView.getOutputVars(module,execname,moduleboxview,this.availableVariables,moduleval);
         this.boundVariables = this.boundVariables.concat(vw.cpm.ModuleView.getInputVars(moduleval.input,module,moduleboxview));
@@ -2065,20 +2219,24 @@
 
   }
 
+  vw.cpm.ModuleView.prototype.showInfo = function(element){
+
+  }
+
   vw.cpm.ModuleView.prototype.exportViewToModelObj = function(){
     var me = this;
     
     for (var i = 0; i < me.canvas.figures.data.length; i++) {
-      me.canvas.figures.data[i]
+      me.canvas.figures.data[i];
     };
     for (var i = 0; i < me.canvas.lines.data.length; i++) {
-      me.canvas.lines.data[i]
+      me.canvas.lines.data[i];
     };
   }
 
   vw.cpm.ModuleView.prototype.createConnections = function(){
     for (var i = 0; i < this.boundVariables.length; i++) {
-      this.boundVariables[i]
+      console.log(this.boundVariables[i]);
       
       if(this.availableVariables[this.boundVariables[i].name]){
         var entry = this.availableVariables[this.boundVariables[i].name];
@@ -2121,10 +2279,10 @@
   }
 
   vw.cpm.ModuleView.templateGraphical = '<div><div class="module-view-toolbox">'+
-    '<span class="module-view-toolbox-item">+ CMD</span>'+
-    '<span class="module-view-toolbox-item">+ MAP</span>'+
-    '<span class="module-view-toolbox-item">+ Input</span>'+
-    '<span class="module-view-toolbox-item">+ Output</span>'+
+    '<span class="module-view-toolbox-item mvti-cmd">+ CMD</span>'+
+    '<span class="module-view-toolbox-item mvti-map">+ MAP</span>'+
+    '<span class="module-view-toolbox-item mvti-input">+ Input</span>'+
+    '<span class="module-view-toolbox-item mvti-output">+ Output</span>'+
     '</div><div class="canvas-container"><div class="canvas-view"></div></div><div class="module-view-infos-panel"></div></div>';
 
   vw.cpm.ModuleView.template = '<div class="module-header">'+
@@ -2152,7 +2310,7 @@
 
   vw.cpm.ProcessManagerView.prototype.init=function(){
     var me = this;
-    
+    me.$el.empty();
   }
 
   vw.cpm.ProcessManagerView.prototype.refresh = function(){

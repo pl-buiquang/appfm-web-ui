@@ -14,41 +14,9 @@ from text files, parse them, apply ner, apply dbpedia ids/refs
 
 from one sentence, parse it, apply ner + dbpedia, answer question
 
-===== Information Extraction =====
+===== Todo... =====
 
-===== Information Research =====
+CLI examples for provided modules (stanford parser, ner, ...)
 
-Pipeline1 : use doc collection, parse, apply ontology mapping, apply tf-idf, store in elasticsearch
 
-<code>
-$ cpm run pipeline_index --in collection_id --lazy
-</code>
 
-lazy : don't process already processed documents (or watch for changes)
-
-Pipeline2 : launch elasticsearch service, use text input, tokenize, lemmatize, query elasticsearch, output result
-
-<code>
-$ cpm run pipeline_query "keyword1 keyword2"
-</code>
-
-===== Q&A =====
-
-Start cpm
-
-<code>
-$ service cpm start
-cpm started, pid 1234
-</code>
-
-Launch registered pipeline, with unregistred data/corpus
-
-<code>
-$ cpm run my_pipeline --if ~/data/question.txt --of ~/data/output/answer.txt
-</code>
-
-Launch unregistered pipeline
-
-<code>
-$ cpm run pipeline_name --config ~/data/pipeline.conf --if ~/data/question.txt --of ~/data/output/answer.txt
-</code>

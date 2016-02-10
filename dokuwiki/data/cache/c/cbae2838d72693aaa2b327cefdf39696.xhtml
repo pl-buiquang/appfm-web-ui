@@ -33,48 +33,12 @@ from one sentence, parse it, apply ner + dbpedia, answer question
 
 </div>
 <!-- EDIT2 SECTION "Examples" [26-505] -->
-<h2 class="sectionedit3" id="information_extraction">Information Extraction</h2>
-<div class="level2">
-
-</div>
-<!-- EDIT3 SECTION "Information Extraction" [506-541] -->
-<h2 class="sectionedit4" id="information_research">Information Research</h2>
+<h2 class="sectionedit3" id="todo">Todo...</h2>
 <div class="level2">
 
 <p>
-Pipeline1 : use doc collection, parse, apply ontology mapping, apply tf-idf, store in elasticsearch
+CLI examples for provided modules (stanford parser, ner, …)
 </p>
-<pre class="code">$ cpm run pipeline_index --in collection_id --lazy</pre>
-
-<p>
-lazy : don&#039;t process already processed documents (or watch for changes)
-</p>
-
-<p>
-Pipeline2 : launch elasticsearch service, use text input, tokenize, lemmatize, query elasticsearch, output result
-</p>
-<pre class="code">$ cpm run pipeline_query &quot;keyword1 keyword2&quot;</pre>
 
 </div>
-<!-- EDIT4 SECTION "Information Research" [542-992] -->
-<h2 class="sectionedit5" id="q_a">Q&amp;A</h2>
-<div class="level2">
-
-<p>
-Start cpm
-</p>
-<pre class="code">$ service cpm start
-cpm started, pid 1234</pre>
-
-<p>
-Launch registered pipeline, with unregistred data/corpus
-</p>
-<pre class="code">$ cpm run my_pipeline --if ~/data/question.txt --of ~/data/output/answer.txt</pre>
-
-<p>
-Launch unregistered pipeline
-</p>
-<pre class="code">$ cpm run pipeline_name --config ~/data/pipeline.conf --if ~/data/question.txt --of ~/data/output/answer.txt</pre>
-
-</div>
-<!-- EDIT5 SECTION "Q&A" [993-] -->
+<!-- EDIT3 SECTION "Todo..." [506-] -->

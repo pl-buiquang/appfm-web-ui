@@ -187,6 +187,13 @@
     module.view.render();
   }
 
+  vw.cpm.ModuleManager.prototype.showModule = function(modulename){
+    var me = this;
+    var $panel = me.app.view.createPanel(modulename);
+    var module = new vw.cpm.Module(me.app,$panel.find(".frame-body"),me.modules[modulename]);
+    me.modulesobj.push(module);
+    module.view.render();
+  }
 
 
 }(window.vw = window.vw || {}));

@@ -15,7 +15,10 @@
 
   vw.cpm.ProcessManager.prototype.showRun = function(modulename,runid){
     var me = this;
-    var $panel = this.app.view.createPanel(modulename + " ( "+runid+" )");
+    var $panel = this.app.view.createPanel('<span class="link">'+modulename + "</span> ( "+runid+" )");
+    $panel.find(".frame-title").find(".link").click(function(){
+      me.app.modulesmanager.showModule(modulename);
+    });
     var process = new vw.cpm.Process(this.app,$panel.find(".frame-body"),{moduledef:me.app.modulesmanager.modules[modulename].module,runconf:{},runid:runid});
     process.sync();
   }

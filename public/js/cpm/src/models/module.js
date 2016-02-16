@@ -37,8 +37,10 @@
             me.app.modulesmanager.fetchAll();
             delete me.def.creation;  
           }
+          success.call();
         }else{
           alert(me.error);
+          error.call();
         }
       },
       error:function(){
@@ -67,9 +69,7 @@
       dataType : "text",
       success: function(data, textStatus, jqXHR) {
         var runid = data;
-        var $panel = me.app.view.createPanel(me.def.modulename+" (run "+runid+")");
-        var process = new vw.cpm.Process(me.app,$panel.find(".frame-body"),{moduledef:me.def.module,runconf:conf,runid:runid});
-        process.sync();
+        me.app.processmanager.showRun(me.def.modulename,runid);
         me.app.processmanager.fetchAll(); // very unoptimized
         success.call(me.view);
       },

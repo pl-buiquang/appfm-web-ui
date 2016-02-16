@@ -134,9 +134,7 @@
     }
 
     if(command == "brat"){
-      $panel = me.view.getPanel("brat");
-      $panel.find('.frame-body').empty();
-      $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="500px" src="http://'+me.options.hostname+':8001/index.xhtml"></iframe>');
+      this.openIFrame('http://'+me.options.hostname+':8001/index.xhtml',"brat")
       return;
     }
 
@@ -147,11 +145,23 @@
     }
 
     me.cpmRawCall(command,function(data){
+      data = jQuery('<div />').text(data).html();
+      data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
       me.view.createPanel(command,data);
       console.log(data);
     });
 
     
+  }
+
+  vw.cpm.CLI.prototype.openIFrame = function(url,title){
+    var me = this;
+    var name = url;
+    if(title){
+      name = title;
+    }
+    $panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>');
+    $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
   }
 
   vw.cpm.CLI.prototype.openFile = function(filepath){

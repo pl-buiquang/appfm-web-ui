@@ -118,7 +118,7 @@
 
     var value = labelname;
     if(typeof labelname == "function"){
-      value = start.
+      //value = 
     }
     connection.setUserData({
       value:value
@@ -138,7 +138,7 @@
         this._super({width:200,height:200});
 
         var port = this.createPort("hybrid", new draw2d.layout.locator.LeftLocator(this));
-          port.setName("input");
+        port.setName("input_"+execname+"_IN");
 
 
     },
@@ -237,12 +237,12 @@
     info : function(){
       var inputs = "";
       for(var inputname in this.userData.moduleval.input){
-        inputs += '<div>'+inputname+' : <input type="text" value="'+this.userData.moduleval.input[inputname]+'"></div>';
+        inputs += '<div>'+inputname+' : <input type="text" style="width:90%;" value="'+this.userData.moduleval.input[inputname]+'"></div>';
       }
       var outputs = "";
       if(this.userData.def.modulename!="_CMD" && this.userData.def.modulename!="_MAP"){
         for(var outputname in this.userData.def.module.output){
-          outputs += '<div>'+outputname+' : <input type="text" style="width:90%;" value="'+this.userData.def.module.output[outputname].value+'"></div>';
+          outputs += '<div>'+outputname+' : <input type="text" style="width:90%;" value="'+this.userData.def.module.output[outputname].value+'" disabled></div>';
         }
       }
       var namespace = "";

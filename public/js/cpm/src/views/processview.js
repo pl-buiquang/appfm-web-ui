@@ -56,11 +56,11 @@
 
   vw.cpm.ProcessView.printVar = function(variable){
     if(variable.type == "FILE"){
-      return '<span class="file-var">'+variable.value+'</span>';
+      return '<span class="file-var link">'+variable.value+'</span>';
     }else if(variable.type == "FILE*"){
       var html = '<ul>';
       for (var i = 0; i < variable.value.length; i++) {
-         html += '<li class="file-var">'+variable.value[i]+'</li>';
+         html += '<li class="file-var link">'+variable.value[i]+'</li>';
       };
       html += '</ul>';
       return html;

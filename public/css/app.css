@@ -591,3 +591,30 @@ ul.main-menu{
  white-space: -o-pre-wrap;    /* Opera 7 */
  word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+
+
+/*******************************************************************
+*      Misc styles
+********************************************************************/
+
+
+a {
+  color: #4e5c72;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+.link{
+  color: #4e5c72;
+  font-weight: bold;
+  text-decoration: none;
+  cursor:pointer;
+}
+
+.link:hover{
+  text-decoration: underline;
+}

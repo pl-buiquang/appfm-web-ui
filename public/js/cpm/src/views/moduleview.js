@@ -10,6 +10,7 @@
 
   vw.cpm.ModuleView.prototype.init=function(){
     var me = this;
+    this.$el.empty();
     this.$el.append(vw.cpm.ModuleView.template);
 
     this.$el.find('.module-view-infos-panel').perfectScrollbar({suppressScrollX:true});

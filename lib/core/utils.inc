@@ -166,7 +166,7 @@ class Logger {
     
     $path = BASE_DIR.LOG_HOME_PATH;
     $myFile = $path . "custom.log";
-    $fh = fopen($myFile, 'a') or die("can't open file");
+    $fh = fopen($myFile, 'a') or die("can't open file ".$myFile);
     $date_array = getdate();
     $time = "[" . $date_array['mday'] . "/" . $date_array['mon'] . "/" . $date_array['year'] . " - " . $date_array['hours'] . ":" . $date_array['minutes'] . ":" . $date_array['seconds'] . "]";
     if(!is_string($message)){

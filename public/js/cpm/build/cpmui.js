@@ -57,12 +57,12 @@
 
     var firstrun = store.get('firstrun')
     if(!firstrun){
-      var panel = this.view.createPanel('Intro',this.helpmanager.slides);  
+      var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
       //this.view.fullscreen(panel);
       me.demo();
       store.set('firstrun','done');
     }else{
-      var panel = this.view.createPanel('Intro',this.helpmanager.slides);
+      var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
 
     }
   
@@ -144,7 +144,7 @@
     }
 
     if(command == "brat"){
-      this.openIFrame('http://'+me.options.hostname+':8001/index.xhtml',"brat")
+      this.openIFrame('http://'+me.options.hostname+':8001/index.xhtml',"brat");
       return;
     }
 
@@ -152,6 +152,11 @@
       var elts = command.split(" ");
       me.openFile(elts[1]);
       return ;
+    }
+
+    if(command == "cadvisor"){
+      this.openIFrame('http://'+me.options.hostname+':8082/',"cadvisor");
+      return;
     }
 
     me.cpmRawCall(command,function(data){
@@ -172,6 +177,7 @@
     }
     $panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>');
     $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
+    return $panel;
   }
 
   vw.cpm.CLI.prototype.openFile = function(filepath){
@@ -514,7 +520,6 @@
   vw.cpm.HelpManager.prototype.init = function(){
     var me = this;
 
-    this.slides = '<iframe style="border-style:none;border:0;margin:0;padding:0;" height="500px" width="100%" src="'+this.app.options.cpmbaseurl+'introslides"></iframe>';
   }
 
 
@@ -1570,11 +1575,10 @@
     this.$el.append(vw.cpm.HelpManagerView.template);
 
     this.$el.find("#help-main-wiki-page").on("click",function(){
-      me.model.app.view.createPanel("Main wiki page",'<iframe width="100%" height="'+vw.cpm.CLIView.maxFrameHeight+'px;" style="border:none;" src="'+me.model.app.options.cpmbaseurl+'/dokuwiki">');
+      me.model.app.openIFrame(me.model.app.options.cpmbaseurl+'/dokuwiki/',"Wiki");
     });
     this.$el.find("#help-presa-slides").on("click",function(){
-      var $panel = me.model.app.view.getPanel("Intro");
-      $panel.find(".frame-body").html(me.model.slides);
+      me.model.app.openIFrame(me.model.app.options.cpmbaseurl+'/introslides',"Intro");
     });
     
   }

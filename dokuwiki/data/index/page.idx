@@ -14,3 +14,7 @@ uses_cases
 roadmap
 cli
 web
+communication_system
+clients
+services
+kernel

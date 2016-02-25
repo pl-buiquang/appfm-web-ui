@@ -1,0 +1,19 @@
+====== AppFM Clients ======
+
+Deux types de clients ont été développés pour répondre à deux usages différents. Ils utilisent tous les deux le [[:communication_system|protocole de commande]] pour communiquer avec le coeur.
+
+===== CLI =====
+
+Le premier cas d'utilisation était de rendre accessible les commandes de base du kernel sous une forme plus "user friendly" et propre à la construction de scripts. Celui ci est réalisé à l'aide d'un module python dont l'installation permet d'accéder aux fonctionnalités d'autocompletion et d'une documentation interne au programme de ligne de commande.
+
+Ce client permet de construire des scripts.
+
+Todo : script simple utilisant des modules (chaine pulsar)
+
+[[:cli|plus d'informations ]]
+
+===== Web =====
+
+Le deuxième cas d'utilisation était de rendre accessible les fonctionnalités et modules via une interface graphique, simplifiant grandement l'utilisation des traitement intégrés à **AppFM**. Cette interface graphique pouvant dès lors servir pour pratiquer des essais rapides de modules, faire des démonstrations, et accéder de façon centralisée à des [[:services|services]] gérés par **AppFM**.
+
+[[:web|plus d'informations ]]

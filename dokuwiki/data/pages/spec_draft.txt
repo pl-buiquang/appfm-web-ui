@@ -186,6 +186,8 @@ Ce module permet tout simplement de lancer une commande.
 |**Exec** |||  |
 |  |execute a shell command (with **_RUN_WD** ||as working directory) |
 
+TODO : explication docker
+
 ==== _MAP ====
 
 Ce module permet de distribuer parallèlement les fichiers d'un corpus ou d'un répertoire à un ensemble de processus ayant au moins une entrée de type FILE.
@@ -264,7 +266,7 @@ La variable **ENC_DFT** (qui peut etre overridé dans la configuration de run) d
 
 ===== Gestion des dépendances =====
 
-- all in a folder static linking (big module in memory size.., possible redundance with other modules...)
+- all in a folder static linking (big module in memory size.., possible redundance with other modules…)
 
 - compose your own docker (using the base one with cpm-process-shell as entrypoint)
 

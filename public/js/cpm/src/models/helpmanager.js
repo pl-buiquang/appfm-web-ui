@@ -10,7 +10,6 @@
   vw.cpm.HelpManager.prototype.init = function(){
     var me = this;
 
-    this.slides = '<iframe style="border-style:none;border:0;margin:0;padding:0;" height="500px" width="100%" src="'+this.app.options.cpmbaseurl+'introslides"></iframe>';
   }
 
 

@@ -13,11 +13,10 @@
     this.$el.append(vw.cpm.HelpManagerView.template);
 
     this.$el.find("#help-main-wiki-page").on("click",function(){
-      me.model.app.view.createPanel("Main wiki page",'<iframe width="100%" height="'+vw.cpm.CLIView.maxFrameHeight+'px;" style="border:none;" src="'+me.model.app.options.cpmbaseurl+'/dokuwiki">');
+      me.model.app.openIFrame(me.model.app.options.cpmbaseurl+'/dokuwiki/',"Wiki");
     });
     this.$el.find("#help-presa-slides").on("click",function(){
-      var $panel = me.model.app.view.getPanel("Intro");
-      $panel.find(".frame-body").html(me.model.slides);
+      me.model.app.openIFrame(me.model.app.options.cpmbaseurl+'/introslides',"Intro");
     });
     
   }

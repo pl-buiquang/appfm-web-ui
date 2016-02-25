@@ -47,12 +47,12 @@
 
     var firstrun = store.get('firstrun')
     if(!firstrun){
-      var panel = this.view.createPanel('Intro',this.helpmanager.slides);  
+      var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
       //this.view.fullscreen(panel);
       me.demo();
       store.set('firstrun','done');
     }else{
-      var panel = this.view.createPanel('Intro',this.helpmanager.slides);
+      var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
 
     }
   
@@ -134,7 +134,7 @@
     }
 
     if(command == "brat"){
-      this.openIFrame('http://'+me.options.hostname+':8001/index.xhtml',"brat")
+      this.openIFrame('http://'+me.options.hostname+':8001/index.xhtml',"brat");
       return;
     }
 
@@ -142,6 +142,11 @@
       var elts = command.split(" ");
       me.openFile(elts[1]);
       return ;
+    }
+
+    if(command == "cadvisor"){
+      this.openIFrame('http://'+me.options.hostname+':8082/',"cadvisor");
+      return;
     }
 
     me.cpmRawCall(command,function(data){
@@ -162,6 +167,7 @@
     }
     $panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>');
     $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
+    return $panel;
   }
 
   vw.cpm.CLI.prototype.openFile = function(filepath){

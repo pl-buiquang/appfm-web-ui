@@ -18,10 +18,13 @@
     this.$el.find("#help-presa-slides").on("click",function(){
       me.model.app.openIFrame(me.model.app.options.cpmbaseurl+'/introslides',"Intro");
     });
+    this.$el.find("#help-tutorial").on("click",function(){
+      me.model.app.demo();
+    });
     
   }
 
-  vw.cpm.HelpManagerView.template = '<div id="help-presa-slides" style="cursor:pointer;">Introduction slides</div><div id="help-main-wiki-page" style="cursor:pointer;">Main wiki</div>';
+  vw.cpm.HelpManagerView.template = '<div id="help-tutorial" style="cursor:pointer;">Tutorial</div><div id="help-presa-slides" style="cursor:pointer;">Introduction slides</div><div id="help-main-wiki-page" style="cursor:pointer;">Main wiki</div>';
 
   
 

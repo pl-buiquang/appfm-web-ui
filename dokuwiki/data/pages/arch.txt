@@ -1,5 +1,7 @@
 ====== Architecture ======
 
+{{https://versatile-world.net/tmp/macroarchitecture.jpg?nolink&800x487}}
+
 ===== Deploiement =====
 
 Dépendances :

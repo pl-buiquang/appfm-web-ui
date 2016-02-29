@@ -2,7 +2,7 @@
 
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
-      <section>
+      <!--<section>
       <a onclick="window.parent.cli.demo();">Demo</a>
       </section>
       <section>
@@ -37,23 +37,28 @@
       <section>
       <h3>Meta</h3>
       </section>
-      </section>
+      </section>-->
 
         <section>
-        <h1>CPM</h1>
-            <h3>Corpus &amp; Process Manager</h3>
+        <h1>AppFM</h1>
+            <h3>Application Frame Manager</h3>
             <h4>(name subject to change)</h4>
             <p>
             <small>Created by <a href="http://versatile-world.net">Paul Bui-Quang</a> / <a href="mailto:paul.bui-quang@limsi.fr">paul.bui-quang@limsi.fr</a></small>
           </p>
           </section>
+
+        <section>
+        <h1>TODO (présentation slides)</h1>
+        </section>
         
         <section>
         <h2>Technologies</h2>
-        </section>
-
-        <section>
-        <code><pre class="bash">$ vagrant up</pre></code>
+        <ul>
+          <li>Docker
+          </li>
+          <li>0MQ</li>
+        </ul>
         </section>
 
         <section>

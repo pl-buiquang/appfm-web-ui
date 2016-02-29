@@ -1,92 +1,166 @@
 
-<h1 class="sectionedit1" id="cpm_nlp">CPM NLP</h1>
+<h1 class="sectionedit1" id="getting_started">Getting Started</h1>
 <div class="level1">
 
 </div>
-<!-- EDIT1 SECTION "CPM NLP" [1-23] -->
+<!-- EDIT1 SECTION "Getting Started" [1-31] -->
 <h2 class="sectionedit2" id="quick_installation">(Quick) Installation</h2>
 <div class="level2">
 
-<p>
-1) Get the source
-</p>
+</div>
+<!-- EDIT2 SECTION "(Quick) Installation" [32-65] -->
+<h3 class="sectionedit3" id="fetch_this_repository">0. Fetch this repository</h3>
+<div class="level3">
 
 <p>
-Without GIT : download static archive (with all/maximum dependencies)
-</p>
+git clone git2@versatile-world.net:~/cpm.git<br/>
 
-<p>
-With GIT (install git if not : apt-get install git or yum install git, …)
-</p>
-
-<p>
-git clone git@versatile-world.net:~/cpm.git . ; cd cpm ; git clone git@versatile-world.net:~/cpm-cli.git . ; git clone git@versatile-world.net:~/cpm-core.git . ; …
-</p>
-
-<p>
-2)
-</p>
-
-<p>
-A. Quick sandbox with vagrant
-</p>
-
-<p>
-2.1) install vagrant
-</p>
-
-<p>
-2.2) run start.sh
-</p>
-
-<p>
-B. Native installation
-</p>
-
-<p>
-2.1) check if dependencies are installed and proper configuration file to link them OR use those provided in “lib” (git clone git@versatile-world.net:~/cpm-lib.git . IF with GIT)
-</p>
-
-<p>
-2.2) proper configuration of env.sh (edit CPM_HOME in env.sh, …)  then run source env.sh
-</p>
-
-<p>
-2.3) run ./start.sh
+cd cpm
 </p>
 
 </div>
-<!-- EDIT2 SECTION "(Quick) Installation" [24-784] -->
-<h2 class="sectionedit3" id="getting_started">Getting started</h2>
+<!-- EDIT3 SECTION "0. Fetch this repository" [66-156] -->
+<h3 class="sectionedit4" id="install_some_dependencies_on_debian">1. Install (some) Dependencies (on debian) :</h3>
+<div class="level3">
+
+<p>
+sudo apt-get install git vagrant virtualbox
+</p>
+
+</div>
+<!-- EDIT4 SECTION "1. Install (some) Dependencies (on debian) :" [157-257] -->
+<h3 class="sectionedit5" id="fetch_projects_modules">2. Fetch projects modules :</h3>
+<div class="level3">
+
+<p>
+git submodule update –init –recursive<br/>
+
+(you will need to enter multiple times the repository password)
+</p>
+
+</div>
+<!-- EDIT5 SECTION "2. Fetch projects modules :" [258-405] -->
+<h3 class="sectionedit6" id="configure_virtual_machineset_up_resources_and_add_an_additional_disk_to_the_virtual_machine">3. Configure virtual machine : Set up resources and add an additional disk to the virtual machine :</h3>
+<div class="level3">
+
+<p>
+change in the file “Vagrantfile” the path to a virtual disk (“file_to_disk” variable) that will be created/used as additionnal disk for the virtual machine<br/>
+
+eg. : file_to_disk = “$HOME/appfm_vagrant_additional_disk.vdi”<br/>
+
+this virtual disk is used to store Docker container and application mongodb data and is set to size 100G
+</p>
+
+<p>
+default resources allocated are 2 cpus and 4G of ram (you can change this in the proper fields in the Vagrantfile : eg. v.customize [“modifyvm”, :id, “–memory”,“4096”])<br/>
+
+Note that depending of your system, you may need to change other settings in the Vagrantfile like port mapping.
+</p>
+
+</div>
+<!-- EDIT6 SECTION "3. Configure virtual machine : Set up resources and add an additional disk to the virtual machine :" [406-1131] -->
+<h3 class="sectionedit7" id="installation_may_take_about_10_30_minutes">4. Installation (may take about 10~30 minutes) :</h3>
+<div class="level3">
+
+<p>
+vagrant up<br/>
+
+vagrant ssh<br/>
+
+/vagrant/scripts/setup.sh
+</p>
+
+</div>
+<!-- EDIT7 SECTION "4. Installation (may take about 10~30 minutes) :" [1132-1245] -->
+<h3 class="sectionedit8" id="first_run_takes_a_long_the_first_time_since_it_builds_base_containers">5. First run (takes a long the first time since it builds base containers):</h3>
+<div class="level3">
+
+<p>
+cd /vagrant<br/>
+
+./start.sh (or ./start-daemon.sh)
+</p>
+
+<p>
+When finished you can go to <a href="http://localhost:8080" class="urlextern" title="http://localhost:8080"  rel="nofollow">http://localhost:8080</a>
+</p>
+
+<p>
+To disconnect session from the virtual machine:<br/>
+
+exit
+</p>
+
+<p>
+To stop the server (and the virtual machine) :<br/>
+
+vagrant halt (from outside the virtual machine session and anywhere within the cpm directory)
+</p>
+
+<p>
+To restart :<br/>
+
+vagrant ssh (from anywhere within the cpm directory)<br/>
+
+cd /vagrant<br/>
+
+./start.sh
+</p>
+
+<p>
+To completly destroy the virtual machine (needs re installation (step 4)) :<br/>
+
+vagrant destroy (from anywhere within the cpm directory)
+</p>
+
+</div>
+<!-- EDIT8 SECTION "5. First run (takes a long the first time since it builds base containers):" [1246-1890] -->
+<h2 class="sectionedit9" id="first_steps_using_cli">First steps (using CLI)</h2>
 <div class="level2">
 
 <p>
-TODO / A Venir :
+If installed within a virtual machine (quick start instructions), you may also want to install the cli within your host to be able to use appfm from outside the vm.<br/>
+
+To do so, go the cli subproject directory and follow the quick install guide in the README
 </p>
 
 <p>
-- Demo link (instance publique online with web client)
+With default installation, there is some modules already availables.<br/>
+
+Following instructions assume that you didn&#039;t change the default paths configuration.
 </p>
 
 <p>
-- How to get it (repos, etc.)
+Listing availables modules :<br/>
+
+cpm module ls
 </p>
 
 <p>
-- Installation
+Running module synchronously :<br/>
+
+- extract pdf content into html :<br/>
+
+cpm module run pdfbox@munshi –arg IN_DIR:/vagrant/data/corpus/some-pdfs –sync
 </p>
 
 <p>
-- Configuration minimale
+Running module asynchronously :<br/>
+
+- apply bonsai parser onto extracted content (may take several minutes)<br/>
+
+cpm module run bonsai-parser@munshi –arg IN_DIR:[insert_result_dir_of_previous_run]
 </p>
 
 <p>
-- Lancement / Exemples commandes (cli)
+Get process information :<br/>
+
+cpm process get [insert_process_id_of_previous_command]
 </p>
 
 </div>
-<!-- EDIT3 SECTION "Getting started" [785-1000] -->
-<h2 class="sectionedit4" id="running_as_a_service">Running as a service</h2>
+<!-- EDIT9 SECTION "First steps (using CLI)" [1891-2822] -->
+<h2 class="sectionedit10" id="running_as_a_service">Running as a service</h2>
 <div class="level2">
 
 <p>
@@ -98,8 +172,8 @@ create init.d script
 </p>
 
 </div>
-<!-- EDIT4 SECTION "Running as a service" [1001-1064] -->
-<h2 class="sectionedit5" id="configuration">Configuration</h2>
+<!-- EDIT10 SECTION "Running as a service" [2823-2886] -->
+<h2 class="sectionedit11" id="configuration">Configuration</h2>
 <div class="level2">
 
 <p>
@@ -115,4 +189,4 @@ Configuration doc (+ défauts)
 </p>
 
 </div>
-<!-- EDIT5 SECTION "Configuration" [1065-] -->
+<!-- EDIT11 SECTION "Configuration" [2887-] -->

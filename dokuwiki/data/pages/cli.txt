@@ -3,10 +3,19 @@
 ===== Installation =====
 
 <code>
-wget URL; unzip cpm-cli.zip; cd cpm-cli; pip install --user .; sh ./generate-autocomplete.sh ; echo ". cpm-cli/cpm-complete.sh">> ~/.bashrc
+cd cli;
+sh ./install.sh
 </code>
 
-then edit //server.conf// to indicate the host and port of a running cpm-core installation
+===== First steps =====
+
+Just run :
+
+<code>
+cpm
+</code>
+
+Some built in documentation exists within the command interface (available commands and description). Every command/subcommand have a ''--help'' documentation (some are empty).
 ===== Module Management =====
 
 - Reload the module definitions : (if modifications have been made on .module files)
@@ -34,30 +43,4 @@ returns a <process id>
 cpm process ls [-a]
 </code>
 
-# default active, -a all
-
-cpm process run [-i //user_input//] [–from //mid//] [–to //mid//] //pid// |//process_name// |//mid// |//module_name// //corpus_name// |//cid// |//filepath//
-
-cpm process stop //prunid//
-
-# how to view results?
-
-===== Corpus Management =====
-
-cpm corpus create [//rootdirpath//] //name//
-
-# name must be unique
-
-# copy files ? yes
-
-cpm corpus //name// |//id// add //filepath// |//folderpath//
-
-# check if exist
-
-cpm corpus //name// |//id// rm //relativefilepath// |//relativefolderpath//
-
-cpm corpus //name// |//id// ls
-
-cpm corpus ls
-
-cpm corpus rm //name// |//id//
+=====   =====

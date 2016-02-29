@@ -1,44 +1,78 @@
-====== CPM NLP ======
+====== Getting Started ======
 
 ===== (Quick) Installation =====
 
-1) Get the source
+==== 0. Fetch this repository ====
 
-Without GIT : download static archive (with all/maximum dependencies)
+git clone git2@versatile-world.net:~/cpm.git\\
+cd cpm
 
-With GIT (install git if not : apt-get install git or yum install git, ...)
+==== 1. Install (some) Dependencies (on debian) : ====
 
-git clone git@versatile-world.net:~/cpm.git . ; cd cpm ; git clone git@versatile-world.net:~/cpm-cli.git . ; git clone git@versatile-world.net:~/cpm-core.git . ; ...
+sudo apt-get install git vagrant virtualbox
 
-2)
+==== 2. Fetch projects modules : ====
 
-A. Quick sandbox with vagrant
+git submodule update –init –recursive\\
+(you will need to enter multiple times the repository password)
 
-2.1) install vagrant
+==== 3. Configure virtual machine : Set up resources and add an additional disk to the virtual machine : ====
 
-2.2) run start.sh
+change in the file "Vagrantfile" the path to a virtual disk ("file_to_disk" variable) that will be created/used as additionnal disk for the virtual machine\\
+eg. : file_to_disk = "$HOME/appfm_vagrant_additional_disk.vdi"\\
+this virtual disk is used to store Docker container and application mongodb data and is set to size 100G
 
-B. Native installation
+default resources allocated are 2 cpus and 4G of ram (you can change this in the proper fields in the Vagrantfile : eg. v.customize ["modifyvm", :id, "–memory","4096"])\\
+Note that depending of your system, you may need to change other settings in the Vagrantfile like port mapping.
 
-2.1) check if dependencies are installed and proper configuration file to link them OR use those provided in "lib" (git clone git@versatile-world.net:~/cpm-lib.git . IF with GIT)
+==== 4. Installation (may take about 10~30 minutes) : ====
 
-2.2) proper configuration of env.sh (edit CPM_HOME in env.sh, ...)  then run source env.sh
+vagrant up\\
+vagrant ssh\\
+/vagrant/scripts/setup.sh
 
-2.3) run ./start.sh
+==== 5. First run (takes a long the first time since it builds base containers): ====
 
-===== Getting started =====
+cd /vagrant\\
+./start.sh (or ./start-daemon.sh)
 
-TODO / A Venir :
+When finished you can go to [[http://localhost:8080|http://localhost:8080]]
 
-- Demo link (instance publique online with web client)
+To disconnect session from the virtual machine:\\
+exit
 
-- How to get it (repos, etc.)
+To stop the server (and the virtual machine) :\\
+vagrant halt (from outside the virtual machine session and anywhere within the cpm directory)
 
-- Installation
+To restart :\\
+vagrant ssh (from anywhere within the cpm directory)\\
+cd /vagrant\\
+./start.sh
 
-- Configuration minimale
+To completly destroy the virtual machine (needs re installation (step 4)) :\\
+vagrant destroy (from anywhere within the cpm directory)
 
-- Lancement / Exemples commandes (cli)
+===== First steps (using CLI) =====
+
+If installed within a virtual machine (quick start instructions), you may also want to install the cli within your host to be able to use appfm from outside the vm.\\
+To do so, go the cli subproject directory and follow the quick install guide in the README
+
+With default installation, there is some modules already availables.\\
+Following instructions assume that you didn't change the default paths configuration.
+
+Listing availables modules :\\
+cpm module ls
+
+Running module synchronously :\\
+- extract pdf content into html :\\
+cpm module run pdfbox@munshi –arg IN_DIR:/vagrant/data/corpus/some-pdfs –sync
+
+Running module asynchronously :\\
+- apply bonsai parser onto extracted content (may take several minutes)\\
+cpm module run bonsai-parser@munshi –arg IN_DIR:[insert_result_dir_of_previous_run]
+
+Get process information :\\
+cpm process get [insert_process_id_of_previous_command]
 
 ===== Running as a service =====
 

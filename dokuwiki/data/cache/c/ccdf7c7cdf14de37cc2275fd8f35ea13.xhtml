@@ -6,15 +6,26 @@
 <!-- EDIT1 SECTION "Command Line Interface Manual" [1-45] -->
 <h2 class="sectionedit2" id="installation">Installation</h2>
 <div class="level2">
-<pre class="code">wget URL; unzip cpm-cli.zip; cd cpm-cli; pip install --user .; sh ./generate-autocomplete.sh ; echo &quot;. cpm-cli/cpm-complete.sh&quot;&gt;&gt; ~/.bashrc</pre>
+<pre class="code">cd cli;
+sh ./install.sh</pre>
+
+</div>
+<!-- EDIT2 SECTION "Installation" [46-111] -->
+<h2 class="sectionedit3" id="first_steps">First steps</h2>
+<div class="level2">
 
 <p>
-then edit <em>server.conf</em> to indicate the host and port of a running cpm-core installation
+Just run :
+</p>
+<pre class="code">cpm</pre>
+
+<p>
+Some built in documentation exists within the command interface (available commands and description). Every command/subcommand have a <code>–help</code> documentation (some are empty).
 </p>
 
 </div>
-<!-- EDIT2 SECTION "Installation" [46-318] -->
-<h2 class="sectionedit3" id="module_management">Module Management</h2>
+<!-- EDIT3 SECTION "First steps" [112-345] -->
+<h2 class="sectionedit4" id="module_management">Module Management</h2>
 <div class="level2">
 
 <p>
@@ -37,67 +48,13 @@ returns a &lt;process id&gt;
 </p>
 
 </div>
-<!-- EDIT3 SECTION "Module Management" [319-714] -->
-<h2 class="sectionedit4" id="run_management">Run Management</h2>
+<!-- EDIT4 SECTION "Module Management" [346-741] -->
+<h2 class="sectionedit5" id="run_management">Run Management</h2>
 <div class="level2">
 <pre class="code">cpm process ls [-a]</pre>
 
-<p>
-# default active, -a all
-</p>
-
-<p>
-cpm process run [-i <em>user_input</em>] [–from <em>mid</em>] [–to <em>mid</em>] <em>pid</em> |<em>process_name</em> |<em>mid</em> |<em>module_name</em> <em>corpus_name</em> |<em>cid</em> |<em>filepath</em>
-</p>
-
-<p>
-cpm process stop <em>prunid</em>
-</p>
-
-<p>
-# how to view results?
-</p>
-
 </div>
-<!-- EDIT4 SECTION "Run Management" [715-1019] -->
-<h2 class="sectionedit5" id="corpus_management">Corpus Management</h2>
 <div class="level2">
 
-<p>
-cpm corpus create [<em>rootdirpath</em>] <em>name</em>
-</p>
-
-<p>
-# name must be unique
-</p>
-
-<p>
-# copy files ? yes
-</p>
-
-<p>
-cpm corpus <em>name</em> |<em>id</em> add <em>filepath</em> |<em>folderpath</em>
-</p>
-
-<p>
-# check if exist
-</p>
-
-<p>
-cpm corpus <em>name</em> |<em>id</em> rm <em>relativefilepath</em> |<em>relativefolderpath</em>
-</p>
-
-<p>
-cpm corpus <em>name</em> |<em>id</em> ls
-</p>
-
-<p>
-cpm corpus ls
-</p>
-
-<p>
-cpm corpus rm <em>name</em> |<em>id</em>
-</p>
-
 </div>
-<!-- EDIT5 SECTION "Corpus Management" [1020-] -->
+<!-- EDIT5 SECTION "Run Management" [742-] -->

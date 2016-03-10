@@ -117,6 +117,7 @@
   }
 
   vw.cpm.ModuleView.prototype.renderGraphical=function(){
+    return; // disabled
     var me = this;
     this.$el.find(".module-content-view").append(vw.cpm.ModuleView.templateGraphical);
     this.$el.find('.canvas-container').perfectScrollbar();

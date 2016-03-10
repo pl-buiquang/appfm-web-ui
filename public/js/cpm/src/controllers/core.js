@@ -17,6 +17,7 @@
     var me = this;
 
     this.foo = "bar";
+    this.testmodule = "treetagger_fr";
 
     if (!store.enabled) {
       alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser. Your session won\'t be saved across page reloads');
@@ -263,6 +264,87 @@
         me.view.openMenu("corpus-menu");
       }else if(element.id=="module-menu"){
         me.view.openMenu("module-menu");
+      }else if(element.id=="process-menu"){
+        me.view.openMenu("process-menu");
+      }else if(element.id=="settings-menu"){
+        me.view.openMenu("settings-menu");
+      }else if(element.id=="help-menu"){
+        me.view.openMenu("help-menu");
+      }
+    });
+    intro.onexit(function(){
+      me.view.closeMenu();
+    });
+    intro.oncomplete(function(){
+      me.view.closeMenu();
+    });
+    intro.start();
+  }
+
+  vw.cpm.CLI.prototype.demoModule = function(){
+    var me = this;
+    var intro = introJs();
+    var testmodule = me.testmodule;
+    if (!me.modulesmanager.modules["testmodule"]){
+      for (modulename in me.modulesmanager.modules){
+        if (modulename != "_CMD" && modulename != "_MAP"){
+          testmodule = modulename;
+          break;
+        }
+      }
+    }
+    me.modulesmanager.showModule(testmodule);
+    intro.setOptions({
+      steps: [
+        { 
+          intro: "<h1>Modules</h1>This short tutorial will present you how the basic actions availables with modules."
+        },
+        {
+          element: document.querySelector('#module-menu'),
+          intro: "Modules available are list here.<br>For the tutorial purpose, We'll open one for you.",
+          position:'bottom'
+        },
+        {
+          element:  document.querySelectorAll('.frame')[0],
+          intro: "Here is the module view",
+          position:'bottom'
+        },
+        {
+          element: document.querySelector('#corpus-menu'),
+          intro: "You can then drag and drop files from corpus into the proper input fields.",
+          position: 'right'
+        },
+        // then run
+        // a process view appears
+        // that you can close and find at any moment within the process list
+        {
+          element: document.querySelector('#module-menu'),
+          intro: "This one list the modules available that can be executed over the data available in the previous menu.",
+          position: 'right'
+        },
+        {
+          element: document.querySelector('#process-menu'),
+          intro: "This last one shows the list of past modules executions.",
+          position: 'right'
+        },
+        {
+          element: document.querySelector('#settings-menu'),
+          intro: "Global settings can be reviewed here.",
+          position: 'right'
+        },
+        {
+          element: document.querySelector('#help-menu'),
+          intro: "...and if you need more help, this is where you can find further documentation.",
+          position: 'right'
+        }              
+      ]
+    });
+    intro.onchange(function(element){
+      if(element.id=="corpus-menu"){
+        me.view.openMenu("corpus-menu");
+      }else if(element.id=="module-menu"){
+        me.view.openMenu("module-menu");
+        
       }else if(element.id=="process-menu"){
         me.view.openMenu("process-menu");
       }else if(element.id=="settings-menu"){

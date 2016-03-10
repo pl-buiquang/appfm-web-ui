@@ -21,10 +21,16 @@
     this.$el.find("#help-tutorial").on("click",function(){
       me.model.app.demo();
     });
+    /*
+    this.$el.find("#help-tutorial-module").on("click",function(){
+      me.model.app.demoModule();
+    });*/
+    
     
   }
 
   vw.cpm.HelpManagerView.template = '<div id="help-tutorial" style="cursor:pointer;">Tutorial</div><div id="help-presa-slides" style="cursor:pointer;">Introduction slides</div><div id="help-main-wiki-page" style="cursor:pointer;">Main wiki</div>';
+  //<div id="help-tutorial-module" style="cursor:pointer;">Module tutorial</div>
 
   
 

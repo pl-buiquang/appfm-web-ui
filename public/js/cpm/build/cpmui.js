@@ -2520,6 +2520,10 @@
       me.$el.find('.file-var').click(function(){
         me.model.app.openFile($(this).html().trim());
       });
+
+      me.$el.find('.iframe-var').click(function(){
+        me.model.app.openIFrame($(this).html().trim());
+      });
     }
   }
 
@@ -2532,6 +2536,9 @@
          html += '<li class="file-var link">'+variable.value[i]+'</li>';
       };
       html += '</ul>';
+      return html;
+    }else if(variable.type == "VAL" && variable.format == "url"){
+      var html = '<span class="iframe-var">'+variable.value+'</span>';
       return html;
     }else if(typeof variable.value == "string" && variable.format == "html"){
       return variable.value;  

@@ -539,6 +539,11 @@ ul.main-menu{
   color:#134E7A;
 }
 
+.iframe-var{
+  cursor: pointer;
+  color:#134E7A;
+}
+
 
 /*******************************************************************
 *      UI widgets // Modal

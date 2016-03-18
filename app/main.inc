@@ -69,7 +69,7 @@ function cpm_main(){
   $html = tplset(array(
     "BASE_URL"=>BASE_URL,
     "HOSTNAME" => CPM_HOST,
-    "WS_PORT" => CPM_WS_PORT
+    "WS_HOST" => CPM_WS_HOST
     ),tpl("main"));
 
 

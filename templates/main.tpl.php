@@ -46,7 +46,7 @@
 
 <!--Main application script entry point-->
 <script>
-  var cli = new vw.cpm.CLI(jQuery("body"),{cpmbaseurl:"[[BASE_URL]]",hostname:"[[HOSTNAME]]",cpmwsport:"[[WS_PORT]]"});
+  var cli = new vw.cpm.CLI(jQuery("body"),{cpmbaseurl:"[[BASE_URL]]",hostname:"[[HOSTNAME]]",cpmwshost:"[[WS_HOST]]"});
 
 </script>
 

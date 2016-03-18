@@ -106,7 +106,7 @@
   vw.cpm.CLI.prototype.initWS = function(){
     var me = this;
     try{
-      this.wssocket = new WebSocket("ws://"+me.options.hostname+":"+me.options.cpmwsport);
+      this.wssocket = new WebSocket("ws://"+me.options.cpmwshost);
       this.wssocket.onopen = function(e){
         me.logger.info(e);
         console.log(arguments);

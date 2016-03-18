@@ -1045,7 +1045,7 @@
 
   vw.cpm.ModuleManager.prototype.showModule = function(modulename){
     var me = this;
-    var panel = me.app.view.getPanelFromSID(modulename,false,"moduledef-"+modulename);
+    var panel = me.app.view.getPanelFromSID("moduledef-"+modulename,false,modulename);
     var module = new vw.cpm.Module(me.app,panel.$el.find(".frame-body"),me.modules[modulename]);
     me.modulesobj.push(module);
     module.view.render();
@@ -1139,7 +1139,7 @@
 
   vw.cpm.ProcessManager.prototype.showRun = function(modulename,runid){
     var me = this;
-    var panel = this.app.view.getPanelFromSID('<span class="link">'+modulename + "</span> ( "+runid+" )",false,"process-"+runid);
+    var panel = this.app.view.getPanelFromSID("process-"+runid,false,'<span class="link">'+modulename + "</span> ( "+runid+" )");
     panel.$el.find(".frame-title").find(".link").click(function(){
       me.app.modulesmanager.showModule(modulename);
     });

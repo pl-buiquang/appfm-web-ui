@@ -189,7 +189,7 @@
 
   vw.cpm.ModuleManager.prototype.showModule = function(modulename){
     var me = this;
-    var panel = me.app.view.getPanelFromSID(modulename,false,"moduledef-"+modulename);
+    var panel = me.app.view.getPanelFromSID("moduledef-"+modulename,false,modulename);
     var module = new vw.cpm.Module(me.app,panel.$el.find(".frame-body"),me.modules[modulename]);
     me.modulesobj.push(module);
     module.view.render();

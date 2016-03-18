@@ -15,7 +15,7 @@
 
   vw.cpm.ProcessManager.prototype.showRun = function(modulename,runid){
     var me = this;
-    var panel = this.app.view.getPanelFromSID('<span class="link">'+modulename + "</span> ( "+runid+" )",false,"process-"+runid);
+    var panel = this.app.view.getPanelFromSID("process-"+runid,false,'<span class="link">'+modulename + "</span> ( "+runid+" )");
     panel.$el.find(".frame-title").find(".link").click(function(){
       me.app.modulesmanager.showModule(modulename);
     });

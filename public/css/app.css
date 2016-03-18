@@ -332,7 +332,6 @@ display: inline-block;
   cursor: pointer;
   background-image:url('../img/system/close2.png');
 }
-}
 
 #fullscreen-container{
   display: none;

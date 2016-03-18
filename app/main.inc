@@ -9,8 +9,7 @@ Router::addRoutes(array(
   ""=>"cpm_main",
   "test"=>"cpm_test",
   "rest/cmd"=>"cmdexec",
-  "rest/file"=>"fetchfile",
-  "introslides"=>"introslides"
+  "introslides"=>"introslides",
 ));
 
 function cpm_main(){
@@ -69,7 +68,8 @@ function cpm_main(){
 
   $html = tplset(array(
     "BASE_URL"=>BASE_URL,
-    "HOSTNAME" => CPM_HOST
+    "HOSTNAME" => CPM_HOST,
+    "WS_PORT" => CPM_WS_PORT
     ),tpl("main"));
 
 
@@ -137,19 +137,6 @@ function cmdexec(){
   exit();
 }
 
-function fetchfile(){
-  if(isset($_POST)){
-    // TODO !!! Limit file access !!!
-    $content = file_get_contents($_POST['file']);
-    Logger::Log($_POST['file']);
-    Logger::Log($content);
-    echo $content;
-    exit();
-  }
-  echo "";
-  exit();
-}
-
 
 function introslides(){
 
@@ -203,3 +190,14 @@ function introslides(){
     </script>
 ");
 }
+
+function cpm_test($args){
+  global $page;
+
+  $page->addJS(BASE_URL."public/js/vendor/jquery-2.1.0.min.js");
+  $page->addJS(BASE_URL."public/vendor/node_modules/bootstrap/dist/js/bootstrap.min.js");
+  $page->addCSS(BASE_URL."public/vendor/node_modules/bootstrap/dist/css/bootstrap.min.css");
+  $page->addToBody(tpl("test"));
+
+}
+

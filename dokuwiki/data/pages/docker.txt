@@ -1,0 +1,15 @@
+====== Intégration Docker ======
+
+Base CPM shell : Dockerfile de base
+
+Paramètres :
+
+- Dockerfile
+
+- Contained
+
+- Docker_opts
+
+Plus de documentation :
+
+http://docs.docker.com

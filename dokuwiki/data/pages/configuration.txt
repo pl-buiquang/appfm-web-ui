@@ -1,0 +1,21 @@
+====== Configuration ======
+
+===== Kernel =====
+
+conf.yml
+
+env.sh, start.sh, start-daemon.sh, start-dev.sh
+
+===== CLI =====
+
+inside cpm.py ... :/
+
+===== WebUI =====
+
+settings.php
+
+.htaccess
+
+===== Vagrant =====
+
+Vagrantfile

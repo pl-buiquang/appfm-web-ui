@@ -26,6 +26,11 @@
   vw.cpm.CLI.prototype.init = function(){
     var me = this;
 
+
+    this.logger = new vw.cpm.Logger(this,{});
+
+    this.logger.info("Starting AppFM web ui");
+
     this.foo = "bar";
     this.testmodule = "treetagger_fr";
 
@@ -50,11 +55,16 @@
       "help-menu":{title:"Help",body:$('<div></div>')}
     }
 
+    me.wssocketactive = false;
+
+
     this.reload();
+
+    this.checkstatus();
 
     this.helpmanager = new vw.cpm.HelpManager(this,this.menus['help-menu'].body);
 
-    
+
 
     var firstrun = store.get('firstrun')
     if(!firstrun){
@@ -69,19 +79,106 @@
   
   }
 
+  vw.cpm.CLI.prototype.checkstatus = function(){
+    var me = this;
+    if(this.longpolling);
+    clearInterval(this.longpolling);
+    this.longpolling = setInterval(function(){
+      $.ajax({
+        type: "POST",
+        data : {
+          cmd: "status"
+        },
+        url: me.options.cpmbaseurl+"rest/cmd",
+        success: function(data, textStatus, jqXHR) {
+          if(data == "timeout"){
+            me.logger.error("Couldn't connect to server : timeout");
+            me.view.setStatusButton("offline");
+          }else{
+            if(me.wssocketactive){
+              me.view.setStatusButton("online");
+              clearInterval(me.longpolling);
+              me.longpolling = undefined;
+            }else{
+              me.view.setStatusButton("limited");
+            }
+          }
+        },
+        error:function(jqXHR){
+          me.logger.error(jqXHR.responseText);
+          me.view.setStatusButton("offline");
+        },
+        timeout: 20000 
+      });
+    },60000);
+  }
+
+  vw.cpm.CLI.prototype.initWS = function(){
+    var me = this;
+    try{
+      this.wssocket = new WebSocket("ws://localhost:8082");
+      this.wssocket.onopen = function(e){
+        me.logger.info(e);
+        console.log(arguments);
+        me.wssocketactive = true;
+      };
+      this.wssocket.onclose = function(e){
+        me.logger.info(e);
+        me.wssocketactive = false;
+        me.checkstatus();
+        console.log(arguments);
+        //me.view.setStatusButton("offline");
+      };
+      this.wssocket.onmessage = function(e){
+        var obj = JSON.parse(e.data);
+        me.logger.info(obj.type+" "+obj.target+" "+obj.more);
+        if(obj.type == "kernel-started"){
+
+        }else if(obj.type == "kernel-stopped"){
+
+        }else if(obj.type == "process-ended"){
+          me.processmanager.showRun(obj.more,obj.target);
+        }else if(obj.type == "process-started"){
+
+        }else if(obj.type == "process-deleted"){
+
+        }else if(obj.type == "module-created"){
+          me.reload();
+        }else if(obj.type == "module-updated"){
+          me.reload();
+        }else{
+
+        }
+      };
+      this.wssocket.onerror = function(e){
+        console.log(arguments);
+        me.logger.error(arguments);
+        me.checkstatus();
+      };
+    }catch(err){
+      me.logger.warn(err);
+      return;
+    }
+  }
+
   vw.cpm.CLI.prototype.reload = function(){
     var me = this;
     this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body,{init:function(){
+      this.logger.info("Received appfm server settings");
       me.initmodules();
     }});
   }
 
   vw.cpm.CLI.prototype.initmodules = function(){
+    this.view.setStatusButton("online");
+
     this.modulesmanager = new vw.cpm.ModuleManager(this,this.menus['module-menu'].body);
 
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
     this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
+
+    this.initWS();
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){
@@ -122,9 +219,9 @@
         success: function(data, textStatus, jqXHR) {
           callback.call(me,data);
         },
-        error:function(){
-
-        }
+        error:function(jqXHR){
+          me.logger.error(jqXHR.responseText);
+        },
       });
   }
 
@@ -134,10 +231,6 @@
 
     command = command.trim();
 
-    if(command == "test"){
-      var $panel = this.view.createPanel("test");
-      var process = new vw.cpm.Process(this,$panel.find('.frame-body'),{moduledef:me.modulesmanager.modules['stanford-parser'],runconf:{IN:'/home/paul/custom/cpm/data/testcorpus/humanism.txt'},runid:"some run id"});
-    }
 
     if(command == "help"){
       me.helpmanager.displayCLIHelp();
@@ -176,48 +269,22 @@
     if(title){
       name = title;
     }
-    $panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>');
-    $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
-    return $panel;
+    var panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>');
+    panel.$el.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
+    return panel;
   }
 
   vw.cpm.CLI.prototype.openFile = function(filepath){
     var me = this;
-    $.ajax({
-      type: "POST",
-      data : {
-        file:filepath
-      },
-      url: me.options.cpmbaseurl+"rest/file",
-      success: function(data, textStatus, jqXHR) {
+    me.cpmRawCall("fs get "+filepath,function(data) {
         data = jQuery('<div />').text(data).html();
         //data = data.replace(/\s/g,'&nbsp;');
         //data = data.replace(/\n|\r|\r\n/g,'<br>');
         data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
         me.view.createPanel(filepath,data);
-      },
-      error:function(){
-
-      }
-    });
+      });
   }
 
-  vw.cpm.CLI.prototype.getFileContent = function(filepath,callback){
-    var me = this;
-    $.ajax({
-      type: "POST",
-      data : {
-        file:filepath
-      },
-      url: me.options.cpmbaseurl+"rest/file",
-      success: function(data, textStatus, jqXHR) {
-        callback.call(me,data);
-      },
-      error:function(){
-
-      }
-    });
-  }
 
 
   vw.cpm.CLI.prototype.cpmSettings = function(){
@@ -261,6 +328,11 @@
           element: document.querySelector('#settings-menu'),
           intro: "Global settings can be reviewed here.",
           position: 'right'
+        },
+        {
+          element: document.querySelector('#log-button'),
+          intro: "Clicking here will show you some logged informations.<br>The status button next to it should be green or yellow (in case optional websockets isn't supported by your browser or port is blocked)",
+          position: 'top'
         },
         {
           element: document.querySelector('#help-menu'),
@@ -617,6 +689,78 @@
 }(window.vw = window.vw || {}));
 (function(vw){
 
+  vw.cpm.Logger = function(app,options){
+    this.options = options;
+    this.app = app;
+    this.logs = [];
+    this.refreshlog = false;
+  }
+
+  vw.cpm.Logger.prototype.appendLog = function(message,type){
+    var d = new Date();
+    var n = d.toUTCString();
+    this.logs.push({"entry":message,"type":type,"date":n});
+    this.refreshlog = true;
+    this.refresh();
+  }
+
+  vw.cpm.Logger.prototype.info = function(message){
+    this.appendLog(message,"info");
+  }
+
+  vw.cpm.Logger.prototype.debug = function(message){
+    this.appendLog(message,"debug");
+  }
+
+  vw.cpm.Logger.prototype.warn = function(message){
+    this.appendLog(message,"warn");
+  }
+
+  vw.cpm.Logger.prototype.error = function(message){
+    this.appendLog(message,"error");
+  }
+
+  vw.cpm.Logger.prototype.refresh = function(){
+    var me = this;
+    var panel = me.app.view.getPanel("AppFM log",true);
+    if (panel){
+      panel.$el.find(".frame-body").empty();
+      panel.$el.find(".frame-body").append(me.render());
+      this.refreshlog = false;
+    }
+  }
+
+  vw.cpm.Logger.prototype.view = function(){
+    var me = this;
+    var panel = me.app.view.getPanel("AppFM log",true);
+    if (!panel){
+      panel = me.app.view.createPanel("AppFM log",me.render());
+    }else{
+      if (me.refreshlog){
+        panel.$el.find(".frame-body").empty();
+        panel.$el.find(".frame-body").append(me.render());
+      }  
+    }
+    
+    this.refreshlog = false;
+    panel.focus();
+  }
+
+
+  vw.cpm.Logger.prototype.render = function(){
+    data = "";
+    for (var i = this.logs.length - 1; i >= 0; i--) {
+      var item =this.logs[i];
+      data += item["type"]+" - "+item["date"]+" : "+item["entry"]+"\n";
+    }
+    return '<code><pre class="pre-wrapped">'+data+'</pre></code>';
+  }
+
+
+
+}(window.vw = window.vw || {}));
+(function(vw){
+
   vw.cpm.Module = function(app,$el,moduledef){
     this.def = moduledef;
     this.app = app;
@@ -881,7 +1025,7 @@
 
   vw.cpm.ModuleManager.prototype.createNewModule = function(modulename,containerdirpath){
     var me = this;
-    var $panel = me.app.view.createPanel(modulename);
+    var panel = me.app.view.createPanel(modulename);
     var newmoduledef = {
       module:{
         name:modulename,
@@ -895,16 +1039,17 @@
       sourcepath:me.app.cpmsettingsmanager.defaultModulesDir+"/custom/"+modulename+".module",
       creation:true
     };
-    var module = new vw.cpm.Module(me.app,$panel.find(".frame-body"),newmoduledef);
+    var module = new vw.cpm.Module(me.app,panel.$el.find(".frame-body"),newmoduledef);
     module.view.render();
   }
 
   vw.cpm.ModuleManager.prototype.showModule = function(modulename){
     var me = this;
-    var $panel = me.app.view.createPanel(modulename);
-    var module = new vw.cpm.Module(me.app,$panel.find(".frame-body"),me.modules[modulename]);
+    var panel = me.app.view.getPanelFromSID(modulename,false,"moduledef-"+modulename);
+    var module = new vw.cpm.Module(me.app,panel.$el.find(".frame-body"),me.modules[modulename]);
     me.modulesobj.push(module);
     module.view.render();
+    panel.focus();
   }
 
 
@@ -955,13 +1100,13 @@
       url : me.app.options.cpmbaseurl+"rest/cmd",
       success : function(data){
         if(data == "ok"){
-          var $panel = me.app.view.getPanelFromContent(me.view.$el);
-          me.app.view.deletePanel($panel);
+          var panel = me.app.view.getPanelFromContent(me.view.$el);
+          panel.delete();
           me.app.processmanager.remove(me.runid);
         }
       },
       error : function(){
-        console.log("error when trying to delete process result "+me.runid);
+        me.app.logger.error("error when trying to delete process result "+me.runid);
       }
     });
   }
@@ -970,7 +1115,7 @@
 
   vw.cpm.Process.prototype.run = function(conf,success,error){
     var me = this;
-    console.log(conf);
+    me.app.logger.debug(conf);
     if(success){
       success.call(me.view);
     }
@@ -994,12 +1139,13 @@
 
   vw.cpm.ProcessManager.prototype.showRun = function(modulename,runid){
     var me = this;
-    var $panel = this.app.view.createPanel('<span class="link">'+modulename + "</span> ( "+runid+" )");
-    $panel.find(".frame-title").find(".link").click(function(){
+    var panel = this.app.view.getPanelFromSID('<span class="link">'+modulename + "</span> ( "+runid+" )",false,"process-"+runid);
+    panel.$el.find(".frame-title").find(".link").click(function(){
       me.app.modulesmanager.showModule(modulename);
     });
-    var process = new vw.cpm.Process(this.app,$panel.find(".frame-body"),{moduledef:me.app.modulesmanager.modules[modulename].module,runconf:{},runid:runid});
+    var process = new vw.cpm.Process(this.app,panel.$el.find(".frame-body"),{moduledef:me.app.modulesmanager.modules[modulename].module,runconf:{},runid:runid});
     process.sync();
+    panel.focus();
   }
 
   vw.cpm.ProcessManager.prototype.remove = function(runid){
@@ -1097,6 +1243,10 @@
       vw.cpm.CLIView.maxFrameHeight = $(window).height()-178 ;
     });
 
+    $("#log-button").click(function(){
+      me.model.logger.view();
+    });
+
 
     this.contentpanel = $("#active-content");
 
@@ -1177,6 +1327,16 @@
     me.model.activemenu = id;
   }
 
+  vw.cpm.CLIView.prototype.setStatusButton = function(status){
+    $("#status-button").removeClass();
+    $("#status-button").addClass("status-button-"+status);
+    if(status == "limited"){
+      $("#status-button").attr("title","Websocket does not seem to work. Some feature won't be available...");
+    }else{
+      $("#status-button").attr("title",undefined);
+    }
+  }
+
   vw.cpm.CLIView.prototype.toggleCLI = function(activate){
     if(activate){
       if(!this.cmdbar.isenabled()){
@@ -1190,45 +1350,35 @@
     }
   }
 
-  vw.cpm.CLIView.prototype.stick = function(panel){
+  vw.cpm.CLIView.prototype.getPanelFromSID = function(sid,do_not_create_new_if_not_found,title){
     var me = this;
-    //panel.detach();
-    this.contentpanel.find('#active-content-sticky').append(panel); 
-    var button = panel.find('.frame-tool-pin');
-    button.removeClass('frame-tool-pin');
-    button.addClass('frame-tool-unpin');
-    button.unbind('click');
-    button.click(function(){
-      me.unstick(panel);
-    });
-    me.contentpanel[0].scrollTop = 0;
-    me.contentpanel.perfectScrollbar("update");
-  }
-
-  vw.cpm.CLIView.prototype.unstick = function(panel){
-    var me = this;
-    //panel.detach();
-    this.contentpanel.find('#active-content-flow').append(panel);
-    var button = panel.find('.frame-tool-unpin');
-    button.removeClass('frame-tool-unpin');
-    button.addClass('frame-tool-pin');
-    button.unbind('click');
-    button.click(function(){
-      me.stick(panel);
-    });
+    var index = -1;
+    for(var i in me.panels){
+      if(me.panels[i].semanticid != undefined && me.panels[i].semanticid==sid){
+        index = i;
+        break;
+      }
+    }
+    if(index!=-1){
+      return me.panels[index];
+    }else if(do_not_create_new_if_not_found){
+      return undefined;
+    }else{
+      return me.createPanel(title,"",sid);
+    }
   }
 
   vw.cpm.CLIView.prototype.getPanel = function(title,do_not_create_new_if_not_found){
     var me = this;
     var index = -1;
     for(var i in me.panels){
-      if(me.panels[i].find(".frame-title").html()==title){
+      if(me.panels[i].$el.find(".frame-title").html()==title){
         index = i;
         break;
       }
     }
     if(index!=-1){
-      return me.panels[i];
+      return me.panels[index];
     }else if(do_not_create_new_if_not_found){
       return undefined;
     }else{
@@ -1237,144 +1387,31 @@
 
   }
 
+  vw.cpm.CLIView.prototype.getPanelFromUID = function(uid){
+    var me = this;
+    var index = -1;
+    for(var i in me.panels){
+      if(me.panels[i].uid==uid){
+        index = i;
+        break;
+      }
+    }
+    if (index != -1){
+      return me.panels[index];
+    }else{
+      return undefined;
+    }
+  }
+
   vw.cpm.CLIView.prototype.getPanelFromContent = function($el){
-    return $el.parents(".frame");
+    return this.getPanelFromUID($el.parents(".frame").attr("uid"));
   }
 
-  vw.cpm.CLIView.prototype.quitFullscreen = function($panel){
-    var me = this;
-    me.$fullscreencontainer.fadeOut();
-    var title = me.$fullscreencontainer.find(".frame-title").children();
-    if(title.length == 0){
-      $panel.find(".frame-title").append(title);
-    }
-    var content = me.$fullscreencontainer.find(".frame-body").children()
-    if(content.length != 0){
-      if(content.length == 1){
-        if(content.prop("originalHeight"))
-          content.height(content.prop("originalHeight"));
-      }
-      $panel.find(".frame-body").append(content);
-    }
+
+  vw.cpm.CLIView.prototype.createPanel = function(title,data,sid){
+    var panel = new vw.cpm.Panel(this.model,title,data,sid);
     
-  }
-
-  vw.cpm.CLIView.prototype.fullscreen = function($panel){
-    var me = this;
-    me.$fullscreencontainer.fadeIn();
-    var title = $panel.find(".frame-title").children();
-    if(title.length == 0){
-      title = $panel.find(".frame-title").html();
-    }
-    var content = $panel.find(".frame-body").children();
-
-    if(content.length==0){
-      content = $panel.find(".frame-body").html();
-    }else if(content.length == 1){
-      content.prop("originalHeight",content.height());
-      content.height($(window).height()-100);
-    }
-    me.$fullscreencontainer.find(".frame-title").empty();
-    me.$fullscreencontainer.find(".frame-body").empty();
-    me.$fullscreencontainer.find(".frame-title").append(title);
-    me.$fullscreencontainer.find(".frame-body").append(content);
-    me.$fullscreencontainer.find(".frame-tool-quitfs").unbind("click");
-    me.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
-      me.quitFullscreen($panel);
-    });
-  }
-
-  vw.cpm.CLIView.prototype.show = function($panel){
-    var me = this;
-    var button = $panel.find('.frame-tool-show');
-    button.removeClass('frame-tool-show');
-    button.addClass('frame-tool-hide');
-    button.unbind("click");
-    $panel.find(".frame-body").slideDown({complete:function(){
-      button.on("click",function(){
-        me.hide($panel);
-      });
-    }});
-  }
-
-  vw.cpm.CLIView.prototype.hide = function($panel){
-    var me = this;
-    var button = $panel.find('.frame-tool-hide');
-    button.removeClass('frame-tool-hide');
-    button.addClass('frame-tool-show');
-    button.unbind("click");
-    $panel.find(".frame-body").slideUp({complete:function(){
-      button.on("click",function(){
-        me.show($panel);
-      });
-    }});
-  }
-
-  vw.cpm.CLIView.prototype.deletePanel = function($panel){
-    var me = this;
-    var index = me.panels.indexOf($panel);
-      if(index!=-1){
-        me.panels.splice(index,1);
-      }
-      $panel.animate({
-          opacity: 0.25,
-          height: "toggle"
-        },{
-        complete:function(){
-          $panel.remove();
-        },
-        duration : 200
-      }
-    );
-  }
-
-  vw.cpm.CLIView.prototype.createPanel = function(title,data){
-    var me = this;
-    var html = vw.cpm.CLIView.frametemplate;
-    var $el = $(html);
-    //$el.hide();
-    //$el.show('drop');
-    this.contentpanel.find('#active-content-flow').prepend($el);
-
-    if(title != 'undefined'){
-      $el.find(".frame-title").append(title);
-    }
-    if(data != 'undefined'){
-      $el.find('.frame-body').append(data);
-    }
-
-    this.panels.push($el);
-
-
-    $el.find(".frame-title").mouseup(function (e){
-       vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
-     });
-    $el.find(".frame-body").mouseup(function (e){
-       vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
-     });
- 
-    $el.find('.frame-tool-pin').click(function(){
-      me.stick($el);
-
-    });
-
-    $el.find('.frame-tool-close').click(function(){
-      me.deletePanel($el)
-    });
-
-    $el.find('.frame-tool-openfs').click(function(){
-      me.fullscreen($el);
-
-    });
-
-    $el.find('.frame-tool-hide').click(function(){
-      me.hide($el);
-    });
-
-    me.contentpanel[0].scrollTop = 0;
-    me.contentpanel.perfectScrollbar("update");
-
-    return $el;
+    return panel;
   }
 
   vw.cpm.CLIView.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div><div class="frame-tool frame-tool-hide"></div></div></div><div class="frame-body"></div></div>';
@@ -2088,22 +2125,28 @@
 
     this.$el.find('.module-view-infos-panel').perfectScrollbar({suppressScrollX:true});
 
-    if(me.model.def.hasOwnProperty("module")){
+    /*if(me.model.def.hasOwnProperty("module")){
       me.renderGraphical();
     }else{
       me.renderSource();
     }
     me.setActiveMenu(".module-view-graphic");
-
+    */
+   me.renderSource();
+   me.setActiveMenu(".module-view-source");
+   
+   
     this.$el.find(".module-view-source").on("click",function(){
       me.$el.find(".module-content-view").empty();
       me.renderSource();
       me.setActiveMenu(".module-view-source");
     });
-    this.$el.find(".module-view-graphic").on("click",function(){
+   /* this.$el.find(".module-view-graphic").on("click",function(){
       me.showGraphical();
       me.setActiveMenu(".module-view-graphic");
     });
+    */
+   
     this.$el.find(".module-save").on("click",function(){
       me.model.sync(function(){
 
@@ -2173,8 +2216,9 @@
         conf[inputname] = $form.find('input[name="'+inputname+'"]').val()
       } 
       me.model.run(conf,function(){
-        me.showGraphical();
-        me.setActiveMenu(".module-view-graphic");
+        me.$el.find(".module-content-view").empty();
+        me.renderSource();
+        me.setActiveMenu(".module-view-source");
       });
     })
   }
@@ -2407,14 +2451,207 @@
     '</div><div class="canvas-container"><div class="canvas-view"></div></div><div class="module-view-infos-panel"></div></div>';
 
   vw.cpm.ModuleView.template = '<div class="module-header">'+
-  '<span class="module-view-source module-header-item" style="float:left; margin-left:8px;">source</span>'+
-  '<span class="module-view-graphic module-header-item" style="float:left; margin-left:20px;">view</span>'+
-  '<span class="module-run module-header-item" style="float:right; margin-right:8px;">run</span>'+
-  '<span class="module-save module-header-item" style="float:right; margin-right:20px;">save</span>'+
+  '<span class="module-view-source module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">source</span>'+
+  //'<span class="module-view-graphic module-header-item" style="float:left; margin-left:20px;">view</span>'+
+  '<span class="module-save module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">save</span>'+
+  '<span class="module-run module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">run</span>'+
   '</div>'+
   '<div class="module-content-view"></div>';
 
   vw.cpm.ModuleView.templateGraphic = '<div class="module-graphical-view"><div ></div>';
+
+
+
+}(window.vw = window.vw || {}));
+
+(function(vw){
+
+  vw.cpm.Panel = function(app,title,data,semanticid){
+    this.app = app;
+    this.semanticid = semanticid;
+    this.$el = $(vw.cpm.Panel.frametemplate);
+    this.app.view.contentpanel.find('#active-content-flow').prepend(this.$el);
+    this.el = this.$el[0];
+    this.uid = vw.cpm.Panel.uids++;
+    this.init(title,data);
+  };
+
+  vw.cpm.Panel.prototype.init = function(title,data){
+    var me = this;
+
+    this.$el.attr("uid",this.uid);
+
+    
+
+    if(title != 'undefined'){
+      me.$el.find(".frame-title").append(title);
+    }
+    if(data != 'undefined'){
+      me.$el.find('.frame-body').append(data);
+    }
+
+    this.app.view.panels.push(me);
+
+
+    me.$el.find(".frame-title").mouseup(function (e){
+       vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
+     });
+    me.$el.find(".frame-body").mouseup(function (e){
+       vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
+     });
+ 
+    me.$el.find('.frame-tool-pin').click(function(){
+      me.stick();
+
+    });
+
+    me.$el.find('.frame-tool-close').click(function(){
+      me.delete()
+    });
+
+    me.$el.find('.frame-tool-openfs').click(function(){
+      me.fullscreen();
+
+    });
+
+    me.$el.find('.frame-tool-hide').click(function(){
+      me.hide();
+    });
+
+    me.app.view.contentpanel[0].scrollTop = 0;
+    me.app.view.contentpanel.perfectScrollbar("update");
+  }
+
+
+
+  vw.cpm.Panel.prototype.quitFullscreen = function(){
+    var me = this;
+    me.app.view.$fullscreencontainer.fadeOut();
+    var title = me.app.view.$fullscreencontainer.find(".frame-title").children();
+    if(title.length == 0){
+      me.$el.find(".frame-title").append(title);
+    }
+    var content = me.app.view.$fullscreencontainer.find(".frame-body").children();
+    if(content.length != 0){
+      if(content.length == 1){
+        if(content.prop("originalHeight"))
+          content.height(content.prop("originalHeight"));
+      }
+      me.$el.find(".frame-body").append(content);
+    }
+    
+  }
+
+  vw.cpm.Panel.prototype.fullscreen = function(){
+    var me = this;
+    me.app.view.$fullscreencontainer.fadeIn();
+    var title = me.$el.find(".frame-title").children();
+    if(title.length == 0){
+      title = me.$el.find(".frame-title").html();
+    }
+    var content = me.$el.find(".frame-body").children();
+
+    if(content.length==0){
+      content = me.$el.find(".frame-body").html();
+    }else if(content.length == 1){
+      content.prop("originalHeight",content.height());
+      content.height($(window).height()-100);
+    }
+    me.app.view.$fullscreencontainer.find(".frame-title").empty();
+    me.app.view.$fullscreencontainer.find(".frame-body").empty();
+    me.app.view.$fullscreencontainer.find(".frame-title").append(title);
+    me.app.view.$fullscreencontainer.find(".frame-body").append(content);
+    me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").unbind("click");
+    me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
+      me.quitFullscreen();
+    });
+  }
+
+  vw.cpm.Panel.prototype.show = function(){
+    var me = this;
+    var button = me.$el.find('.frame-tool-show');
+    button.removeClass('frame-tool-show');
+    button.addClass('frame-tool-hide');
+    button.unbind("click");
+    me.$el.find(".frame-body").slideDown({complete:function(){
+      button.on("click",function(){
+        me.hide();
+      });
+    }});
+  }
+
+  vw.cpm.Panel.prototype.hide = function(){
+    var me = this;
+    var button = me.$el.find('.frame-tool-hide');
+    button.removeClass('frame-tool-hide');
+    button.addClass('frame-tool-show');
+    button.unbind("click");
+    me.$el.find(".frame-body").slideUp({complete:function(){
+      button.on("click",function(){
+        me.show();
+      });
+    }});
+  }
+
+  vw.cpm.Panel.prototype.focus = function(){
+    var me = this;
+    me.app.view.contentpanel[0].scrollTop = me.$el[0].offsetTop-20;
+  }
+
+  vw.cpm.Panel.prototype.delete = function(){
+    var me = this;
+    var index = me.app.view.panels.indexOf(me);
+    if(index!=-1){
+      me.app.view.panels.splice(index,1);
+    }
+    me.$el.animate({
+          opacity: 0.25,
+          height: "toggle"
+        },{
+        complete:function(){
+          me.$el.remove();
+        },
+        duration : 200
+      }
+    );
+  }
+
+  vw.cpm.Panel.prototype.stick = function(){
+    var me = this;
+    //panel.detach();
+    this.app.view.contentpanel.find('#active-content-sticky').append(me.$el); 
+    var button = me.$el.find('.frame-tool-pin');
+    button.removeClass('frame-tool-pin');
+    button.addClass('frame-tool-unpin');
+    button.unbind('click');
+    button.click(function(){
+      me.unstick();
+    });
+    me.app.view.contentpanel[0].scrollTop = 0;
+    me.app.view.contentpanel.perfectScrollbar("update");
+  }
+
+  vw.cpm.Panel.prototype.unstick = function(){
+    var me = this;
+    //panel.detach();
+    this.app.view.contentpanel.find('#active-content-flow').append(me.$el);
+    var button = me.$el.find('.frame-tool-unpin');
+    button.removeClass('frame-tool-unpin');
+    button.addClass('frame-tool-pin');
+    button.unbind('click');
+    button.click(function(){
+      me.stick();
+    });
+  }
+
+  vw.cpm.Panel.uids = 0;
+
+  vw.cpm.Panel.maxFrameHeight = 500;
+
+  vw.cpm.Panel.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div><div class="frame-tool frame-tool-hide"></div></div></div><div class="frame-body"></div></div>';
+  vw.cpm.Panel.fullscreentemplate = '<div id="fullscreen-container"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-quitfs"></div></div></div><div class="frame-body"></div></div>';
+
+
 
 
 
@@ -2478,6 +2715,7 @@
 
   vw.cpm.ProcessView.prototype.init=function(){
     var me = this;
+    this.$el.empty();
     this.$el.append(vw.cpm.ProcessView.template);
     
   }

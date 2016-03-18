@@ -44,13 +44,13 @@
       url : me.app.options.cpmbaseurl+"rest/cmd",
       success : function(data){
         if(data == "ok"){
-          var $panel = me.app.view.getPanelFromContent(me.view.$el);
-          me.app.view.deletePanel($panel);
+          var panel = me.app.view.getPanelFromContent(me.view.$el);
+          panel.delete();
           me.app.processmanager.remove(me.runid);
         }
       },
       error : function(){
-        console.log("error when trying to delete process result "+me.runid);
+        me.app.logger.error("error when trying to delete process result "+me.runid);
       }
     });
   }
@@ -59,7 +59,7 @@
 
   vw.cpm.Process.prototype.run = function(conf,success,error){
     var me = this;
-    console.log(conf);
+    me.app.logger.debug(conf);
     if(success){
       success.call(me.view);
     }

@@ -34,6 +34,10 @@
       vw.cpm.CLIView.maxFrameHeight = $(window).height()-178 ;
     });
 
+    $("#log-button").click(function(){
+      me.model.logger.view();
+    });
+
 
     this.contentpanel = $("#active-content");
 
@@ -114,6 +118,16 @@
     me.model.activemenu = id;
   }
 
+  vw.cpm.CLIView.prototype.setStatusButton = function(status){
+    $("#status-button").removeClass();
+    $("#status-button").addClass("status-button-"+status);
+    if(status == "limited"){
+      $("#status-button").attr("title","Websocket does not seem to work. Some feature won't be available...");
+    }else{
+      $("#status-button").attr("title",undefined);
+    }
+  }
+
   vw.cpm.CLIView.prototype.toggleCLI = function(activate){
     if(activate){
       if(!this.cmdbar.isenabled()){
@@ -127,45 +141,35 @@
     }
   }
 
-  vw.cpm.CLIView.prototype.stick = function(panel){
+  vw.cpm.CLIView.prototype.getPanelFromSID = function(sid,do_not_create_new_if_not_found,title){
     var me = this;
-    //panel.detach();
-    this.contentpanel.find('#active-content-sticky').append(panel); 
-    var button = panel.find('.frame-tool-pin');
-    button.removeClass('frame-tool-pin');
-    button.addClass('frame-tool-unpin');
-    button.unbind('click');
-    button.click(function(){
-      me.unstick(panel);
-    });
-    me.contentpanel[0].scrollTop = 0;
-    me.contentpanel.perfectScrollbar("update");
-  }
-
-  vw.cpm.CLIView.prototype.unstick = function(panel){
-    var me = this;
-    //panel.detach();
-    this.contentpanel.find('#active-content-flow').append(panel);
-    var button = panel.find('.frame-tool-unpin');
-    button.removeClass('frame-tool-unpin');
-    button.addClass('frame-tool-pin');
-    button.unbind('click');
-    button.click(function(){
-      me.stick(panel);
-    });
+    var index = -1;
+    for(var i in me.panels){
+      if(me.panels[i].semanticid != undefined && me.panels[i].semanticid==sid){
+        index = i;
+        break;
+      }
+    }
+    if(index!=-1){
+      return me.panels[index];
+    }else if(do_not_create_new_if_not_found){
+      return undefined;
+    }else{
+      return me.createPanel(title,"",sid);
+    }
   }
 
   vw.cpm.CLIView.prototype.getPanel = function(title,do_not_create_new_if_not_found){
     var me = this;
     var index = -1;
     for(var i in me.panels){
-      if(me.panels[i].find(".frame-title").html()==title){
+      if(me.panels[i].$el.find(".frame-title").html()==title){
         index = i;
         break;
       }
     }
     if(index!=-1){
-      return me.panels[i];
+      return me.panels[index];
     }else if(do_not_create_new_if_not_found){
       return undefined;
     }else{
@@ -174,144 +178,31 @@
 
   }
 
+  vw.cpm.CLIView.prototype.getPanelFromUID = function(uid){
+    var me = this;
+    var index = -1;
+    for(var i in me.panels){
+      if(me.panels[i].uid==uid){
+        index = i;
+        break;
+      }
+    }
+    if (index != -1){
+      return me.panels[index];
+    }else{
+      return undefined;
+    }
+  }
+
   vw.cpm.CLIView.prototype.getPanelFromContent = function($el){
-    return $el.parents(".frame");
+    return this.getPanelFromUID($el.parents(".frame").attr("uid"));
   }
 
-  vw.cpm.CLIView.prototype.quitFullscreen = function($panel){
-    var me = this;
-    me.$fullscreencontainer.fadeOut();
-    var title = me.$fullscreencontainer.find(".frame-title").children();
-    if(title.length == 0){
-      $panel.find(".frame-title").append(title);
-    }
-    var content = me.$fullscreencontainer.find(".frame-body").children()
-    if(content.length != 0){
-      if(content.length == 1){
-        if(content.prop("originalHeight"))
-          content.height(content.prop("originalHeight"));
-      }
-      $panel.find(".frame-body").append(content);
-    }
+
+  vw.cpm.CLIView.prototype.createPanel = function(title,data,sid){
+    var panel = new vw.cpm.Panel(this.model,title,data,sid);
     
-  }
-
-  vw.cpm.CLIView.prototype.fullscreen = function($panel){
-    var me = this;
-    me.$fullscreencontainer.fadeIn();
-    var title = $panel.find(".frame-title").children();
-    if(title.length == 0){
-      title = $panel.find(".frame-title").html();
-    }
-    var content = $panel.find(".frame-body").children();
-
-    if(content.length==0){
-      content = $panel.find(".frame-body").html();
-    }else if(content.length == 1){
-      content.prop("originalHeight",content.height());
-      content.height($(window).height()-100);
-    }
-    me.$fullscreencontainer.find(".frame-title").empty();
-    me.$fullscreencontainer.find(".frame-body").empty();
-    me.$fullscreencontainer.find(".frame-title").append(title);
-    me.$fullscreencontainer.find(".frame-body").append(content);
-    me.$fullscreencontainer.find(".frame-tool-quitfs").unbind("click");
-    me.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
-      me.quitFullscreen($panel);
-    });
-  }
-
-  vw.cpm.CLIView.prototype.show = function($panel){
-    var me = this;
-    var button = $panel.find('.frame-tool-show');
-    button.removeClass('frame-tool-show');
-    button.addClass('frame-tool-hide');
-    button.unbind("click");
-    $panel.find(".frame-body").slideDown({complete:function(){
-      button.on("click",function(){
-        me.hide($panel);
-      });
-    }});
-  }
-
-  vw.cpm.CLIView.prototype.hide = function($panel){
-    var me = this;
-    var button = $panel.find('.frame-tool-hide');
-    button.removeClass('frame-tool-hide');
-    button.addClass('frame-tool-show');
-    button.unbind("click");
-    $panel.find(".frame-body").slideUp({complete:function(){
-      button.on("click",function(){
-        me.show($panel);
-      });
-    }});
-  }
-
-  vw.cpm.CLIView.prototype.deletePanel = function($panel){
-    var me = this;
-    var index = me.panels.indexOf($panel);
-      if(index!=-1){
-        me.panels.splice(index,1);
-      }
-      $panel.animate({
-          opacity: 0.25,
-          height: "toggle"
-        },{
-        complete:function(){
-          $panel.remove();
-        },
-        duration : 200
-      }
-    );
-  }
-
-  vw.cpm.CLIView.prototype.createPanel = function(title,data){
-    var me = this;
-    var html = vw.cpm.CLIView.frametemplate;
-    var $el = $(html);
-    //$el.hide();
-    //$el.show('drop');
-    this.contentpanel.find('#active-content-flow').prepend($el);
-
-    if(title != 'undefined'){
-      $el.find(".frame-title").append(title);
-    }
-    if(data != 'undefined'){
-      $el.find('.frame-body').append(data);
-    }
-
-    this.panels.push($el);
-
-
-    $el.find(".frame-title").mouseup(function (e){
-       vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
-     });
-    $el.find(".frame-body").mouseup(function (e){
-       vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
-     });
- 
-    $el.find('.frame-tool-pin').click(function(){
-      me.stick($el);
-
-    });
-
-    $el.find('.frame-tool-close').click(function(){
-      me.deletePanel($el)
-    });
-
-    $el.find('.frame-tool-openfs').click(function(){
-      me.fullscreen($el);
-
-    });
-
-    $el.find('.frame-tool-hide').click(function(){
-      me.hide($el);
-    });
-
-    me.contentpanel[0].scrollTop = 0;
-    me.contentpanel.perfectScrollbar("update");
-
-    return $el;
+    return panel;
   }
 
   vw.cpm.CLIView.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div><div class="frame-tool frame-tool-hide"></div></div></div><div class="frame-body"></div></div>';

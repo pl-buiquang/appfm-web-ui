@@ -9,6 +9,7 @@
 
   vw.cpm.ProcessView.prototype.init=function(){
     var me = this;
+    this.$el.empty();
     this.$el.append(vw.cpm.ProcessView.template);
     
   }

@@ -2,12 +2,20 @@
 
 Le protocole de communication avec le kernel repose sur les sockets zmq. Sa spécification est simpliste mais pourrait aisément être optimisée en termes de performance et robustesse.
 
-===== Structure des messages =====
+Il existe deux canaux de communication dont les ports d'écoute sont définis dans la [[:configuration|configuration]] aux variables ''cmd_listen_port'' et ''event_pub_port''.
+
+Le premier est le canal de commandes de type REQ/REP (en socket zmq) qui permet d'instruire au coeur les principal fonctionnalités : lister les modules, lancer un module, obtenir les résultats, lister les corpus, etc. Ces commandes sont disponibles via l'[[:cli|interface]][[:cli| en ligne de commande]] ou indirectement à partir de l'[[:web|interface]][[:web| web]].
+
+Le deuxième est un système d'événement produit par un socker zmq de type PUB. Ce canal est utilisé par le serveur de websocket pour permettre la remontée d'information en temps réel vers l'interface web mais peut facilement être utilisé dans d'autres applications en utilisant les socket de type SUB de la librairie zmq.
+
+===== Commandes =====
+
+==== Structure des messages ====
 
 Tous les messages envoyés au kernel sont composés de 4 parties dont une seule est obligatoire, la commande.
 
 Un message est une chaine de caractère en utf-8 dont les champs sont séparés par des balises du type ''==//nomduchamp// =='' et ''==END_//nomduchamp// ==''
-==== Commande ====
+=== Commande ===
 
 Le nom de ce champ est ''CMD''.
 
@@ -15,24 +23,51 @@ Il contient une commande valide.
 
 Le fichier source contenant les points d'entrées de ces commandes se trouve dans le projet **core** et se nomme //src/main/scala/fr/limsi/iles/server/CLIInterpreter.scala//
 
-todo : liste des commandes sous forme de tableau// //
+todo : liste des commandes sous forme de tableau
 
-==== Données ====
+=== Données ===
 
 Le nom de ce champ est ''DATA''. Il contient des données complémentaire à la commande.
 
 Ce champ est donc optionnel et dépend de la commande envoyée.
 
-==== Utilisateur ====
+=== Utilisateur ===
 
 Deux champs définissant les utilisateurs ''USER'' et ''PSWD''.
 
-Ces champs ne sont pour l'instant pas utilisé (pas de gestion d'utilisateur encore opérationnel).
+Ces champs ne sont pour l'instant pas utilisé (pas de gestion d'utilisateur encore opérationnel) et donc peuvent être vides.
 
-==== Exemples ====
+=== Exemples ===
 
 Lister les modules
 
 <code>
-'' ==USER==default==END_USER====PSWD==password==END_PSWD====CMD==module ls==END_CMD====DATA====END_DATA== ''
+==USER==default==END_USER====PSWD==password==END_PSWD====CMD==module ls==END_CMD====DATA====END_DATA==
 </code>
+
+===== Evenements =====
+
+==== Structure des messages ====
+
+Les messages envoyés par le kernel sont au format json avec les champs suivants :
+
+- type : le type de l'événement (voir plus bas)
+
+- target : objet à l'origine de l'événement
+
+- more : informations supplémentaires optionnelles
+
+==== Types d'événements ====
+
+Les types d'événements envoyés sont les suivants :
+
+^Type ^Target ^More ^Description |
+|process-started |pid |modulename |un module a été lancé |
+|process-ended |pid |modulename |un module a terminé son execution |
+|process-deleted |pid |modulename |un "run" (et ses résultats) a été supprimé |
+|module-added |modulename |modulepath |un nouveau module a été ajouté |
+|module-updated |modulename |definition |la définition d'un module a été modifiée (validée) |
+|kernel-started |  |  |le kernel a démaré |
+|kernel-stopped |  |  |le kernel est arrêté |
+
+\\

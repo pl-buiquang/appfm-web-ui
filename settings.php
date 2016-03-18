@@ -20,6 +20,8 @@ define("CALLER_DEFAULT_MAIN_TEMPLATE",'front_default_main_template');
 
 define("CPM_HOST","localhost");
 define("CPM_PORT","5555");
+
+define("CPM_WS_PORT","8083");
 /*
 define("CPM_HOST","10.0.2.2");
 define("CPM_PORT","5556");

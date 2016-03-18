@@ -15,22 +15,28 @@
 
     this.$el.find('.module-view-infos-panel').perfectScrollbar({suppressScrollX:true});
 
-    if(me.model.def.hasOwnProperty("module")){
+    /*if(me.model.def.hasOwnProperty("module")){
       me.renderGraphical();
     }else{
       me.renderSource();
     }
     me.setActiveMenu(".module-view-graphic");
-
+    */
+   me.renderSource();
+   me.setActiveMenu(".module-view-source");
+   
+   
     this.$el.find(".module-view-source").on("click",function(){
       me.$el.find(".module-content-view").empty();
       me.renderSource();
       me.setActiveMenu(".module-view-source");
     });
-    this.$el.find(".module-view-graphic").on("click",function(){
+   /* this.$el.find(".module-view-graphic").on("click",function(){
       me.showGraphical();
       me.setActiveMenu(".module-view-graphic");
     });
+    */
+   
     this.$el.find(".module-save").on("click",function(){
       me.model.sync(function(){
 
@@ -100,8 +106,9 @@
         conf[inputname] = $form.find('input[name="'+inputname+'"]').val()
       } 
       me.model.run(conf,function(){
-        me.showGraphical();
-        me.setActiveMenu(".module-view-graphic");
+        me.$el.find(".module-content-view").empty();
+        me.renderSource();
+        me.setActiveMenu(".module-view-source");
       });
     })
   }
@@ -334,10 +341,10 @@
     '</div><div class="canvas-container"><div class="canvas-view"></div></div><div class="module-view-infos-panel"></div></div>';
 
   vw.cpm.ModuleView.template = '<div class="module-header">'+
-  '<span class="module-view-source module-header-item" style="float:left; margin-left:8px;">source</span>'+
-  '<span class="module-view-graphic module-header-item" style="float:left; margin-left:20px;">view</span>'+
-  '<span class="module-run module-header-item" style="float:right; margin-right:8px;">run</span>'+
-  '<span class="module-save module-header-item" style="float:right; margin-right:20px;">save</span>'+
+  '<span class="module-view-source module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">source</span>'+
+  //'<span class="module-view-graphic module-header-item" style="float:left; margin-left:20px;">view</span>'+
+  '<span class="module-save module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">save</span>'+
+  '<span class="module-run module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">run</span>'+
   '</div>'+
   '<div class="module-content-view"></div>';
 

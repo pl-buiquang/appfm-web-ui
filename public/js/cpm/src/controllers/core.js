@@ -16,6 +16,11 @@
   vw.cpm.CLI.prototype.init = function(){
     var me = this;
 
+
+    this.logger = new vw.cpm.Logger(this,{});
+
+    this.logger.info("Starting AppFM web ui");
+
     this.foo = "bar";
     this.testmodule = "treetagger_fr";
 
@@ -40,11 +45,16 @@
       "help-menu":{title:"Help",body:$('<div></div>')}
     }
 
+    me.wssocketactive = false;
+
+
     this.reload();
+
+    this.checkstatus();
 
     this.helpmanager = new vw.cpm.HelpManager(this,this.menus['help-menu'].body);
 
-    
+
 
     var firstrun = store.get('firstrun')
     if(!firstrun){
@@ -59,19 +69,106 @@
   
   }
 
+  vw.cpm.CLI.prototype.checkstatus = function(){
+    var me = this;
+    if(this.longpolling);
+    clearInterval(this.longpolling);
+    this.longpolling = setInterval(function(){
+      $.ajax({
+        type: "POST",
+        data : {
+          cmd: "status"
+        },
+        url: me.options.cpmbaseurl+"rest/cmd",
+        success: function(data, textStatus, jqXHR) {
+          if(data == "timeout"){
+            me.logger.error("Couldn't connect to server : timeout");
+            me.view.setStatusButton("offline");
+          }else{
+            if(me.wssocketactive){
+              me.view.setStatusButton("online");
+              clearInterval(me.longpolling);
+              me.longpolling = undefined;
+            }else{
+              me.view.setStatusButton("limited");
+            }
+          }
+        },
+        error:function(jqXHR){
+          me.logger.error(jqXHR.responseText);
+          me.view.setStatusButton("offline");
+        },
+        timeout: 20000 
+      });
+    },60000);
+  }
+
+  vw.cpm.CLI.prototype.initWS = function(){
+    var me = this;
+    try{
+      this.wssocket = new WebSocket("ws://"+me.options.hostname+":"+me.options.cpmwsport);
+      this.wssocket.onopen = function(e){
+        me.logger.info(e);
+        console.log(arguments);
+        me.wssocketactive = true;
+      };
+      this.wssocket.onclose = function(e){
+        me.logger.info(e);
+        me.wssocketactive = false;
+        me.checkstatus();
+        console.log(arguments);
+        //me.view.setStatusButton("offline");
+      };
+      this.wssocket.onmessage = function(e){
+        var obj = JSON.parse(e.data);
+        me.logger.info(obj.type+" "+obj.target+" "+obj.more);
+        if(obj.type == "kernel-started"){
+
+        }else if(obj.type == "kernel-stopped"){
+
+        }else if(obj.type == "process-ended"){
+          me.processmanager.showRun(obj.more,obj.target);
+        }else if(obj.type == "process-started"){
+
+        }else if(obj.type == "process-deleted"){
+
+        }else if(obj.type == "module-created"){
+          me.reload();
+        }else if(obj.type == "module-updated"){
+          me.reload();
+        }else{
+
+        }
+      };
+      this.wssocket.onerror = function(e){
+        console.log(arguments);
+        me.logger.error(arguments);
+        me.checkstatus();
+      };
+    }catch(err){
+      me.logger.warn(err);
+      return;
+    }
+  }
+
   vw.cpm.CLI.prototype.reload = function(){
     var me = this;
     this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body,{init:function(){
+      this.logger.info("Received appfm server settings");
       me.initmodules();
     }});
   }
 
   vw.cpm.CLI.prototype.initmodules = function(){
+    this.view.setStatusButton("online");
+
     this.modulesmanager = new vw.cpm.ModuleManager(this,this.menus['module-menu'].body);
 
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
     this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
+
+    this.initWS();
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){
@@ -112,9 +209,9 @@
         success: function(data, textStatus, jqXHR) {
           callback.call(me,data);
         },
-        error:function(){
-
-        }
+        error:function(jqXHR){
+          me.logger.error(jqXHR.responseText);
+        },
       });
   }
 
@@ -124,10 +221,6 @@
 
     command = command.trim();
 
-    if(command == "test"){
-      var $panel = this.view.createPanel("test");
-      var process = new vw.cpm.Process(this,$panel.find('.frame-body'),{moduledef:me.modulesmanager.modules['stanford-parser'],runconf:{IN:'/home/paul/custom/cpm/data/testcorpus/humanism.txt'},runid:"some run id"});
-    }
 
     if(command == "help"){
       me.helpmanager.displayCLIHelp();
@@ -166,48 +259,22 @@
     if(title){
       name = title;
     }
-    $panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>');
-    $panel.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
-    return $panel;
+    var panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>');
+    panel.$el.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
+    return panel;
   }
 
   vw.cpm.CLI.prototype.openFile = function(filepath){
     var me = this;
-    $.ajax({
-      type: "POST",
-      data : {
-        file:filepath
-      },
-      url: me.options.cpmbaseurl+"rest/file",
-      success: function(data, textStatus, jqXHR) {
+    me.cpmRawCall("fs get "+filepath,function(data) {
         data = jQuery('<div />').text(data).html();
         //data = data.replace(/\s/g,'&nbsp;');
         //data = data.replace(/\n|\r|\r\n/g,'<br>');
         data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
         me.view.createPanel(filepath,data);
-      },
-      error:function(){
-
-      }
-    });
+      });
   }
 
-  vw.cpm.CLI.prototype.getFileContent = function(filepath,callback){
-    var me = this;
-    $.ajax({
-      type: "POST",
-      data : {
-        file:filepath
-      },
-      url: me.options.cpmbaseurl+"rest/file",
-      success: function(data, textStatus, jqXHR) {
-        callback.call(me,data);
-      },
-      error:function(){
-
-      }
-    });
-  }
 
 
   vw.cpm.CLI.prototype.cpmSettings = function(){
@@ -251,6 +318,11 @@
           element: document.querySelector('#settings-menu'),
           intro: "Global settings can be reviewed here.",
           position: 'right'
+        },
+        {
+          element: document.querySelector('#log-button'),
+          intro: "Clicking here will show you some logged informations.<br>The status button next to it should be green or yellow (in case optional websockets isn't supported by your browser or port is blocked)",
+          position: 'top'
         },
         {
           element: document.querySelector('#help-menu'),

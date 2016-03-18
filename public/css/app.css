@@ -77,8 +77,35 @@ background: linear-gradient(180deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
 }
 
 
+#log-button{
+  background-image: url('../img/system/log.png');
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  margin-right: 4px;
+  float:right;
+  cursor: pointer;
+}
 
+#status-button{
+  width: 19px;
+  height: 19px;
+  margin-top: 3px;
+  margin-right: 4px;
+  float:right;
+}
 
+.status-button-online{
+  background-image: url('../img/system/online.png') !important;
+}
+
+.status-button-offline{
+  background-image: url('../img/system/offline.png') !important;
+}
+
+.status-button-limited{
+  background-image: url('../img/system/limited.png') !important;
+}
 
 
 /*******************************************************************

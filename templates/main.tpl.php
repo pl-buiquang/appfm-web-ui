@@ -42,11 +42,11 @@
   </div>
 </div>
 
-<div id="status-bar" class="menu-closed"></div>
+<div id="status-bar" class="menu-closed"><div id="status-button" class="status-button-offline"></div><div id="log-button"></div></div>
 
 <!--Main application script entry point-->
 <script>
-  var cli = new vw.cpm.CLI(jQuery("body"),{cpmbaseurl:"[[BASE_URL]]",hostname:"[[HOSTNAME]]"});
+  var cli = new vw.cpm.CLI(jQuery("body"),{cpmbaseurl:"[[BASE_URL]]",hostname:"[[HOSTNAME]]",cpmwsurl:"[[WS_PORT]]"});
 
 </script>
 

@@ -25,6 +25,7 @@
     }
 
     this.app.view.panels.push(me);
+    this.app.view.refreshPanelList(); 
 
 
     me.$el.find(".frame-title").mouseup(function (e){
@@ -137,6 +138,7 @@
     var index = me.app.view.panels.indexOf(me);
     if(index!=-1){
       me.app.view.panels.splice(index,1);
+      me.app.view.refreshPanelList(); 
     }
     me.$el.animate({
           opacity: 0.25,

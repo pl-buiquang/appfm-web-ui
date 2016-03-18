@@ -300,6 +300,40 @@ ul.main-menu{
 *      Frames Layout
 ********************************************************************/
 
+.panel-item{
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+    position: relative;
+    background-color: #fafafa;
+    color:#4e5c72;
+  overflow: hidden;
+  text-overflow : ellipsis;
+  height: 24px;
+  font-weight: bold;
+      padding: 2px 30px 2px 8px;
+    width: 200px;
+    margin-bottom: 2px;
+    border-radius: 1px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.panel-item:hover{
+    color: #fafafa;
+    background-color: #4e5c72;
+}
+
+.panel-item-close{
+display: inline-block;
+  width:24px;
+  height: 24px;
+  float:right;
+  margin-right: 4px;
+  margin-top: 2px;
+  cursor: pointer;
+  background-image:url('../img/system/close2.png');
+}
+}
+
 #fullscreen-container{
   display: none;
   width: 100%;

@@ -66,14 +66,12 @@
     jQuery("#app-title").click(function(){
       me.toggleCLI(false);
       // set default menu if menu is to be opened and is empty
-      if(jQuery("#main").hasClass("menu-closed")){
-        me.model.activemenu = "default";
-        me.model.setActiveMenu("default");
+      if(me.model.activemenu =="default"){
+        jQuery(".menu-open").switchClass("menu-open","menu-closed");
+        jQuery(".menu-closed").switchClass("menu-closed","menu-open");
+      }else{
+        me.openMenu("default");
       }
-      
-
-      jQuery(".menu-open").switchClass("menu-open","menu-closed");
-      jQuery(".menu-closed").switchClass("menu-closed","menu-open");
       
     });
 
@@ -139,6 +137,25 @@
         this.cmdbar.disable();
       }
     }
+  }
+
+  vw.cpm.CLIView.prototype.refreshPanelList = function(){
+    var me =this;
+    var html = "";
+    for (var i = me.panels.length - 1; i >= 0; i--) {
+      var panel = me.panels[i];
+      html += '<div class="panel-item" uid="'+panel.uid+'">'+panel.$el.find('.frame-title').text()+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
+    }
+    this.model.menus["default"].body.empty();
+    this.model.menus["default"].body.append(html);
+    this.model.menus["default"].body.find(".panel-item").click(function(){
+      var panel = me.getPanelFromUID($(this).attr("uid"));
+      panel.focus();
+    });
+    this.model.menus["default"].body.find(".panel-item-close").click(function(){
+      var panel = me.getPanelFromUID($(this).attr("uid"));
+      panel.delete();
+    });
   }
 
   vw.cpm.CLIView.prototype.getPanelFromSID = function(sid,do_not_create_new_if_not_found,title){

@@ -15,7 +15,7 @@
 
   vw.cpm.HelpManager.prototype.displayCLIHelp = function(){
     var helpcontent = 'todo.. :/';
-    this.app.view.createPanel("help",helpcontent);
+    this.app.view.createPanel("help",helpcontent,"system-help",new vw.cpm.Command("s","help"));
   }
   
 

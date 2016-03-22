@@ -20,6 +20,21 @@
     return guid;
   }
 
+  vw.cpm.utils.waitTill = function(refObj,field,callback,refreshInterval){
+    var interval = setInterval(function(){
+      var cond = false;
+      if(_.isFunction(refObj[field]) ){
+        cond = refObj[field].call(refObj);
+      }else{
+        cond = refObj[field];
+      }
+      if(cond){
+        clearInterval(interval);
+        callback.call();
+      }
+    },refreshInterval);
+  }
+
   vw.cpm.utils.getSelectionText =function() {
     var text = "";
     if (window.getSelection) {

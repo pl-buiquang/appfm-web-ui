@@ -5,6 +5,7 @@
     this.app = app;
     this.view = new vw.cpm.CPMSettingsManagerView(this,$el);
     this.cpmsettings = {};
+    this.initiated = false;
     this.init();
   }
 
@@ -16,6 +17,7 @@
   vw.cpm.CPMSettingsManager.prototype.fetch = function(callback){
     var me = this;
     this.app.cpmCall("settings",function(data){
+      me.initiated = true;
       me.cpmsettings = data;
       // set default module dir for newly created modules
       for (var i = 0; i < data.modules.length; i++) {

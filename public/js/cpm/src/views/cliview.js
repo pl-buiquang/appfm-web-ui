@@ -120,7 +120,7 @@
     $("#status-button").removeClass();
     $("#status-button").addClass("status-button-"+status);
     if(status == "limited"){
-      $("#status-button").attr("title","Websocket does not seem to work. Some feature won't be available...");
+      $("#status-button").attr("title","Websocket does not seem to work. You can try to reconnect via the settings page. Some feature won't be available till then...");
     }else{
       $("#status-button").attr("title",undefined);
     }
@@ -142,10 +142,14 @@
   vw.cpm.CLIView.prototype.refreshPanelList = function(){
     var me =this;
     var html = "";
+    var serialized = [];
     for (var i = me.panels.length - 1; i >= 0; i--) {
       var panel = me.panels[i];
-      html += '<div class="panel-item" uid="'+panel.uid+'">'+panel.$el.find('.frame-title').text()+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
+      serialized.push(panel.serialize());
+      var title = panel.$el.find('.frame-title').text();
+      html += '<div class="panel-item" uid="'+panel.uid+'" title="'+title+'">'+title+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
     }
+    store.set("panels",serialized);
     this.model.menus["default"].body.empty();
     this.model.menus["default"].body.append(html);
     this.model.menus["default"].body.find(".panel-item").click(function(){
@@ -156,9 +160,11 @@
       var panel = me.getPanelFromUID($(this).attr("uid"));
       panel.delete();
     });
+
+
   }
 
-  vw.cpm.CLIView.prototype.getPanelFromSID = function(sid,do_not_create_new_if_not_found,title){
+  vw.cpm.CLIView.prototype.getPanelFromSID = function(sid,do_not_create_new_if_not_found,title,cmd){
     var me = this;
     var index = -1;
     for(var i in me.panels){
@@ -172,11 +178,11 @@
     }else if(do_not_create_new_if_not_found){
       return undefined;
     }else{
-      return me.createPanel(title,"",sid);
+      return me.createPanel(title,"",sid,cmd);
     }
   }
 
-  vw.cpm.CLIView.prototype.getPanel = function(title,do_not_create_new_if_not_found){
+  vw.cpm.CLIView.prototype.getPanel = function(title,do_not_create_new_if_not_found,cmd){
     var me = this;
     var index = -1;
     for(var i in me.panels){
@@ -190,7 +196,7 @@
     }else if(do_not_create_new_if_not_found){
       return undefined;
     }else{
-      return me.createPanel(title);
+      return me.createPanel(title,undefined,undefined,cmd);
     }
 
   }
@@ -216,8 +222,8 @@
   }
 
 
-  vw.cpm.CLIView.prototype.createPanel = function(title,data,sid){
-    var panel = new vw.cpm.Panel(this.model,title,data,sid);
+  vw.cpm.CLIView.prototype.createPanel = function(title,data,sid,cmd){
+    var panel = new vw.cpm.Panel(this.model,title,data,sid,cmd);
     
     return panel;
   }

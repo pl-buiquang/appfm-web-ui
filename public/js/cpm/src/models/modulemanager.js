@@ -1,6 +1,7 @@
 (function(vw){
 
   vw.cpm.ModuleManager = function(app,$el,options){
+    this.initiated = false;
     this.options = options;
     this.app = app;
     this.view = new vw.cpm.ModuleManagerView(this,$el);
@@ -28,6 +29,7 @@
         me.parseModuleTree(data);
         me.addDefaultModules();
         me.view.refresh();
+        me.initiated = true;
       }
     })
   }
@@ -169,7 +171,7 @@
 
   vw.cpm.ModuleManager.prototype.createNewModule = function(modulename,containerdirpath){
     var me = this;
-    var panel = me.app.view.createPanel(modulename);
+    var panel = me.app.view.createPanel(modulename,"","moduledef-"+modulename,new vw.cpm.Command("m",modulename));
     var newmoduledef = {
       module:{
         name:modulename,
@@ -189,7 +191,7 @@
 
   vw.cpm.ModuleManager.prototype.showModule = function(modulename){
     var me = this;
-    var panel = me.app.view.getPanelFromSID("moduledef-"+modulename,false,modulename);
+    var panel = me.app.view.getPanelFromSID("moduledef-"+modulename,false,modulename,new vw.cpm.Command("m",modulename));
     var module = new vw.cpm.Module(me.app,panel.$el.find(".frame-body"),me.modules[modulename]);
     me.modulesobj.push(module);
     module.view.render();

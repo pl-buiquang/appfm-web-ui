@@ -45,7 +45,7 @@
     var me = this;
     var panel = me.app.view.getPanel("AppFM log",true);
     if (!panel){
-      panel = me.app.view.createPanel("AppFM log",me.render());
+      panel = me.app.view.createPanel("AppFM log",me.render(),"system-log",new vw.cpm.Command("s","log"));
     }else{
       if (me.refreshlog){
         panel.$el.find(".frame-body").empty();

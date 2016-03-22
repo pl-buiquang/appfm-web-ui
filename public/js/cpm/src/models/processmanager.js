@@ -1,10 +1,12 @@
 (function(vw){
 
   vw.cpm.ProcessManager = function(app,$el,options){
+    this.initiated = false;
     this.options = options;
     this.app = app;
     this.view = new vw.cpm.ProcessManagerView(this,$el);
     this.init();
+    this.startedprocess = []; // for websocket update only those
     this.runs = {};
   }
 
@@ -15,7 +17,7 @@
 
   vw.cpm.ProcessManager.prototype.showRun = function(modulename,runid){
     var me = this;
-    var panel = this.app.view.getPanelFromSID("process-"+runid,false,'<span class="link">'+modulename + "</span> ( "+runid+" )");
+    var panel = this.app.view.getPanelFromSID("process-"+runid,false,'<span class="link">'+modulename + "</span> ( "+runid+" )",new vw.cpm.Command("p",{name:modulename,runid:runid}));
     panel.$el.find(".frame-title").find(".link").click(function(){
       me.app.modulesmanager.showModule(modulename);
     });
@@ -75,6 +77,7 @@
           }
         }
         me.view.refresh();
+        me.initiated = true;
       }
     });
 

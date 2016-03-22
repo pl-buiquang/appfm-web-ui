@@ -5,7 +5,53 @@
 }(window.vw = window.vw || {}));
 (function(vw){
 
-  
+  /**
+   * This class is used to serialize Panel instanciation and allow saving AppFM view state across browser restart using localStorage feature
+   * Some non exhaustive commands are :
+   *  - module view
+   *  - process view
+   *  - file view
+   *  - iframe view
+   *  - static apps (logs, intro, etc.)
+   *
+   * 
+   */
+
+  vw.cpm.Command = function(command,data){
+    this.command = command;
+    this.data = data;
+  }
+
+
+  vw.cpm.Command.prototype.execute = function(app){
+    var me = this;
+    vw.cpm.utils.waitTill(app,"isInitiated",function(){
+      if(me.command == "p"){
+        app.processmanager.showRun(me.data.name,me.data.runid);
+      }else if(me.command == "m"){
+        app.modulesmanager.showModule(me.data)
+      }else if(me.command == "f"){
+        app.openFile(me.data);
+      }else if(me.command == "i"){
+        var items = me.data.split("\t");
+        app.openIFrame(items[1],items[0]);
+      }else if(me.command == "s"){
+        if(me.data == "log"){
+          app.logger.view();
+        }else if(me.data == "help"){
+          app.helpmanager.displayCLIHelp();
+        }else{
+          app.logger.warn("unknown panel system command : "+me.data);
+        }
+      }else if(me.command == "c"){
+        app.request(me.data);
+      }else{
+        app.logger.warn("unknown panel command : "+me.command+"("+me.data+")");
+      }
+    },1000)
+  }
+
+ 
 
 }(window.vw = window.vw || {}));
 (function(vw){
@@ -31,16 +77,13 @@
 
     this.logger.info("Starting AppFM web ui");
 
-    this.foo = "bar";
     this.testmodule = "treetagger_fr";
 
     if (!store.enabled) {
       alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser. Your session won\'t be saved across page reloads');
       
     }
-    console.log(store.get('test'));
 
-    store.set('test',this.view.panels);  
 
 
 
@@ -73,7 +116,7 @@
       me.demo();
       store.set('firstrun','done');
     }else{
-      var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
+      // init stuff like previously opened frames after full initialization reload callback
 
     }
   
@@ -118,12 +161,11 @@
     try{
       this.wssocket = new WebSocket("ws://"+me.options.cpmwshost);
       this.wssocket.onopen = function(e){
-        me.logger.info(e);
-        console.log(arguments);
+        me.logger.info("opening websocket connection");
         me.wssocketactive = true;
       };
       this.wssocket.onclose = function(e){
-        me.logger.info(e);
+        me.logger.info("websocket connection ended");
         me.wssocketactive = false;
         me.checkstatus();
         console.log(arguments);
@@ -131,23 +173,26 @@
       };
       this.wssocket.onmessage = function(e){
         var obj = JSON.parse(e.data);
-        me.logger.info(obj.type+" "+obj.target+" "+obj.more);
+        
         if(obj.type == "kernel-started"){
 
         }else if(obj.type == "kernel-stopped"){
 
         }else if(obj.type == "process-ended"){
-          me.processmanager.showRun(obj.more,obj.target);
+          if(_.indexOf(me.processmanager.startedprocess,obj.target)!=-1){
+            me.processmanager.showRun(obj.more,obj.target);
+          }
         }else if(obj.type == "process-started"){
-
+          me.processmanager.fetchAll();
         }else if(obj.type == "process-deleted"){
-
+          me.processmanager.fetchAll();
         }else if(obj.type == "module-created"){
-          me.reload();
+          me.modulesmanager.fetchAll();
         }else if(obj.type == "module-updated"){
-          me.reload();
+          me.modulesmanager.fetchAll();
         }else{
-
+          console.log(e);
+          me.logger.info(obj.type+" "+obj.target+" "+obj.more);
         }
       };
       this.wssocket.onerror = function(e){
@@ -169,6 +214,10 @@
     }});
   }
 
+  vw.cpm.CLI.prototype.isInitiated = function(){
+    return this.cpmsettingsmanager.initiated && this.modulesmanager.initiated && this.processmanager.initiated && this.corpusmanager.initiated;
+  }
+
   vw.cpm.CLI.prototype.initmodules = function(){
     this.view.setStatusButton("online");
 
@@ -179,6 +228,17 @@
     this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
 
     this.initWS();
+
+    var panels = store.get("panels");
+    if(panels && panels.length > 0){
+      store.set("panels",[]);
+      for (var i = panels.length - 1; i >= 0; i--) {
+        vw.cpm.Panel.deserialize(this,panels[i]);
+        this.logger.info("Loading panel : "+panels[i].cmd.command+" "+panels[i].cmd.data);
+      }
+    }else{
+      var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
+    }
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){
@@ -256,7 +316,7 @@
     me.cpmRawCall(command,function(data){
       data = jQuery('<div />').text(data).html();
       data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
-      me.view.createPanel(command,data);
+      me.view.createPanel(command,data,"cmd-"+command,new vw.cpm.Command("c",command));
       console.log(data);
     });
 
@@ -269,7 +329,7 @@
     if(title){
       name = title;
     }
-    var panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>');
+    var panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>',"","iframe-"+url,new vw.cpm.Command("i",name+"\t"+url));
     panel.$el.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
     return panel;
   }
@@ -281,7 +341,7 @@
         //data = data.replace(/\s/g,'&nbsp;');
         //data = data.replace(/\n|\r|\r\n/g,'<br>');
         data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
-        me.view.createPanel(filepath,data);
+        me.view.createPanel(filepath,data,"fs-"+filepath,new vw.cpm.Command("f",filepath));
       });
   }
 
@@ -514,6 +574,21 @@
     return guid;
   }
 
+  vw.cpm.utils.waitTill = function(refObj,field,callback,refreshInterval){
+    var interval = setInterval(function(){
+      var cond = false;
+      if(_.isFunction(refObj[field]) ){
+        cond = refObj[field].call(refObj);
+      }else{
+        cond = refObj[field];
+      }
+      if(cond){
+        clearInterval(interval);
+        callback.call();
+      }
+    },refreshInterval);
+  }
+
   vw.cpm.utils.getSelectionText =function() {
     var text = "";
     if (window.getSelection) {
@@ -576,6 +651,8 @@
 (function(vw){
 
   vw.cpm.CorpusManager = function(app,$el,options){
+    this.loaded = 0;
+    this.initiated = false;
     this.options = options;
     this.app = app;
     this.view = new vw.cpm.CorpusManagerView(this,$el);
@@ -618,6 +695,10 @@
       success:function(data,textStatus,jqXHR){
         //me.filetree = {"corpus":{"corpora":data.corpus},"results":{"results":data.results}}; // because...
         onsuccess.call(me,data,filepath);
+        me.loaded += 1;
+        if(me.loaded == 2){
+          me.initiated = true;
+        }
       }
     });
   }
@@ -633,6 +714,7 @@
     this.app = app;
     this.view = new vw.cpm.CPMSettingsManagerView(this,$el);
     this.cpmsettings = {};
+    this.initiated = false;
     this.init();
   }
 
@@ -644,6 +726,7 @@
   vw.cpm.CPMSettingsManager.prototype.fetch = function(callback){
     var me = this;
     this.app.cpmCall("settings",function(data){
+      me.initiated = true;
       me.cpmsettings = data;
       // set default module dir for newly created modules
       for (var i = 0; i < data.modules.length; i++) {
@@ -679,7 +762,7 @@
 
   vw.cpm.HelpManager.prototype.displayCLIHelp = function(){
     var helpcontent = 'todo.. :/';
-    this.app.view.createPanel("help",helpcontent);
+    this.app.view.createPanel("help",helpcontent,"system-help",new vw.cpm.Command("s","help"));
   }
   
 
@@ -734,7 +817,7 @@
     var me = this;
     var panel = me.app.view.getPanel("AppFM log",true);
     if (!panel){
-      panel = me.app.view.createPanel("AppFM log",me.render());
+      panel = me.app.view.createPanel("AppFM log",me.render(),"system-log",new vw.cpm.Command("s","log"));
     }else{
       if (me.refreshlog){
         panel.$el.find(".frame-body").empty();
@@ -830,6 +913,7 @@
       dataType : "text",
       success: function(data, textStatus, jqXHR) {
         var runid = data;
+        me.app.processmanager.startedprocess.push(runid);
         me.app.processmanager.showRun(me.def.modulename,runid);
         me.app.processmanager.fetchAll(); // very unoptimized
         success.call(me.view);
@@ -857,6 +941,7 @@
 (function(vw){
 
   vw.cpm.ModuleManager = function(app,$el,options){
+    this.initiated = false;
     this.options = options;
     this.app = app;
     this.view = new vw.cpm.ModuleManagerView(this,$el);
@@ -884,6 +969,7 @@
         me.parseModuleTree(data);
         me.addDefaultModules();
         me.view.refresh();
+        me.initiated = true;
       }
     })
   }
@@ -1025,7 +1111,7 @@
 
   vw.cpm.ModuleManager.prototype.createNewModule = function(modulename,containerdirpath){
     var me = this;
-    var panel = me.app.view.createPanel(modulename);
+    var panel = me.app.view.createPanel(modulename,"","moduledef-"+modulename,new vw.cpm.Command("m",modulename));
     var newmoduledef = {
       module:{
         name:modulename,
@@ -1045,7 +1131,7 @@
 
   vw.cpm.ModuleManager.prototype.showModule = function(modulename){
     var me = this;
-    var panel = me.app.view.getPanelFromSID("moduledef-"+modulename,false,modulename);
+    var panel = me.app.view.getPanelFromSID("moduledef-"+modulename,false,modulename,new vw.cpm.Command("m",modulename));
     var module = new vw.cpm.Module(me.app,panel.$el.find(".frame-body"),me.modules[modulename]);
     me.modulesobj.push(module);
     module.view.render();
@@ -1125,10 +1211,12 @@
 (function(vw){
 
   vw.cpm.ProcessManager = function(app,$el,options){
+    this.initiated = false;
     this.options = options;
     this.app = app;
     this.view = new vw.cpm.ProcessManagerView(this,$el);
     this.init();
+    this.startedprocess = []; // for websocket update only those
     this.runs = {};
   }
 
@@ -1139,7 +1227,7 @@
 
   vw.cpm.ProcessManager.prototype.showRun = function(modulename,runid){
     var me = this;
-    var panel = this.app.view.getPanelFromSID("process-"+runid,false,'<span class="link">'+modulename + "</span> ( "+runid+" )");
+    var panel = this.app.view.getPanelFromSID("process-"+runid,false,'<span class="link">'+modulename + "</span> ( "+runid+" )",new vw.cpm.Command("p",{name:modulename,runid:runid}));
     panel.$el.find(".frame-title").find(".link").click(function(){
       me.app.modulesmanager.showModule(modulename);
     });
@@ -1199,6 +1287,7 @@
           }
         }
         me.view.refresh();
+        me.initiated = true;
       }
     });
 
@@ -1329,7 +1418,7 @@
     $("#status-button").removeClass();
     $("#status-button").addClass("status-button-"+status);
     if(status == "limited"){
-      $("#status-button").attr("title","Websocket does not seem to work. Some feature won't be available...");
+      $("#status-button").attr("title","Websocket does not seem to work. You can try to reconnect via the settings page. Some feature won't be available till then...");
     }else{
       $("#status-button").attr("title",undefined);
     }
@@ -1351,10 +1440,14 @@
   vw.cpm.CLIView.prototype.refreshPanelList = function(){
     var me =this;
     var html = "";
+    var serialized = [];
     for (var i = me.panels.length - 1; i >= 0; i--) {
       var panel = me.panels[i];
-      html += '<div class="panel-item" uid="'+panel.uid+'">'+panel.$el.find('.frame-title').text()+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
+      serialized.push(panel.serialize());
+      var title = panel.$el.find('.frame-title').text();
+      html += '<div class="panel-item" uid="'+panel.uid+'" title="'+title+'">'+title+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
     }
+    store.set("panels",serialized);
     this.model.menus["default"].body.empty();
     this.model.menus["default"].body.append(html);
     this.model.menus["default"].body.find(".panel-item").click(function(){
@@ -1365,9 +1458,11 @@
       var panel = me.getPanelFromUID($(this).attr("uid"));
       panel.delete();
     });
+
+
   }
 
-  vw.cpm.CLIView.prototype.getPanelFromSID = function(sid,do_not_create_new_if_not_found,title){
+  vw.cpm.CLIView.prototype.getPanelFromSID = function(sid,do_not_create_new_if_not_found,title,cmd){
     var me = this;
     var index = -1;
     for(var i in me.panels){
@@ -1381,11 +1476,11 @@
     }else if(do_not_create_new_if_not_found){
       return undefined;
     }else{
-      return me.createPanel(title,"",sid);
+      return me.createPanel(title,"",sid,cmd);
     }
   }
 
-  vw.cpm.CLIView.prototype.getPanel = function(title,do_not_create_new_if_not_found){
+  vw.cpm.CLIView.prototype.getPanel = function(title,do_not_create_new_if_not_found,cmd){
     var me = this;
     var index = -1;
     for(var i in me.panels){
@@ -1399,7 +1494,7 @@
     }else if(do_not_create_new_if_not_found){
       return undefined;
     }else{
-      return me.createPanel(title);
+      return me.createPanel(title,undefined,undefined,cmd);
     }
 
   }
@@ -1425,13 +1520,12 @@
   }
 
 
-  vw.cpm.CLIView.prototype.createPanel = function(title,data,sid){
-    var panel = new vw.cpm.Panel(this.model,title,data,sid);
+  vw.cpm.CLIView.prototype.createPanel = function(title,data,sid,cmd){
+    var panel = new vw.cpm.Panel(this.model,title,data,sid,cmd);
     
     return panel;
   }
 
-  vw.cpm.CLIView.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div><div class="frame-tool frame-tool-hide"></div></div></div><div class="frame-body"></div></div>';
   vw.cpm.CLIView.fullscreentemplate = '<div id="fullscreen-container"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-quitfs"></div></div></div><div class="frame-body"></div></div>';
 
 
@@ -1667,6 +1761,7 @@
     
     var data = this.model.cpmsettings;
     var html ='<div><button class="cpm-refresh">Refresh</button></div>';
+    html +='<div><button class="cpm-reconnect">Reconnect (websockets)</button></div>';
     html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
     html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
     var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'
@@ -1686,6 +1781,9 @@
     var me = this;
     this.$el.find(".cpm-refresh").click(function(){
       me.model.app.reload();
+    });
+    this.$el.find(".cpm-reconnect").click(function(){
+      me.model.app.initWS();
     });
   }
 
@@ -2483,13 +2581,14 @@
 
 (function(vw){
 
-  vw.cpm.Panel = function(app,title,data,semanticid){
+  vw.cpm.Panel = function(app,title,data,semanticid,cmd){
     this.app = app;
     this.semanticid = semanticid;
     this.$el = $(vw.cpm.Panel.frametemplate);
     this.app.view.contentpanel.find('#active-content-flow').prepend(this.$el);
     this.el = this.$el[0];
     this.uid = vw.cpm.Panel.uids++;
+    this.cmd = cmd;
     this.init(title,data);
   };
 
@@ -2585,6 +2684,16 @@
     });
   }
 
+  vw.cpm.Panel.prototype.serialize = function(){
+    return {cmd:this.cmd,uid:this.uid,sid:this.semanticid};
+  }
+
+  vw.cpm.Panel.deserialize = function(app,serialized){
+    var cmd = new vw.cpm.Command(serialized.cmd.command,serialized.cmd.data);
+    var panel = cmd.execute(app);
+    return panel;
+  }
+
   vw.cpm.Panel.prototype.show = function(){
     var me = this;
     var button = me.$el.find('.frame-tool-show');
@@ -2668,7 +2777,6 @@
   vw.cpm.Panel.maxFrameHeight = 500;
 
   vw.cpm.Panel.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div><div class="frame-tool frame-tool-hide"></div></div></div><div class="frame-body"></div></div>';
-  vw.cpm.Panel.fullscreentemplate = '<div id="fullscreen-container"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-quitfs"></div></div></div><div class="frame-body"></div></div>';
 
 
 

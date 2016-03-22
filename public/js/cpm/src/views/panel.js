@@ -1,12 +1,13 @@
 (function(vw){
 
-  vw.cpm.Panel = function(app,title,data,semanticid){
+  vw.cpm.Panel = function(app,title,data,semanticid,cmd){
     this.app = app;
     this.semanticid = semanticid;
     this.$el = $(vw.cpm.Panel.frametemplate);
     this.app.view.contentpanel.find('#active-content-flow').prepend(this.$el);
     this.el = this.$el[0];
     this.uid = vw.cpm.Panel.uids++;
+    this.cmd = cmd;
     this.init(title,data);
   };
 
@@ -100,6 +101,16 @@
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
       me.quitFullscreen();
     });
+  }
+
+  vw.cpm.Panel.prototype.serialize = function(){
+    return {cmd:this.cmd,uid:this.uid,sid:this.semanticid};
+  }
+
+  vw.cpm.Panel.deserialize = function(app,serialized){
+    var cmd = new vw.cpm.Command(serialized.cmd.command,serialized.cmd.data);
+    var panel = cmd.execute(app);
+    return panel;
   }
 
   vw.cpm.Panel.prototype.show = function(){

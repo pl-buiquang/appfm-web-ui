@@ -18,6 +18,7 @@
     
     var data = this.model.cpmsettings;
     var html ='<div><button class="cpm-refresh">Refresh</button></div>';
+    html +='<div><button class="cpm-reconnect">Reconnect (websockets)</button></div>';
     html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
     html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
     var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'
@@ -37,6 +38,9 @@
     var me = this;
     this.$el.find(".cpm-refresh").click(function(){
       me.model.app.reload();
+    });
+    this.$el.find(".cpm-reconnect").click(function(){
+      me.model.app.initWS();
     });
   }
 

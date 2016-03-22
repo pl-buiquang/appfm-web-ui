@@ -1,6 +1,8 @@
 (function(vw){
 
   vw.cpm.CorpusManager = function(app,$el,options){
+    this.loaded = 0;
+    this.initiated = false;
     this.options = options;
     this.app = app;
     this.view = new vw.cpm.CorpusManagerView(this,$el);
@@ -43,6 +45,10 @@
       success:function(data,textStatus,jqXHR){
         //me.filetree = {"corpus":{"corpora":data.corpus},"results":{"results":data.results}}; // because...
         onsuccess.call(me,data,filepath);
+        me.loaded += 1;
+        if(me.loaded == 2){
+          me.initiated = true;
+        }
       }
     });
   }

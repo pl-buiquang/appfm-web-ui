@@ -21,16 +21,13 @@
 
     this.logger.info("Starting AppFM web ui");
 
-    this.foo = "bar";
     this.testmodule = "treetagger_fr";
 
     if (!store.enabled) {
       alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser. Your session won\'t be saved across page reloads');
       
     }
-    console.log(store.get('test'));
 
-    store.set('test',this.view.panels);  
 
 
 
@@ -63,7 +60,7 @@
       me.demo();
       store.set('firstrun','done');
     }else{
-      var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
+      // init stuff like previously opened frames after full initialization reload callback
 
     }
   
@@ -108,12 +105,11 @@
     try{
       this.wssocket = new WebSocket("ws://"+me.options.cpmwshost);
       this.wssocket.onopen = function(e){
-        me.logger.info(e);
-        console.log(arguments);
+        me.logger.info("opening websocket connection");
         me.wssocketactive = true;
       };
       this.wssocket.onclose = function(e){
-        me.logger.info(e);
+        me.logger.info("websocket connection ended");
         me.wssocketactive = false;
         me.checkstatus();
         console.log(arguments);
@@ -121,23 +117,26 @@
       };
       this.wssocket.onmessage = function(e){
         var obj = JSON.parse(e.data);
-        me.logger.info(obj.type+" "+obj.target+" "+obj.more);
+        
         if(obj.type == "kernel-started"){
 
         }else if(obj.type == "kernel-stopped"){
 
         }else if(obj.type == "process-ended"){
-          me.processmanager.showRun(obj.more,obj.target);
+          if(_.indexOf(me.processmanager.startedprocess,obj.target)!=-1){
+            me.processmanager.showRun(obj.more,obj.target);
+          }
         }else if(obj.type == "process-started"){
-
+          me.processmanager.fetchAll();
         }else if(obj.type == "process-deleted"){
-
+          me.processmanager.fetchAll();
         }else if(obj.type == "module-created"){
-          me.reload();
+          me.modulesmanager.fetchAll();
         }else if(obj.type == "module-updated"){
-          me.reload();
+          me.modulesmanager.fetchAll();
         }else{
-
+          console.log(e);
+          me.logger.info(obj.type+" "+obj.target+" "+obj.more);
         }
       };
       this.wssocket.onerror = function(e){
@@ -159,6 +158,10 @@
     }});
   }
 
+  vw.cpm.CLI.prototype.isInitiated = function(){
+    return this.cpmsettingsmanager.initiated && this.modulesmanager.initiated && this.processmanager.initiated && this.corpusmanager.initiated;
+  }
+
   vw.cpm.CLI.prototype.initmodules = function(){
     this.view.setStatusButton("online");
 
@@ -169,6 +172,17 @@
     this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
 
     this.initWS();
+
+    var panels = store.get("panels");
+    if(panels && panels.length > 0){
+      store.set("panels",[]);
+      for (var i = panels.length - 1; i >= 0; i--) {
+        vw.cpm.Panel.deserialize(this,panels[i]);
+        this.logger.info("Loading panel : "+panels[i].cmd.command+" "+panels[i].cmd.data);
+      }
+    }else{
+      var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
+    }
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){
@@ -246,7 +260,7 @@
     me.cpmRawCall(command,function(data){
       data = jQuery('<div />').text(data).html();
       data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
-      me.view.createPanel(command,data);
+      me.view.createPanel(command,data,"cmd-"+command,new vw.cpm.Command("c",command));
       console.log(data);
     });
 
@@ -259,7 +273,7 @@
     if(title){
       name = title;
     }
-    var panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>');
+    var panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>',"","iframe-"+url,new vw.cpm.Command("i",name+"\t"+url));
     panel.$el.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
     return panel;
   }
@@ -271,7 +285,7 @@
         //data = data.replace(/\s/g,'&nbsp;');
         //data = data.replace(/\n|\r|\r\n/g,'<br>');
         data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
-        me.view.createPanel(filepath,data);
+        me.view.createPanel(filepath,data,"fs-"+filepath,new vw.cpm.Command("f",filepath));
       });
   }
 

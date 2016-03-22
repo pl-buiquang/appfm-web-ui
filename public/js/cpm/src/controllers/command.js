@@ -29,7 +29,7 @@
         app.openFile(me.data);
       }else if(me.command == "i"){
         var items = me.data.split("\t");
-        app.openIFrames(items[1],items[0]);
+        app.openIFrame(items[1],items[0]);
       }else if(me.command == "s"){
         if(me.data == "log"){
           app.logger.view();

@@ -68,7 +68,7 @@ function cpm_main(){
 
   $html = tplset(array(
     "BASE_URL"=>BASE_URL,
-    "HOSTNAME" => CPM_HOST,
+    "HOSTNAME" => $_SERVER["SERVER_NAME"],
     "WS_HOST" => CPM_WS_HOST
     ),tpl("main"));
 

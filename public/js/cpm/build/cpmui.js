@@ -110,7 +110,6 @@
 
 
 
-    vw.cpm.utils.showNotif("yo","man");
   
   }
 

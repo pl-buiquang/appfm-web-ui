@@ -72,6 +72,7 @@
   vw.cpm.CLI.prototype.init = function(){
     var me = this;
 
+    vw.cpm.SingletonCLI = this;
 
     this.logger = new vw.cpm.Logger(this,{});
 
@@ -109,7 +110,7 @@
 
 
 
-    
+    vw.cpm.utils.showNotif("yo","man");
   
   }
 
@@ -172,6 +173,9 @@
 
         }else if(obj.type == "process-ended"){
           if(_.indexOf(me.processmanager.startedprocess,obj.target)!=-1){
+            vw.cpm.utils.showNotif("Process ended !","The run ("+obj.target+") of module "+obj.more+" has ended !",function(){
+              me.processmanager.showRun(obj.more,obj.target);
+            },me.options.cpmbaseurl+'public/img/system/process.png');
             me.processmanager.showRun(obj.more,obj.target);
           }
         }else if(obj.type == "process-started"){
@@ -575,6 +579,27 @@
     }
     vw.cpm.utils.guids.push(guid);
     return guid;
+  }
+
+  vw.cpm.utils.showNotif = function(title,message,callback,icon){
+    if (!Notification) {
+      if(vw.cpm.SingletonCLI){
+        vw.cpm.SingletonCLI.logger.warn('Desktop notifications not available in your browser. Try a more recent browser.');
+      }
+      return;
+    }
+
+    if (Notification.permission == "granted"){
+      var notification = new Notification(title, {
+        icon:icon,
+        //icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+        body: message,
+      });
+
+      notification.onclick = callback;
+
+    }
+
   }
 
   vw.cpm.utils.waitTill = function(refObj,field,callback,refreshInterval){

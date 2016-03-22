@@ -78,6 +78,9 @@ function cpm_main(){
 
   $page->addToBody($html);
 
+  $page->addToBody('<script>$(document).ready(function(){if (Notification.permission !== "granted"){
+    Notification.requestPermission();}});</script>');
+
 }
 
 
@@ -163,6 +166,8 @@ function introslides(){
 
 
   $page->addToBody("    <script>
+
+
 
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration

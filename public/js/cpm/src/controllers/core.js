@@ -16,6 +16,7 @@
   vw.cpm.CLI.prototype.init = function(){
     var me = this;
 
+    vw.cpm.SingletonCLI = this;
 
     this.logger = new vw.cpm.Logger(this,{});
 
@@ -53,7 +54,6 @@
 
 
 
-    
   
   }
 
@@ -116,6 +116,9 @@
 
         }else if(obj.type == "process-ended"){
           if(_.indexOf(me.processmanager.startedprocess,obj.target)!=-1){
+            vw.cpm.utils.showNotif("Process ended !","The run ("+obj.target+") of module "+obj.more+" has ended !",function(){
+              me.processmanager.showRun(obj.more,obj.target);
+            },me.options.cpmbaseurl+'public/img/system/process.png');
             me.processmanager.showRun(obj.more,obj.target);
           }
         }else if(obj.type == "process-started"){

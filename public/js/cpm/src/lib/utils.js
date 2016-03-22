@@ -20,6 +20,27 @@
     return guid;
   }
 
+  vw.cpm.utils.showNotif = function(title,message,callback,icon){
+    if (!Notification) {
+      if(vw.cpm.SingletonCLI){
+        vw.cpm.SingletonCLI.logger.warn('Desktop notifications not available in your browser. Try a more recent browser.');
+      }
+      return;
+    }
+
+    if (Notification.permission == "granted"){
+      var notification = new Notification(title, {
+        icon:icon,
+        //icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+        body: message,
+      });
+
+      notification.onclick = callback;
+
+    }
+
+  }
+
   vw.cpm.utils.waitTill = function(refObj,field,callback,refreshInterval){
     var interval = setInterval(function(){
       var cond = false;

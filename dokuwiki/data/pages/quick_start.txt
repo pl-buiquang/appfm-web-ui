@@ -34,7 +34,7 @@ vagrant ssh\\
 ==== 5. First run (takes a long the first time since it builds base containers): ====
 
 cd /vagrant\\
-./start.sh (or ./start-daemon.sh)
+./appfm start (ou ./appfm start -d)
 
 When finished you can go to [[http://localhost:8080|http://localhost:8080]]
 
@@ -42,12 +42,14 @@ To disconnect session from the virtual machine:\\
 exit
 
 To stop the server (and the virtual machine) :\\
+./appfm stop
+
 vagrant halt (from outside the virtual machine session and anywhere within the cpm directory)
 
 To restart :\\
 vagrant ssh (from anywhere within the cpm directory)\\
 cd /vagrant\\
-./start.sh
+./appfm restart
 
 To completly destroy the virtual machine (needs re installation (step 4)) :\\
 vagrant destroy (from anywhere within the cpm directory)

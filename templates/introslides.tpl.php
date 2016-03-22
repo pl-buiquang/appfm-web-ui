@@ -42,49 +42,97 @@
         <section>
         <h1>AppFM</h1>
             <h3>Application Frame Manager</h3>
-            <h4>(name subject to change)</h4>
+            <h4>Chaîne de traitement TAL </h4>
             <p>
             <small>Created by <a href="http://versatile-world.net">Paul Bui-Quang</a> / <a href="mailto:paul.bui-quang@limsi.fr">paul.bui-quang@limsi.fr</a></small>
           </p>
           </section>
 
         <section>
-        <h1>TODO (présentation slides)</h1>
+        <h2>Objectifs</h2>
+        <p>
+        <ol>
+        <li class="fragment">Facilité d'utilisation</li>
+        <li class="fragment">Compositionnalité (chaînes)</li>
+        <li class="fragment">"Scalabilité"</li>
+        </ol>
+        </p>
         </section>
         
         <section>
-        <h2>Technologies</h2>
-        <ul>
-          <li>Docker
-          </li>
-          <li>0MQ</li>
-        </ul>
+          <h2>Existant</h2>
+          <ul>
+            <li class="fragment">ESB, Talend, ...</li>
+            <li class="fragment">UIMA, Gate, Lingpipe, ...</li>
+            <li class="fragment">gparallel, bash scripts, xml definition, ...</li>
+          </ul>
         </section>
 
         <section>
-        <h2>Modules</h2>
-        <code><pre class="yaml">
-        name : name of the module
-
-        desc : description
-
-        input : #inputs
-          KEY :
-            type : FILE
-
-        output : # outpus
-          KEY :
-            type : VAL*
-            value :
-              - val1
-              - val2
-
-        exec :
-          - modval1
-          - modval2
-
-        </pre></code>
+          <h2>1. Facilité d'utilisation : installation</h2>
+          <center class="fragment"><img src="../public/img/slides/docker.png"></center>
+          
+          <div class="fragment">
+            Architecture client-serveur : les applications sont déjà installées !
+          </div>
         </section>
+
+        <section>
+          <h2>1. Facilité d'utilisation : interfaces</h2>
+          <ul>
+            <li class="fragment">Interface web : tests / demos
+            </li>
+            <li class="fragment">Interface ligne de commande : scripting
+            <img src="../public/img/slides/python.png">
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>2. Compositionnalité : (M : I -> O)+</h2>
+          <div class="fragment">"Modules" : applications fonctionneles décrites en YAML</div>
+          <div class="fragment">Module de base : _CMD</div>
+          <div class="fragment">Opérateurs : _MAP, _IF, ...</div>
+        </section>
+
+
+        <section>
+          <h2>3. "Scalabilité"</h2>
+          Architecture orientée "message" + conteneurs Docker
+          <center><img src="../public/img/slides/zmq.gif" width="300px"></center>
+        </section>
+
+
+        <section>
+          <h2>Etat d'avancement</h2>
+          <ul>
+          <li>interfaces et serveur</li>
+          <li>~10 modules implémentés</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>En cours</h2>
+          <ul>
+          <li>Services</li>
+          <li>Contraintes</li>
+          <li>Vues</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Roadmap</h2>
+          <ul>
+            <li>Edition graphique</li>
+            <li>Replica system (/hdfs/nfs)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Demo</h2>
+          
+        </section>
+
 
       </div>
 

@@ -34,7 +34,7 @@
         app.openFile(me.data);
       }else if(me.command == "i"){
         var items = me.data.split("\t");
-        app.openIFrame(items[1],items[0]);
+        app.openIFrames(items[1],items[0]);
       }else if(me.command == "s"){
         if(me.data == "log"){
           app.logger.view();
@@ -109,16 +109,7 @@
 
 
 
-    var firstrun = store.get('firstrun')
-    if(!firstrun){
-      var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
-      //this.view.fullscreen(panel);
-      me.demo();
-      store.set('firstrun','done');
-    }else{
-      // init stuff like previously opened frames after full initialization reload callback
-
-    }
+    
   
   }
 
@@ -163,9 +154,10 @@
       this.wssocket.onopen = function(e){
         me.logger.info("opening websocket connection");
         me.wssocketactive = true;
+        me.view.setStatusButton("online");
       };
       this.wssocket.onclose = function(e){
-        me.logger.info("websocket connection ended");
+        me.logger.info("websocket connection ended with code "+e.code+" ( "+e.reason+" )");
         me.wssocketactive = false;
         me.checkstatus();
         console.log(arguments);
@@ -197,7 +189,6 @@
       };
       this.wssocket.onerror = function(e){
         console.log(arguments);
-        me.logger.error(arguments);
         me.checkstatus();
       };
     }catch(err){
@@ -229,16 +220,27 @@
 
     this.initWS();
 
-    var panels = store.get("panels");
-    if(panels && panels.length > 0){
-      store.set("panels",[]);
-      for (var i = panels.length - 1; i >= 0; i--) {
-        vw.cpm.Panel.deserialize(this,panels[i]);
-        this.logger.info("Loading panel : "+panels[i].cmd.command+" "+panels[i].cmd.data);
-      }
-    }else{
+    var firstrun = store.get('firstrun')
+    if(!firstrun){
       var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
+      //this.view.fullscreen(panel);
+      me.demo();
+      store.set('firstrun','done');
+    }else{
+      var panels = store.get("panels");
+      if(panels && panels.length > 0){
+        store.set("panels",[]);
+        for (var i = panels.length - 1; i >= 0; i--) {
+          vw.cpm.Panel.deserialize(this,panels[i]);
+          this.logger.info("Loading panel : "+panels[i].cmd.command+" "+panels[i].cmd.data);
+        }
+      }else{
+        var panel = this.openIFrame(this.options.cpmbaseurl+'/introslides',"Intro");
+      }
+
     }
+
+    
   }
 
   vw.cpm.CLI.prototype.setActiveMenu = function(menuitem){

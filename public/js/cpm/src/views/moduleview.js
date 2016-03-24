@@ -39,9 +39,10 @@
    
     this.$el.find(".module-save").on("click",function(){
       me.model.sync(function(){
-
+        me.init();
+        me.model.app.logger.info("successfully saved")
       },function(){
-
+        me.model.app.logger.error("couldn't save. error happend!");
       });
     });
     this.$el.find(".module-run").on("click",function(){

@@ -138,8 +138,8 @@
             }
           }
         },
-        error:function(jqXHR){
-          me.logger.error(jqXHR.responseText);
+        error:function(jqXHR,textStatus,errorThrown){
+          me.logger.error(errorThrown);
           me.view.setStatusButton("offline");
         },
         timeout: 20000 
@@ -285,8 +285,8 @@
         success: function(data, textStatus, jqXHR) {
           callback.call(me,data);
         },
-        error:function(jqXHR){
-          me.logger.error(jqXHR.responseText);
+        error:function(jqXHR,textStatus,errorThrown){
+          me.logger.error(errorThrown);
         },
       });
   }
@@ -915,7 +915,7 @@
         }
       },
       error:function(){
-
+        error.call();
       }
     });
   }
@@ -2291,9 +2291,10 @@
    
     this.$el.find(".module-save").on("click",function(){
       me.model.sync(function(){
-
+        me.init();
+        me.model.app.logger.info("successfully saved")
       },function(){
-
+        me.model.app.logger.error("couldn't save. error happend!");
       });
     });
     this.$el.find(".module-run").on("click",function(){

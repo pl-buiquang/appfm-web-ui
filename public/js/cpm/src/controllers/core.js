@@ -82,8 +82,8 @@
             }
           }
         },
-        error:function(jqXHR){
-          me.logger.error(jqXHR.responseText);
+        error:function(jqXHR,textStatus,errorThrown){
+          me.logger.error(errorThrown);
           me.view.setStatusButton("offline");
         },
         timeout: 20000 
@@ -229,8 +229,8 @@
         success: function(data, textStatus, jqXHR) {
           callback.call(me,data);
         },
-        error:function(jqXHR){
-          me.logger.error(jqXHR.responseText);
+        error:function(jqXHR,textStatus,errorThrown){
+          me.logger.error(errorThrown);
         },
       });
   }

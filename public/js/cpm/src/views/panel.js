@@ -74,6 +74,7 @@
           content.height(content.prop("originalHeight"));
       }
       me.$el.find(".frame-body").append(content);
+      me.$el.find(".frame-body").trigger("fullscreenOff");
     }
     
   }
@@ -97,6 +98,7 @@
     me.app.view.$fullscreencontainer.find(".frame-body").empty();
     me.app.view.$fullscreencontainer.find(".frame-title").append(title);
     me.app.view.$fullscreencontainer.find(".frame-body").append(content);
+    me.$el.find(".frame-body").trigger("fullscreenOn");
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").unbind("click");
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
       me.quitFullscreen();

@@ -10,6 +10,7 @@ Router::addRoutes(array(
   "test"=>"cpm_test",
   "rest/cmd"=>"cmdexec",
   "introslides"=>"introslides",
+  "updateConnectionInfo"=>"updateconnectionInfo"
 ));
 
 function cpm_main(){
@@ -66,10 +67,25 @@ function cpm_main(){
   $page->addCSS(BASE_URL."public/css/app.css");
 
 
+  $cpm_ws_host=CPM_WS_HOST;
+  if(isset($_SESSION["CPM_WS_HOST"])){
+    $cpm_ws_host=$_SESSION["CPM_WS_HOST"];
+  }
+  $cpm_host=CPM_HOST;
+  if(isset($_SESSION["CPM_HOST"])){
+    $cpm_host=$_SESSION["CPM_HOST"];
+  }
+  $cpm_port=CPM_PORT;
+  if(isset($_SESSION["CPM_PORT"])){
+    $cpm_port=$_SESSION["CPM_PORT"];
+  }
+
   $html = tplset(array(
     "BASE_URL"=>BASE_URL,
     "HOSTNAME" => $_SERVER["SERVER_NAME"],
-    "WS_HOST" => CPM_WS_HOST
+    "WS_HOST" => $cpm_ws_host,
+    "CPM_HOST"=>$cpm_host,
+    "CPM_PORT"=>$cpm_port
     ),tpl("main"));
 
 
@@ -83,6 +99,38 @@ function cpm_main(){
 
 }
 
+function updateconnectionInfo(){
+  Logger::Log($_POST);
+  if(!isset($_POST["CPM_HOST"]) || !isset($_POST["CPM_PORT"]) || !isset($_POST["CPM_WS_HOST"])){
+    echo '{"error":true}';
+    exit();
+  }
+
+  $prevConncetionInfo = array(
+    "CPM_HOST"=>$_SESSION["CPM_HOST"],
+    "CPM_PORT"=>$_SESSION["CPM_PORT"],
+    "CPM_WS_HOST"=>$_SESSION["CPM_WS_HOST"]
+    );
+
+  Logger::Log($_SESSION);
+
+  $_SESSION["CPM_HOST"] = $_POST["CPM_HOST"];  
+  $_SESSION["CPM_PORT"] = $_POST["CPM_PORT"];
+  $_SESSION["CPM_WS_HOST"] = $_POST["CPM_WS_HOST"];
+  $message = cpm_command_call("status");
+  if($message != "timeout"){
+    echo '{"success":true}';
+    exit();
+  }else{
+    $_SESSION["CPM_HOST"] = $prevConncetionInfo["CPM_HOST"];  
+    $_SESSION["CPM_PORT"] = $prevConncetionInfo["CPM_PORT"];
+    $_SESSION["CPM_WS_HOST"] = $prevConncetionInfo["CPM_WS_HOST"];
+    echo '{"error":true}';
+    exit();
+  }
+  
+}
+
 
 
 function cpm_command_call($command,$data=NULL){
@@ -91,7 +139,17 @@ function cpm_command_call($command,$data=NULL){
   set_time_limit ( 30);
   $socket = $context->getSocket(ZMQ::SOCKET_REQ);
 
-  $socket->connect("tcp://".CPM_HOST.":".CPM_PORT);
+
+  $cpm_host=CPM_HOST;
+  if(isset($_SESSION["CPM_HOST"])){
+    $cpm_host=$_SESSION["CPM_HOST"];
+  }
+  $cpm_port=CPM_PORT;
+  if(isset($_SESSION["CPM_PORT"])){
+    $cpm_port=$_SESSION["CPM_PORT"];
+  }
+
+  $socket->connect("tcp://".$cpm_host.":".$cpm_port);
 
   $dataframe = "";
   if(isset($data) && !empty($data)){
@@ -157,7 +215,7 @@ function introslides(){
       var link = document.createElement( 'link' );
       link.rel = 'stylesheet';
       link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '".BASE_URL."public/vendor/reveal.js-3.2.0/css/print/pdf.css' : '".BASE_URL."public/vendor/reveal.js-3.2.0/css/print/paper.css';
       document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>");
 

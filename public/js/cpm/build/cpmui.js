@@ -769,6 +769,35 @@
     });
   }
 
+  vw.cpm.CPMSettingsManager.prototype.updateConnection = function(host,port,wshost){
+    console.log(host);
+    var me = this;
+    $.ajax({
+        type: "POST",
+        data : {
+          CPM_HOST:host,
+          CPM_PORT:port,
+          CPM_WS_HOST:wshost
+        },
+        dataType:"json",
+        url: me.app.options.cpmbaseurl+"updateConnectionInfo",
+        success: function(data, textStatus, jqXHR) {
+          if(data.error){
+            alert("wrong connection information. nothing changed!");
+          }else if(data.success){
+            window.location.reload();  
+          }else{
+            console.log(data);
+            alert("something went wrong. nothing changed!");
+          }
+          
+        },
+        error:function(){
+          alert("wrong connection information. nothing changed!");
+        }
+      });
+  }
+
 
 
 }(window.vw = window.vw || {}));
@@ -1784,11 +1813,17 @@
   }
 
   vw.cpm.CPMSettingsManagerView.prototype.render = function(){
+    var me = this;
     this.$el.empty();
     
     var data = this.model.cpmsettings;
     var html ='<div><button class="cpm-refresh">Refresh</button></div>';
-    html +='<div><button class="cpm-reconnect">Reconnect (websockets)</button></div>';
+    html +='<div><button class="cpm-reconnect-ws">Reconnect (websockets)</button></div>';
+    html += '<div class="settings-field-title"> Connection infos : </div>';
+    html += '<div class="settings-field-body">AppFM Host : <input type="text" name="cpmhost" value="'+this.model.app.options.cpmhost+'"></div>';
+    html += '<div class="settings-field-body">AppFM Port : <input type="text" name="cpmport" value="'+this.model.app.options.cpmport+'"></div>';
+    html += '<div class="settings-field-body">AppFM WS Host+Port : <input type="text" name="cpwsmhost" value="'+this.model.app.options.cpmwshost+'"></div>';
+    html +='<div><button class="cpm-reconnect">Connect</button></div>';
     html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
     html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
     var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'
@@ -1805,11 +1840,18 @@
     html += moduledir;
     this.$el.append(html);
 
-    var me = this;
+    this.$el.find('.cpm-reconnect').click(function(){
+      var host = me.$el.find('input[name=cpmhost]').val();
+      var port = me.$el.find('input[name=cpmport]').val();
+      var wshostport = me.$el.find('input[name=cpwsmhost]').val();
+      me.model.updateConnection(host,port,wshostport);
+    });
+
+    
     this.$el.find(".cpm-refresh").click(function(){
       me.model.app.reload();
     });
-    this.$el.find(".cpm-reconnect").click(function(){
+    this.$el.find(".cpm-reconnect-ws").click(function(){
       me.model.app.initWS();
     });
   }
@@ -2333,6 +2375,19 @@
     this.editor.getSession().setTabSize(2);
     this.editor.getSession().setUseSoftTabs(true);
     this.editor.session.setMode(new YamlMode());
+
+    /*
+    this.$el.on("fullscreenOn",function(){
+        me.$el.find(".module-source-editor").height(me.$el.find(".module-content-view").height()-me.$el.find(".module-header").height());
+        me.editor.resize();
+      });
+
+    this.$el.on("fullscreenOff",function(){      
+        me.$el.find(".module-source-editor").height(me.$el.find(".module-content-view").height()-me.$el.find(".module-header").height());
+        me.editor.resize();
+      });*/
+
+
   }
 
   vw.cpm.ModuleView.prototype.renderRunConfForm=function(){
@@ -2593,13 +2648,13 @@
     '<span class="module-view-toolbox-item mvti-output">+ Output</span>'+
     '</div><div class="canvas-container"><div class="canvas-view"></div></div><div class="module-view-infos-panel"></div></div>';
 
-  vw.cpm.ModuleView.template = '<div class="module-header">'+
+  vw.cpm.ModuleView.template = '<div class="module-view-container"><div class="module-header">'+
   '<span class="module-view-source module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">source</span>'+
   //'<span class="module-view-graphic module-header-item" style="float:left; margin-left:20px;">view</span>'+
   '<span class="module-save module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">save</span>'+
   '<span class="module-run module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">run</span>'+
   '</div>'+
-  '<div class="module-content-view"></div>';
+  '<div class="module-content-view"></div></div>';
 
   vw.cpm.ModuleView.templateGraphic = '<div class="module-graphical-view"><div ></div>';
 
@@ -2683,6 +2738,7 @@
           content.height(content.prop("originalHeight"));
       }
       me.$el.find(".frame-body").append(content);
+      me.$el.find(".frame-body").trigger("fullscreenOff");
     }
     
   }
@@ -2706,6 +2762,7 @@
     me.app.view.$fullscreencontainer.find(".frame-body").empty();
     me.app.view.$fullscreencontainer.find(".frame-title").append(title);
     me.app.view.$fullscreencontainer.find(".frame-body").append(content);
+    me.$el.find(".frame-body").trigger("fullscreenOn");
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").unbind("click");
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
       me.quitFullscreen();

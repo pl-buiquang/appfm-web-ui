@@ -81,6 +81,19 @@
     this.editor.getSession().setTabSize(2);
     this.editor.getSession().setUseSoftTabs(true);
     this.editor.session.setMode(new YamlMode());
+
+    /*
+    this.$el.on("fullscreenOn",function(){
+        me.$el.find(".module-source-editor").height(me.$el.find(".module-content-view").height()-me.$el.find(".module-header").height());
+        me.editor.resize();
+      });
+
+    this.$el.on("fullscreenOff",function(){      
+        me.$el.find(".module-source-editor").height(me.$el.find(".module-content-view").height()-me.$el.find(".module-header").height());
+        me.editor.resize();
+      });*/
+
+
   }
 
   vw.cpm.ModuleView.prototype.renderRunConfForm=function(){
@@ -341,13 +354,13 @@
     '<span class="module-view-toolbox-item mvti-output">+ Output</span>'+
     '</div><div class="canvas-container"><div class="canvas-view"></div></div><div class="module-view-infos-panel"></div></div>';
 
-  vw.cpm.ModuleView.template = '<div class="module-header">'+
+  vw.cpm.ModuleView.template = '<div class="module-view-container"><div class="module-header">'+
   '<span class="module-view-source module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">source</span>'+
   //'<span class="module-view-graphic module-header-item" style="float:left; margin-left:20px;">view</span>'+
   '<span class="module-save module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">save</span>'+
   '<span class="module-run module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">run</span>'+
   '</div>'+
-  '<div class="module-content-view"></div>';
+  '<div class="module-content-view"></div></div>';
 
   vw.cpm.ModuleView.templateGraphic = '<div class="module-graphical-view"><div ></div>';
 

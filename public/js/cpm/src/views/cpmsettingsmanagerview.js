@@ -14,11 +14,17 @@
   }
 
   vw.cpm.CPMSettingsManagerView.prototype.render = function(){
+    var me = this;
     this.$el.empty();
     
     var data = this.model.cpmsettings;
     var html ='<div><button class="cpm-refresh">Refresh</button></div>';
-    html +='<div><button class="cpm-reconnect">Reconnect (websockets)</button></div>';
+    html +='<div><button class="cpm-reconnect-ws">Reconnect (websockets)</button></div>';
+    html += '<div class="settings-field-title"> Connection infos : </div>';
+    html += '<div class="settings-field-body">AppFM Host : <input type="text" name="cpmhost" value="'+this.model.app.options.cpmhost+'"></div>';
+    html += '<div class="settings-field-body">AppFM Port : <input type="text" name="cpmport" value="'+this.model.app.options.cpmport+'"></div>';
+    html += '<div class="settings-field-body">AppFM WS Host+Port : <input type="text" name="cpwsmhost" value="'+this.model.app.options.cpmwshost+'"></div>';
+    html +='<div><button class="cpm-reconnect">Connect</button></div>';
     html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
     html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
     var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'
@@ -35,11 +41,18 @@
     html += moduledir;
     this.$el.append(html);
 
-    var me = this;
+    this.$el.find('.cpm-reconnect').click(function(){
+      var host = me.$el.find('input[name=cpmhost]').val();
+      var port = me.$el.find('input[name=cpmport]').val();
+      var wshostport = me.$el.find('input[name=cpwsmhost]').val();
+      me.model.updateConnection(host,port,wshostport);
+    });
+
+    
     this.$el.find(".cpm-refresh").click(function(){
       me.model.app.reload();
     });
-    this.$el.find(".cpm-reconnect").click(function(){
+    this.$el.find(".cpm-reconnect-ws").click(function(){
       me.model.app.initWS();
     });
   }

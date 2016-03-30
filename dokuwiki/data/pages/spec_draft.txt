@@ -27,7 +27,6 @@ Les entrées d'un module sont décrites via une //map// de la forme suivante :
 input :
   NOM_INPUT_1 :
     type  : INPUT_TYPE
-    encoding : ENCODING (optionnel, défaut étant utf-8) # not implemented
     format : FORMAT (optionnel)
     schema : SCHEMA (optionnel)
     desc : description optionnelle
@@ -53,7 +52,6 @@ Symmétriquement aux entrées d'un module, les sorties sont décrites via une //
 output :
   NOM_OUTPUT_1 :
     type  : OUTPUT_TYPE
-    encoding : ENCODING (optionnel, défaut est utf-8) # not implemented
     format : FORMAT (optionnel)
     schema : SCHEMA (optionnel)
     desc : description optionnelle
@@ -74,11 +72,7 @@ Le champ **exec** est un champ composé d'une liste d'**instances**** de**** mod
 <code>
 exec :
   - "nom-de-module-1#namespace-optionel-1" :
-      input :
-        INPUT-1 : VALEUR
-        ...
-      output :
-        OUTPUT-1 : ALIAS
+      INPUT-1 : VALEUR
         ...
   - ...
 </code>
@@ -94,8 +88,6 @@ Les variables sont des alias correspondant à des valeurs définies à l'extéri
 
 - **_RUN_DIR** : le répertoire dans lequel s'éxecute le module
 
-- **_RUN_ID **: l'id du run courant
-
 Les variables de **sorties des modules éxécutés ** (qui se trouvent dans le champ **run**) sont accessible soit par leur "chemin d'accès", ie (//NOM_MODULE.NOM_OUTPUT//), ou par un alias/nom de variable assigné dans la descritption du **run**.
 
 Les variables sont utilisées en préfixant le nom de la variable par le caractère **$**. Pour les variables "internes" (NOM_VARIABLE**:** VARIABLE), il faut encapsuler le chemin dans le patron **${**//CHEMIN_ACCESS//**}**.
@@ -103,11 +95,11 @@ Les variables sont utilisées en préfixant le nom de la variable par le caract�
 
 Chaque type de variable à une représentation par défaut sous forme de chaine de caractère. Certaines variables
 
-==== VAL/STREAM ====
+==== VAL ====
 
 Les entrées de types **VAL** sont des chaines de caractères.
 
-Par défaut, l'encoding est **utf-8**
+Par défaut, l'encodage est **utf-8**
 
 Représentation chaine de caractères : identité
 
@@ -153,15 +145,16 @@ Ce module permet tout simplement de lancer une commande, possiblement à l'inté
 
 |**Input** |||  |  |
 |  |**CMD**   |VAL |commande à executer |  |
-|  |**DOCKERFILE**   |VAL (true |false) |indique si la commande doit s'éxécuter à l'intérieur d'un conteneur Docker définit par une Dockerfile |
-|  |**CONTAINED**   |VAL (true |false) |indique si pour chaque execution un nouveau conteneur Docker est créé ou si une seule instance suffit |
+|  |**DOCKERFILE**   |VAL  |Le nom ou chemin relatif du Dockerfile utilisé (ou false si pas de docker utilisé) |indique si la commande doit s'éxécuter à l'intérieur d'un conteneur Docker définit par une Dockerfile |
+|  |**CONTAINED**   |VAL (true,false) |  |indique si pour chaque execution un nouveau conteneur Docker est créé ou si une seule instance suffit |
+|  |**DOCKEROPTS**   |VAL |options à passer au lancement du conteneur Docker |  |
 |**Output** |||  |  |
 |  |**STDOUT**   |VAL |sortie standard de la commande |  |
 |  |**STDERR**   |VAL |sortie d'erreur de la commande |  |
 |**Exec** |||  |  |
-|  |execute a shell command (with **_RUN_WD** ||as working directory) |  |
+|  |execute a shell command (with **_RUN_** ||**DIR **as working directory)  |  |  |
 
-TODO : explication docker
+Pour plus d'explication sur docker et comment créer un Dockerfile adapté à AppFM, continuer la lecture [[:docker|ici]].
 
 ==== _MAP ====
 
@@ -171,7 +164,6 @@ Ce module permet de distribuer parallèlement les fichiers d'un corpus ou d'un r
 |  |**IN**   |DIR |le répertoire dont chaque fichier va être la source d'une execution en parallèle des modules définis dans la variable **RUN** avec pour nom **$_**   |
 |  |**RUN**   |MODULE+ |liste d'instance de modules |
 |  |**REGEX**   |VAL |expression régulière filtrant les fichiers du répertoire qui seront traités |
-|  |**CHUNK_SIZE**   |VAL |nombre de processus exécutés en parallèle (defaut 20) |
 |**Output** ||||
 |  |**OUT**   |MAP ||
 |**Exec** ||||
@@ -193,11 +185,6 @@ Les schemas sont combinables, certains sont implicitement mutuellement exclusifs
 
 Ainsi nous avons défini les formats suivants : Annotation qui est définit par un contenu (texte d'un xml) dont des spans sont annotés, et CAS qui en xml a des champs specifiques pour déclarer des annotations globales au document et des annotations sur des parties d'un texte original.
 
-==== Encoding ====
-
-L'encoding est l'information qui permet de décoder le signal de base (bits) en des structures informatique natives (char,int,etc.) bas niveau.
-
-La variable **ENC_DFT** (qui peut etre overridé dans la configuration de run) définit la valeur par défaut qui est pour le texte : l'utf-8
 ====   ====
 
 ===== Gestion des dépendances =====

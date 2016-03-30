@@ -33,6 +33,36 @@
     });
   }
 
+  vw.cpm.CPMSettingsManager.prototype.updateConnection = function(host,port,wshost){
+    console.log(host);
+    var me = this;
+    $.ajax({
+        type: "POST",
+        data : {
+          CPM_HOST:host,
+          CPM_PORT:port,
+          CPM_WS_HOST:wshost
+        },
+        dataType:"json",
+        url: me.app.options.cpmbaseurl+"updateConnectionInfo",
+        success: function(data, textStatus, jqXHR) {
+          if(data.error){
+            alert("wrong connection information. nothing changed!");
+          }else if(data.success){
+            store.set("panels",[]);
+            window.location.reload();  
+          }else{
+            console.log(data);
+            alert("something went wrong. nothing changed!");
+          }
+          
+        },
+        error:function(){
+          alert("wrong connection information. nothing changed!");
+        }
+      });
+  }
+
 
 
 }(window.vw = window.vw || {}));

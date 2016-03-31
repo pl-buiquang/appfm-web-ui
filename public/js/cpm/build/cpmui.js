@@ -785,6 +785,7 @@
           if(data.error){
             alert("wrong connection information. nothing changed!");
           }else if(data.success){
+            store.set("panels",[]);
             window.location.reload();  
           }else{
             console.log(data);
@@ -922,7 +923,6 @@
     if(me.def.creation){
       synctype = "create "+me.def.modulename+" "+vw.cpm.utils.getParentDir(me.def.sourcepath);
     }
-    console.log(me.def);
     $.ajax({
       type: "POST",
       data : {
@@ -933,13 +933,13 @@
       dataType : "json",
       success: function(data, textStatus, jqXHR) {
         if(data.success){
-          if(me.def.creation){
+          if(me.def.creation || !me.def.module){
             me.app.modulesmanager.fetchAll();
             delete me.def.creation;  
           }
           success.call();
         }else{
-          alert(me.error);
+          alert(data.error);
           error.call();
         }
       },
@@ -1820,10 +1820,10 @@
     var html ='<div><button class="cpm-refresh">Refresh</button></div>';
     html +='<div><button class="cpm-reconnect-ws">Reconnect (websockets)</button></div>';
     html += '<div class="settings-field-title"> Connection infos : </div>';
-    html += '<div class="settings-field-body">AppFM Host : <input type="text" name="cpmhost" value="'+this.model.app.options.cpmhost+'"></div>';
-    html += '<div class="settings-field-body">AppFM Port : <input type="text" name="cpmport" value="'+this.model.app.options.cpmport+'"></div>';
-    html += '<div class="settings-field-body">AppFM WS Host+Port : <input type="text" name="cpwsmhost" value="'+this.model.app.options.cpmwshost+'"></div>';
-    html +='<div><button class="cpm-reconnect">Connect</button></div>';
+    html += '<div class="settings-field-body"><div>AppFM Host : </div><input type="text" name="cpmhost" value="'+this.model.app.options.cpmhost+'"></div>';
+    html += '<div class="settings-field-body"><div>AppFM Port : </div><input type="text" name="cpmport" value="'+this.model.app.options.cpmport+'"></div>';
+    html += '<div class="settings-field-body"><div>AppFM WS Host+Port : </div><input type="text" name="cpwsmhost" value="'+this.model.app.options.cpmwshost+'"></div>';
+    html +='<div class="settings-field-body"><button class="cpm-reconnect">Connect</button></div>';
     html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
     html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
     var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'

@@ -22,7 +22,6 @@
     if(me.def.creation){
       synctype = "create "+me.def.modulename+" "+vw.cpm.utils.getParentDir(me.def.sourcepath);
     }
-    console.log(me.def);
     $.ajax({
       type: "POST",
       data : {
@@ -33,13 +32,13 @@
       dataType : "json",
       success: function(data, textStatus, jqXHR) {
         if(data.success){
-          if(me.def.creation){
+          if(me.def.creation || !me.def.module){
             me.app.modulesmanager.fetchAll();
             delete me.def.creation;  
           }
           success.call();
         }else{
-          alert(me.error);
+          alert(data.error);
           error.call();
         }
       },

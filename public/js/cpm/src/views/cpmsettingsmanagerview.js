@@ -21,10 +21,10 @@
     var html ='<div><button class="cpm-refresh">Refresh</button></div>';
     html +='<div><button class="cpm-reconnect-ws">Reconnect (websockets)</button></div>';
     html += '<div class="settings-field-title"> Connection infos : </div>';
-    html += '<div class="settings-field-body">AppFM Host : <input type="text" name="cpmhost" value="'+this.model.app.options.cpmhost+'"></div>';
-    html += '<div class="settings-field-body">AppFM Port : <input type="text" name="cpmport" value="'+this.model.app.options.cpmport+'"></div>';
-    html += '<div class="settings-field-body">AppFM WS Host+Port : <input type="text" name="cpwsmhost" value="'+this.model.app.options.cpmwshost+'"></div>';
-    html +='<div><button class="cpm-reconnect">Connect</button></div>';
+    html += '<div class="settings-field-body"><div>AppFM Host : </div><input type="text" name="cpmhost" value="'+this.model.app.options.cpmhost+'"></div>';
+    html += '<div class="settings-field-body"><div>AppFM Port : </div><input type="text" name="cpmport" value="'+this.model.app.options.cpmport+'"></div>';
+    html += '<div class="settings-field-body"><div>AppFM WS Host+Port : </div><input type="text" name="cpwsmhost" value="'+this.model.app.options.cpmwshost+'"></div>';
+    html +='<div class="settings-field-body"><button class="cpm-reconnect">Connect</button></div>';
     html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
     html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
     var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'

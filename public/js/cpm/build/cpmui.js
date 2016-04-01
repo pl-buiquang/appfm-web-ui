@@ -786,6 +786,11 @@
             alert("wrong connection information. nothing changed!");
           }else if(data.success){
             store.set("panels",[]);
+            store.set("connectionInfo",{
+              CPM_HOST:host,
+              CPM_PORT:port,
+              CPM_WS_HOST:wshost
+            })
             window.location.reload();  
           }else{
             console.log(data);
@@ -1820,6 +1825,11 @@
     var html ='<div><button class="cpm-refresh">Refresh</button></div>';
     html +='<div><button class="cpm-reconnect-ws">Reconnect (websockets)</button></div>';
     html += '<div class="settings-field-title"> Connection infos : </div>';
+    html += '<div class="settings-field-body"><select id="server-chooser">';
+    for (var server in me.model.app.options.servers) {
+      html+= '<option value="'+server+'">'+server+'</option>';
+    }
+    html += '</select></div>';
     html += '<div class="settings-field-body"><div>AppFM Host : </div><input type="text" name="cpmhost" value="'+this.model.app.options.cpmhost+'"></div>';
     html += '<div class="settings-field-body"><div>AppFM Port : </div><input type="text" name="cpmport" value="'+this.model.app.options.cpmport+'"></div>';
     html += '<div class="settings-field-body"><div>AppFM WS Host+Port : </div><input type="text" name="cpwsmhost" value="'+this.model.app.options.cpmwshost+'"></div>';
@@ -1839,6 +1849,13 @@
     moduledir += '</ul></div>';
     html += moduledir;
     this.$el.append(html);
+
+    this.$el.find('#server-chooser').on("change",function(){
+      var servername = $(this).val();
+      me.$el.find('input[name=cpmhost]').val(me.model.app.options.servers[servername]["CPM_HOST"]);
+      me.$el.find('input[name=cpmport]').val(me.model.app.options.servers[servername]["CPM_PORT"]);
+      me.$el.find('input[name=cpwsmhost]').val(me.model.app.options.servers[servername]["CPM_WS_HOST"]);
+    });
 
     this.$el.find('.cpm-reconnect').click(function(){
       var host = me.$el.find('input[name=cpmhost]').val();

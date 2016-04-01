@@ -29,7 +29,7 @@
       
     }
 
-
+    
 
 
     this.activemenu = "";
@@ -147,6 +147,14 @@
   vw.cpm.CLI.prototype.reload = function(){
     var me = this;
     this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body,{init:function(){
+      var connectionInfo = store.get("connectionInfo");
+      if(connectionInfo){
+        if(me.options.cpmwshost != connectionInfo["CPM_WS_HOST"] && 
+          me.options.cpmhost != connectionInfo["CPM_HOST"]
+          me.options.cpmport !=connectionInfo["CPM_PORT"]){
+          me.cpmsettingsmanager.updateConnection(connectionInfo["CPM_HOST"],connectionInfo["CPM_PORT"],connectionInfo["CPM_WS_HOST"])
+        }
+      }
       this.logger.info("Received appfm server settings");
       me.initmodules();
     }});

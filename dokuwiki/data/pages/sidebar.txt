@@ -12,4 +12,5 @@
   *  [[:clients|Clients]]
       * [[:cli|CLI]]
       * [[:web|Web interface]]
+  * [[faq|FAQ]]
 

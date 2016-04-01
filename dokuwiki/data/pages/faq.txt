@@ -1,0 +1,10 @@
+====== FAQ ======
+
+Note : Certains éléments de cette FAQ sont relatif à l'instance existante à rscpm.limsi.fr
+
+===== Comment uploader un corpus =====
+
+Uploadez votre corpus sur machine rscpm avec : ''scp -r /PATH/TO/CORPUS appfm@rscpm.limsi.fr:~/data/corpus'' , le mot de passe est ''appfm''
+===== Comment uploader les sources d'un module =====
+
+Uploadez votre corpus sur machine rscpm avec : scp -r /PATH/TO/MODULEDIRECTORY appfm@rscpm.limsi.fr:~/data/modules/custom , le mot de passe est appfm

@@ -85,7 +85,8 @@ function cpm_main(){
     "HOSTNAME" => $_SERVER["SERVER_NAME"],
     "WS_HOST" => $cpm_ws_host,
     "CPM_HOST"=>$cpm_host,
-    "CPM_PORT"=>$cpm_port
+    "CPM_PORT"=>$cpm_port,
+    "SERVERS"=>json_encode(readServerInfo())
     ),tpl("main"));
 
 
@@ -264,3 +265,33 @@ function cpm_test($args){
 
 }
 
+function readServerInfo(){
+  $infos = array();
+  if(file_exists(BASE_DIR."servers.info")){
+    $content = file_get_contents(BASE_DIR."servers.info");
+    $lines = split("\n", $content);
+    $curinfo = NULL;
+    foreach ($lines as $line) {
+      $line = trim($line);
+      if($line == "" || Utils::startsWith($line,"#")){
+        continue;
+      }
+      $matches = array();
+      $match = preg_match("/\[(.*?)\]/", $line,$matches);
+      if($match){
+        $infos[$matches[1]] = array();
+        $curinfo = &$infos[$matches[1]];
+      }else{
+        $items = split(":",$line);
+        if(count($items)<2){
+          continue;
+        }else{
+          $curinfo[trim($items[0])] = trim(implode(":",array_slice($items,1)));
+        }
+      }
+
+    }
+    Logger::Log($infos);
+    return $infos;
+  }
+}

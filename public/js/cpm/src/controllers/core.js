@@ -256,7 +256,7 @@
     }
 
     if(command == "brat"){
-      this.openIFrame('http://'+me.options.hostname+':8001/index.xhtml',"brat");
+      this.openIFrame('http://'+me.options.cpmhost+':8001/index.xhtml',"brat");
       return;
     }
 
@@ -267,7 +267,7 @@
     }
 
     if(command == "cadvisor"){
-      this.openIFrame('http://'+me.options.hostname+':8082/',"cadvisor");
+      this.openIFrame('http://'+me.options.cpmhost+':8082/',"cadvisor");
       return;
     }
 

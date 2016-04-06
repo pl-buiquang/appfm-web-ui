@@ -85,7 +85,7 @@
       
     }
 
-
+    
 
 
     this.activemenu = "";
@@ -203,6 +203,14 @@
   vw.cpm.CLI.prototype.reload = function(){
     var me = this;
     this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body,{init:function(){
+      var connectionInfo = store.get("connectionInfo");
+      if(connectionInfo){
+        if(me.options.cpmwshost != connectionInfo["CPM_WS_HOST"] && 
+          me.options.cpmhost != connectionInfo["CPM_HOST"] &&
+          me.options.cpmport !=connectionInfo["CPM_PORT"]){
+          me.cpmsettingsmanager.updateConnection(connectionInfo["CPM_HOST"],connectionInfo["CPM_PORT"],connectionInfo["CPM_WS_HOST"])
+        }
+      }
       this.logger.info("Received appfm server settings");
       me.initmodules();
     }});
@@ -740,13 +748,14 @@
     this.options = options;
     this.app = app;
     this.view = new vw.cpm.CPMSettingsManagerView(this,$el);
-    this.cpmsettings = {};
+    this.cpmsettings = {corpus_dir:"not connected",modules:[],result_dir:"not connected"};
     this.initiated = false;
     this.init();
   }
 
   vw.cpm.CPMSettingsManager.prototype.init = function(callback){
     var me = this;
+    me.view.render();
     me.fetch();
   }
 
@@ -790,7 +799,7 @@
               CPM_HOST:host,
               CPM_PORT:port,
               CPM_WS_HOST:wshost
-            })
+            });
             window.location.reload();  
           }else{
             console.log(data);

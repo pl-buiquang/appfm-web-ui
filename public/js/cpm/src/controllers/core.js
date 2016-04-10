@@ -125,6 +125,11 @@
           me.processmanager.fetchAll();
         }else if(obj.type == "process-deleted"){
           me.processmanager.fetchAll();
+        }else if(obj.type == "process-update"){
+          /*if(_.indexOf(me.processmanager.startedprocess,obj.target)!=-1){
+            // todo : should update view with status log
+          }*/
+          me.logger.info(obj.target+"\n"+obj.more);
         }else if(obj.type == "module-created"){
           me.modulesmanager.fetchAll();
         }else if(obj.type == "module-updated"){
@@ -150,7 +155,7 @@
       var connectionInfo = store.get("connectionInfo");
       if(connectionInfo){
         if(me.options.cpmwshost != connectionInfo["CPM_WS_HOST"] && 
-          me.options.cpmhost != connectionInfo["CPM_HOST"]
+          me.options.cpmhost != connectionInfo["CPM_HOST"] &&
           me.options.cpmport !=connectionInfo["CPM_PORT"]){
           me.cpmsettingsmanager.updateConnection(connectionInfo["CPM_HOST"],connectionInfo["CPM_PORT"],connectionInfo["CPM_WS_HOST"])
         }

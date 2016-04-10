@@ -317,7 +317,7 @@
     }
 
     if(command == "brat"){
-      this.openIFrame('http://'+me.options.hostname+':8001/index.xhtml',"brat");
+      this.openIFrame('http://'+me.options.cpmhost+':8001/index.xhtml',"brat");
       return;
     }
 
@@ -328,7 +328,7 @@
     }
 
     if(command == "cadvisor"){
-      this.openIFrame('http://'+me.options.hostname+':8082/',"cadvisor");
+      this.openIFrame('http://'+me.options.cpmhost+':8082/',"cadvisor");
       return;
     }
 
@@ -753,13 +753,14 @@
     this.options = options;
     this.app = app;
     this.view = new vw.cpm.CPMSettingsManagerView(this,$el);
-    this.cpmsettings = {};
+    this.cpmsettings = {corpus_dir:"not connected",modules:[],result_dir:"not connected"};
     this.initiated = false;
     this.init();
   }
 
   vw.cpm.CPMSettingsManager.prototype.init = function(callback){
     var me = this;
+    me.view.render();
     me.fetch();
   }
 
@@ -1840,7 +1841,11 @@
     html += '<div class="settings-field-title"> Connection infos : </div>';
     html += '<div class="settings-field-body"><select id="server-chooser">';
     for (var server in me.model.app.options.servers) {
-      html+= '<option value="'+server+'">'+server+'</option>';
+      var selected = ""
+      if(this.model.app.options.cpmhost == me.model.app.options.servers[server]["CPM_HOST"]){
+        selected = "selected"
+      }
+      html+= '<option value="'+server+'" '+selected+'>'+server+'</option>';
     }
     html += '</select></div>';
     html += '<div class="settings-field-body"><div>AppFM Host : </div><input type="text" name="cpmhost" value="'+this.model.app.options.cpmhost+'"></div>';

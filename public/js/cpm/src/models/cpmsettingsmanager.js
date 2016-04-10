@@ -4,13 +4,14 @@
     this.options = options;
     this.app = app;
     this.view = new vw.cpm.CPMSettingsManagerView(this,$el);
-    this.cpmsettings = {};
+    this.cpmsettings = {corpus_dir:"not connected",modules:[],result_dir:"not connected"};
     this.initiated = false;
     this.init();
   }
 
   vw.cpm.CPMSettingsManager.prototype.init = function(callback){
     var me = this;
+    me.view.render();
     me.fetch();
   }
 

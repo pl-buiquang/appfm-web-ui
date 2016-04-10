@@ -23,7 +23,11 @@
     html += '<div class="settings-field-title"> Connection infos : </div>';
     html += '<div class="settings-field-body"><select id="server-chooser">';
     for (var server in me.model.app.options.servers) {
-      html+= '<option value="'+server+'">'+server+'</option>';
+      var selected = ""
+      if(this.model.app.options.cpmhost == me.model.app.options.servers[server]["CPM_HOST"]){
+        selected = "selected"
+      }
+      html+= '<option value="'+server+'" '+selected+'>'+server+'</option>';
     }
     html += '</select></div>';
     html += '<div class="settings-field-body"><div>AppFM Host : </div><input type="text" name="cpmhost" value="'+this.model.app.options.cpmhost+'"></div>';

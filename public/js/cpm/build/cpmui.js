@@ -181,6 +181,11 @@
           me.processmanager.fetchAll();
         }else if(obj.type == "process-deleted"){
           me.processmanager.fetchAll();
+        }else if(obj.type == "process-update"){
+          /*if(_.indexOf(me.processmanager.startedprocess,obj.target)!=-1){
+            // todo : should update view with status log
+          }*/
+          me.logger.info(obj.target+"\n"+obj.more);
         }else if(obj.type == "module-created"){
           me.modulesmanager.fetchAll();
         }else if(obj.type == "module-updated"){

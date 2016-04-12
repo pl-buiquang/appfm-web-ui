@@ -149,7 +149,7 @@
       var title = panel.$el.find('.frame-title').text();
       html += '<div class="panel-item" uid="'+panel.uid+'" title="'+title+'">'+title+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
     }
-    store.set(me.model.options.hostname+"-panels",serialized);
+    store.set(me.model.options.cpmhost+"-panels",serialized);
     this.model.menus["default"].body.empty();
     this.model.menus["default"].body.append(html);
     this.model.menus["default"].body.find(".panel-item").click(function(){

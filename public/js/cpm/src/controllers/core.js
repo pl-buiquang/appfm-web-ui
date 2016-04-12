@@ -188,9 +188,9 @@
       me.demo();
       store.set('firstrun','done');
     }else{
-      var panels = store.get(me.options.hostname+"-panels");
+      var panels = store.get(me.options.cpmhost+"-panels");
       if(panels && panels.length > 0){
-        store.set(me.options.hostname+"-panels",[]);
+        store.set(me.options.cpmhost+"-panels",[]);
         for (var i = panels.length - 1; i >= 0; i--) {
           vw.cpm.Panel.deserialize(this,panels[i]);
           this.logger.info("Loading panel : "+panels[i].cmd.command+" "+panels[i].cmd.data);

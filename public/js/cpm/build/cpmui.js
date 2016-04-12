@@ -211,7 +211,7 @@
           me.cpmsettingsmanager.updateConnection(connectionInfo["CPM_HOST"],connectionInfo["CPM_PORT"],connectionInfo["CPM_WS_HOST"])
         }
       }
-      this.logger.info("Received appfm server settings");
+      me.logger.info("Received appfm server settings");
       me.initmodules();
     }});
   }
@@ -239,9 +239,9 @@
       me.demo();
       store.set('firstrun','done');
     }else{
-      var panels = store.get("panels");
+      var panels = store.get(me.options.hostname+"-panels");
       if(panels && panels.length > 0){
-        store.set("panels",[]);
+        store.set(me.options.hostname+"-panels",[]);
         for (var i = panels.length - 1; i >= 0; i--) {
           vw.cpm.Panel.deserialize(this,panels[i]);
           this.logger.info("Loading panel : "+panels[i].cmd.command+" "+panels[i].cmd.data);
@@ -794,7 +794,6 @@
           if(data.error){
             alert("wrong connection information. nothing changed!");
           }else if(data.success){
-            store.set("panels",[]);
             store.set("connectionInfo",{
               CPM_HOST:host,
               CPM_PORT:port,
@@ -1517,7 +1516,7 @@
       var title = panel.$el.find('.frame-title').text();
       html += '<div class="panel-item" uid="'+panel.uid+'" title="'+title+'">'+title+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
     }
-    store.set("panels",serialized);
+    store.set(me.model.options.hostname+"-panels",serialized);
     this.model.menus["default"].body.empty();
     this.model.menus["default"].body.append(html);
     this.model.menus["default"].body.find(".panel-item").click(function(){

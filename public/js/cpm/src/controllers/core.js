@@ -155,7 +155,7 @@
           me.cpmsettingsmanager.updateConnection(connectionInfo["CPM_HOST"],connectionInfo["CPM_PORT"],connectionInfo["CPM_WS_HOST"])
         }
       }
-      this.logger.info("Received appfm server settings");
+      me.logger.info("Received appfm server settings");
       me.initmodules();
     }});
   }
@@ -183,9 +183,9 @@
       me.demo();
       store.set('firstrun','done');
     }else{
-      var panels = store.get("panels");
+      var panels = store.get(me.options.hostname+"-panels");
       if(panels && panels.length > 0){
-        store.set("panels",[]);
+        store.set(me.options.hostname+"-panels",[]);
         for (var i = panels.length - 1; i >= 0; i--) {
           vw.cpm.Panel.deserialize(this,panels[i]);
           this.logger.info("Loading panel : "+panels[i].cmd.command+" "+panels[i].cmd.data);

@@ -50,7 +50,6 @@
           if(data.error){
             alert("wrong connection information. nothing changed!");
           }else if(data.success){
-            store.set("panels",[]);
             store.set("connectionInfo",{
               CPM_HOST:host,
               CPM_PORT:port,

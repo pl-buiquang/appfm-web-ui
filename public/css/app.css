@@ -683,3 +683,11 @@ a:hover{
 .link:hover{
   text-decoration: underline;
 }
+
+.error-msg{
+  border:1px solid #c02026;
+  padding:4px;
+  width:100%;
+  margin:10px;
+  border-radius: 4px;
+}

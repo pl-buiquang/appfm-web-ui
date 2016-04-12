@@ -210,8 +210,8 @@
     this.cpmsettingsmanager = new vw.cpm.CPMSettingsManager(this,this.menus['settings-menu'].body,{init:function(){
       var connectionInfo = store.get("connectionInfo");
       if(connectionInfo){
-        if(me.options.cpmwshost != connectionInfo["CPM_WS_HOST"] && 
-          me.options.cpmhost != connectionInfo["CPM_HOST"] &&
+        if(me.options.cpmwshost != connectionInfo["CPM_WS_HOST"] || 
+          me.options.cpmhost != connectionInfo["CPM_HOST"] ||
           me.options.cpmport !=connectionInfo["CPM_PORT"]){
           me.cpmsettingsmanager.updateConnection(connectionInfo["CPM_HOST"],connectionInfo["CPM_PORT"],connectionInfo["CPM_WS_HOST"])
         }
@@ -2394,7 +2394,9 @@
     var me = this;
     var content = me.model.def.source;//.replace(/(?:\r\n|\r|\n)/g, '<br>').replace(/(?:\s)/g,"&nbsp;");
 
-    
+    if(me.model.def.error){
+      this.$el.find(".module-content-view").append('<div class="error-msg">'+me.model.def.error+'</div>');  
+    }
     this.$el.find(".module-content-view").append('<div id="source-'+this.id+'" class="module-source-editor"></div>');
     this.$el.find('#source-'+this.id).append(content);
     this.editor = ace.edit("source-"+this.id);

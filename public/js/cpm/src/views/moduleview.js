@@ -42,6 +42,7 @@
         me.init();
         me.model.app.logger.info("successfully saved")
       },function(){
+        me.init();
         me.model.app.logger.error("couldn't save. error happend!");
       });
     });

@@ -957,6 +957,7 @@
           }
           success.call();
         }else{
+          me.def.error = data.error;
           alert(data.error);
           error.call();
         }
@@ -2370,6 +2371,7 @@
         me.init();
         me.model.app.logger.info("successfully saved")
       },function(){
+        me.init();
         me.model.app.logger.error("couldn't save. error happend!");
       });
     });

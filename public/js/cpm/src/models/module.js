@@ -38,6 +38,7 @@
           }
           success.call();
         }else{
+          me.def.error = data.error;
           alert(data.error);
           error.call();
         }

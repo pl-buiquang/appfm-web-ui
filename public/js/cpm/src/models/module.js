@@ -36,6 +36,7 @@
             me.app.modulesmanager.fetchAll();
             delete me.def.creation;  
           }
+          delete me.def.error;
           success.call();
         }else{
           me.def.error = data.error;

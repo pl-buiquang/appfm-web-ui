@@ -71,8 +71,9 @@
         me.model.getStatus(function(data){
           if(data.exited){
             clearInterval(me.shared.interval);
+          }else{
+            me.$el.find(".process-detailed-status").html('<code><pre class="pre-wrapped">'+data.info+'</pre></code>');
           }
-          me.$el.find(".process-detailed-status").html(data.info);
         });
       },2000);
 

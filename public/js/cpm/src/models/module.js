@@ -33,9 +33,10 @@
       success: function(data, textStatus, jqXHR) {
         if(data.success){
           if(me.def.creation || !me.def.module){
-            // optimize that?
             me.app.modulesmanager.fetchAll();
+            delete me.def.creation;  
           }
+          delete me.def.error;
           success.call();
         }else{
           me.def.error = data.error;

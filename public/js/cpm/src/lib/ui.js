@@ -42,6 +42,32 @@
   vw.cpm.ui.Modal.alreadyExist = false;
   vw.cpm.ui.Modal.template = '<div class="cpm-modal"><div class="cpm-modal-header"><div class="cpm-modal-close"></div></div><div class="cpm-modal-content"></div></div>';
 
+
+
+  vw.cpm.ui.WrapDiv = function(content,title,minheight,maxheight){
+    var me = this;
+    this.$el = $(vw.cpm.ui.WrapDiv.template);
+    this.$el.find('.cpm-wrap-div-switch').click(function(){
+      me.wrapToggle();
+    });
+    var $container = me.$el.find(".cpm-wrap-div-content");
+    if(minheight){
+      $container.css("min-height",minheight);
+    }
+    if(maxheight){
+      $container.css("max-height",maxheight);
+    }
+    if(title){
+      me.$el.find(".cpm-wrap-div-header").prepend(title);
+    }
+    $container.append(content);
+  }
+
+  vw.cpm.ui.WrapDiv.prototype.wrapToggle = function(){
+  }
     
+  vw.cpm.ui.WrapDiv.template = '<div class="cpm-wrap-div"><div class="cpm-wrap-div-header"><div class="cpm-wrap-div-switch"></div></div><div class="cpm-wrap-div-content"></div></div>';
+  
+
 
 }(window.vw = window.vw || {}));

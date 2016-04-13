@@ -34,6 +34,24 @@
     });
   }
 
+  vw.cpm.Process.prototype.getStatus = function(callback){
+    var me = this;
+    $.ajax({
+      type: "POST",
+      data : {
+        cmd: "process status "+me.runid+" --json",
+      },
+      url: me.app.options.cpmbaseurl+"rest/cmd",
+      dataType : "json",
+      success: function(data, textStatus, jqXHR) {
+        callback.call(me.view,data);
+      },
+      error:function(){
+        alert('could not parse process info json (run id = '+me.runid+')');
+      }
+    });
+  }
+
   vw.cpm.Process.prototype.delete = function(){
     var me = this;
     $.ajax({

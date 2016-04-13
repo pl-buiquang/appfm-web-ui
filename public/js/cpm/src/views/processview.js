@@ -12,13 +12,20 @@
     this.$el.empty();
     this.$el.append(vw.cpm.ProcessView.template);
     
+    this.shared = {};
+    var panel = me.model.app.view.getPanelFromContent(this.$el);
+    if(panel){
+      panel.exitCB = function(){
+        clearInterval(me.shared.interval);
+      }
+    }
   }
 
   
   vw.cpm.ProcessView.prototype.refresh=function(){
     var me = this;
     if(me.model.synced){
-      me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><button class="processresult-refresh" type="button">refresh</button><button class="processresult-delete" type="button">delete</button>');
+      me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><div class="process-detailed-status"></div><button class="processresult-refresh" type="button">refresh</button><button class="processresult-delete" type="button">delete</button>');
       me.$el.find('.run-status .info-box-content .processresult-refresh').on("click",function(){
         me.model.sync();
       });
@@ -56,6 +63,25 @@
       me.$el.find('.iframe-var').click(function(){
         me.model.app.openIFrame($(this).html().trim());
       });
+
+      if(me.shared.interval){
+        clearInterval(me.shared.interval);
+      }
+      me.shared.interval = setInterval(function(){
+        me.model.getStatus(function(data){
+          if(data.exited){
+            clearInterval(me.shared.interval);
+          }
+          me.$el.find(".process-detailed-status").html(data.info);
+        });
+      },2000);
+
+
+      me.$el.find('.info-box').each(function(i){
+        $(this).find(".info-box-title").click(function(){
+          $(this).parent().find('.info-box-content').toggle();
+        })
+      })
     }
   }
 

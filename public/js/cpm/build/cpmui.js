@@ -568,7 +568,33 @@
   vw.cpm.ui.Modal.alreadyExist = false;
   vw.cpm.ui.Modal.template = '<div class="cpm-modal"><div class="cpm-modal-header"><div class="cpm-modal-close"></div></div><div class="cpm-modal-content"></div></div>';
 
+
+
+  vw.cpm.ui.WrapDiv = function(content,title,minheight,maxheight){
+    var me = this;
+    this.$el = $(vw.cpm.ui.WrapDiv.template);
+    this.$el.find('.cpm-wrap-div-switch').click(function(){
+      me.wrapToggle();
+    });
+    var $container = me.$el.find(".cpm-wrap-div-content");
+    if(minheight){
+      $container.css("min-height",minheight);
+    }
+    if(maxheight){
+      $container.css("max-height",maxheight);
+    }
+    if(title){
+      me.$el.find(".cpm-wrap-div-header").prepend(title);
+    }
+    $container.append(content);
+  }
+
+  vw.cpm.ui.WrapDiv.prototype.wrapToggle = function(){
+  }
     
+  vw.cpm.ui.WrapDiv.template = '<div class="cpm-wrap-div"><div class="cpm-wrap-div-header"><div class="cpm-wrap-div-switch"></div></div><div class="cpm-wrap-div-content"></div></div>';
+  
+
 
 }(window.vw = window.vw || {}));
 (function(vw){
@@ -952,9 +978,10 @@
       success: function(data, textStatus, jqXHR) {
         if(data.success){
           if(me.def.creation || !me.def.module){
-            // optimize that?
             me.app.modulesmanager.fetchAll();
+            delete me.def.creation;  
           }
+          delete me.def.error;
           success.call();
         }else{
           me.def.error = data.error;
@@ -1244,6 +1271,24 @@
         me.info = data;
         me.synced = true;
         me.view.refresh();
+      },
+      error:function(){
+        alert('could not parse process info json (run id = '+me.runid+')');
+      }
+    });
+  }
+
+  vw.cpm.Process.prototype.getStatus = function(callback){
+    var me = this;
+    $.ajax({
+      type: "POST",
+      data : {
+        cmd: "process status "+me.runid+" --json",
+      },
+      url: me.app.options.cpmbaseurl+"rest/cmd",
+      dataType : "json",
+      success: function(data, textStatus, jqXHR) {
+        callback.call(me.view,data);
       },
       error:function(){
         alert('could not parse process info json (run id = '+me.runid+')');
@@ -2855,6 +2900,11 @@
       me.app.view.panels.splice(index,1);
       me.app.view.refreshPanelList(); 
     }
+
+    if(me.exitCB){
+      me.exitCB.call();
+    }
+
     me.$el.animate({
           opacity: 0.25,
           height: "toggle"
@@ -2968,13 +3018,20 @@
     this.$el.empty();
     this.$el.append(vw.cpm.ProcessView.template);
     
+    this.shared = {};
+    var panel = me.model.app.view.getPanelFromContent(this.$el);
+    if(panel){
+      panel.exitCB = function(){
+        clearInterval(me.shared.interval);
+      }
+    }
   }
 
   
   vw.cpm.ProcessView.prototype.refresh=function(){
     var me = this;
     if(me.model.synced){
-      me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><button class="processresult-refresh" type="button">refresh</button><button class="processresult-delete" type="button">delete</button>');
+      me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><div class="process-detailed-status"></div><button class="processresult-refresh" type="button">refresh</button><button class="processresult-delete" type="button">delete</button>');
       me.$el.find('.run-status .info-box-content .processresult-refresh').on("click",function(){
         me.model.sync();
       });
@@ -3012,6 +3069,25 @@
       me.$el.find('.iframe-var').click(function(){
         me.model.app.openIFrame($(this).html().trim());
       });
+
+      if(me.shared.interval){
+        clearInterval(me.shared.interval);
+      }
+      me.shared.interval = setInterval(function(){
+        me.model.getStatus(function(data){
+          if(data.exited){
+            clearInterval(me.shared.interval);
+          }
+          me.$el.find(".process-detailed-status").html(data.info);
+        });
+      },2000);
+
+
+      me.$el.find('.info-box').each(function(i){
+        $(this).find(".info-box-title").click(function(){
+          $(this).parent().find('.info-box-content').toggle();
+        })
+      })
     }
   }
 

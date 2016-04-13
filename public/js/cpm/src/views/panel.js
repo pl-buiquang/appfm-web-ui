@@ -153,6 +153,11 @@
       me.app.view.panels.splice(index,1);
       me.app.view.refreshPanelList(); 
     }
+
+    if(me.exitCB){
+      me.exitCB.call();
+    }
+
     me.$el.animate({
           opacity: 0.25,
           height: "toggle"

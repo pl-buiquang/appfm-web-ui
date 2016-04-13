@@ -3039,9 +3039,9 @@
         me.model.delete();
       });
 
-      me.$el.find('.processresult-log'.on("click"),function(){
+      me.$el.find('.processresult-log').on("click",function(){
         me.model.app.request("process log "+me.model.runid);
-      })
+      });
 
       var config = "<ul>";
       for(var key in me.model.info.runconf){

@@ -14,10 +14,10 @@ class Router{
       $requestArgs = explode("/",$requestUri);
       $path = array();
       for($i=0;$i<count($requestArgs);$i++){
-        if(isset($requestArgs[$i]) && !empty($requestArgs[$i])){
+        if(isset($requestArgs[$i]) && (!empty($requestArgs[$i]) || $requestArgs[$i] === "0")){
           $pathPart = $requestArgs[$i];
           $pathParts = explode("?", $pathPart);
-          if(!empty($pathParts[0])){
+          if(!empty($pathParts[0]) || $pathParts[0] === "0"){
             $path[] = $pathParts[0];
           }
         }

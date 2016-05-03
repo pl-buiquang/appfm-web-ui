@@ -36,7 +36,9 @@
         }else if(me.data == "help"){
           app.helpmanager.displayCLIHelp();
         }else{
-          app.logger.warn("unknown panel system command : "+me.data);
+          if(!app.servicemanager.showService(me.data)){
+            app.logger.warn("unknown panel system command : "+me.data);
+          }
         }
       }else if(me.command == "c"){
         app.request(me.data);

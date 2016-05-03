@@ -41,7 +41,9 @@
         }else if(me.data == "help"){
           app.helpmanager.displayCLIHelp();
         }else{
-          app.logger.warn("unknown panel system command : "+me.data);
+          if(!app.servicemanager.showService(me.data)){
+            app.logger.warn("unknown panel system command : "+me.data);
+          }
         }
       }else if(me.command == "c"){
         app.request(me.data);
@@ -60,7 +62,7 @@
     this.options = options;
     this.view = new vw.cpm.CLIView(this,$el);
     this.init();
-    
+    vw.cpm.INSTANCE = this;
     
   }
 
@@ -95,6 +97,7 @@
       "corpus-menu":{title:"Corpora",body:$('<div></div>')},
       "module-menu":{title:"Modules",body:$('<div></div>')},
       "process-menu":{title:"Process",body:$('<div></div>')},
+      "service-menu":{title:"Services",body:$('<div></div>')},
       "settings-menu":{title:"Settings",body:$('<div></div>')},
       "help-menu":{title:"Help",body:$('<div></div>')}
     }
@@ -233,6 +236,8 @@
 
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
+    this.servicemanager = new vw.cpm.ServiceManager(this,this.menus['service-menu'].body);
+
     this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
 
     this.initWS();
@@ -318,6 +323,11 @@
 
     if(command == "brat"){
       this.openIFrame('http://'+me.options.cpmhost+':8001/index.xhtml',"brat");
+      return;
+    }
+
+    if(command == "depgraph"){
+      this.openIFrame('http://'+me.options.cpmhost+'/depgraph',"depgraph");
       return;
     }
 
@@ -1408,6 +1418,102 @@
         }
         me.view.refresh();
         me.initiated = true;
+      }
+    });
+
+  }
+
+
+
+}(window.vw = window.vw || {}));
+(function(vw){
+
+  vw.cpm.ServiceManager = function(app,$el,options){
+    this.initiated = false;
+    this.options = options;
+    this.app = app;
+    this.view = new vw.cpm.ServiceManagerView(this,$el);
+    this.init();
+    this.services = []; 
+  }
+
+  vw.cpm.ServiceManager.prototype.init = function(){
+    var me = this;
+    me.fetchAll();
+  }
+
+  vw.cpm.ServiceManager.prototype.showService = function(servicename){
+    var me = this;
+    for (var i = me.services.length - 1; i >= 0; i--) {
+      if(me.services[i].name == servicename){
+        var service = me.services[i];
+        var title = service.name;
+        if(service.url){
+          title = '<a href="'+service.url+'" target="_blank">'+service.name+'</a>';
+        }
+        var panel = this.app.view.getPanelFromSID("service-"+servicename,false,title,new vw.cpm.Command("s",servicename));
+        var serviceview = new vw.cpm.ServiceView(this.app,panel.$el.find(".frame-body"),service);
+        break;
+      }
+    }
+    
+    panel.focus();
+  }
+
+  vw.cpm.ServiceManager.prototype.startService = function(serviceview){
+    var me = this;
+    $.ajax({
+      type:"POST",
+      url : me.app.options.cpmbaseurl + "rest/cmd",
+      data:{cmd:"service start "+serviceview.service.name},
+      dataType : 'json',
+      success:function(data,textStatus,jqXHR){
+        if(data.error){
+          me.app.logger.error(data.error);
+        }else{
+          serviceview.service.status = true;
+          me.view.refresh();
+          serviceview.refresh();
+        }
+      }
+    });
+  }
+
+  vw.cpm.ServiceManager.prototype.stopService = function(serviceview){
+    var me = this;
+    $.ajax({
+      type:"POST",
+      url : me.app.options.cpmbaseurl + "rest/cmd",
+      data:{cmd:"service stop "+serviceview.service.name},
+      dataType : 'json',
+      success:function(data,textStatus,jqXHR){
+        if(data.error){
+          me.app.logger.error(data.error);
+        }else{
+          serviceview.service.status = false;
+          me.view.refresh();
+          serviceview.refresh();
+        }
+      }
+    });
+  }
+
+
+  vw.cpm.ServiceManager.prototype.fetchAll = function(modulename,callback){
+    var me = this;
+    $.ajax({
+      type:"POST",
+      url : me.app.options.cpmbaseurl + "rest/cmd",
+      data:{cmd:"service ls"},
+      dataType : 'json',
+      success:function(data,textStatus,jqXHR){
+        if(data.error){
+          me.app.logger.error(data.error);
+        }else{
+          me.services = data;
+          me.view.refresh();
+          me.initiated = true;          
+        }
       }
     });
 
@@ -3045,7 +3151,7 @@
 
       var config = "<ul>";
       for(var key in me.model.info.runconf){
-        config += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.runconf[key])+'</span></li>';
+        config += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.runconf[key],key)+'</span></li>';
       }
       config += "</ul>";
       me.$el.find('.run-config .info-box-content').html(config);
@@ -3055,13 +3161,13 @@
         if(me.model.info.runconf.hasOwnProperty(key)){
           continue;
         }
-        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.env[key])+'</span></li>';
+        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.env[key],key)+'</span></li>';
       }
       for(var key in me.model.info.parentEnv){
         if(me.model.info.runconf.hasOwnProperty(key)){
           continue;
         }
-        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.parentEnv[key])+'</span></li>';
+        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.parentEnv[key],key)+'</span></li>';
       }
       results += "</ul>";
       me.$el.find('.run-results .info-box-content').html(results);
@@ -3096,7 +3202,7 @@
     }
   }
 
-  vw.cpm.ProcessView.printVar = function(variable){
+  vw.cpm.ProcessView.printVar = function(variable,variablename){
     if(variable.type == "FILE"){
       return '<span class="file-var link">'+variable.value+'</span>';
     }else if(variable.type == "FILE*"){
@@ -3107,7 +3213,7 @@
       html += '</ul>';
       return html;
     }else if(variable.type == "VAL" && variable.format == "url"){
-      var html = '<span class="iframe-var">'+variable.value+'</span>';
+      var html = '<span class="iframe-var" name="'+variablename+'">'+variable.value.replace("localhost",vw.cpm.INSTANCE.options.cpmhost)+'</span>';
       return html;
     }else if(typeof variable.value == "string" && variable.format == "html"){
       return variable.value;  
@@ -3122,6 +3228,90 @@
   vw.cpm.ProcessView.template = '<div class="run-status info-box"><div class="info-box-title">Status</div> <div class="info-box-content"></div></div>'+
     '<div class="run-config info-box"><div class="info-box-title">Config</div><div class="info-box-content"></div></div>'+
     '<div class="run-results info-box"><div class="info-box-title">Results</div> <div class="info-box-content"></div></div>';
+
+
+
+}(window.vw = window.vw || {}));
+
+(function(vw){
+
+  vw.cpm.ServiceManagerView = function(model,$el){
+    this.$el = $el || $('<div></div>');
+    this.el = this.$el[0];
+    this.model = model;
+    this.init();
+  };
+
+  vw.cpm.ServiceManagerView.prototype.init=function(){
+    var me = this;
+    me.$el.empty();
+  }
+
+  vw.cpm.ServiceManagerView.prototype.refresh = function(){
+    var me = this;
+
+
+    var html ="";
+    // list process results 
+    for (var i in me.model.services){
+      var service = me.model.services[i];
+      var active = "";
+      if(service.status){
+        active = "active";
+      }
+      html += '<div class="service '+active+'"><div class="service-name">'+service.name+'</div></div>';
+    }
+    
+    me.$el.empty();
+    me.$el.append(html);
+    me.$el.find(".service-name").on("click",function(){
+      me.model.showService($(this).html().trim());
+    });
+  }
+
+
+  vw.cpm.ServiceView = function(app,$el,model){
+    this.$el = $el || $('<div></div>');
+    this.el = this.$el[0];
+    this.service = model;
+    this.app = app;
+    this.refresh();
+  }
+
+  vw.cpm.ServiceView.prototype.refresh = function(){
+    var me = this;
+    this.$el.empty();
+    if(this.service.desc){
+      this.$el.append('<div>'+this.service.desc+'</div>');  
+    }
+    this.$el.append('<div> Status : '+(this.service.status?"running":"stopped")+'</div>');
+    if(this.service.status){
+      this.$el.append('<div><button>Stop</button></div>');
+    }else{
+      this.$el.append('<div><button>Start</button></div>');
+    }
+    this.$el.find('button').click(function(){
+      if(me.service.status){
+        me.app.servicemanager.stopService(me);
+      }else{
+        me.app.servicemanager.startService(me);
+      }
+    });
+    var ul = '<ul>';
+    for (var outputname in me.service.outputs) {
+      ul += '<li><span>'+outputname+' : </span>'+vw.cpm.ProcessView.printVar(me.service.outputs[outputname],outputname);
+    }
+    ul += '</ul>';
+    this.$el.append(ul);
+    me.$el.find('.iframe-var').click(function(){
+      me.app.openIFrame($(this).html().trim(),me.service.name+" "+$(this).attr('name'));
+    });    
+  }
+  
+
+
+
+  
 
 
 

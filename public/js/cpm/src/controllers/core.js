@@ -4,7 +4,7 @@
     this.options = options;
     this.view = new vw.cpm.CLIView(this,$el);
     this.init();
-    
+    vw.cpm.INSTANCE = this;
     
   }
 
@@ -39,6 +39,7 @@
       "corpus-menu":{title:"Corpora",body:$('<div></div>')},
       "module-menu":{title:"Modules",body:$('<div></div>')},
       "process-menu":{title:"Process",body:$('<div></div>')},
+      "service-menu":{title:"Services",body:$('<div></div>')},
       "settings-menu":{title:"Settings",body:$('<div></div>')},
       "help-menu":{title:"Help",body:$('<div></div>')}
     }
@@ -177,6 +178,8 @@
 
     this.corpusmanager = new vw.cpm.CorpusManager(this,this.menus['corpus-menu'].body);
 
+    this.servicemanager = new vw.cpm.ServiceManager(this,this.menus['service-menu'].body);
+
     this.processmanager = new vw.cpm.ProcessManager(this,this.menus['process-menu'].body);
 
     this.initWS();
@@ -262,6 +265,11 @@
 
     if(command == "brat"){
       this.openIFrame('http://'+me.options.cpmhost+':8001/index.xhtml',"brat");
+      return;
+    }
+
+    if(command == "depgraph"){
+      this.openIFrame('http://'+me.options.cpmhost+'/depgraph',"depgraph");
       return;
     }
 

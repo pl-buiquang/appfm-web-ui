@@ -156,6 +156,10 @@ background: linear-gradient(180deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
   background-image:url('../img/system/process.png');
 }
 
+#service-menu{
+  background-image:url('../img/system/services.png'); 
+}
+
 #settings-menu{
   background-image:url('../img/system/settings.png');
 }
@@ -602,6 +606,26 @@ display: inline-block;
 .iframe-var{
   cursor: pointer;
   color:#134E7A;
+}
+
+.service{
+  background-image:url('../img/system/module3.png'); 
+  background-repeat: no-repeat;
+  background-position: left;
+  padding-left: 48px;
+  min-height: 32px;
+  margin-bottom: 4px;
+  padding-top: 8px;
+
+}
+
+.service.active{
+  background-image:url('../img/system/module4.png'); 
+}
+
+.service-name{
+  font-weight: bold;
+  cursor: pointer;
 }
 
 

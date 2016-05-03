@@ -9,4 +9,8 @@ Brat
 
 Cadvisor
 
-TODO : base de données? spotlight/deepdive ...
+TODO : base de données? spotlight/deepdive …
+
+===== Description =====
+
+Tout comme les modules, les services sont décrit sous forme d'un fichier de configuration yaml.

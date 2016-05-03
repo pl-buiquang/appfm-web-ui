@@ -14,6 +14,7 @@
     </ul>
     <!--Bottom menu links-->
     <ul class="main-menu bottom-menu">
+      <li><div id="service-menu" class="main-menu-item"></div></li>
       <li><div id="settings-menu" class="main-menu-item"></div></li>
       <li><div id="help-menu" class="main-menu-item"></div></li>
     </ul>

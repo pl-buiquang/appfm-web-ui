@@ -39,7 +39,7 @@
 
       var config = "<ul>";
       for(var key in me.model.info.runconf){
-        config += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.runconf[key])+'</span></li>';
+        config += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.runconf[key],key)+'</span></li>';
       }
       config += "</ul>";
       me.$el.find('.run-config .info-box-content').html(config);
@@ -49,13 +49,13 @@
         if(me.model.info.runconf.hasOwnProperty(key)){
           continue;
         }
-        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.env[key])+'</span></li>';
+        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.env[key],key)+'</span></li>';
       }
       for(var key in me.model.info.parentEnv){
         if(me.model.info.runconf.hasOwnProperty(key)){
           continue;
         }
-        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.parentEnv[key])+'</span></li>';
+        results += '<li><span style="font-weight:bold;">'+key+' : </span><span>'+vw.cpm.ProcessView.printVar(me.model.info.parentEnv[key],key)+'</span></li>';
       }
       results += "</ul>";
       me.$el.find('.run-results .info-box-content').html(results);
@@ -90,7 +90,7 @@
     }
   }
 
-  vw.cpm.ProcessView.printVar = function(variable){
+  vw.cpm.ProcessView.printVar = function(variable,variablename){
     if(variable.type == "FILE"){
       return '<span class="file-var link">'+variable.value+'</span>';
     }else if(variable.type == "FILE*"){
@@ -101,7 +101,7 @@
       html += '</ul>';
       return html;
     }else if(variable.type == "VAL" && variable.format == "url"){
-      var html = '<span class="iframe-var">'+variable.value+'</span>';
+      var html = '<span class="iframe-var" name="'+variablename+'">'+variable.value.replace("localhost",vw.cpm.INSTANCE.options.cpmhost)+'</span>';
       return html;
     }else if(typeof variable.value == "string" && variable.format == "html"){
       return variable.value;  

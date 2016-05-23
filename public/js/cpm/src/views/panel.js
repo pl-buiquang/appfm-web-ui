@@ -62,6 +62,18 @@
 
   vw.cpm.Panel.prototype.quitFullscreen = function(){
     var me = this;
+    me.$el.removeClass("fullscreen");
+    me.$el.find(".frame-body").trigger("fullscreenOff");
+    me.$el.find(".frame-tool-quitfs").remove();
+    me.$el.find(".frame-tools").children().show();
+    // change content height 
+    var content = me.$el.find(".frame-body").children();
+    if(content.length == 1){
+      if(content.prop("originalHeight")){
+        content.height(content.prop("originalHeight"));
+      }
+    }
+    /*
     me.app.view.$fullscreencontainer.fadeOut();
     var title = me.app.view.$fullscreencontainer.find(".frame-title").children();
     if(title.length == 0){
@@ -76,11 +88,26 @@
       me.$el.find(".frame-body").append(content);
       me.$el.find(".frame-body").trigger("fullscreenOff");
     }
-    
+    */
   }
 
   vw.cpm.Panel.prototype.fullscreen = function(){
     var me = this;
+    me.$el.addClass("fullscreen");
+    me.$el.find(".frame-body").trigger("fullscreenOn");
+    me.$el.find(".frame-tools").children().hide();
+    me.$el.find(".frame-tools").append('<div class="frame-tool frame-tool-quitfs"></div>');
+    // change content height
+    var content = me.$el.find(".frame-body").children();
+    if(content.length == 1){
+      content.prop("originalHeight",content.height());
+      content.height($(window).height()-100);
+    }
+    me.$el.find(".frame-tool-quitfs").on("click",function(){
+      me.quitFullscreen();
+    });
+
+    /*
     me.app.view.$fullscreencontainer.fadeIn();
     var title = me.$el.find(".frame-title").children();
     if(title.length == 0){
@@ -102,7 +129,7 @@
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").unbind("click");
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
       me.quitFullscreen();
-    });
+    });*/
   }
 
   vw.cpm.Panel.prototype.serialize = function(){

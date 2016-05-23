@@ -1,0 +1,3 @@
+====== Misc ======
+
+Des développements, intégrations et installations spécifiques ont été réalisée afin de mettre en place des exemples d'installation/utilisation d'appfm. Notamment une partie est dédiée aux travaux réalisés pour le traitement d'entités nommés pour le [[:pulsar|projet PULSAR]]. Une seconde récapitule les modules supplémentaires intégrés à l'installation de démonstration présente sur le serveur [[http://rscpm.limsi.fr|rscpm]].

@@ -18,6 +18,9 @@
     this.$el.find("#help-presa-slides").on("click",function(){
       me.model.app.openIFrame(me.model.app.options.cpmbaseurl+'/introslides',"Intro");
     });
+    this.$el.find("#help-presa-overview").on("click",function(){
+      me.model.app.openIFrame(me.model.app.options.cpmbaseurl+'/public/doc/appfm-overview.pdf',"AppFM Overview");
+    });
     this.$el.find("#help-tutorial").on("click",function(){
       me.model.app.demo();
     });
@@ -29,7 +32,7 @@
     
   }
 
-  vw.cpm.HelpManagerView.template = '<div id="help-tutorial" style="cursor:pointer;">Tutorial</div><div id="help-presa-slides" style="cursor:pointer;">Introduction slides</div><div id="help-main-wiki-page" style="cursor:pointer;">Main wiki</div>';
+  vw.cpm.HelpManagerView.template = '<div id="help-tutorial" style="cursor:pointer;">Tutorial</div><div id="help-presa-slides" style="cursor:pointer;">Introduction slides</div><div id="help-presa-overview" style="cursor:pointer;">Architecture/Features Overview</div><div id="help-main-wiki-page" style="cursor:pointer;">Main wiki</div>';
   //<div id="help-tutorial-module" style="cursor:pointer;">Module tutorial</div>
 
   

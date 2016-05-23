@@ -1,7 +1,3 @@
-1456761025	::1	E	quick_start	admin		
-1456761048	::1	E	quick_start	admin		
-1456761475	::1	E	arch	admin		
-1456762078	::1	E	cli	admin		
 1456763015	::1	E	spec_draft	admin		
 1456763095	::1	E	spec_draft	admin		
 1458137428	::1	E	sidebar	admin		
@@ -22,3 +18,8 @@
 1462292190	::1	E	sidebar	admin		
 1462292258	::1	E	sidebar	admin		
 1462293498	::1	E	services	admin		
+1463483132	::1	E	sidebar	admin		
+1463483454	::1	C	misc	admin	created	
+1463483623	::1	C	pulsar	admin	created	
+1463483724	::1	C	addons	admin	created	
+1463483937	::1	E	sidebar	admin		

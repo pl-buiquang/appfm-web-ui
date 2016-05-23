@@ -341,6 +341,11 @@
           position:'bottom'
         },
         {
+          element: document.querySelector('#app-title'),
+          intro: "This button shows the currently opened frames",
+          position: 'right'
+        },
+        {
           element: document.querySelector('#corpus-menu'),
           intro: "There is 3 main menus. This first one show a list of all corpus handled by AppFM.",
           position: 'right'
@@ -373,7 +378,9 @@
       ]
     });
     intro.onchange(function(element){
-      if(element.id=="corpus-menu"){
+      if(element.id=="app-title"){
+        me.view.openMenu("default");
+      }else if(element.id=="corpus-menu"){
         me.view.openMenu("corpus-menu");
       }else if(element.id=="module-menu"){
         me.view.openMenu("module-menu");

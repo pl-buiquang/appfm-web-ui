@@ -1,0 +1,17 @@
+====== Projet PULSAR ======
+
+===== Appfm =====
+
+Instance sur jarry/labiche (/vol/datailes/sys/appfm)
+
+===== Modules =====
+
+(/vol/projiles/pulsar/ner_process)
+
+ner_tools
+
+ne_annotate_X
+
+===== Misc =====
+
+Corpus (/vol/projiles/pulsar/corpus) , evals, ...

@@ -399,6 +399,11 @@
           position:'bottom'
         },
         {
+          element: document.querySelector('#app-title'),
+          intro: "This button shows the currently opened frames",
+          position: 'right'
+        },
+        {
           element: document.querySelector('#corpus-menu'),
           intro: "There is 3 main menus. This first one show a list of all corpus handled by AppFM.",
           position: 'right'
@@ -431,7 +436,9 @@
       ]
     });
     intro.onchange(function(element){
-      if(element.id=="corpus-menu"){
+      if(element.id=="app-title"){
+        me.view.openMenu("default");
+      }else if(element.id=="corpus-menu"){
         me.view.openMenu("corpus-menu");
       }else if(element.id=="module-menu"){
         me.view.openMenu("module-menu");
@@ -2069,6 +2076,9 @@
     this.$el.find("#help-presa-slides").on("click",function(){
       me.model.app.openIFrame(me.model.app.options.cpmbaseurl+'/introslides',"Intro");
     });
+    this.$el.find("#help-presa-overview").on("click",function(){
+      me.model.app.openIFrame(me.model.app.options.cpmbaseurl+'/public/doc/appfm-overview.pdf',"AppFM Overview");
+    });
     this.$el.find("#help-tutorial").on("click",function(){
       me.model.app.demo();
     });
@@ -2080,7 +2090,7 @@
     
   }
 
-  vw.cpm.HelpManagerView.template = '<div id="help-tutorial" style="cursor:pointer;">Tutorial</div><div id="help-presa-slides" style="cursor:pointer;">Introduction slides</div><div id="help-main-wiki-page" style="cursor:pointer;">Main wiki</div>';
+  vw.cpm.HelpManagerView.template = '<div id="help-tutorial" style="cursor:pointer;">Tutorial</div><div id="help-presa-slides" style="cursor:pointer;">Introduction slides</div><div id="help-presa-overview" style="cursor:pointer;">Architecture/Features Overview</div><div id="help-main-wiki-page" style="cursor:pointer;">Main wiki</div>';
   //<div id="help-tutorial-module" style="cursor:pointer;">Module tutorial</div>
 
   
@@ -2915,6 +2925,18 @@
 
   vw.cpm.Panel.prototype.quitFullscreen = function(){
     var me = this;
+    me.$el.removeClass("fullscreen");
+    me.$el.find(".frame-body").trigger("fullscreenOff");
+    me.$el.find(".frame-tool-quitfs").remove();
+    me.$el.find(".frame-tools").children().show();
+    // change content height 
+    var content = me.$el.find(".frame-body").children();
+    if(content.length == 1){
+      if(content.prop("originalHeight")){
+        content.height(content.prop("originalHeight"));
+      }
+    }
+    /*
     me.app.view.$fullscreencontainer.fadeOut();
     var title = me.app.view.$fullscreencontainer.find(".frame-title").children();
     if(title.length == 0){
@@ -2929,11 +2951,26 @@
       me.$el.find(".frame-body").append(content);
       me.$el.find(".frame-body").trigger("fullscreenOff");
     }
-    
+    */
   }
 
   vw.cpm.Panel.prototype.fullscreen = function(){
     var me = this;
+    me.$el.addClass("fullscreen");
+    me.$el.find(".frame-body").trigger("fullscreenOn");
+    me.$el.find(".frame-tools").children().hide();
+    me.$el.find(".frame-tools").append('<div class="frame-tool frame-tool-quitfs"></div>');
+    // change content height
+    var content = me.$el.find(".frame-body").children();
+    if(content.length == 1){
+      content.prop("originalHeight",content.height());
+      content.height($(window).height()-100);
+    }
+    me.$el.find(".frame-tool-quitfs").on("click",function(){
+      me.quitFullscreen();
+    });
+
+    /*
     me.app.view.$fullscreencontainer.fadeIn();
     var title = me.$el.find(".frame-title").children();
     if(title.length == 0){
@@ -2955,7 +2992,7 @@
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").unbind("click");
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
       me.quitFullscreen();
-    });
+    });*/
   }
 
   vw.cpm.Panel.prototype.serialize = function(){

@@ -323,8 +323,37 @@ ul.main-menu{
 
 .panel-item:hover{
     color: #fafafa;
-    background-color: #4e5c72;
+    background-color: #4e5c72 !important;
 }
+
+.panel-item.panel-i-item{
+  background-color: #83A0B9;
+}
+
+.panel-item.panel-s-item{
+  background-color: #B1B5B9;
+}
+
+.panel-item.panel-p-item{
+  background-color: #B9A383;
+}
+
+.panel-item.panel-m-item{
+  background-color: #83B98F;
+}
+
+.panel-item.panel-f-item{
+  background-color: #AEB983;
+}
+
+.panel-item.panel-c-item{
+  background-color: #B9A383;
+}
+
+.panel-item.panel-l-item{
+  background-color: #83B98F;
+}
+
 
 .panel-item-close{
 display: inline-block;

@@ -41,9 +41,11 @@
         }else if(me.data == "help"){
           app.helpmanager.displayCLIHelp();
         }else{
-          if(!app.servicemanager.showService(me.data)){
-            app.logger.warn("unknown panel system command : "+me.data);
-          }
+          
+        }
+      }else if(me.command == "l"){
+        if(!app.servicemanager.showService(me.data)){
+          app.logger.warn("unknown panel system command : "+me.data);
         }
       }else if(me.command == "c"){
         app.request(me.data);
@@ -345,7 +347,7 @@
     me.cpmRawCall(command,function(data){
       data = jQuery('<div />').text(data).html();
       data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
-      me.view.createPanel(command,data,"cmd-"+command,new vw.cpm.Command("c",command));
+      var panel = me.view.createPanel(command,data,"cmd-"+command,new vw.cpm.Command("c",command));
       console.log(data);
     });
 
@@ -1458,7 +1460,7 @@
         if(service.url){
           title = '<a href="'+service.url+'" target="_blank">'+service.name+'</a>';
         }
-        var panel = this.app.view.getPanelFromSID("service-"+servicename,false,title,new vw.cpm.Command("s",servicename));
+        var panel = this.app.view.getPanelFromSID("service-"+servicename,false,title,new vw.cpm.Command("l",servicename));
         var serviceview = new vw.cpm.ServiceView(this.app,panel.$el.find(".frame-body"),service);
         break;
       }
@@ -1678,7 +1680,11 @@
       var panel = me.panels[i];
       serialized.push(panel.serialize());
       var title = panel.$el.find('.frame-title').text();
-      html += '<div class="panel-item" uid="'+panel.uid+'" title="'+title+'">'+title+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
+      var paneltype = "";
+      if(panel.cmd){
+        paneltype = "panel-"+panel.cmd.command+"-item";
+      }
+      html += '<div class="panel-item '+paneltype+'" uid="'+panel.uid+'" title="'+title+'">'+title+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
     }
     store.set(me.model.options.cpmhost+"-panels",serialized);
     this.model.menus["default"].body.empty();

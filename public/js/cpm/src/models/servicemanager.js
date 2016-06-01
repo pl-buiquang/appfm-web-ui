@@ -23,7 +23,7 @@
         if(service.url){
           title = '<a href="'+service.url+'" target="_blank">'+service.name+'</a>';
         }
-        var panel = this.app.view.getPanelFromSID("service-"+servicename,false,title,new vw.cpm.Command("s",servicename));
+        var panel = this.app.view.getPanelFromSID("service-"+servicename,false,title,new vw.cpm.Command("l",servicename));
         var serviceview = new vw.cpm.ServiceView(this.app,panel.$el.find(".frame-body"),service);
         break;
       }

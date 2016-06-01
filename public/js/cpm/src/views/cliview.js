@@ -147,7 +147,11 @@
       var panel = me.panels[i];
       serialized.push(panel.serialize());
       var title = panel.$el.find('.frame-title').text();
-      html += '<div class="panel-item" uid="'+panel.uid+'" title="'+title+'">'+title+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
+      var paneltype = "";
+      if(panel.cmd){
+        paneltype = "panel-"+panel.cmd.command+"-item";
+      }
+      html += '<div class="panel-item '+paneltype+'" uid="'+panel.uid+'" title="'+title+'">'+title+'</div><div class="panel-item-close" uid="'+panel.uid+'"></div>';
     }
     store.set(me.model.options.cpmhost+"-panels",serialized);
     this.model.menus["default"].body.empty();

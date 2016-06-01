@@ -287,7 +287,7 @@
     me.cpmRawCall(command,function(data){
       data = jQuery('<div />').text(data).html();
       data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
-      me.view.createPanel(command,data,"cmd-"+command,new vw.cpm.Command("c",command));
+      var panel = me.view.createPanel(command,data,"cmd-"+command,new vw.cpm.Command("c",command));
       console.log(data);
     });
 

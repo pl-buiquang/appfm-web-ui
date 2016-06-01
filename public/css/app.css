@@ -445,6 +445,12 @@ display: inline-block;
 .frame-body{
   padding:8px;
   word-wrap: break-word;
+  /*overflow: hidden;
+  max-height: 650px;*/
+}
+
+.fullscreen .frame-body{
+  max-height: 100% !important; 
 }
 
 /*******************************************************************

@@ -2898,6 +2898,8 @@
     me.$el.find(".frame-body").mouseup(function (e){
        vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
      });
+
+    //me.$el.find(".frame-body").perfectScrollbar();
  
     me.$el.find('.frame-tool-pin').click(function(){
       me.stick();
@@ -2937,6 +2939,10 @@
       }
     }
     /*
+    var fb = me.$el.find(".frame-body");
+    fb.height(fb.prop("originalHeight"));
+    fb.perfectScrollbar('update');*/
+    /*
     me.app.view.$fullscreencontainer.fadeOut();
     var title = me.app.view.$fullscreencontainer.find(".frame-title").children();
     if(title.length == 0){
@@ -2966,6 +2972,10 @@
       content.prop("originalHeight",content.height());
       content.height($(window).height()-100);
     }
+    /*var fb = me.$el.find(".frame-body");
+    fb.prop("originalHeight",fb.height());
+    fb.height($(window).height()-70);
+    fb.perfectScrollbar('update');*/
     me.$el.find(".frame-tool-quitfs").on("click",function(){
       me.quitFullscreen();
     });
@@ -3090,7 +3100,7 @@
 
   vw.cpm.Panel.uids = 0;
 
-  vw.cpm.Panel.maxFrameHeight = 500;
+  vw.cpm.Panel.maxFrameHeight = 650;
 
   vw.cpm.Panel.frametemplate = '<div class="frame"><div class="frame-header"><div class="frame-title"></div><div class="frame-tools"><div class="frame-tool frame-tool-close"></div><div class="frame-tool frame-tool-pin"></div><div class="frame-tool frame-tool-openfs"></div><div class="frame-tool frame-tool-hide"></div></div></div><div class="frame-body"></div></div>';
 

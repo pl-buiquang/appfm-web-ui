@@ -56,10 +56,12 @@
       this.$el.append('<div><button>Start</button></div>');
     }
     this.$el.find('button').click(function(){
-      if(me.service.status){
-        me.app.servicemanager.stopService(me);
-      }else{
-        me.app.servicemanager.startService(me);
+      if(!$(this).hasClass('ajax-submitted')){
+        if(me.service.status){
+          me.app.servicemanager.stopService(me,$(this));
+        }else{
+          me.app.servicemanager.startService(me,$(this));
+        }        
       }
     });
     var ul = '<ul>';

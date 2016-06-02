@@ -68,6 +68,18 @@
     
   vw.cpm.ui.WrapDiv.template = '<div class="cpm-wrap-div"><div class="cpm-wrap-div-header"><div class="cpm-wrap-div-switch"></div></div><div class="cpm-wrap-div-content"></div></div>';
   
+  vw.cpm.ui.AjaxButton = {
+    start : function($div){
+      if($div){
+        $div.addClass('ajax-submitted');
+      }
+    },
+    stop : function($div){
+      if($div){
+        $div.removeClass('ajax-submitted');
+      }
+    }
+  }
 
 
 }(window.vw = window.vw || {}));

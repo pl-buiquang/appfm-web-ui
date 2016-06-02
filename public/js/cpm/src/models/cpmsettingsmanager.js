@@ -34,9 +34,10 @@
     });
   }
 
-  vw.cpm.CPMSettingsManager.prototype.updateConnection = function(host,port,wshost){
+  vw.cpm.CPMSettingsManager.prototype.updateConnection = function(host,port,wshost,$button){
     console.log(host);
     var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
         type: "POST",
         data : {
@@ -47,6 +48,7 @@
         dataType:"json",
         url: me.app.options.cpmbaseurl+"updateConnectionInfo",
         success: function(data, textStatus, jqXHR) {
+          vw.cpm.ui.AjaxButton.stop($button);
           if(data.error){
             alert("wrong connection information. nothing changed!");
           }else if(data.success){
@@ -63,6 +65,7 @@
           
         },
         error:function(){
+          vw.cpm.ui.AjaxButton.stop($button);
           alert("wrong connection information. nothing changed!");
         }
       });

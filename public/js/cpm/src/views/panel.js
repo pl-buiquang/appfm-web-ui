@@ -235,6 +235,15 @@
     });
   }
 
+  vw.cpm.Panel.prototype.addToolButton = function($button){
+    $button.addClass("frame-tool");
+    this.$el.find(".frame-tools").append($button);
+  }
+
+  vw.cpm.Panel.prototype.removeToolButton = function(buttonclass){
+    this.$el.find(".frame-tools").find(buttonclass).remove();
+  }
+
   vw.cpm.Panel.uids = 0;
 
   vw.cpm.Panel.maxFrameHeight = 650;

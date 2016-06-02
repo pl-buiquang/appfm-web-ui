@@ -41,6 +41,27 @@
 
   }
 
+  vw.cpm.utils.windowOpenPost = function(data,url){
+    var windowOpenPostForm = '<form id="depgraphlibWindowOpenPostForm" method="post" action="'+url+'" target="_blank"></form>';
+    var existingForm = jQuery('#depgraphlibWindowOpenPostForm');
+    if(!existingForm.length){
+      existingForm = jQuery(windowOpenPostForm);
+      jQuery('body').append(existingForm);
+    }
+    existingForm.html('');
+    for(param in data){
+      var stringdata = null;
+      if(typeof data[param] == 'string'){
+        stringdata = data[param];
+      }else{
+        stringdata = JSON.stringify(data[param]);
+      }
+      existingForm.append('<input type="hidden" name="'+param+'" value="">');
+      existingForm[0][param].value = stringdata;
+    }
+    document.getElementById('depgraphlibWindowOpenPostForm').submit();
+  };
+
   vw.cpm.utils.waitTill = function(refObj,field,callback,refreshInterval){
     var interval = setInterval(function(){
       var cond = false;

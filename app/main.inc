@@ -10,7 +10,7 @@ Router::addRoutes(array(
   "test"=>"cpm_test",
   "rest/cmd"=>"cmdexec",
   "introslides"=>"introslides",
-  "updateConnectionInfo"=>"updateconnectionInfo"
+  "updateConnectionInfo"=>"updateconnectionInfo",
 ));
 
 function cpm_main(){
@@ -100,6 +100,8 @@ function cpm_main(){
 
 }
 
+
+
 function updateconnectionInfo(){
   Logger::Log($_POST);
   if(!isset($_POST["CPM_HOST"]) || !isset($_POST["CPM_PORT"]) || !isset($_POST["CPM_WS_HOST"])){
@@ -157,7 +159,7 @@ function cpm_command_call($command,$data=NULL){
     $dataframe = "==DATA==".$data."==END_DATA==";
   }
   /* Send a request */
-  $socket->send("==CMD==".$_POST['cmd']."==END_CMD==".$dataframe);
+  $socket->send("==CMD==".$command."==END_CMD==".$dataframe);
 
   $poll = new ZMQPoll();
 

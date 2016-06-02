@@ -14,8 +14,9 @@
     this.synced = false;
   }
 
-  vw.cpm.Process.prototype.sync = function(){
+  vw.cpm.Process.prototype.sync = function($button){
     var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
       type: "POST",
       data : {
@@ -24,11 +25,13 @@
       url: me.app.options.cpmbaseurl+"rest/cmd",
       dataType : "json",
       success: function(data, textStatus, jqXHR) {
+        vw.cpm.ui.AjaxButton.stop($button);
         me.info = data;
         me.synced = true;
         me.view.refresh();
       },
       error:function(){
+        vw.cpm.ui.AjaxButton.stop($button);
         alert('could not parse process info json (run id = '+me.runid+')');
       }
     });
@@ -52,8 +55,9 @@
     });
   }
 
-  vw.cpm.Process.prototype.delete = function(){
+  vw.cpm.Process.prototype.delete = function($button){
     var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
       type : "POST",
       data : {
@@ -61,6 +65,7 @@
       },
       url : me.app.options.cpmbaseurl+"rest/cmd",
       success : function(data){
+        vw.cpm.ui.AjaxButton.stop($button);
         if(data == "ok"){
           var panel = me.app.view.getPanelFromContent(me.view.$el);
           panel.delete();
@@ -68,6 +73,7 @@
         }
       },
       error : function(){
+        vw.cpm.ui.AjaxButton.stop($button);
         me.app.logger.error("error when trying to delete process result "+me.runid);
       }
     });

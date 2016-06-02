@@ -135,6 +135,10 @@
           me.modulesmanager.fetchAll();
         }else if(obj.type == "module-updated"){
           me.modulesmanager.fetchAll();
+        }else if(obj.type == "service-started"){
+          me.servicemanager.fetchAll();
+        }else if(obj.type == "service-stopped"){
+          me.servicemanager.fetchAll();
         }else{
           console.log(e);
           me.logger.info(obj.type+" "+obj.target+" "+obj.more);
@@ -288,7 +292,17 @@
       data = jQuery('<div />').text(data).html();
       data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
       var panel = me.view.createPanel(command,data,"cmd-"+command,new vw.cpm.Command("c",command));
-      console.log(data);
+      var refreshbutton = $('<div class="frame-tool-refresh"></div>');
+      panel.addToolButton(refreshbutton);
+      refreshbutton.on("click",function(){
+        me.cpmRawCall(command,function(data){
+          data = jQuery('<div />').text(data).html();
+          data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
+          var body = panel.$el.find('.frame-body');
+          body.empty();
+          body.append(data);
+        });
+      });
     });
 
     
@@ -301,6 +315,12 @@
       name = title;
     }
     var panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>',"","iframe-"+url,new vw.cpm.Command("i",name+"\t"+url));
+    var refreshbutton = $('<div class="frame-tool-refresh"></div>');
+    panel.addToolButton(refreshbutton);
+    refreshbutton.on("click",function(){
+      var iframe = panel.$el.find('iframe');
+      iframe[0].src = iframe[0].src;
+    });
     panel.$el.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
     return panel;
   }
@@ -312,7 +332,12 @@
         //data = data.replace(/\s/g,'&nbsp;');
         //data = data.replace(/\n|\r|\r\n/g,'<br>');
         data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
-        me.view.createPanel(filepath,data,"fs-"+filepath,new vw.cpm.Command("f",filepath));
+        var panel = me.view.createPanel(filepath,data,"fs-"+filepath,new vw.cpm.Command("f",filepath));
+        var dlbutton = $('<div class="frame-tool-download"></div>');
+        panel.addToolButton(dlbutton);
+        dlbutton.on("click",function(){
+          vw.cpm.utils.windowOpenPost({file:filepath},me.options.cpmbaseurl+"file");
+        });
       });
   }
 

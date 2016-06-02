@@ -27,10 +27,10 @@
     if(me.model.synced){
       me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><div class="process-detailed-status"></div><button class="processresult-refresh" type="button">refresh</button><button class="processresult-log" type="button">log</button><button class="processresult-delete" type="button">delete</button>');
       me.$el.find('.run-status .info-box-content .processresult-refresh').on("click",function(){
-        me.model.sync();
+        me.model.sync($(this));
       });
       me.$el.find('.run-status .info-box-content .processresult-delete').on("click",function(){
-        me.model.delete();
+        me.model.delete($(this));
       });
 
       me.$el.find('.processresult-log').on("click",function(){

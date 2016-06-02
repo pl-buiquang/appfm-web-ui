@@ -195,6 +195,10 @@
           me.modulesmanager.fetchAll();
         }else if(obj.type == "module-updated"){
           me.modulesmanager.fetchAll();
+        }else if(obj.type == "service-started"){
+          me.servicemanager.fetchAll();
+        }else if(obj.type == "service-stopped"){
+          me.servicemanager.fetchAll();
         }else{
           console.log(e);
           me.logger.info(obj.type+" "+obj.target+" "+obj.more);
@@ -348,7 +352,17 @@
       data = jQuery('<div />').text(data).html();
       data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
       var panel = me.view.createPanel(command,data,"cmd-"+command,new vw.cpm.Command("c",command));
-      console.log(data);
+      var refreshbutton = $('<div class="frame-tool-refresh"></div>');
+      panel.addToolButton(refreshbutton);
+      refreshbutton.on("click",function(){
+        me.cpmRawCall(command,function(data){
+          data = jQuery('<div />').text(data).html();
+          data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
+          var body = panel.$el.find('.frame-body');
+          body.empty();
+          body.append(data);
+        });
+      });
     });
 
     
@@ -361,6 +375,12 @@
       name = title;
     }
     var panel = me.view.createPanel('<a href="'+url+'" target="_blank">'+name+'</a>',"","iframe-"+url,new vw.cpm.Command("i",name+"\t"+url));
+    var refreshbutton = $('<div class="frame-tool-refresh"></div>');
+    panel.addToolButton(refreshbutton);
+    refreshbutton.on("click",function(){
+      var iframe = panel.$el.find('iframe');
+      iframe[0].src = iframe[0].src;
+    });
     panel.$el.find('.frame-body').append('<iframe style="border-style:none;border:0;margin:0;padding:0;" width="100%" height="600px" src="'+url+'"></iframe>');
     return panel;
   }
@@ -372,7 +392,12 @@
         //data = data.replace(/\s/g,'&nbsp;');
         //data = data.replace(/\n|\r|\r\n/g,'<br>');
         data = '<code><pre class="pre-wrapped">'+data+'</pre></code>';
-        me.view.createPanel(filepath,data,"fs-"+filepath,new vw.cpm.Command("f",filepath));
+        var panel = me.view.createPanel(filepath,data,"fs-"+filepath,new vw.cpm.Command("f",filepath));
+        var dlbutton = $('<div class="frame-tool-download"></div>');
+        panel.addToolButton(dlbutton);
+        dlbutton.on("click",function(){
+          vw.cpm.utils.windowOpenPost({file:filepath},me.options.cpmbaseurl+"file");
+        });
       });
   }
 
@@ -613,6 +638,18 @@
     
   vw.cpm.ui.WrapDiv.template = '<div class="cpm-wrap-div"><div class="cpm-wrap-div-header"><div class="cpm-wrap-div-switch"></div></div><div class="cpm-wrap-div-content"></div></div>';
   
+  vw.cpm.ui.AjaxButton = {
+    start : function($div){
+      if($div){
+        $div.addClass('ajax-submitted');
+      }
+    },
+    stop : function($div){
+      if($div){
+        $div.removeClass('ajax-submitted');
+      }
+    }
+  }
 
 
 }(window.vw = window.vw || {}));
@@ -658,6 +695,27 @@
     }
 
   }
+
+  vw.cpm.utils.windowOpenPost = function(data,url){
+    var windowOpenPostForm = '<form id="depgraphlibWindowOpenPostForm" method="post" action="'+url+'" target="_blank"></form>';
+    var existingForm = jQuery('#depgraphlibWindowOpenPostForm');
+    if(!existingForm.length){
+      existingForm = jQuery(windowOpenPostForm);
+      jQuery('body').append(existingForm);
+    }
+    existingForm.html('');
+    for(param in data){
+      var stringdata = null;
+      if(typeof data[param] == 'string'){
+        stringdata = data[param];
+      }else{
+        stringdata = JSON.stringify(data[param]);
+      }
+      existingForm.append('<input type="hidden" name="'+param+'" value="">');
+      existingForm[0][param].value = stringdata;
+    }
+    document.getElementById('depgraphlibWindowOpenPostForm').submit();
+  };
 
   vw.cpm.utils.waitTill = function(refObj,field,callback,refreshInterval){
     var interval = setInterval(function(){
@@ -828,9 +886,10 @@
     });
   }
 
-  vw.cpm.CPMSettingsManager.prototype.updateConnection = function(host,port,wshost){
+  vw.cpm.CPMSettingsManager.prototype.updateConnection = function(host,port,wshost,$button){
     console.log(host);
     var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
         type: "POST",
         data : {
@@ -841,6 +900,7 @@
         dataType:"json",
         url: me.app.options.cpmbaseurl+"updateConnectionInfo",
         success: function(data, textStatus, jqXHR) {
+          vw.cpm.ui.AjaxButton.stop($button);
           if(data.error){
             alert("wrong connection information. nothing changed!");
           }else if(data.success){
@@ -857,6 +917,7 @@
           
         },
         error:function(){
+          vw.cpm.ui.AjaxButton.stop($button);
           alert("wrong connection information. nothing changed!");
         }
       });
@@ -1277,8 +1338,9 @@
     this.synced = false;
   }
 
-  vw.cpm.Process.prototype.sync = function(){
+  vw.cpm.Process.prototype.sync = function($button){
     var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
       type: "POST",
       data : {
@@ -1287,11 +1349,13 @@
       url: me.app.options.cpmbaseurl+"rest/cmd",
       dataType : "json",
       success: function(data, textStatus, jqXHR) {
+        vw.cpm.ui.AjaxButton.stop($button);
         me.info = data;
         me.synced = true;
         me.view.refresh();
       },
       error:function(){
+        vw.cpm.ui.AjaxButton.stop($button);
         alert('could not parse process info json (run id = '+me.runid+')');
       }
     });
@@ -1315,8 +1379,9 @@
     });
   }
 
-  vw.cpm.Process.prototype.delete = function(){
+  vw.cpm.Process.prototype.delete = function($button){
     var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
       type : "POST",
       data : {
@@ -1324,6 +1389,7 @@
       },
       url : me.app.options.cpmbaseurl+"rest/cmd",
       success : function(data){
+        vw.cpm.ui.AjaxButton.stop($button);
         if(data == "ok"){
           var panel = me.app.view.getPanelFromContent(me.view.$el);
           panel.delete();
@@ -1331,6 +1397,7 @@
         }
       },
       error : function(){
+        vw.cpm.ui.AjaxButton.stop($button);
         me.app.logger.error("error when trying to delete process result "+me.runid);
       }
     });
@@ -1469,14 +1536,16 @@
     panel.focus();
   }
 
-  vw.cpm.ServiceManager.prototype.startService = function(serviceview){
+  vw.cpm.ServiceManager.prototype.startService = function(serviceview,$button){
     var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
       type:"POST",
       url : me.app.options.cpmbaseurl + "rest/cmd",
       data:{cmd:"service start "+serviceview.service.name},
       dataType : 'json',
       success:function(data,textStatus,jqXHR){
+        vw.cpm.ui.AjaxButton.stop($button);
         if(data.error){
           me.app.logger.error(data.error);
         }else{
@@ -1484,18 +1553,23 @@
           me.view.refresh();
           serviceview.refresh();
         }
+      },
+      error:function(){
+        vw.cpm.ui.AjaxButton.stop($button);
       }
     });
   }
 
-  vw.cpm.ServiceManager.prototype.stopService = function(serviceview){
+  vw.cpm.ServiceManager.prototype.stopService = function(serviceview,$button){
     var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
       type:"POST",
       url : me.app.options.cpmbaseurl + "rest/cmd",
       data:{cmd:"service stop "+serviceview.service.name},
       dataType : 'json',
       success:function(data,textStatus,jqXHR){
+        vw.cpm.ui.AjaxButton.stop($button);
         if(data.error){
           me.app.logger.error(data.error);
         }else{
@@ -1503,6 +1577,9 @@
           me.view.refresh();
           serviceview.refresh();
         }
+      },
+      error:function(){
+        vw.cpm.ui.AjaxButton.stop($button);
       }
     });
   }
@@ -3104,6 +3181,15 @@
     });
   }
 
+  vw.cpm.Panel.prototype.addToolButton = function($button){
+    $button.addClass("frame-tool");
+    this.$el.find(".frame-tools").append($button);
+  }
+
+  vw.cpm.Panel.prototype.removeToolButton = function(buttonclass){
+    this.$el.find(".frame-tools").find(buttonclass).remove();
+  }
+
   vw.cpm.Panel.uids = 0;
 
   vw.cpm.Panel.maxFrameHeight = 650;
@@ -3192,10 +3278,10 @@
     if(me.model.synced){
       me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><div class="process-detailed-status"></div><button class="processresult-refresh" type="button">refresh</button><button class="processresult-log" type="button">log</button><button class="processresult-delete" type="button">delete</button>');
       me.$el.find('.run-status .info-box-content .processresult-refresh').on("click",function(){
-        me.model.sync();
+        me.model.sync($(this));
       });
       me.$el.find('.run-status .info-box-content .processresult-delete').on("click",function(){
-        me.model.delete();
+        me.model.delete($(this));
       });
 
       me.$el.find('.processresult-log').on("click",function(){
@@ -3344,10 +3430,12 @@
       this.$el.append('<div><button>Start</button></div>');
     }
     this.$el.find('button').click(function(){
-      if(me.service.status){
-        me.app.servicemanager.stopService(me);
-      }else{
-        me.app.servicemanager.startService(me);
+      if(!$(this).hasClass('ajax-submitted')){
+        if(me.service.status){
+          me.app.servicemanager.stopService(me,$(this));
+        }else{
+          me.app.servicemanager.startService(me,$(this));
+        }        
       }
     });
     var ul = '<ul>';

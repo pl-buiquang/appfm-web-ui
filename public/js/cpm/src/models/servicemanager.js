@@ -32,14 +32,16 @@
     panel.focus();
   }
 
-  vw.cpm.ServiceManager.prototype.startService = function(serviceview){
+  vw.cpm.ServiceManager.prototype.startService = function(serviceview,$button){
     var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
       type:"POST",
       url : me.app.options.cpmbaseurl + "rest/cmd",
       data:{cmd:"service start "+serviceview.service.name},
       dataType : 'json',
       success:function(data,textStatus,jqXHR){
+        vw.cpm.ui.AjaxButton.stop($button);
         if(data.error){
           me.app.logger.error(data.error);
         }else{
@@ -47,18 +49,23 @@
           me.view.refresh();
           serviceview.refresh();
         }
+      },
+      error:function(){
+        vw.cpm.ui.AjaxButton.stop($button);
       }
     });
   }
 
-  vw.cpm.ServiceManager.prototype.stopService = function(serviceview){
+  vw.cpm.ServiceManager.prototype.stopService = function(serviceview,$button){
     var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
       type:"POST",
       url : me.app.options.cpmbaseurl + "rest/cmd",
       data:{cmd:"service stop "+serviceview.service.name},
       dataType : 'json',
       success:function(data,textStatus,jqXHR){
+        vw.cpm.ui.AjaxButton.stop($button);
         if(data.error){
           me.app.logger.error(data.error);
         }else{
@@ -66,6 +73,9 @@
           me.view.refresh();
           serviceview.refresh();
         }
+      },
+      error:function(){
+        vw.cpm.ui.AjaxButton.stop($button);
       }
     });
   }

@@ -443,6 +443,15 @@ display: inline-block;
   cursor: pointer;
 }
 
+.frame-tool-refresh{
+  background-image:url('../img/system/refresh.png'); 
+}
+
+.frame-tool-download{
+  background-image:url('../img/system/download.png'); 
+}
+
+
 .frame-tool-pin{
   background-image:url('../img/system/unpinned.png');
 }
@@ -780,4 +789,35 @@ a:hover{
   margin-top:12px;
   margin-bottom:12px;
   padding: 8px;
+}
+
+.ajax-submitted{
+  background-image: url('../img/system/ajax-loader-button.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color:#7C899E; 
+}
+
+button {
+  -moz-box-shadow:inset 0px 1px 0px 0px #687486;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #687486;
+  box-shadow:inset 0px 1px 0px 0px #687486;
+  background-color:#4D5767;
+  border:1px solid #373E48;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:13px;
+  font-weight:bold;
+  padding:6px 12px;
+  text-decoration:none;
+}
+button:hover {
+  background-color:rgb(96, 108, 128);
+}
+button:active {
+  background-color:#7C899E; 
+  position:relative;
+  top:1px;
 }

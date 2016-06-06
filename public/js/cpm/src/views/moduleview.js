@@ -85,16 +85,16 @@
     this.editor.getSession().setUseSoftTabs(true);
     this.editor.session.setMode(new YamlMode());
 
-    /*
+    
     this.$el.on("fullscreenOn",function(){
-        me.$el.find(".module-source-editor").height(me.$el.find(".module-content-view").height()-me.$el.find(".module-header").height());
+        me.$el.find(".module-source-editor").height(me.$el.find(".module-view-container").height()-me.$el.find(".module-header").height());
         me.editor.resize();
       });
 
     this.$el.on("fullscreenOff",function(){      
-        me.$el.find(".module-source-editor").height(me.$el.find(".module-content-view").height()-me.$el.find(".module-header").height());
+        me.$el.find(".module-source-editor").height(me.$el.find(".module-view-container").height()-me.$el.find(".module-header").height());
         me.editor.resize();
-      });*/
+      });
 
 
   }

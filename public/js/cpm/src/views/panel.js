@@ -36,7 +36,7 @@
        vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
      });
 
-    //me.$el.find(".frame-body").perfectScrollbar();
+    me.$el.find(".frame-body").perfectScrollbar();
  
     me.$el.find('.frame-tool-pin').click(function(){
       me.stick();
@@ -69,16 +69,18 @@
     me.$el.find(".frame-tool-quitfs").remove();
     me.$el.find(".frame-tools").children().show();
     // change content height 
-    var content = me.$el.find(".frame-body").children();
+    var content = me.$el.find(".frame-body").children().not(".ps-scrollbar-x-rail").not(".ps-scrollbar-y-rail");
     if(content.length == 1){
       if(content.prop("originalHeight")){
         content.height(content.prop("originalHeight"));
       }
     }
-    /*
+    
     var fb = me.$el.find(".frame-body");
     fb.height(fb.prop("originalHeight"));
-    fb.perfectScrollbar('update');*/
+    fb.perfectScrollbar('update');
+
+    me.$el.find(".frame-body").trigger("fullscreenOff");
     /*
     me.app.view.$fullscreencontainer.fadeOut();
     var title = me.app.view.$fullscreencontainer.find(".frame-title").children();
@@ -92,7 +94,7 @@
           content.height(content.prop("originalHeight"));
       }
       me.$el.find(".frame-body").append(content);
-      me.$el.find(".frame-body").trigger("fullscreenOff");
+      
     }
     */
   }
@@ -104,18 +106,20 @@
     me.$el.find(".frame-tools").children().hide();
     me.$el.find(".frame-tools").append('<div class="frame-tool frame-tool-quitfs"></div>');
     // change content height
-    var content = me.$el.find(".frame-body").children();
+    var content = me.$el.find(".frame-body").children().not(".ps-scrollbar-x-rail").not(".ps-scrollbar-y-rail");
     if(content.length == 1){
       content.prop("originalHeight",content.height());
       content.height($(window).height()-100);
     }
-    /*var fb = me.$el.find(".frame-body");
+    var fb = me.$el.find(".frame-body");
     fb.prop("originalHeight",fb.height());
     fb.height($(window).height()-70);
-    fb.perfectScrollbar('update');*/
+    fb.perfectScrollbar('update');
     me.$el.find(".frame-tool-quitfs").on("click",function(){
       me.quitFullscreen();
     });
+
+    me.$el.find(".frame-body").trigger("fullscreenOn");
 
     /*
     me.app.view.$fullscreencontainer.fadeIn();
@@ -135,7 +139,7 @@
     me.app.view.$fullscreencontainer.find(".frame-body").empty();
     me.app.view.$fullscreencontainer.find(".frame-title").append(title);
     me.app.view.$fullscreencontainer.find(".frame-body").append(content);
-    me.$el.find(".frame-body").trigger("fullscreenOn");
+    
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").unbind("click");
     me.app.view.$fullscreencontainer.find(".frame-tool-quitfs").on("click",function(){
       me.quitFullscreen();

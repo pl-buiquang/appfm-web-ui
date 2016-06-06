@@ -483,8 +483,9 @@ display: inline-block;
 .frame-body{
   padding:8px;
   word-wrap: break-word;
-  /*overflow: hidden;
-  max-height: 650px;*/
+  overflow: hidden;
+  max-height: 650px;
+  position: relative;
 }
 
 .fullscreen .frame-body{
@@ -528,10 +529,9 @@ display: inline-block;
   height: 32px;
   left: 0;
   position: absolute;
-  top: 32px;
   width: 100%;
   background: rgba(79, 93, 115,0.85);
-
+  top:0px;
 }
 
 .module-content-view{

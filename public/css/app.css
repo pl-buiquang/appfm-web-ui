@@ -518,6 +518,15 @@ display: inline-block;
 *      Module viewer
 ********************************************************************/
 
+.success-action{
+  padding-right: 24px;
+  background-image: url('../img/system/bullet-valid-icon.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  -webkit-transition: background-image 0.2s ease-in-out;
+  transition: background-image 0.2s ease-in-out;
+}
+
 .module-view-infos-panel{
   height:200px;
   width: 100%;

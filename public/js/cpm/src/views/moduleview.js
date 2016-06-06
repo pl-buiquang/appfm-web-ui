@@ -40,7 +40,11 @@
     this.$el.find(".module-save").on("click",function(){
       me.model.sync(function(){
         me.init();
-        me.model.app.logger.info("successfully saved")
+        me.model.app.logger.info("successfully saved");
+        me.$el.find(".module-save").addClass("success-action");
+        setTimeout(function(){
+          me.$el.find(".module-save").removeClass("success-action");
+        },2000);
       },function(){
         me.init();
         me.model.app.logger.error("couldn't save. error happend!");

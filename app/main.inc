@@ -136,7 +136,7 @@ function updateconnectionInfo(){
 
 
 
-function cpm_command_call($command,$data=NULL){
+function cpm_command_call($command,$data=NULL,$user=NULL,$passwd=NULL){
   global $context;
 
   set_time_limit ( 30);
@@ -159,7 +159,11 @@ function cpm_command_call($command,$data=NULL){
     $dataframe = "==DATA==".$data."==END_DATA==";
   }
   /* Send a request */
-  $socket->send("==CMD==".$command."==END_CMD==".$dataframe);
+  if(!isset($user)){
+    $user = get_client_ip_server();
+  }
+  $userframe = "==USER==".$user."==END_USER====PSWD====END_PSWD==";
+  $socket->send("==CMD==".$command."==END_CMD==".$dataframe.$userframe);
 
   $poll = new ZMQPoll();
 
@@ -186,6 +190,26 @@ function cpm_command_call($command,$data=NULL){
     $message = "timeout";
   }
   return $message;
+}
+
+function get_client_ip_server() {
+    $ipaddress = '';
+    if ($_SERVER['HTTP_CLIENT_IP'])
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else if($_SERVER['HTTP_X_FORWARDED'])
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    else if($_SERVER['HTTP_FORWARDED_FOR'])
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    else if($_SERVER['HTTP_FORWARDED'])
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    else if($_SERVER['REMOTE_ADDR'])
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    else
+        $ipaddress = 'UNKNOWN';
+ 
+    return $ipaddress;
 }
 
 

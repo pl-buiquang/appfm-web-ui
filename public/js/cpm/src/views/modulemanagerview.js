@@ -16,10 +16,69 @@
     me.$el.append($mastercontainer);
 
     me.$el.find("#modulemanager-menu").append('<div id="modulemanager-add-new">Create a new module</div>');
+    me.$el.find("#modulemanager-menu").append('<input id="modulemanager-search" type="text">');
     me.$el.find("#modulemanager-add-new").click(function(){
       me.model.prepareCreateNewModule();
     });
+    me.$el.find("#modulemanager-search").on("keyup",function(e){
+      if(e.keyCode == 27){
+        me.showAll();
+        $(this).val("");
+      }else{
+        var query = $(this).val().trim();
+        if(query){
+          me.model.search(query,function(data){me.show(data);});
+        }else{
+          me.showAll();
+        }
+      }
+    });
   }
+
+  vw.cpm.ModuleManagerView.prototype.showAll = function(){
+    this.$el.find(".treeview-leaf").each(function(i,e){
+      var $node = $(e);
+      if($node.hasClass("search-hidden")){
+        $node.removeClass("search-hidden");
+      }else if($node.hasClass("search-result")){
+        $node.removeClass("search-result");
+      }
+
+    });
+    this.$el.find('.treeview-node').each(function(i,e){
+      if($(e).hasClass("search-hidden")){
+        $(e).removeClass("search-hidden");
+      }
+    })
+  }
+
+  vw.cpm.ModuleManagerView.prototype.show = function(list){
+    this.$el.find(".treeview-leaf").each(function(i,e){
+      var $node = $(e);
+      if(list.indexOf($node.html().trim()) == -1){
+        if(!$node.hasClass("search-hidden")){
+          $node.addClass("search-hidden");
+        }
+        if($node.hasClass("search-result")){
+          $node.removeClass("search-result");
+        }
+      }else{
+        if($node.hasClass("search-hidden")){
+          $node.removeClass("search-hidden");
+        }
+        if(!$node.hasClass("search-result")){
+          $node.addClass("search-result");
+        }
+      }
+    });
+    this.$el.find('.treeview-node').each(function(i,e){
+      if(!$(e).hasClass("search-hidden")){
+        $(e).addClass("search-hidden");
+      }
+    })
+  }
+
+
 
   vw.cpm.ModuleManagerView.prototype.refresh = function(){
     var me = this;

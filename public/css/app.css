@@ -252,6 +252,23 @@ ul.main-menu{
   cursor:pointer;
 }
 
+#modulemanager-search{
+  padding-right:28px;
+  min-height: 24px;
+  background-image:url('../img/system/Very-Basic-Search-icon.png');
+  background-repeat: no-repeat;
+  background-position: right;
+  width: 240px;
+  margin-top: 12px;
+}
+
+.search-hidden{
+  display: none;
+}
+
+.search-result{
+  margin-left: 12px !important;
+}
 /*******************************************************************
 *      Process/Run Manager
 ********************************************************************/

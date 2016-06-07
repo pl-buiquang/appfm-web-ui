@@ -34,6 +34,21 @@
     })
   }
 
+  vw.cpm.ModuleManager.prototype.search = function(query,onsuccess){
+    var me = this;
+    $.ajax({
+      type:"POST",
+      url : me.app.options.cpmbaseurl + "rest/cmd",
+      data:{cmd:"module search --json",data:query},
+      dataType : 'json',
+      success:function(data,textStatus,jqXHR){
+        onsuccess.call(me,data);
+      },error:function(message){
+        me.app.logger.error(message);
+      }
+    }) 
+  }
+
   vw.cpm.ModuleManager.prototype.addDefaultModules = function(){
     this.modules["_CMD"]={
       module:{

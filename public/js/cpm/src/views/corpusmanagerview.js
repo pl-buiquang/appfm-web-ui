@@ -38,6 +38,7 @@
   vw.cpm.CorpusManagerView.prototype.renderResults = function(data){
     var me = this;
     var $html = me.renderDirectory(data,me.model.app.cpmsettingsmanager.cpmsettings.result_dir,1);
+    this.$el.find("#corpora-results-container").empty();
     this.$el.find("#corpora-results-container").append($html);
   }
 

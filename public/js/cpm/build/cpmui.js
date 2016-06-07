@@ -154,6 +154,9 @@
 
   vw.cpm.CLI.prototype.initWS = function(){
     var me = this;
+    if(me.wssocketactive){
+      return;
+    }
     try{
       this.wssocket = new WebSocket("ws://"+me.options.cpmwshost);
       this.wssocket.onopen = function(e){
@@ -181,11 +184,13 @@
               me.processmanager.showRun(obj.more,obj.target);
             },me.options.cpmbaseurl+'public/img/system/process.png');
             me.processmanager.showRun(obj.more,obj.target);
+            me.corpusmanager.refreshResults();
           }
         }else if(obj.type == "process-started"){
           me.processmanager.fetchAll();
         }else if(obj.type == "process-deleted"){
           me.processmanager.fetchAll();
+          me.corpusmanager.refreshResults();
         }else if(obj.type == "process-update"){
           /*if(_.indexOf(me.processmanager.startedprocess,obj.target)!=-1){
             // todo : should update view with status log
@@ -254,7 +259,7 @@
       //this.view.fullscreen(panel);
       me.demo();
       store.set('firstrun','done');
-    }else{
+    }else if(this.view.panels.length==0){
       var panels = store.get(me.options.cpmhost+"-panels");
       if(panels && panels.length > 0){
         store.set(me.options.cpmhost+"-panels",[]);
@@ -826,6 +831,13 @@
         me.view.refresh();
       }
     })*/
+  }
+
+  vw.cpm.CorpusManager.prototype.refreshResults = function(){
+    var me = this;
+    me.lsDir(me.app.cpmsettingsmanager.cpmsettings.result_dir,0,function(data){
+      me.view.renderResults(data);
+    });
   }
 
   vw.cpm.CorpusManager.prototype.lsDir = function(filepath,offset,onsuccess){
@@ -1888,6 +1900,7 @@
   vw.cpm.CorpusManagerView.prototype.renderResults = function(data){
     var me = this;
     var $html = me.renderDirectory(data,me.model.app.cpmsettingsmanager.cpmsettings.result_dir,1);
+    this.$el.find("#corpora-results-container").empty();
     this.$el.find("#corpora-results-container").append($html);
   }
 
@@ -2618,7 +2631,7 @@
         me.$el.find(".module-save").addClass("success-action");
         setTimeout(function(){
           me.$el.find(".module-save").removeClass("success-action");
-        },3000);
+        },2000);
       },function(){
         me.init();
         me.model.app.logger.error("couldn't save. error happend!");

@@ -35,6 +35,13 @@
     })*/
   }
 
+  vw.cpm.CorpusManager.prototype.refreshResults = function(){
+    var me = this;
+    me.lsDir(me.app.cpmsettingsmanager.cpmsettings.result_dir,0,function(data){
+      me.view.renderResults(data);
+    });
+  }
+
   vw.cpm.CorpusManager.prototype.lsDir = function(filepath,offset,onsuccess){
     var me = this;
     $.ajax({

@@ -94,6 +94,9 @@
 
   vw.cpm.CLI.prototype.initWS = function(){
     var me = this;
+    if(me.wssocketactive){
+      return;
+    }
     try{
       this.wssocket = new WebSocket("ws://"+me.options.cpmwshost);
       this.wssocket.onopen = function(e){
@@ -121,11 +124,13 @@
               me.processmanager.showRun(obj.more,obj.target);
             },me.options.cpmbaseurl+'public/img/system/process.png');
             me.processmanager.showRun(obj.more,obj.target);
+            me.corpusmanager.refreshResults();
           }
         }else if(obj.type == "process-started"){
           me.processmanager.fetchAll();
         }else if(obj.type == "process-deleted"){
           me.processmanager.fetchAll();
+          me.corpusmanager.refreshResults();
         }else if(obj.type == "process-update"){
           /*if(_.indexOf(me.processmanager.startedprocess,obj.target)!=-1){
             // todo : should update view with status log
@@ -194,7 +199,7 @@
       //this.view.fullscreen(panel);
       me.demo();
       store.set('firstrun','done');
-    }else{
+    }else if(this.view.panels.length==0){
       var panels = store.get(me.options.cpmhost+"-panels");
       if(panels && panels.length > 0){
         store.set(me.options.cpmhost+"-panels",[]);

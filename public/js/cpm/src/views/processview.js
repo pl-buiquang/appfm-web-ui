@@ -25,7 +25,10 @@
   vw.cpm.ProcessView.prototype.refresh=function(){
     var me = this;
     if(me.model.synced){
-      me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><div class="process-detailed-status"></div><button class="processresult-refresh" type="button">refresh</button><button class="processresult-log" type="button">log</button><button class="processresult-delete" type="button">delete</button>');
+      me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><div class="process-detailed-status"></div><button class="processresult-rerun" type="button">re-run</button><button class="processresult-refresh" type="button">refresh</button><button class="processresult-log" type="button">log</button><button class="processresult-delete" type="button">delete</button>');
+      me.$el.find('.run-status .info-box-content .processresult-rerun').on("click",function(){
+        me.model.rerun();
+      });
       me.$el.find('.run-status .info-box-content .processresult-refresh').on("click",function(){
         me.model.sync($(this));
       });

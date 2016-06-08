@@ -2,10 +2,12 @@
 
   vw.cpm.ModuleView = function(model,$el){
     this.id = vw.cpm.utils.guid();
-    this.$el = $el || $('<div></div>');
-    this.el = this.$el[0];
     this.model = model;
-    this.init();
+    if($el){
+      this.$el = $el || $('<div></div>');
+      this.el = this.$el[0];
+      this.init();
+    }
   };
 
   vw.cpm.ModuleView.prototype.init=function(){

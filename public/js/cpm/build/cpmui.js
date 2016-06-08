@@ -1111,7 +1111,9 @@
         me.app.processmanager.startedprocess.push(runid);
         me.app.processmanager.showRun(me.def.modulename,runid);
         me.app.processmanager.fetchAll(); // very unoptimized
-        success.call(me.view);
+        if(success){
+          success.call(me.view);
+        }
       },
       error:function(){
 
@@ -1448,6 +1450,7 @@
         mConf[key] = pConf[key].value;
       }
     }
+    return mConf;
   }
 
   vw.cpm.Process.prototype.rerun = function(){

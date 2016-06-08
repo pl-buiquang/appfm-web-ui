@@ -96,6 +96,7 @@
         mConf[key] = pConf[key].value;
       }
     }
+    return mConf;
   }
 
   vw.cpm.Process.prototype.rerun = function(){

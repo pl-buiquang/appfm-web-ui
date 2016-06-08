@@ -124,7 +124,10 @@
     $form.find(".submit").on("click",function(){
       var conf = {}
       for(var inputname in inputs){
-        conf[inputname] = $form.find('input[name="'+inputname+'"]').val()
+        var value = $form.find('input[name="'+inputname+'"]').val()
+        if(value.trim()!=""){
+          conf[inputname] = value;
+        }
       } 
       me.model.run(conf,function(){
         me.$el.find(".module-content-view").empty();

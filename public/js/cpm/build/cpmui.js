@@ -1453,7 +1453,7 @@
   vw.cpm.Process.prototype.rerun = function(){
     var me = this;
     var conf = vw.cpm.Process.pConf2mConf(me.info.runconf);
-    var module = new vw.cpm.Module(me.app,$('<div></div>'),me.app.modulesmanager.modules[me.info.name]);
+    var module = new vw.cpm.Module(me.app,undefined,me.app.modulesmanager.modules[me.info.name]);
     module.run(conf);
   }
 

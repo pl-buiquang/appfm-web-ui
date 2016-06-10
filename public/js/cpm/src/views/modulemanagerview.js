@@ -130,6 +130,7 @@
 
   vw.cpm.ModuleManagerView.renderSubTree = function(tree,offset){
     var html = "";
+    var offsetsize = 14;
     if(typeof tree == "object"){
       if(tree.constructor === Array){
         tree = tree.sort(compareTreeView);
@@ -141,11 +142,11 @@
           if(tree.foldername!=""){
             var folded = "treeview-folded";
             var hidden = 'style="display:none;"';
-            if(true || offset == 0){
+            if((offset / offsetsize) < 3){
               folded = "treeview-unfolded";
               hidden = "";
             }
-            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + 14)+'</div></div>';
+            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + offsetsize)+'</div></div>';
           }else{
             html += vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset)
           }

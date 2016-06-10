@@ -266,9 +266,6 @@
 
     command = command.trim();
 
-    if(command == "demo"){
-      me.demo();
-    }
 
     if(command == "help"){
       me.helpmanager.displayCLIHelp();
@@ -447,6 +444,7 @@
       }
     }
     me.modulesmanager.showModule(testmodule);
+    var testmoduleobj = me.modulesmanager.getModule(testmodule);
     intro.setOptions({
       steps: [
         { 
@@ -463,16 +461,23 @@
           position:'bottom'
         },
         {
+          element: document.querySelectorAll('.frame')[0].querySelector(".module-header"),
+          intro: "From this menu you can view the source, save modification, and run it",
+          position: 'bottom'
+        },
+        {
+          element: document.querySelectorAll('.frame')[0].querySelector(".module-run"),
+          intro: "Let's go to the run section",
+          position: 'bottom'
+        },
+        {
           element: document.querySelector('#corpus-menu'),
           intro: "You can then drag and drop files from corpus into the proper input fields.",
           position: 'right'
         },
-        // then run
-        // a process view appears
-        // that you can close and find at any moment within the process list
         {
-          element: document.querySelector('#module-menu'),
-          intro: "This one list the modules available that can be executed over the data available in the previous menu.",
+          element: document.querySelector('#corpus-menu'),
+          intro: "You can then drag and drop files from corpus into the proper input fields.",
           position: 'right'
         },
         {
@@ -480,16 +485,9 @@
           intro: "This last one shows the list of past modules executions.",
           position: 'right'
         },
-        {
-          element: document.querySelector('#settings-menu'),
-          intro: "Global settings can be reviewed here.",
-          position: 'right'
-        },
-        {
-          element: document.querySelector('#help-menu'),
-          intro: "...and if you need more help, this is where you can find further documentation.",
-          position: 'right'
-        }              
+        // then run
+        // a process view appears
+        // that you can close and find at any moment within the process list
       ]
     });
     intro.onchange(function(element){
@@ -498,6 +496,8 @@
       }else if(element.id=="module-menu"){
         me.view.openMenu("module-menu");
         
+      }else if(element.classList.contains("module-run")){
+        testmoduleobj.run();
       }else if(element.id=="process-menu"){
         me.view.openMenu("process-menu");
       }else if(element.id=="settings-menu"){

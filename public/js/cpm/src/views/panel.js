@@ -36,7 +36,7 @@
        vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
      });
 
-    me.$el.find(".frame-body").perfectScrollbar();
+    me.$el.find(".frame-body").perfectScrollbar({wheelPropagation: true});
  
     me.$el.find('.frame-tool-pin').click(function(){
       me.stick();

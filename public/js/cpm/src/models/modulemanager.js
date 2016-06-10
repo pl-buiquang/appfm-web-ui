@@ -213,5 +213,14 @@
     panel.focus();
   }
 
+  vw.cpm.ModuleManager.prototype.getModule = function(modulename){
+    for (var i in modulesobj){
+      if(modulesobj[i].def.modulename==modulename){
+        return modulename;
+      }
+    }
+    return new vw.cpm.Module(me.app,undefined,me.modules[modulename]);
+  }
+
 
 }(window.vw = window.vw || {}));

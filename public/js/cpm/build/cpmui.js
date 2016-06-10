@@ -326,9 +326,6 @@
 
     command = command.trim();
 
-    if(command == "demo"){
-      me.demo();
-    }
 
     if(command == "help"){
       me.helpmanager.displayCLIHelp();
@@ -507,6 +504,7 @@
       }
     }
     me.modulesmanager.showModule(testmodule);
+    var testmoduleobj = me.modulesmanager.getModule(testmodule);
     intro.setOptions({
       steps: [
         { 
@@ -523,16 +521,23 @@
           position:'bottom'
         },
         {
+          element: document.querySelectorAll('.frame')[0].querySelector(".module-header"),
+          intro: "From this menu you can view the source, save modification, and run it",
+          position: 'bottom'
+        },
+        {
+          element: document.querySelectorAll('.frame')[0].querySelector(".module-run"),
+          intro: "Let's go to the run section",
+          position: 'bottom'
+        },
+        {
           element: document.querySelector('#corpus-menu'),
           intro: "You can then drag and drop files from corpus into the proper input fields.",
           position: 'right'
         },
-        // then run
-        // a process view appears
-        // that you can close and find at any moment within the process list
         {
-          element: document.querySelector('#module-menu'),
-          intro: "This one list the modules available that can be executed over the data available in the previous menu.",
+          element: document.querySelector('#corpus-menu'),
+          intro: "You can then drag and drop files from corpus into the proper input fields.",
           position: 'right'
         },
         {
@@ -540,16 +545,9 @@
           intro: "This last one shows the list of past modules executions.",
           position: 'right'
         },
-        {
-          element: document.querySelector('#settings-menu'),
-          intro: "Global settings can be reviewed here.",
-          position: 'right'
-        },
-        {
-          element: document.querySelector('#help-menu'),
-          intro: "...and if you need more help, this is where you can find further documentation.",
-          position: 'right'
-        }              
+        // then run
+        // a process view appears
+        // that you can close and find at any moment within the process list
       ]
     });
     intro.onchange(function(element){
@@ -558,6 +556,8 @@
       }else if(element.id=="module-menu"){
         me.view.openMenu("module-menu");
         
+      }else if(element.classList.contains("module-run")){
+        testmoduleobj.run();
       }else if(element.id=="process-menu"){
         me.view.openMenu("process-menu");
       }else if(element.id=="settings-menu"){
@@ -1351,6 +1351,15 @@
     me.modulesobj.push(module);
     module.view.render();
     panel.focus();
+  }
+
+  vw.cpm.ModuleManager.prototype.getModule = function(modulename){
+    for (var i in modulesobj){
+      if(modulesobj[i].def.modulename==modulename){
+        return modulename;
+      }
+    }
+    return new vw.cpm.Module(me.app,undefined,me.modules[modulename]);
   }
 
 
@@ -2633,6 +2642,7 @@
 
   vw.cpm.ModuleManagerView.renderSubTree = function(tree,offset){
     var html = "";
+    var offsetsize = 14;
     if(typeof tree == "object"){
       if(tree.constructor === Array){
         tree = tree.sort(compareTreeView);
@@ -2644,11 +2654,11 @@
           if(tree.foldername!=""){
             var folded = "treeview-folded";
             var hidden = 'style="display:none;"';
-            if(true || offset == 0){
+            if((offset / offsetsize) < 3){
               folded = "treeview-unfolded";
               hidden = "";
             }
-            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + 14)+'</div></div>';
+            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + offsetsize)+'</div></div>';
           }else{
             html += vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset)
           }
@@ -3101,7 +3111,7 @@
        vw.cpm.currentTextSelection = vw.cpm.utils.getSelectionText();
      });
 
-    me.$el.find(".frame-body").perfectScrollbar();
+    me.$el.find(".frame-body").perfectScrollbar({wheelPropagation: true});
  
     me.$el.find('.frame-tool-pin').click(function(){
       me.stick();

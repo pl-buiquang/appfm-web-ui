@@ -648,6 +648,7 @@ display: inline-block;
   padding-top: 6px;
   cursor: pointer;
   color:#ffffff;
+  word-wrap: break-word;
 }
 
 .warning-field{

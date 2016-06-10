@@ -326,6 +326,9 @@
 
     command = command.trim();
 
+    if(command == "demo"){
+      me.demo();
+    }
 
     if(command == "help"){
       me.helpmanager.displayCLIHelp();

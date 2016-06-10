@@ -1,45 +1,24 @@
 ====== Application Frame Manager - AppFM ======
 
-(previously CPM)
+AppFM (nommé avant CPM - Corpus & Process Manager) est une plate-forme de gestion d'applications définies selon un certain formalisme et référées plus loin sous le nom de [[:spec_draft|modules]].
 
-AppFM (previously CPM) is a platform that manage applications defined within a frame that we will further refer as [[:spec_draft|modules]].
+Les fonctionnalités principales d'AppFM sont de :
 
-The initial main purpose of AppFM was to be able to :
+  * faciliter l'utilisation d'applications de traitement de la langue
+  * construire des chaînes de modules
+  * permettre la parallélisation de traitement
 
-  * facilitate the use of already developped applications for testing purpose
-  * design applications pipeline
-  * provide useful built-in tools and views for common nlp process (POS tagging, dependency parser, corpus statistics, etc.)
+Les principaux éléments qui constituent la plateforme AppFM sont les suivants :
 
-In order to achieve these purpose, the AppFM platform is built around :
+  * un [[:spec_draft|formalisme de représentation de module]] (application frame)
+  * un serveur orchestrant l'exécution des modules
+  * une interface en ligne de commande
+  * une interface graphique web
 
-  * a [[:spec_draft|module implementation guide]]
-  * a core server handling the execution and management of module and modules pipeline (both are actually the same kind of object)
-  * a command line interface for basic interaction with the core
-  * a web interface for advanced viewing of module execution results and creation
+===== Comparaison avec les plateformes existantes =====
 
-===== Background =====
+Dans le domaine du traitement de la langue, il existe depuis longtemps des plateforme permettant de construire des chaines de traitement par modules. Sans être exhaustif on peut citer UIMA, Gate ou Lingpipe. Ces plateformes, souvent difficiles à prendre en main, imposent un cadre contraignant au niveau du language de programmation, des modèles de données, etc. AppFM a donc été construit pour donner le plus de liberté dans la construction de modules ou surtout l'intégration d'application exisxtantes.
 
-Existing solutions :
+Plus généralement, il existe des plateformes ou méthodes d'intégrations (EIP,ESB) tels camel, talend, permettant la construction de chaines de traitement en dehors d'applications de traitement de la langue. Ces solutions sont cependant plus adaptées à une production industrielles et sont donc encore plus coûteuse en termes de maitrise et de mise en place.
 
-  * Enterprise Integration Pattern, Enterprise Service Bus (camel, talend, etc.)
-  * NLP Frameworks (UIMA, Gate)
-
-===== Global Project Information =====
-
-[[:quick_start|Getting started]]
-
-[[:roadmap|Roadmap]]
-
-[[:arch|Architecture générale]]
-
-[[:dependencies|Dépendances]]
-
-==== Core Server/Kernel ====
-
-[[:spec_draft|Documentation modules]]
-
-==== Clients ====
-
-[[:cli|CLI manual]]
-
-[[:web|Web interface]]
+=====   =====

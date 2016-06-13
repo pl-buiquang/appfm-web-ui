@@ -1,3 +1,13 @@
-====== Misc ======
+====== Instances LIMSI ======
 
-Des développements, intégrations et installations spécifiques ont été réalisée afin de mettre en place des exemples d'installation/utilisation d'appfm. Notamment une partie est dédiée aux travaux réalisés pour le traitement d'entités nommés pour le [[:pulsar|projet PULSAR]]. Une seconde récapitule les modules supplémentaires intégrés à l'installation de démonstration présente sur le serveur [[http://rscpm.limsi.fr|rscpm]].
+Des développements, intégrations et installations spécifiques ont été réalisée afin de mettre en place des exemples d'installation/utilisation d'appfm.  Le client web [[http://rscpm.limsi.fr|rscpm]] permet de se connecter aux instances existantes.
+
+===== Labiche =====
+
+Cette instance ne permet pas de lancer des modules utilisant Docker. Elle tire cependant parti de la puissance du serveur (30 coeurs) et est utilisée pour lancer les modules propres au [[:pulsar|projet PULSAR]]. Cette instance est située dans le répertoire /vol/datailes/tools/sys/appfm (et est potentiellement exécutable sur d'autres serveurs ayant accès à ce dossier).
+
+===== RSCPM =====
+
+Cette instance est accessible via ssh sur le serveur rscpm.limsi.fr avec comme identifiant et mot de passe : appfm
+
+C'est l'instance de démo avec Docker activée.

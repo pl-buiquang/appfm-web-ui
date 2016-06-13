@@ -1,1 +1,95 @@
 ====== Installation ======
+
+===== Installation facile (dans une machine virtuelle) =====
+
+==== 0. Récupérer le code source ====
+
+git clone git@github.limsi.fr:/appfm/base appfm\\
+cd appfm
+
+==== 1. Installer vagrant (machine virtuelle) ====
+
+sudo apt-get install vagrant virtualbox
+
+==== 2. Récupérer les sous projets : ====
+
+git submodule update –init –recursive
+
+==== 3. Configurer la machine virtuelle :  ====
+
+Editer le fichier "Vagrantfile" :
+
+- le chemin vers un disque virtuel : (variable "file_to_disk") un fichier sera créé à ce chemin et servira de disque additionnel pour la machine virtuelle\\
+ex. : file_to_disk = "$HOME/appfm_vagrant_additional_disk.vdi"\\
+ce disque virtuel permet de stocker les conteneurs Docker et les données (mongodb) de l'application. La taille par défaut de ce disque est 100G (peut etre modifier dans le fichier de configuration "Vagrantfile".
+
+- ressources allouées à la machine virtuelle (les valeurs par défaut sont 2 cpus et 4G de ram :
+
+ex. v.customize ["modifyvm", :id, "–memory","4096"])
+
+- ports
+
+==== 4. Installation (may take about 10~30 minutes) : ====
+
+vagrant up\\
+vagrant ssh\\
+sudo /vagrant/install.sh
+
+==== 5. First run (takes a long the first time since it builds base containers): ====
+
+cd /vagrant\\
+./appfm start
+
+When finished you can go to [[http://localhost:8080|http://localhost:8080]]
+
+To disconnect session from the virtual machine:\\
+exit
+
+To stop the server (and the virtual machine) :\\
+./appfm stop
+
+vagrant halt (from outside the virtual machine session and anywhere within the cpm directory)
+
+To restart :\\
+vagrant ssh (from anywhere within the cpm directory)\\
+cd /vagrant\\
+./appfm restart
+
+To completly destroy the virtual machine (needs re installation (step 4)) :\\
+vagrant destroy (from anywhere within the cpm directory)
+
+===== First steps (using CLI) =====
+
+If installed within a virtual machine (quick start instructions), you may also want to install the cli within your host to be able to use appfm from outside the vm.\\
+To do so, go the cli subproject directory and follow the quick install guide in the README
+
+With default installation, there is some modules already availables.\\
+Following instructions assume that you didn't change the default paths configuration.
+
+Listing availables modules :\\
+cpm module ls
+
+Running module synchronously :\\
+- extract pdf content into html :\\
+cpm module run pdfbox@munshi –arg IN_DIR:/vagrant/data/corpus/some-pdfs –sync
+
+Running module asynchronously :\\
+- apply bonsai parser onto extracted content (may take several minutes)\\
+cpm module run bonsai-parser@munshi –arg IN_DIR:[insert_result_dir_of_previous_run]
+
+Get process information :\\
+cpm process get [insert_process_id_of_previous_command]
+
+===== Running as a service =====
+
+TODO :
+
+create init.d script
+
+===== Configuration =====
+
+TODO / A Venir :
+
+conf.yaml detail ( modules dir, corpus dir, result dir)
+
+Configuration doc (+ défauts)

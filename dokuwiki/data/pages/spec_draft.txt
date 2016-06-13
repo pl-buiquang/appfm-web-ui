@@ -4,7 +4,7 @@ Les modules sont les descriptions du cadre et de l'exécution d'une application 
 
 Les noms des modules sont des chaines de caractères respectant l'expression régulière suivante : **nom_module** (@**//namespace//**)? où **nom_module** et **namespace** sont de la forme [a-zA-Z][a-zA-Z0-9_\-]+ (ex: //parser@user//, //mon-module-de-normalisation@hostname//, //parser_customisé// @domain, …)
 
-Des modules déjà existant se trouvent dans la distribution dans le répertoire (relatif au répertoire d'installation de **AppFM**) modules/custom et modules/addons.
+Ces fichiers de définition ainsi que les autres fichiers nécessaires à l'exécution des modules se trouvent dans les répertoires définis dans la **[[:configuration|configuration d'AppFM​]]** (variable ''modules_dir'').
 ===== Description (fichier .module) =====
 
 Le fichier de description d'un module est en format [[http://learnxinyminutes.com/docs/fr-fr/yaml-fr/|YAML]].
@@ -42,9 +42,15 @@ Chaque **input****/parametre **à un **nom unique** dans le module et est donné
 
 Ce nom DOIT respecter l'expression régulière suivante : [A-Z][A-Z0-9_]*
 
-Le seul parametre vraiment requis est le **type ** du paramètre. Il en existe 3 (pour l'instant) qui seront décrit plus bas : **VAL**, **FILE**, **DIR**
+Le seul parametre obligatoire est le **type ** du paramètre. Il en existe 3 qui seront décrit plus bas : **VAL**, **FILE**, **DIR**
 
-Le type peut etre complémenté des quantificateurs suivants : * pour un nombre indéfini de valeurs, **+** pour un nombre strictement positif de valeurs et **?** pour une ou aucune valeur (paramètre optionnel)
+Le champ **format** et **schema** permet de spécifier la sémantique du paramètre.
+
+Le champ **desc** permet d'ajouter une description supplémentaire au paramètre.
+
+Le champ **value** permet de donner une valeur par défaut au paramètre.
+
+Le type peut etre complémenté des quantificateurs suivants : ***** pour un nombre indéfini de valeurs et **+** pour un nombre strictement positif de valeurs. Les paramètres optionnelles sont ceux ayant une valeur par défaut donnée.
 ==== Output ====
 
 Symmétriquement aux entrées d'un module, les sorties sont décrites via une //map// de la forme suivante :
@@ -88,13 +94,12 @@ Les variables sont des alias correspondant à des valeurs définies à l'extéri
 
 - **_RUN_DIR** : le répertoire dans lequel s'éxecute le module
 
-Les variables de **sorties des modules éxécutés ** (qui se trouvent dans le champ **run**) sont accessible soit par leur "chemin d'accès", ie (//NOM_MODULE.NOM_OUTPUT//), ou par un alias/nom de variable assigné dans la descritption du **run**.
+Les variables de **sorties des modules éxécutés ** (qui se trouvent dans le champ **exec**) sont accessible soit par leur "chemin d'accès", ie (//NOM_MODULE.NOM_OUTPUT//).
 
 Les variables sont utilisées en préfixant le nom de la variable par le caractère **$**. Pour les variables "internes" (NOM_VARIABLE**:** VARIABLE), il faut encapsuler le chemin dans le patron **${**//CHEMIN_ACCESS//**}**.
 ===== Types de variables/paramètres =====
 
-Chaque type de variable à une représentation par défaut sous forme de chaine de caractère. Certaines variables
-
+Chaque type de variable à une représentation par défaut sous forme de chaine de caractère qui est utilisée lors de son remplacement dans l'éxécution définie dans le champs **exec**.
 ==== VAL ====
 
 Les entrées de types **VAL** sont des chaines de caractères.
@@ -105,15 +110,14 @@ Représentation chaine de caractères : identité
 
 ==== FILE ====
 
-Défaut conversions : fromDir
-
 Représentation chaine de caractère : chemin du fichier
 
 variables internes :
 
-|**basedir**   |parent directory path |VAL |
-|**basenam****e**   |name of the file without last extension (.???) |VAL |
-|**filename**   |filename |VAL |
+|**basedir**   |chemin du répertoire parent |VAL |
+|**basenam****e**   |nom du fichier sans sa dernière extension (.???) |VAL |
+|**filename**   |nom du fichier (sans le chemin complet) |VAL |
+|**content**   |contenu du fichier |VAL |
 
 ==== DIR ====
 
@@ -126,7 +130,7 @@ variables internes :
 
 ==== MODULE ====
 
-Représentation chaine de caractère : yaml représentation d'un ModuleVal
+Représentation chaine de caractère : représentation yaml d'un ModuleVal
 
 ==== LIST[type] | type(+|*) ====
 
@@ -138,21 +142,21 @@ Représentation en chaine de caractère : yaml map des représentation en chaine
 
 ===== Modules natifs / Built-in modules =====
 
-Ces modules sont des modules dont l'exécution (champ //run//) est intégrée directement dans le fonctionnement de **cpm**. Ils sont les briques de bases qui permettent de constituer des modules.
+Ces modules sont des modules dont l'exécution (champ //run//) est intégrée directement dans le fonctionnement de **appfm**. Ils sont les briques de bases qui permettent de constituer des modules.
 ==== _CMD ====
 
 Ce module permet tout simplement de lancer une commande, possiblement à l'intérieur d'un conteneur Docker.
 
-|**Input** |||  |  |
-|  |**CMD**   |VAL |commande à executer |  |
-|  |**DOCKERFILE**   |VAL  |Le nom ou chemin relatif du Dockerfile utilisé (ou false si pas de docker utilisé) |indique si la commande doit s'éxécuter à l'intérieur d'un conteneur Docker définit par une Dockerfile |
-|  |**CONTAINED**   |VAL (true,false) |  |indique si pour chaque execution un nouveau conteneur Docker est créé ou si une seule instance suffit |
-|  |**DOCKEROPTS**   |VAL |options à passer au lancement du conteneur Docker |  |
-|**Output** |||  |  |
-|  |**STDOUT**   |VAL |sortie standard de la commande |  |
-|  |**STDERR**   |VAL |sortie d'erreur de la commande |  |
-|**Exec** |||  |  |
-|  |execute a shell command (with **_RUN_** ||**DIR **as working directory)  |  |  |
+|**Input** |||  |  |  |
+|  |**CMD**   |VAL |commande shell à executer |  |  |
+|  |**DOCKERFILE**   |VAL |Le nom ou chemin relatif du Dockerfile utilisé (ou false si pas de docker utilisé) |indique si la commande doit s'éxécuter à l'intérieur d'un conteneur Docker définit par une Dockerfile |  |
+|  |**CONTAINED**   |VAL (true,false) |  |indique si pour chaque execution un nouveau conteneur Docker est créé ou si une seule instance suffit |  |
+|  |**DOCKEROPTS**   |VAL |options à passer au lancement du conteneur Docker |  |  |
+|**Output** |||  |  |  |
+|  |**STDOUT**   |VAL |sortie standard de la commande |  |  |
+|  |**STDERR**   |VAL |sortie d'erreur de la commande |  |  |
+|**Exec** |||  |  |  |
+|  |execute a shell command (with **_RUN_** ||**DIR ** as working directory)  |  |  |
 
 Pour plus d'explication sur docker et comment créer un Dockerfile adapté à AppFM, continuer la lecture [[:docker|ici]].
 
@@ -165,9 +169,9 @@ Ce module permet de distribuer parallèlement les fichiers d'un corpus ou d'un r
 |  |**RUN**   |MODULE+ |liste d'instance de modules |
 |  |**REGEX**   |VAL |expression régulière filtrant les fichiers du répertoire qui seront traités |
 |**Output** ||||
-|  |**OUT**   |MAP ||
+|  |**OUT**   |DIR |le répertoire parent des répertoires contenant les résultats des modules exécutés (définis dans le champ RUN) |
 |**Exec** ||||
-|  |execute in parallel the moduleval list on a files in the entry. produce a map of keyed modulenamespace outputs |||
+|  |exécute en parallèle les modules sur chaques fichiers contenus (et filtrés par l'expression régulière) dans le répertoire d'entrée.  |||
 
 ===== Formats / Schemas =====
 
@@ -181,9 +185,7 @@ Il doit etre possible de convertir automatiquement certains formats en d'autres 
 
 Le schema définit la sémantique d'une donnée. Par exemple : passage, depxml, ConLL, stanford, etc.
 
-Les schemas sont combinables, certains sont implicitement mutuellement exclusifs. On ne verifiera pas la mutuel exclusion.
-
-Ainsi nous avons défini les formats suivants : Annotation qui est définit par un contenu (texte d'un xml) dont des spans sont annotés, et CAS qui en xml a des champs specifiques pour déclarer des annotations globales au document et des annotations sur des parties d'un texte original.
+Cette typologie est définie par le créateur des modules et n'est actuellement pas prise en compte dans le lancement d'une chaine.
 
 ====   ====
 

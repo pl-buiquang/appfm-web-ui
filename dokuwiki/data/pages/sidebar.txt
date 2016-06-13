@@ -1,7 +1,6 @@
 
 
   * [[:start|Introduction]]
-  * [[:quick_start|Getting started]]
   * [[:tutorials|Tutoriels]]
   *  [[:spec_draft|Modules]]
       * [[:docker|Docker]]
@@ -16,7 +15,7 @@
       * [[:roadmap|Roadmap]]
       * [[:kernel|Serveur/Kernel]]
       * [[:communication_system|Protocole de communication]]
-  *  [[:misc|Misc]]
+  *  [[:misc|Instances LIMSI]]
       * [[:pulsar|Projet PULSAR]]
       * [[:addons|Addons]]
   * [[:faq|FAQ]]

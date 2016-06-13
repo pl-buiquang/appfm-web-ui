@@ -6,7 +6,7 @@
 
 Dépendances :
 
-- Vagrant debian vm
+- zmq
 
 - pyzmq + click (cpm-cli)
 
@@ -19,19 +19,9 @@ scripts :
 
 ===== Serveur =====
 
-**Gestionnaire de corpus**
-
 **Serveur de commandes**
 
-**Serveur web**
-
-**Rest API**
-
-**Pipeline run hyperviseur**
-
 **Gestionnaire de composants**
-
-Modules, pipelines
 
 **Gestionnaire de runs**
 
@@ -42,5 +32,3 @@ Modules, pipelines
 **CLI**
 
 **Web interface**
-
-**Python module**

@@ -50,7 +50,7 @@ Le champ **desc** permet d'ajouter une description supplémentaire au paramètre
 
 Le champ **value** permet de donner une valeur par défaut au paramètre.
 
-Le type peut etre complémenté des quantificateurs suivants : ***** pour un nombre indéfini de valeurs et **+** pour un nombre strictement positif de valeurs. Les paramètres optionnelles sont ceux ayant une valeur par défaut donnée.
+Le type peut etre complémenté des quantificateurs suivants : * pour un nombre indéfini de valeurs et **+** pour un nombre strictement positif de valeurs. Les paramètres optionnelles sont ceux ayant une valeur par défaut donnée.
 ==== Output ====
 
 Symmétriquement aux entrées d'un module, les sorties sont décrites via une //map// de la forme suivante :
@@ -162,7 +162,7 @@ Pour plus d'explication sur docker et comment créer un Dockerfile adapté à Ap
 
 ==== _MAP ====
 
-Ce module permet de distribuer parallèlement les fichiers d'un corpus ou d'un répertoire à un ensemble de processus ayant au moins une entrée de type FILE.
+Ce module permet de distribuer parallèlement les fichiers enfants d'un répertoire à un ensemble de processus ayant au moins une entrée de type FILE.
 
 |**Input** ||||
 |  |**IN**   |DIR |le répertoire dont chaque fichier va être la source d'une execution en parallèle des modules définis dans la variable **RUN** avec pour nom **$_**   |
@@ -171,7 +171,33 @@ Ce module permet de distribuer parallèlement les fichiers d'un corpus ou d'un r
 |**Output** ||||
 |  |**OUT**   |DIR |le répertoire parent des répertoires contenant les résultats des modules exécutés (définis dans le champ RUN) |
 |**Exec** ||||
-|  |exécute en parallèle les modules sur chaques fichiers contenus (et filtrés par l'expression régulière) dans le répertoire d'entrée.  |||
+|  |exécute en parallèle les modules sur chaques fichiers contenus (et filtrés par l'expression régulière) dans le répertoire d'entrée. |||
+
+==== _WALKMAP   ====
+
+Tout comme **_MAP** ce module permet de distribuer parallèlement des traitement. Ici, c'est tous les enfants (récursivement) d'un dossier qui sont traités.
+
+|**Input** ||||
+|  |**IN**   |DIR |le répertoire dont chaque fichier va être la source d'une execution en parallèle des modules définis dans la variable **RUN** avec pour nom **$_**   |
+|  |**RUN**   |MODULE+ |liste d'instance de modules |
+|  |**REGEX**   |VAL |expression régulière filtrant les fichiers du répertoire qui seront traités |
+|**Output** ||||
+|  |**OUT**   |DIR |le répertoire parent des répertoires contenant les résultats des modules exécutés (définis dans le champ RUN) |
+|**Exec** ||||
+|  |exécute en parallèle les modules sur chaques fichiers contenus (et filtrés par l'expression régulière) dans le répertoire d'entrée. |||
+
+==== _IF ====
+
+Ce module permet d'éxécuter des traitement différent selon la valence d'une variable.
+
+|**Input** ||||
+|  |**COND**   |VAL |Les valeurs "false" (insensible à la casse), 0 et l'abesnce de valeur "" sont interprétées comme des condition négatives, sinon la condition est considérée comme positive |
+|  |**THEN**   |MODULE+ |liste d'instance de modules à exécuter si la condition est vraie |
+|  |**ELSE**   |MODULE+ |liste d'instance de modules à exécuter si la condition est fausse |
+|**Output** ||||
+|  |**?**   |MAP |L'aggreggation des sorties de la liste de module exécutés. Si la liste des modules exéctués comprend des sorties de même nom, seule la valeur d'une de ces sortie sera disponible... (bug) |
+|**Exec** ||||
+|  |exécute conditionnellement une liste de modules |||
 
 ===== Formats / Schemas =====
 

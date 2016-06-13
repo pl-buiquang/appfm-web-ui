@@ -19,4 +19,5 @@
       * [[:pulsar|Projet PULSAR]]
       * [[:addons|Addons]]
   * [[:faq|FAQ]]
+  * [[:issues|Bugs]]
 

@@ -1,7 +1,5 @@
 ====== Services ======
 
-TODO (fonctionnalité non implémentée)
-
 Afin d'exploiter plus loin les possibilités offerte par la technologie [[https://www.docker.com/|Docker]]. **AppFM** permet de gérer (en partie) le déploiement de services déployés via des conteneurs Docker.
 ===== Exemples =====
 

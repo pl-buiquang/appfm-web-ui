@@ -1,8 +1,9 @@
 ====== Tutoriels ======
 
+{{:tutorial_raw.mp4|}}
+
 ===== Lancer un module =====
 
-====   ====
 
 ===== Créer une chaîne =====
 

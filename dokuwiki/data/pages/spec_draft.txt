@@ -1,6 +1,6 @@
 ====== Modules ======
 
-Les modules sont les composants de base de la chaine et peuvent aussi être la définition d'une chaine. Ces modules sont définis par des fichiers ayant la forme suivante : NOM_MODULE.module
+Les modules sont les descriptions du cadre et de l'exécution d'une application ou d'une chaine d'applications. Ces modules sont définis par des fichiers ayant la forme suivante : NOM_MODULE.module
 
 Les noms des modules sont des chaines de caractères respectant l'expression régulière suivante : **nom_module** (@**//namespace//**)? où **nom_module** et **namespace** sont de la forme [a-zA-Z][a-zA-Z0-9_\-]+ (ex: //parser@user//, //mon-module-de-normalisation@hostname//, //parser_customisé// @domain, …)
 

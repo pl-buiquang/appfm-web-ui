@@ -69,6 +69,16 @@
         if(!$node.hasClass("search-result")){
           $node.addClass("search-result");
         }
+        var $parents = $node.parents(".treeview-module-folder-content");
+        $parents.each(function(ip,ep){
+          var $ep = $(ep);
+          var $epp = $ep.parent();
+          if($epp.hasClass("treeview-folded")){
+            $ep.show();
+            $epp.removeClass("treeview-folded");
+            $epp.addClass("treeview-unfolded");
+          }
+        });
       }
     });
     this.$el.find('.treeview-node').each(function(i,e){
@@ -146,7 +156,7 @@
               folded = "treeview-unfolded";
               hidden = "";
             }
-            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + offsetsize)+'</div></div>';
+            html += '<div class="treeview-fold '+folded+'"><div class="treeview-node treeview-module-folder" style="margin-left:'+offset+'px;">'+tree.foldername+'</div><div class="treeview-module-folder-content" '+hidden+'>' + vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset + offsetsize)+'</div></div>';
           }else{
             html += vw.cpm.ModuleManagerView.renderSubTree(tree.items,offset)
           }

@@ -3585,6 +3585,9 @@
       }
     });
     var ul = '<ul>';
+    if(me.service.log){
+      ul += '<li><span>log : </span>'+me.service.log;
+    }
     for (var outputname in me.service.outputs) {
       ul += '<li><span>'+outputname+' : </span>'+vw.cpm.ProcessView.printVar(me.service.outputs[outputname],outputname);
     }

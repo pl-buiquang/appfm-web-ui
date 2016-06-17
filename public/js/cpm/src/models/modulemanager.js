@@ -136,12 +136,23 @@
 
   }
 
-  vw.cpm.ModuleManager.prototype.checkNameExist = function(modulename,success,failure){
+  vw.cpm.ModuleManager.prototype.checkNameExist = function(modulepath,modulename,success,failure){
     var me = this;
     var regex = /^(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#(?:\w|-)+)?$/;
     var match = regex.exec(modulename);
     if(!match){
-      failure.call();
+      failure.call(me,"Module name isn't valid. Please choose another name.");
+      return;
+    }
+    var allowedDirectory = false;
+    for (var i = me.app.cpmsettingsmanager.cpmsettings.modules.length - 1; i >= 0; i--) {
+      if(me.app.cpmsettingsmanager.cpmsettings.modules[i].exist && modulepath.indexOf(me.app.cpmsettingsmanager.cpmsettings.modules[i].name) == 0){
+        allowedDirectory = true;
+        break;
+      }
+    }
+    if(!allowedDirectory){
+      failure.call(me,"The directory you choose isn't located within modules directories.");
       return;
     }
     $.ajax({
@@ -153,55 +164,63 @@
         for (var i = 0; i < modulenames.length; i++) {
           modname = modulenames[i].trim();
           if(modname == modulename){
-            failure.call();
+            failure.call(me,"Module name already exist. Please choose another name.");
             return;
           }
         }
         success.call();
       },
       error:function(){
-        failure.call();
+        failure.call(me,"Error when retrieving existing modules.");
       }
     });
   }
 
-  vw.cpm.ModuleManager.prototype.prepareCreateNewModule = function(){
+  vw.cpm.ModuleManager.prototype.prepareCreateNewModule = function(source){
     var me = this;
     var modal = new vw.cpm.ui.Modal();
     $preconfig = $(vw.cpm.ModuleManagerView.templatePreConfigAddNew);
+    $preconfig.find('input[name="directory"]').val(me.app.cpmsettingsmanager.defaultModulesDir);
     $preconfig.find('.create-module-preconfig-submit').click(function(){
-      var modulename = $preconfig.find('input').val();
-      var dirpath = "custom";
-      me.checkNameExist(modulename,function(){
+      var modulename = $preconfig.find('input[name="name"]').val();
+      var dirpath = $preconfig.find('input[name="directory"]').val();
+      me.checkNameExist(dirpath,modulename,function(){
         modal.close();
-        me.createNewModule(modulename,dirpath);
-      },function(){
+        me.createNewModule(modulename,dirpath,source);
+      },function(errormessage){
         var modalcontent = modal.getContainer();
         modalcontent.find(".error-message").remove();
-        modalcontent.prepend('<div class="error-message">Module name already exist or isn\'t allowed, please choose another name</div>');
+        modalcontent.prepend('<div class="error-message">'+errormessage+'</div>');
       });
     });
     modal.open($preconfig);
   }
 
-  vw.cpm.ModuleManager.prototype.createNewModule = function(modulename,containerdirpath){
+  vw.cpm.ModuleManager.prototype.createNewModule = function(modulename,containerdirpath,prefilledsource){
     var me = this;
     var panel = me.app.view.createPanel(modulename,"","moduledef-"+modulename,new vw.cpm.Command("m",modulename));
+    var sourcecontent = "name : "+modulename+"\n\ndesc : > \n  please fill in a brief description";
+    var modulecontent = {
+      name:modulename,
+      desc:"please fill in a brief description",
+      input:{},
+      output:{},
+      exec:[],
+    };
+    if(prefilledsource){
+      sourcecontent = prefilledsource.replace(/name\s*:(.*)/g,"name : "+modulename);
+      modulecontent = YAML.parse(sourcecontent);
+    }
     var newmoduledef = {
-      module:{
-        name:modulename,
-        desc:"please fill in a brief description",
-        input:{},
-        output:{},
-        exec:[],
-      },
+      module:modulecontent,
       modulename:modulename,
-      source:"name : "+modulename+"\n\ndesc : > \n  please fill in a brief description",
-      sourcepath:me.app.cpmsettingsmanager.defaultModulesDir+"/custom/"+modulename+".module",
+      source:sourcecontent,
+      sourcepath:containerdirpath+"/"+modulename+".module",
       creation:true
     };
     var module = new vw.cpm.Module(me.app,panel.$el.find(".frame-body"),newmoduledef);
     module.view.render();
+    return module;
   }
 
   vw.cpm.ModuleManager.prototype.showModule = function(modulename){

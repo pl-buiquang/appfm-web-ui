@@ -29,9 +29,11 @@
     });
   }
 
-  vw.cpm.CorpusManagerView.prototype.renderCorpora = function(data){
+  vw.cpm.CorpusManagerView.prototype.renderCorpora = function(data,path){
     var me = this;
-    var $html = me.renderDirectory(data,me.model.app.cpmsettingsmanager.cpmsettings.corpus_dir,1);
+    var directory = {};
+    directory[path] = data;
+    var $html = me.renderDirectory([directory],"",1);
     this.$el.find("#corpora-corpora-container").append($html);
   }
 
@@ -134,11 +136,19 @@
         if(filename == "..."){
           html += '<div class="treeview-leaf treeview-more" style="margin-left:'+offset+'px;" filepath="'+parentpath+'" next="'+data[i][filename]+'">'+filename+'</div>';
         }else{
-          html += '<div class="treeview-fold treeview-folded" depth="'+depth+'"><div class="treeview-node" style="margin-left:'+offset+'px;" filepath="'+parentpath+"/"+filename+'">'+filename+'</div><div style="display:none;"></div></div>';
+          var startingslash = "/";
+          if(filename.indexOf("/")==0){
+            startingslash = "";
+          }
+          html += '<div class="treeview-fold treeview-folded" depth="'+depth+'"><div class="treeview-node" style="margin-left:'+offset+'px;" filepath="'+parentpath+startingslash+filename+'">'+filename+'</div><div style="display:none;"></div></div>';
         }
       }else{
         var filename = data[i];
-        html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;" filepath="'+parentpath+"/"+filename+'">'+filename+'</div>';
+        var startingslash = "/";
+        if(filename.indexOf("/")==0){
+          startingslash = "";
+        }
+        html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;" filepath="'+parentpath+startingslash+filename+'">'+filename+'</div>';
       }
     };
     html+="</div>";

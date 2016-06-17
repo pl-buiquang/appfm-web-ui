@@ -31,11 +31,18 @@
     return this.$el.find(".cpm-modal-content");
   }
 
-  vw.cpm.ui.Modal.prototype.close = function(){
-    this.$el.slideUp({complete:function(){
+  vw.cpm.ui.Modal.prototype.close = function(instantaneously){
+    if(instantaneously){
+      this.$el.hide();
       $('body').find("#cpm-modal-bg").remove();
       vw.cpm.ui.Modal.alreadyExist = false;
-    }});
+    }else{
+      this.$el.slideUp({complete:function(){
+        $('body').find("#cpm-modal-bg").remove();
+        vw.cpm.ui.Modal.alreadyExist = false;
+      }});  
+    }
+    
     
   }
 

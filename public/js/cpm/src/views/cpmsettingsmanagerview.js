@@ -34,9 +34,13 @@
     html += '<div class="settings-field-body"><div>AppFM Port : </div><input type="text" name="cpmport" value="'+this.model.app.options.cpmport+'"></div>';
     html += '<div class="settings-field-body"><div>AppFM WS Host+Port : </div><input type="text" name="cpwsmhost" value="'+this.model.app.options.cpmwshost+'"></div>';
     html +='<div class="settings-field-body"><button class="cpm-reconnect">Connect</button></div>';
-    html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
+    html += '<div class="settings-field-title"> Corpus directories : </div><div class="settings-field-body">';
+    for (var i = data.corpus_dir.length - 1; i >= 0; i--) {
+      html += "<li> "+ data.corpus_dir[i]+'</li>';
+    };
+    html += '</ul></div>';
     html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
-    var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'
+    var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>';
     for (var i = data.modules.length - 1; i >= 0; i--) {
       moduledir += "<li ";
       if(data.modules[i].exist){

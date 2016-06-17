@@ -177,7 +177,8 @@
 
   vw.cpm.ModuleManagerView.templatePreConfigAddNew = '<div>'+
     '<div style="padding:12px;">'+
-      '<div>Choose a name for your new module (allowed form : [a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)? ): <input type="text"></div>'+
+      '<div>Parent Directory : </div><div><input style="width:80%;" type="text" name="directory"></div>'+
+      '<div>Choose a name for your new module (allowed form : [a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)? ): </div><div><input style="width:80%;" type="text" name="name"></div>'+
       '<button class="create-module-preconfig-submit" type="button">Ok</button>'+
       '<div style="margin-top:24px; font-size:0.75em;">For more information about how to create modules refer to help pages.</div>'+
     '</div>'+

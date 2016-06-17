@@ -2,6 +2,7 @@
 
   vw.cpm.Module = function(app,$el,moduledef){
     this.def = moduledef;
+    this.lastSavedSource = moduledef.source;
     this.app = app;
     this.view = new vw.cpm.ModuleView(this,$el);
     this.synced = false;
@@ -15,30 +16,39 @@
     
   }
 
-  vw.cpm.Module.prototype.sync = function(success,error){
+  vw.cpm.Module.prototype.sync = function(success,error,ignoreWarning){
     var me = this;
     me.def.source = me.view.editor.getValue();
     var synctype = "update "+me.def.modulename;
     if(me.def.creation){
       synctype = "create "+me.def.modulename+" "+vw.cpm.utils.getParentDir(me.def.sourcepath);
     }
+    var force = "";
+    if(ignoreWarning){
+      force = " --force";
+    }
     $.ajax({
       type: "POST",
       data : {
-        cmd: "module "+synctype,
+        cmd: "module "+synctype+force,
         data:me.def.source
       },
       url: me.app.options.cpmbaseurl+"rest/cmd",
       dataType : "json",
       success: function(data, textStatus, jqXHR) {
         if(data.success){
-          if(me.def.creation || !me.def.module){
+          if(me.def.creation || !me.def.module || ignoreWarning){
             me.app.modulesmanager.fetchAll();
-            delete me.def.creation;  
+            if(me.def.creation){
+              delete me.def.creation;
+            }
           }
           delete me.def.error;
           me.internalSyncToModel();
+          me.lastSavedSource = me.def.source;
           success.call();
+        }else if(data.warning){
+           me.syncWarningOptions(data.warning,success,error);
         }else{
           me.def.error = data.error;
           alert(data.error);
@@ -49,6 +59,25 @@
         error.call();
       }
     });
+  }
+
+  vw.cpm.Module.prototype.syncWarningOptions = function(modulelist,sucess,error){
+    var me = this;
+    var modal = new vw.cpm.ui.Modal();
+    $html = $(vw.cpm.ModuleView.templateWarningSave);
+    $html.find('.tpl-warning-save-message').html(modulelist);
+    $html.find('.clone-module').click(function(){
+      modal.close(true);
+      me.app.modulesmanager.prepareCreateNewModule(me.def.source);
+    });
+    $html.find('.force-module-save').click(function(){
+      modal.close();
+      me.sync(sucess,error,true);
+    });
+    $html.find('.abort-module-save').click(function(){
+      modal.close();
+    });
+    modal.open($html);
   }
 
   vw.cpm.Module.confToYaml = function(conf){

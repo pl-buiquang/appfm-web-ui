@@ -368,6 +368,9 @@
           body.append(data);
         });
       });
+      if(command == "reload"){
+        me.reload();
+      }
     });
 
     
@@ -609,11 +612,18 @@
     return this.$el.find(".cpm-modal-content");
   }
 
-  vw.cpm.ui.Modal.prototype.close = function(){
-    this.$el.slideUp({complete:function(){
+  vw.cpm.ui.Modal.prototype.close = function(instantaneously){
+    if(instantaneously){
+      this.$el.hide();
       $('body').find("#cpm-modal-bg").remove();
       vw.cpm.ui.Modal.alreadyExist = false;
-    }});
+    }else{
+      this.$el.slideUp({complete:function(){
+        $('body').find("#cpm-modal-bg").remove();
+        vw.cpm.ui.Modal.alreadyExist = false;
+      }});  
+    }
+    
     
   }
 
@@ -813,14 +823,23 @@
 
   vw.cpm.CorpusManager.prototype.init = function(){
     var me = this;
+    this.loaded = 0;
     me.fetch();
   }
 
   vw.cpm.CorpusManager.prototype.fetch = function(){
     var me = this;
-    me.lsDir(me.app.cpmsettingsmanager.cpmsettings.corpus_dir,0,function(data){
-      me.view.renderCorpora(data);
-    });
+    for (var i = me.app.cpmsettingsmanager.cpmsettings.corpus_dir.length - 1; i >= 0; i--) {
+      var corpuspath = me.app.cpmsettingsmanager.cpmsettings.corpus_dir[i];
+      var rendering = (function(path){
+        var func = function(data){
+          me.view.renderCorpora(data,path);
+        }
+        return func;
+      })(corpuspath);
+
+      me.lsDir(corpuspath,0,rendering);
+    }
     me.lsDir(me.app.cpmsettingsmanager.cpmsettings.result_dir,0,function(data){
       me.view.renderResults(data);
     });
@@ -845,6 +864,7 @@
 
   vw.cpm.CorpusManager.prototype.lsDir = function(filepath,offset,onsuccess){
     var me = this;
+    var n2load = me.app.cpmsettingsmanager.cpmsettings.corpus_dir.length + 1;
     $.ajax({
       type:"POST",
       url : me.app.options.cpmbaseurl + "rest/cmd",
@@ -854,7 +874,13 @@
         //me.filetree = {"corpus":{"corpora":data.corpus},"results":{"results":data.results}}; // because...
         onsuccess.call(me,data,filepath);
         me.loaded += 1;
-        if(me.loaded == 2){
+        if(me.loaded == n2load){
+          me.initiated = true;
+        }
+      },
+      error:function(){
+        me.loaded += 1;
+        if(me.loaded == n2load){
           me.initiated = true;
         }
       }
@@ -1042,6 +1068,7 @@
 
   vw.cpm.Module = function(app,$el,moduledef){
     this.def = moduledef;
+    this.lastSavedSource = moduledef.source;
     this.app = app;
     this.view = new vw.cpm.ModuleView(this,$el);
     this.synced = false;
@@ -1055,30 +1082,39 @@
     
   }
 
-  vw.cpm.Module.prototype.sync = function(success,error){
+  vw.cpm.Module.prototype.sync = function(success,error,ignoreWarning){
     var me = this;
     me.def.source = me.view.editor.getValue();
     var synctype = "update "+me.def.modulename;
     if(me.def.creation){
       synctype = "create "+me.def.modulename+" "+vw.cpm.utils.getParentDir(me.def.sourcepath);
     }
+    var force = "";
+    if(ignoreWarning){
+      force = " --force";
+    }
     $.ajax({
       type: "POST",
       data : {
-        cmd: "module "+synctype,
+        cmd: "module "+synctype+force,
         data:me.def.source
       },
       url: me.app.options.cpmbaseurl+"rest/cmd",
       dataType : "json",
       success: function(data, textStatus, jqXHR) {
         if(data.success){
-          if(me.def.creation || !me.def.module){
+          if(me.def.creation || !me.def.module || ignoreWarning){
             me.app.modulesmanager.fetchAll();
-            delete me.def.creation;  
+            if(me.def.creation){
+              delete me.def.creation;
+            }
           }
           delete me.def.error;
           me.internalSyncToModel();
+          me.lastSavedSource = me.def.source;
           success.call();
+        }else if(data.warning){
+           me.syncWarningOptions(data.warning,success,error);
         }else{
           me.def.error = data.error;
           alert(data.error);
@@ -1089,6 +1125,25 @@
         error.call();
       }
     });
+  }
+
+  vw.cpm.Module.prototype.syncWarningOptions = function(modulelist,sucess,error){
+    var me = this;
+    var modal = new vw.cpm.ui.Modal();
+    $html = $(vw.cpm.ModuleView.templateWarningSave);
+    $html.find('.tpl-warning-save-message').html(modulelist);
+    $html.find('.clone-module').click(function(){
+      modal.close(true);
+      me.app.modulesmanager.prepareCreateNewModule(me.def.source);
+    });
+    $html.find('.force-module-save').click(function(){
+      modal.close();
+      me.sync(sucess,error,true);
+    });
+    $html.find('.abort-module-save').click(function(){
+      modal.close();
+    });
+    modal.open($html);
   }
 
   vw.cpm.Module.confToYaml = function(conf){
@@ -1276,12 +1331,23 @@
 
   }
 
-  vw.cpm.ModuleManager.prototype.checkNameExist = function(modulename,success,failure){
+  vw.cpm.ModuleManager.prototype.checkNameExist = function(modulepath,modulename,success,failure){
     var me = this;
     var regex = /^(_?[a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)?)(#(?:\w|-)+)?$/;
     var match = regex.exec(modulename);
     if(!match){
-      failure.call();
+      failure.call(me,"Module name isn't valid. Please choose another name.");
+      return;
+    }
+    var allowedDirectory = false;
+    for (var i = me.app.cpmsettingsmanager.cpmsettings.modules.length - 1; i >= 0; i--) {
+      if(me.app.cpmsettingsmanager.cpmsettings.modules[i].exist && modulepath.indexOf(me.app.cpmsettingsmanager.cpmsettings.modules[i].name) == 0){
+        allowedDirectory = true;
+        break;
+      }
+    }
+    if(!allowedDirectory){
+      failure.call(me,"The directory you choose isn't located within modules directories.");
       return;
     }
     $.ajax({
@@ -1293,55 +1359,63 @@
         for (var i = 0; i < modulenames.length; i++) {
           modname = modulenames[i].trim();
           if(modname == modulename){
-            failure.call();
+            failure.call(me,"Module name already exist. Please choose another name.");
             return;
           }
         }
         success.call();
       },
       error:function(){
-        failure.call();
+        failure.call(me,"Error when retrieving existing modules.");
       }
     });
   }
 
-  vw.cpm.ModuleManager.prototype.prepareCreateNewModule = function(){
+  vw.cpm.ModuleManager.prototype.prepareCreateNewModule = function(source){
     var me = this;
     var modal = new vw.cpm.ui.Modal();
     $preconfig = $(vw.cpm.ModuleManagerView.templatePreConfigAddNew);
+    $preconfig.find('input[name="directory"]').val(me.app.cpmsettingsmanager.defaultModulesDir);
     $preconfig.find('.create-module-preconfig-submit').click(function(){
-      var modulename = $preconfig.find('input').val();
-      var dirpath = "custom";
-      me.checkNameExist(modulename,function(){
+      var modulename = $preconfig.find('input[name="name"]').val();
+      var dirpath = $preconfig.find('input[name="directory"]').val();
+      me.checkNameExist(dirpath,modulename,function(){
         modal.close();
-        me.createNewModule(modulename,dirpath);
-      },function(){
+        me.createNewModule(modulename,dirpath,source);
+      },function(errormessage){
         var modalcontent = modal.getContainer();
         modalcontent.find(".error-message").remove();
-        modalcontent.prepend('<div class="error-message">Module name already exist or isn\'t allowed, please choose another name</div>');
+        modalcontent.prepend('<div class="error-message">'+errormessage+'</div>');
       });
     });
     modal.open($preconfig);
   }
 
-  vw.cpm.ModuleManager.prototype.createNewModule = function(modulename,containerdirpath){
+  vw.cpm.ModuleManager.prototype.createNewModule = function(modulename,containerdirpath,prefilledsource){
     var me = this;
     var panel = me.app.view.createPanel(modulename,"","moduledef-"+modulename,new vw.cpm.Command("m",modulename));
+    var sourcecontent = "name : "+modulename+"\n\ndesc : > \n  please fill in a brief description";
+    var modulecontent = {
+      name:modulename,
+      desc:"please fill in a brief description",
+      input:{},
+      output:{},
+      exec:[],
+    };
+    if(prefilledsource){
+      sourcecontent = prefilledsource.replace(/name\s*:(.*)/g,"name : "+modulename);
+      modulecontent = YAML.parse(sourcecontent);
+    }
     var newmoduledef = {
-      module:{
-        name:modulename,
-        desc:"please fill in a brief description",
-        input:{},
-        output:{},
-        exec:[],
-      },
+      module:modulecontent,
       modulename:modulename,
-      source:"name : "+modulename+"\n\ndesc : > \n  please fill in a brief description",
-      sourcepath:me.app.cpmsettingsmanager.defaultModulesDir+"/custom/"+modulename+".module",
+      source:sourcecontent,
+      sourcepath:containerdirpath+"/"+modulename+".module",
       creation:true
     };
     var module = new vw.cpm.Module(me.app,panel.$el.find(".frame-body"),newmoduledef);
     module.view.render();
+    return module;
   }
 
   vw.cpm.ModuleManager.prototype.showModule = function(modulename){
@@ -1937,9 +2011,11 @@
     });
   }
 
-  vw.cpm.CorpusManagerView.prototype.renderCorpora = function(data){
+  vw.cpm.CorpusManagerView.prototype.renderCorpora = function(data,path){
     var me = this;
-    var $html = me.renderDirectory(data,me.model.app.cpmsettingsmanager.cpmsettings.corpus_dir,1);
+    var directory = {};
+    directory[path] = data;
+    var $html = me.renderDirectory([directory],"",1);
     this.$el.find("#corpora-corpora-container").append($html);
   }
 
@@ -2042,11 +2118,19 @@
         if(filename == "..."){
           html += '<div class="treeview-leaf treeview-more" style="margin-left:'+offset+'px;" filepath="'+parentpath+'" next="'+data[i][filename]+'">'+filename+'</div>';
         }else{
-          html += '<div class="treeview-fold treeview-folded" depth="'+depth+'"><div class="treeview-node" style="margin-left:'+offset+'px;" filepath="'+parentpath+"/"+filename+'">'+filename+'</div><div style="display:none;"></div></div>';
+          var startingslash = "/";
+          if(filename.indexOf("/")==0){
+            startingslash = "";
+          }
+          html += '<div class="treeview-fold treeview-folded" depth="'+depth+'"><div class="treeview-node" style="margin-left:'+offset+'px;" filepath="'+parentpath+startingslash+filename+'">'+filename+'</div><div style="display:none;"></div></div>';
         }
       }else{
         var filename = data[i];
-        html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;" filepath="'+parentpath+"/"+filename+'">'+filename+'</div>';
+        var startingslash = "/";
+        if(filename.indexOf("/")==0){
+          startingslash = "";
+        }
+        html += '<div class="treeview-leaf" style="margin-left:'+offset+'px;" filepath="'+parentpath+startingslash+filename+'">'+filename+'</div>';
       }
     };
     html+="</div>";
@@ -2153,9 +2237,13 @@
     html += '<div class="settings-field-body"><div>AppFM Port : </div><input type="text" name="cpmport" value="'+this.model.app.options.cpmport+'"></div>';
     html += '<div class="settings-field-body"><div>AppFM WS Host+Port : </div><input type="text" name="cpwsmhost" value="'+this.model.app.options.cpmwshost+'"></div>';
     html +='<div class="settings-field-body"><button class="cpm-reconnect">Connect</button></div>';
-    html += '<div class="settings-field-title"> Corpus directory : </div><div class="settings-field-body">'+data.corpus_dir+'</div>';
+    html += '<div class="settings-field-title"> Corpus directories : </div><div class="settings-field-body">';
+    for (var i = data.corpus_dir.length - 1; i >= 0; i--) {
+      html += "<li> "+ data.corpus_dir[i]+'</li>';
+    };
+    html += '</ul></div>';
     html += '<div class="settings-field-title"> Result directory : </div><div class="settings-field-body">'+data.result_dir+'</div>';
-    var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>'
+    var moduledir = '<div class="settings-field-title"> Modules directories :</div><div class="settings-field-body"><ul>';
     for (var i = data.modules.length - 1; i >= 0; i--) {
       moduledir += "<li ";
       if(data.modules[i].exist){
@@ -2689,7 +2777,8 @@
 
   vw.cpm.ModuleManagerView.templatePreConfigAddNew = '<div>'+
     '<div style="padding:12px;">'+
-      '<div>Choose a name for your new module (allowed form : [a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)? ): <input type="text"></div>'+
+      '<div>Parent Directory : </div><div><input style="width:80%;" type="text" name="directory"></div>'+
+      '<div>Choose a name for your new module (allowed form : [a-zA-Z][a-zA-Z0-9\-_]+(@[a-zA-Z0-9\-_]+)? ): </div><div><input style="width:80%;" type="text" name="name"></div>'+
       '<button class="create-module-preconfig-submit" type="button">Ok</button>'+
       '<div style="margin-top:24px; font-size:0.75em;">For more information about how to create modules refer to help pages.</div>'+
     '</div>'+
@@ -3076,6 +3165,15 @@
   '<span class="module-run module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">run</span>'+
   '</div>'+
   '<div class="module-content-view"></div></div>';
+
+  vw.cpm.ModuleView.templateWarningSave = '<div>'+
+    '<div style="padding:12px;">'+
+      '<div class="tpl-warning-save-message"></div>'+
+      '<div style="width:30%; display:inline-block;"><center><button class="clone-module" type="button">Clone this module</button></center></div>'+
+      '<div style="width:30%; display:inline-block;"><center><button class="force-module-save" type="button">Save this module anyway</button></center></div>'+
+      '<div style="width:30%; display:inline-block;"><center><button class="abort-module-save" type="button">Abort saving</button></center></div>'+
+    '</div>'+
+  '</div>';
 
   vw.cpm.ModuleView.templateGraphic = '<div class="module-graphical-view"><div ></div>';
 

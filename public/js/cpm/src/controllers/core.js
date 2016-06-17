@@ -308,6 +308,9 @@
           body.append(data);
         });
       });
+      if(command == "reload"){
+        me.reload();
+      }
     });
 
     

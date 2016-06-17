@@ -374,6 +374,15 @@
   '</div>'+
   '<div class="module-content-view"></div></div>';
 
+  vw.cpm.ModuleView.templateWarningSave = '<div>'+
+    '<div style="padding:12px;">'+
+      '<div class="tpl-warning-save-message"></div>'+
+      '<div style="width:30%; display:inline-block;"><center><button class="clone-module" type="button">Clone this module</button></center></div>'+
+      '<div style="width:30%; display:inline-block;"><center><button class="force-module-save" type="button">Save this module anyway</button></center></div>'+
+      '<div style="width:30%; display:inline-block;"><center><button class="abort-module-save" type="button">Abort saving</button></center></div>'+
+    '</div>'+
+  '</div>';
+
   vw.cpm.ModuleView.templateGraphic = '<div class="module-graphical-view"><div ></div>';
 
 

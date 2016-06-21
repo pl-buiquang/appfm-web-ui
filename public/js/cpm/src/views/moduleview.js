@@ -76,6 +76,9 @@
     if(me.model.def.error){
       this.$el.find(".module-content-view").append('<div class="error-msg">'+me.model.def.error+'</div>');  
     }
+    if(me.model.def.creation){
+      this.$el.find(".module-content-view").append('<div class="warning-msg"><div><div class="warning-close"></div></div><div>'+me.model.def.warning+'</div></div>');
+    }
     this.$el.find(".module-content-view").append('<div id="source-'+this.id+'" class="module-source-editor"></div>');
     this.$el.find('#source-'+this.id).append(content);
     this.editor = ace.edit("source-"+this.id);
@@ -102,6 +105,9 @@
         me.editor.resize();
       });
 
+    this.$el.find(".module-content-view").find(".warning-close").click(function(){
+      $(this).parents(".warning-msg").remove();
+    })
 
   }
 

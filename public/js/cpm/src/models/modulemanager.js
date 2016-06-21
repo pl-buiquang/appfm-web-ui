@@ -199,14 +199,35 @@
   vw.cpm.ModuleManager.prototype.createNewModule = function(modulename,containerdirpath,prefilledsource){
     var me = this;
     var panel = me.app.view.createPanel(modulename,"","moduledef-"+modulename,new vw.cpm.Command("m",modulename));
-    var sourcecontent = "name : "+modulename+"\n\ndesc : > \n  please fill in a brief description";
     var modulecontent = {
       name:modulename,
       desc:"please fill in a brief description",
-      input:{},
-      output:{},
-      exec:[],
+      input:{
+        IN : {
+          type : "VAL",
+          desc : "you can add some description here, baisc valid types are VAL,FILE,DIR. format and schema are optional field for documentation purpose for now.",
+          format : "unknown",
+          schema : "unknown"
+        }
+      },
+      output:{
+        OUT : {
+          type : "VAL",
+          desc : "you can add some description here, baisc valid types are VAL,FILE,DIR. format and schema are optional field for documentation purpose for now.",
+          format : "unknown",
+          schema : "unknown",
+          value : "\"mandatory value (can use exec modules outputs : ${_CMD#mandatory_id_for_same_name_modules.STDOUT})\""
+        }
+      },
+      exec:[
+        {
+          "_CMD#mandatory_id_for_same_name_modules" : {
+            CMD : "echo \"Hello $IN ! \""
+          }
+        }
+      ],
     };
+    var sourcecontent = YAML.stringify(modulecontent);
     if(prefilledsource){
       sourcecontent = prefilledsource.replace(/name\s*:(.*)/g,"name : "+modulename);
       modulecontent = YAML.parse(sourcecontent);
@@ -219,7 +240,9 @@
       creation:true
     };
     var module = new vw.cpm.Module(me.app,panel.$el.find(".frame-body"),newmoduledef);
+    module.def.warning = "If you wish to prevent other users from modifying this module definition, please set proper unix permissions in the file ("+containerdirpath+"/"+modulename+".module"+") created in the server.";
     module.view.render();
+    module.sync();
     return module;
   }
 

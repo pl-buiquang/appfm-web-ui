@@ -123,7 +123,7 @@
   
 
   vw.cpm.Module.prototype.internalSyncToSource = function(){
-    this.def.source = J2YAML.stringify(this.def.module);
+    this.def.source = YAML.stringify(this.def.module,99);
   }
 
   vw.cpm.Module.prototype.internalSyncToModel = function(){

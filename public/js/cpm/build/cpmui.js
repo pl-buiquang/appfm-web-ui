@@ -1189,7 +1189,7 @@
   
 
   vw.cpm.Module.prototype.internalSyncToSource = function(){
-    this.def.source = J2YAML.stringify(this.def.module);
+    this.def.source = YAML.stringify(this.def.module,99);
   }
 
   vw.cpm.Module.prototype.internalSyncToModel = function(){
@@ -1428,7 +1428,7 @@
         }
       ],
     };
-    var sourcecontent = J2YAML.stringify(modulecontent);
+    var sourcecontent = YAML.stringify(modulecontent,99);
     if(prefilledsource){
       sourcecontent = prefilledsource.replace(/name\s*:(.*)/g,"name : "+modulename);
       modulecontent = YAML.parse(sourcecontent);

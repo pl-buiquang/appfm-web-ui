@@ -56,7 +56,6 @@ function cpm_main(){
   $page->addJS(BASE_URL.'public/js/vendor/ace-builds-master/src-noconflict/mode-yaml.js');
 
   $page->addJS(BASE_URL.'public/js/vendor/yaml.js-develop/dist/yaml.js');
-  $page->addJS(BASE_URL.'public/js/vendor/json2yaml.js');
 
 
   $page->addJS(BASE_URL.'public/vendor/intro.js-2.0/intro.js');

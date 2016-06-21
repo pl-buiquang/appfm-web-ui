@@ -1428,7 +1428,7 @@
         }
       ],
     };
-    var sourcecontent = YAML.stringify(modulecontent);
+    var sourcecontent = J2YAML.stringify(modulecontent);
     if(prefilledsource){
       sourcecontent = prefilledsource.replace(/name\s*:(.*)/g,"name : "+modulename);
       modulecontent = YAML.parse(sourcecontent);

@@ -46,17 +46,23 @@
           delete me.def.error;
           me.internalSyncToModel();
           me.lastSavedSource = me.def.source;
-          success.call();
+          if(success){
+            success.call();  
+          }
         }else if(data.warning){
            me.syncWarningOptions(data.warning,success,error);
         }else{
           me.def.error = data.error;
           alert(data.error);
-          error.call();
+          if(error){
+            error.call();  
+          }
         }
       },
       error:function(){
-        error.call();
+        if(error){
+          error.call();  
+        }
       }
     });
   }

@@ -87,6 +87,13 @@ background: linear-gradient(180deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
   cursor: pointer;
 }
 
+#resources-info{
+  margin-top: 4px;
+  margin-right: 8px;
+  float: right;
+  font-size: 12px;
+}
+
 #status-button{
   width: 19px;
   height: 19px;

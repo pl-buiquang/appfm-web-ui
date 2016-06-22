@@ -43,7 +43,7 @@
   </div>
 </div>
 
-<div id="status-bar" class="menu-closed"><div id="status-button" class="status-button-offline"></div><div id="log-button"></div></div>
+<div id="status-bar" class="menu-closed"><div id="status-button" class="status-button-offline"></div><div id="log-button"></div><div id="resources-info">...</div></div>
 
 <!--Main application script entry point-->
 <script>

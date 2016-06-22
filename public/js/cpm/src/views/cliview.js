@@ -126,6 +126,10 @@
     }
   }
 
+  vw.cpm.CLIView.prototype.resourceInfo = function(infos){
+    $("#resources-info").html("Proc : "+infos["proc"]+" | Mem : "+infos["mem"]);
+  }
+
   vw.cpm.CLIView.prototype.toggleCLI = function(activate){
     if(activate){
       if(!this.cmdbar.isenabled()){

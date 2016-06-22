@@ -120,8 +120,9 @@
 
   vw.cpm.CLI.prototype.checkstatus = function(){
     var me = this;
-    if(this.longpolling);
-    clearInterval(this.longpolling);
+    if(this.longpolling){
+      clearInterval(this.longpolling);
+    }
     this.longpolling = setInterval(function(){
       $.ajax({
         type: "POST",
@@ -150,6 +151,26 @@
         timeout: 20000 
       });
     },60000);
+    if(this.resourceusagepolling){
+      clearInterval(this.resourceusagepolling);
+    }
+    this.resourceusagepolling = setInterval(function(){
+      $.ajax({
+        type: "POST",
+        data : {
+          cmd: "resourceusage"
+        },
+        dataType : "json",
+        url: me.options.cpmbaseurl+"rest/cmd",
+        success: function(data, textStatus, jqXHR) {
+          me.view.resourceInfo(data);
+        },
+        error:function(jqXHR,textStatus,errorThrown){
+          me.view.resourceInfo({"proc":"?","mem":"?"});
+        },
+        timeout: 2000 
+      });
+    },2000);
   }
 
   vw.cpm.CLI.prototype.initWS = function(){
@@ -1921,6 +1942,10 @@
     }else{
       $("#status-button").attr("title",undefined);
     }
+  }
+
+  vw.cpm.CLIView.prototype.resourceInfo = function(infos){
+    $("#resources-info").html("Proc : "+infos["proc"]+" | Mem : "+infos["mem"]);
   }
 
   vw.cpm.CLIView.prototype.toggleCLI = function(activate){

@@ -51,11 +51,20 @@
     }
     this.$el.append('<div> Status : '+(this.service.status?"running":"stopped")+'</div>');
     if(this.service.status){
-      this.$el.append('<div><button>Stop</button></div>');
+      this.$el.append('<div class="service-run-switch"><button>Stop</button></div>');
     }else{
-      this.$el.append('<div><button>Start</button></div>');
+      this.$el.append('<div class="service-run-switch"><button>Start</button></div>');
     }
-    this.$el.find('button').click(function(){
+    if(this.service.test){
+      this.$el.append('<div><button class="service-test">Test service</button></div>'); 
+      this.$el.find('.service-test').click(function(){
+        if(!$(this).hasClass('ajax-submitted')){
+          me.app.servicemanager.testService(me,$(this));        
+        }
+      });
+    }
+
+    this.$el.find('.service-run-switch').click(function(){
       if(!$(this).hasClass('ajax-submitted')){
         if(me.service.status){
           me.app.servicemanager.stopService(me,$(this));

@@ -1,45 +1,33 @@
-1462293498	::1	E	services	admin		
-1463483132	::1	E	sidebar	admin		
-1463483454	::1	C	misc	admin	created	
-1463483623	::1	C	pulsar	admin	created	
-1463483724	::1	C	addons	admin	created	
-1463483937	::1	E	sidebar	admin		
-1465467534	127.0.0.1	E	start		external edit	
-1465467534	127.0.0.1	E	sidebar		external edit	
-1465471941	::1	E	start	admin		
-1465477915	::1	E	start	admin	[Comparaison aux plateformes existantes] 	
-1465484150	::1	E	sidebar	admin		
-1465484193	::1	E	sidebar	admin		
-1465484255	::1	E	sidebar	admin		
-1465484341	::1	C	tutorials	admin	created	
-1465484806	::1	E	sidebar	admin		
-1465485059	::1	E	sidebar	admin		
-1465485148	::1	E	sidebar	admin		
-1465485667	::1	C	dev	admin	created	
-1465485773	::1	C	install	admin	created	
-1465486124	::1	E	start	admin		
 1465831500	::1	E	tutorials	admin		
 1465831896	::1	E	tutorials	admin		
 1465832766	::1	E	dev	admin		
 1465833074	::1	E	install	admin		
 1465833655	::1	E	install	admin		
-1465467534	127.0.0.1	E	configuration		external edit	
 1465834483	::1	E	configuration	admin		
-1465822239	127.0.0.1	E	spec_draft		external edit	
 1465835840	::1	E	spec_draft	admin		
 1465836269	::1	E	configuration	admin		
 1465836288	::1	E	configuration	admin		
 1465836369	::1	E	sidebar	admin		
-1465467534	127.0.0.1	E	misc		external edit	
 1465836794	::1	E	misc	admin		
 1465836828	::1	E	sidebar	admin		
 1465842786	::1	E	sidebar	admin		
 1465843139	::1	C	issues	admin	created	
-1465467534	127.0.0.1	E	services		external edit	
 1465843224	::1	E	services	admin		
-1465467534	127.0.0.1	E	arch		external edit	
 1465843381	::1	E	arch	admin		
 1465845104	::1	E	spec_draft	admin		
 1465845278	::1	E	issues	admin		
 1465845334	::1	E	issues	admin		
 1465849799	::1	E	tutorials	admin		
+1466605136	::1	E	sidebar	admin		
+1466605167	::1	C	modules	admin	created	
+1466605287	::1	E	sidebar	admin		
+1466605542	::1	E	spec_draft	admin		
+1466606069	::1	E	tutorials	admin		
+1466607353	::1	E	modules	admin		
+1466607371	::1	E	modules	admin		
+1466608305	::1	E	spec_draft	admin		
+1466608375	::1	E	tutorials	admin		
+1466609165	::1	E	tutorials	admin	[Schema client-serveur] 	
+1466609388	::1	E	services	admin		
+1466612168	::1	E	services	admin		
+1466629853	::1	E	spec_draft	admin		

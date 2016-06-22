@@ -1,11 +1,63 @@
 ====== Tutoriels ======
 
-===== Lancer un module =====
+Ces tutoriels donnent des exemples d'utilisation de la plateforme AppFM et d'intégration de modules.
+
+===== Web UI =====
+
+==== Lancer un module ====
 
 {{:tutorial_1.mp4|}}
 
-===== Créer une chaîne =====
+==== Créer une chaîne ====
 
 {{:tutorial_2.mp4|}}
 
 ===== Intégrer une application =====
+
+Pour intégrer une application il faut s'assurer que le programme fonctionne le plus indépendamment possible du système sur lequel il a été développé. Les applications écrites en java par exemple sont par nature assez portable et peuvent souvent être empaquetées simplement. D'autres demandent une installation de dépendances assez spécifiques pouvant parfois rentrer en conflit avec d'autres installations et dont la routine est propre à différentes distributions de linux. Dans ces cas, il est préférable et recommandé d'intégrer ces applications via l'outil Docker.
+
+Dans tous les cas, la première étape est de préparer le dossier qui contiendra les fichiers nécessaires au fonctionnement de l'application. Pour cela il faut se connecter au serveur ([[:misc#rscpm|voir les informations relative à l'instance de démo du Limsi]]) et créer (de préférence dans un sous répertoire de "custom" si l'organisation de base est celle d'origine) un répertoire dans un des [[:configuration#configyml|répertoires de modules (modules_dir) du serveur AppFM]].
+
+==== Dépendances statiques ====
+
+Dans les cas où le programme ne nécéssite pas à priori l'installation de dépendance (scripts python utilisant les librairies de base, programme java). Il suffit de placer tous les fichiers dans le répertoire du module et créer le [[:spec_draft|fichier de définition du module]].
+
+Le cas le plus simple prendra souvent la forme suivante (toute les informations concernant les types et variables se trouvent dans la[[:spec_draft|documentation]][[:spec_draft| du formalisme de définition des modules]]) :
+
+<code>
+name : //NOM_DU_MODULE # nom du module correspondant au nom du fichier .module
+
+// desc : description du module # optionnel mais fortement recommandé
+
+input :
+  NOM_DE_VARIABLE_ENTREE :
+    type : FILE
+
+output :
+  NOM_DE_VARIABLE_SORTIE :
+    type : FILE
+    value : $_RUN_DIR/output # il est nécessaire d'indiquer de manière déterministe la valeur de la sortie
+  NOM_DE_VARIABLE_SORTIE_2 :
+    type : VAL
+    value : ${_CMD.STDERR} # la valeur de sortie peut être le résultat d'un élément de la chaine d'éxécution
+
+# liste des modules à exécuter.
+# ici le module de base "_CMD" exécute une commande shell
+# $_DEF_DIR étant le chemin absolu du répertoire où se situe le présent fichier
+# $_RUN_DIR étant le chemin absolu du répertoire où s'exécute la commande (unique par lancement du module)
+exec :
+  - _CMD :
+     CMD : $_DEF_DIR/monprogramme.sh $NOM_DE_VARIABLE_ENTREE> $_RUN_DIR/output
+</code>
+
+  Dans cet exemple le module représenté est une application qui prend en entrée un fichier et exécute le script "monprogramme.sh" avec en paramètre ce fichier d'entrée. La sortie standard est écrite dans le fichier "output" et la sortie d'erreur est gardée en mémoire en tant que valeur de sortie du module (à noter que la sortie d'erreur est automatiquement ajoutée au log du module accessible pour chaque exécution).
+
+Il est fortement recommandé de tester la commande directement sur le serveur afin de voir si aucune dépendance ne manque et que l'application fonctionne correctement.
+
+==== Empaquetage avec Docker ====
+
+==== Schema client-serveur ====
+
+Attention, certains services prennent du temps avant d'être complètement initialisés et écouter sur leur socket. => Lancer au préalable le service et tester (test) sont état avant.
+
+Sinon : utilisation de ZMQ => buffer

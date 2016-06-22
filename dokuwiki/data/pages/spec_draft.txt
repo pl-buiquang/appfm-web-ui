@@ -1,6 +1,6 @@
-====== Modules ======
+====== Formalisme de description des modules ======
 
-Les modules sont les descriptions du cadre et de l'exécution d'une application ou d'une chaine d'applications. Ces modules sont définis par des fichiers ayant la forme suivante : NOM_MODULE.module
+Les [[:modules|modules]] sont les descriptions du cadre et de l'exécution d'une application ou d'une chaine d'applications. Ces modules sont définis par des fichiers ayant la forme suivante : NOM_MODULE.module
 
 Les noms des modules sont des chaines de caractères respectant l'expression régulière suivante : **nom_module** (@**//namespace//**)? où **nom_module** et **namespace** sont de la forme [a-zA-Z][a-zA-Z0-9_\-]+ (ex: //parser@user//, //mon-module-de-normalisation@hostname//, //parser_customisé// @domain, …)
 
@@ -11,15 +11,17 @@ Le fichier de description d'un module est en format [[http://learnxinyminutes.co
 
 Les champs obligatoires sont :
 
-- name : Le nom du module qui DOIT correspondre au nom de base du fichier (sans l'extension .module). Ce nom doit etre unique entre tous les modules enregistrés (voir configuration, modules_dir).
+- **name** : Le nom du module qui DOIT correspondre au nom de base du fichier (sans l'extension .module). Ce nom doit etre unique entre tous les modules enregistrés (voir configuration, modules_dir).
 
-- input : La liste des paramètres d'entrée du module (voir plus bas)
+- **input** : La liste des paramètres d'entrée du module (voir plus bas)
 
-- output : La liste des paramètres de sortie du module (voir plus bas)
+- **output** : La liste des paramètres de sortie du module (voir plus bas)
 
-- exec : La liste des modules à exécuter (voir plus bas)
+- **exec** : La liste des modules à exécuter (voir plus bas)
 
-Il est possible et fortement recommandé de rajouter un champ "desc" qui contient une description utile du module affichée dans les différentes interfaces de **AppFM**.
+Il est possible et fortement recommandé de rajouter un champ "**desc**" qui contient une description utile du module affichée dans les différentes interfaces de **AppFM**.
+
+Pour les modules construits sous forme de client-serveur ou utilisant des [[:services|services intégrés]], le champ **require** peut être ajouté et contient la liste des services nécessaires au fonctionnement du module. De nouvelles variables sont alors accessibles dans la définition.
 ==== Input ====
 
 Les entrées d'un module sont décrites via une //map// de la forme suivante :
@@ -149,9 +151,10 @@ Ce module permet tout simplement de lancer une commande, possiblement à l'inté
 
 |**Input** |||  |  |  |
 |  |**CMD**   |VAL |commande shell à executer |  |  |
-|  |**DOCKERFILE**   |VAL |Le nom ou chemin relatif du Dockerfile utilisé (ou false si pas de docker utilisé) |indique si la commande doit s'éxécuter à l'intérieur d'un conteneur Docker définit par une Dockerfile |  |
-|  |**CONTAINED**   |VAL (true,false) |  |indique si pour chaque execution un nouveau conteneur Docker est créé ou si une seule instance suffit |  |
-|  |**DOCKEROPTS**   |VAL |options à passer au lancement du conteneur Docker |  |  |
+|  |**NTHREADS**   |VAL |//[optionel]// nombre de thread sur lequel s'exécute la commande  |indique si la commande est multithreadée nativement  |  |
+|  |**DOCKERFILE**   |VAL |//[optionel] // Le nom ou chemin relatif du Dockerfile utilisé (ou false si pas de docker utilisé)  |indique si la commande doit s'éxécuter à l'intérieur d'un conteneur Docker définit par une Dockerfile |  |
+|  |**CONTAINED**   |VAL (true,false) |//[optionel]//   |indique si pour chaque execution un nouveau conteneur Docker est créé ou si une seule instance suffit |  |
+|  |**DOCKEROPTS**   |VAL |//[optionel] // options à passer au lancement du conteneur Docker  |  |  |
 |**Output** |||  |  |  |
 |  |**STDOUT**   |VAL |sortie standard de la commande |  |  |
 |  |**STDERR**   |VAL |sortie d'erreur de la commande |  |  |
@@ -167,20 +170,20 @@ Ce module permet de distribuer parallèlement les fichiers enfants d'un réperto
 |**Input** ||||
 |  |**IN**   |DIR |le répertoire dont chaque fichier va être la source d'une execution en parallèle des modules définis dans la variable **RUN** avec pour nom **$_**   |
 |  |**RUN**   |MODULE+ |liste d'instance de modules |
-|  |**REGEX**   |VAL |expression régulière filtrant les fichiers du répertoire qui seront traités |
+|  |**REGEX**   |VAL |//[optionel] // expression régulière filtrant les fichiers du répertoire qui seront traités  |
 |**Output** ||||
 |  |**OUT**   |DIR |le répertoire parent des répertoires contenant les résultats des modules exécutés (définis dans le champ RUN) |
 |**Exec** ||||
 |  |exécute en parallèle les modules sur chaques fichiers contenus (et filtrés par l'expression régulière) dans le répertoire d'entrée. |||
 
-==== _WALKMAP   ====
+==== _WALKMAP ====
 
 Tout comme **_MAP** ce module permet de distribuer parallèlement des traitement. Ici, c'est tous les enfants (récursivement) d'un dossier qui sont traités.
 
 |**Input** ||||
 |  |**IN**   |DIR |le répertoire dont chaque fichier va être la source d'une execution en parallèle des modules définis dans la variable **RUN** avec pour nom **$_**   |
 |  |**RUN**   |MODULE+ |liste d'instance de modules |
-|  |**REGEX**   |VAL |expression régulière filtrant les fichiers du répertoire qui seront traités |
+|  |**REGEX**   |VAL |//[optionel] // expression régulière filtrant les fichiers du répertoire qui seront traités  |
 |**Output** ||||
 |  |**OUT**   |DIR |le répertoire parent des répertoires contenant les résultats des modules exécutés (définis dans le champ RUN) |
 |**Exec** ||||
@@ -195,7 +198,7 @@ Ce module permet d'éxécuter des traitement différent selon la valence d'une v
 |  |**THEN**   |MODULE+ |liste d'instance de modules à exécuter si la condition est vraie |
 |  |**ELSE**   |MODULE+ |liste d'instance de modules à exécuter si la condition est fausse |
 |**Output** ||||
-|  |**?**   |MAP |L'aggreggation des sorties de la liste de module exécutés. Si la liste des modules exéctués comprend des sorties de même nom, seule la valeur d'une de ces sortie sera disponible... (bug) |
+|  |**?**   |MAP |L'aggreggation des sorties de la liste de module exécutés. Si la liste des modules exéctués comprend des sorties de même nom, seule la valeur d'une de ces sortie sera disponible… (bug) |
 |**Exec** ||||
 |  |exécute conditionnellement une liste de modules |||
 

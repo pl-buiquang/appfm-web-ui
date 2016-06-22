@@ -32,6 +32,31 @@
     panel.focus();
   }
 
+  vw.cpm.ServiceManager.prototype.testService = function(serviceview,$button){
+    var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
+    $.ajax({
+      type:"POST",
+      url : me.app.options.cpmbaseurl + "rest/cmd",
+      data:{cmd:"service test "+serviceview.service.name},
+      dataType : 'json',
+      success:function(data,textStatus,jqXHR){
+        vw.cpm.ui.AjaxButton.stop($button);
+        var modal = new vw.cpm.ui.Modal();
+        $content = $('<div><div>Results of the test are : </div><div class="service-test-result">'+data.result+'</div></div>');
+        modal.open($content);
+      },
+      error:function(message){
+        vw.cpm.ui.AjaxButton.stop($button);
+        var modal = new vw.cpm.ui.Modal();
+        $content = $('<div>Error happended when trying to launch test : '+message+'</div>');
+        modal.open($content);
+      }
+    });
+  }
+
+  
+
   vw.cpm.ServiceManager.prototype.startService = function(serviceview,$button){
     var me = this;
     vw.cpm.ui.AjaxButton.start($button);

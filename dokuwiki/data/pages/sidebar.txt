@@ -2,7 +2,8 @@
 
   * [[:start|Introduction]]
   * [[:tutorials|Tutoriels]]
-  *  [[:spec_draft|Modules]]
+  *  [[:modules|Modules]]
+      * [[:spec_draft|Formalisme de définition]]
       * [[:docker|Docker]]
       * [[:services|Services]]
   *  [[:clients|Clients]]

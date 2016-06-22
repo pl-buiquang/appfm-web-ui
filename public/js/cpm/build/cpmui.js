@@ -1698,6 +1698,31 @@
     panel.focus();
   }
 
+  vw.cpm.ServiceManager.prototype.testService = function(serviceview,$button){
+    var me = this;
+    vw.cpm.ui.AjaxButton.start($button);
+    $.ajax({
+      type:"POST",
+      url : me.app.options.cpmbaseurl + "rest/cmd",
+      data:{cmd:"service test "+serviceview.service.name},
+      dataType : 'json',
+      success:function(data,textStatus,jqXHR){
+        vw.cpm.ui.AjaxButton.stop($button);
+        var modal = new vw.cpm.ui.Modal();
+        $content = $('<div><div>Results of the test are : </div><div class="service-test-result">'+data.result+'</div></div>');
+        modal.open($content);
+      },
+      error:function(message){
+        vw.cpm.ui.AjaxButton.stop($button);
+        var modal = new vw.cpm.ui.Modal();
+        $content = $('<div>Error happended when trying to launch test : '+message+'</div>');
+        modal.open($content);
+      }
+    });
+  }
+
+  
+
   vw.cpm.ServiceManager.prototype.startService = function(serviceview,$button){
     var me = this;
     vw.cpm.ui.AjaxButton.start($button);
@@ -3704,11 +3729,20 @@
     }
     this.$el.append('<div> Status : '+(this.service.status?"running":"stopped")+'</div>');
     if(this.service.status){
-      this.$el.append('<div><button>Stop</button></div>');
+      this.$el.append('<div class="service-run-switch"><button>Stop</button></div>');
     }else{
-      this.$el.append('<div><button>Start</button></div>');
+      this.$el.append('<div class="service-run-switch"><button>Start</button></div>');
     }
-    this.$el.find('button').click(function(){
+    if(this.service.test){
+      this.$el.append('<div><button class="service-test">Test service</button></div>'); 
+      this.$el.find('.service-test').click(function(){
+        if(!$(this).hasClass('ajax-submitted')){
+          me.app.servicemanager.testService(me,$(this));        
+        }
+      });
+    }
+
+    this.$el.find('.service-run-switch').click(function(){
       if(!$(this).hasClass('ajax-submitted')){
         if(me.service.status){
           me.app.servicemanager.stopService(me,$(this));

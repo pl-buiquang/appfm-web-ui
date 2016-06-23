@@ -1,15 +1,7 @@
-a:2:{s:7:"current";a:8:{s:4:"date";a:2:{s:7:"created";i:1458137610;s:8:"modified";i:1465467534;}s:7:"creator";s:14:"Paul Bui-Quang";s:4:"user";s:5:"admin";s:11:"last_change";b:0;s:5:"title";s:19:"Intégration Docker";s:11:"description";a:2:{s:15:"tableofcontents";a:1:{i:0;a:4:{s:3:"hid";s:18:"integration_docker";s:5:"title";s:19:"Intégration Docker";s:4:"type";s:2:"ul";s:5:"level";i:1;}}s:8:"abstract";s:164:"Intégration Docker
+a:2:{s:7:"current";a:9:{s:4:"date";a:2:{s:7:"created";i:1458137610;s:8:"modified";i:1466723999;}s:7:"creator";s:14:"Paul Bui-Quang";s:4:"user";s:5:"admin";s:11:"last_change";a:7:{s:4:"date";i:1466723999;s:2:"ip";s:3:"::1";s:4:"type";s:1:"E";s:2:"id";s:6:"docker";s:4:"user";s:5:"admin";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:5:"admin";s:14:"Paul Bui-Quang";}s:5:"title";s:19:"Intégration Docker";s:11:"description";a:2:{s:15:"tableofcontents";a:6:{i:0;a:4:{s:3:"hid";s:18:"integration_docker";s:5:"title";s:19:"Intégration Docker";s:4:"type";s:2:"ul";s:5:"level";i:1;}i:1;a:4:{s:3:"hid";s:19:"le_module_appfm_cmd";s:5:"title";s:20:"Le module AppFM _CMD";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:2;a:4:{s:3:"hid";s:24:"l_image_dockerdockerfile";s:5:"title";s:27:"L'image Docker : Dockerfile";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:3;a:4:{s:3:"hid";s:23:"exemples_d_instructions";s:5:"title";s:23:"Exemples d'instructions";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:4;a:4:{s:3:"hid";s:24:"tester_son_environnement";s:5:"title";s:24:"Tester son environnement";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:5;a:4:{s:3:"hid";s:21:"plus_de_documentation";s:5:"title";s:21:"Plus de documentation";s:4:"type";s:2:"ul";s:5:"level";i:2;}}s:8:"abstract";s:263:"Intégration Docker
 
-Base CPM shell : Dockerfile de base
+Docker est un service qui permet de créer des conteneurs dans lesquels des applications vont s'éxécuté dans un environnement prédéterminé. L'environnement est décrit par le biais d'un Dockerfile.
 
-Paramètres :
+Le module AppFM _CMD
 
-- Dockerfile
-
-- Contained
-
-- Docker_opts
-
-Plus de documentation :
-
-<http://docs.docker.com>";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:8:"relation";a:1:{s:10:"firstimage";s:0:"";}}s:10:"persistent";a:4:{s:4:"date";a:1:{s:7:"created";i:1458137610;}s:7:"creator";s:14:"Paul Bui-Quang";s:4:"user";s:5:"admin";s:11:"last_change";b:0;}}
+Le module natif";}s:8:"relation";a:2:{s:10:"references";a:1:{s:10:"spec_draft";b:1;}s:10:"firstimage";s:0:"";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:5:{s:4:"date";a:2:{s:7:"created";i:1458137610;s:8:"modified";i:1466723999;}s:7:"creator";s:14:"Paul Bui-Quang";s:4:"user";s:5:"admin";s:11:"last_change";a:7:{s:4:"date";i:1466723999;s:2:"ip";s:3:"::1";s:4:"type";s:1:"E";s:2:"id";s:6:"docker";s:4:"user";s:5:"admin";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:5:"admin";s:14:"Paul Bui-Quang";}}}

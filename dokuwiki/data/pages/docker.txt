@@ -1,15 +1,46 @@
 ====== Intégration Docker ======
 
-Base CPM shell : Dockerfile de base
+Docker est un service qui permet de créer des conteneurs dans lesquels des applications vont s'éxécuté dans un environnement prédéterminé. L'environnement est décrit par le biais d'un [[https://docs.docker.com/engine/reference/builder/#run|Dockerfile]].
 
-Paramètres :
+===== Le module AppFM _CMD  =====
 
-- Dockerfile
+Le module natif [[:spec_draft#cmd|_CMD]] est le module de base permettant de lancer la commande d'exécution de votre application. Cette commande et l'application qu'elle lance peuvent nécessiter des librairies, outils, autres programmes qui ne sont pas présent sur le serveur et seront donc lancés dans des conteneurs Docker qui vont créer l'environnement nécessaire au bon fonctionnement de l'application. En plus de la création d'un Dockerfile, il faut spécifier les champs optionnels suivants :
 
-- Contained
+- DOCKERFILE : [obligatoire] Le nom du Dockerfile ("Dockerfile" sauf si plusieurs images sont définies dans le meme répertoire)
 
-- Docker_opts
+- CONTAINED : [optionel] "True" ou "False" cela indique qu'un nouveau conteneur est créé pour chaque exécution de votre application (utile pour certains cas spécifiques)
 
-Plus de documentation :
+- DOCKER_OPTS : [optionel] Des options qui seront ajouter à la commande "''docker run''" exécutée par AppFM lorqu'il crée le conteneur pour votre application ([[https://docs.docker.com/engine/reference/run/|plus d'informations sur les options]])
 
-http://docs.docker.com
+===== L'image Docker : Dockerfile =====
+
+Ce fichier doit donc être créé et rajouté à la racine du répertoire de votre module.
+
+Les applications gérées par AppFM étant encapsulée dans un script qui requiert certaines librairies. Il est préférable de constituer son Dockerfile à partir du Dockerfile encapsulant cela (base_cpm_shell). Pour plus d'information sur le contenu de ce Dockerfile, il est possible de trouver son contenu dans le fichier INSTALLATION_RACINE/pshell/Dockerfile.
+
+Ainsi il est recommandé de constituer son Dockerfile par :
+
+<code>
+FROM base_cpm_shell
+
+# suite des instruction
+</code>
+===== Exemples d'instructions =====
+
+Les instruction les plus courantes pour constituer son environnement sont :
+
+''WORKDIR path'' pour se placer dans un chemin du conteneur (cela impacte les instructions suivantes)
+
+''RUN commande'' pour lancer une commande (par exemple apt-get install nom_de_librairie pour installer une paquet)
+
+''ADD relative_path_of_directory path'' pour copier le contenu d'un dossier vers un chemin dans le conteneur
+===== Tester son environnement =====
+
+Afin de tester son image, il suffit de lancer les commandes suivantes :
+
+''docker build -t nom_de_l_image .'' construit l'image
+
+''docker run -ti --entrypoint /bin/bash nom_de_l_image'' lance un conteneur à partir de l'image et donne accès à un shell avec lequel vous pourrez tester votre application
+===== Plus de documentation =====
+
+AppFM limite l'utilisation de docker car prend en charge la construction et le lancement des images/conteneurs mais permet tout de même d'exploiter plus de possibilités que présenté dans cette documentation. Afin de tirer au mieux parti de cette technologie vous pouvez continuer et lire la documentation officielle à [[http://docs.docker.com|http://docs.docker.com]]

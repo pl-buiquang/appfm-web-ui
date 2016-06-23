@@ -16,6 +16,12 @@ Les différences sont :
 - il n'y a pas de champ **input** (un service étant considéré comme quelque chose de statique qui n'admet qu'une seule instanciation possible)
 
 - l'introduction des champs **log** et **test**
+
+|start |Ce champ est une map qui contient les même champs que le module _CMD et est la commande qui lance le service |
+|stop (optionel si utilisation de Docker) |Ce champ est une map qui contient les même champs que le module _CMD et est la commande qui arrête le service |
+|log (optionel) |le chemin vers le log du service |
+|test (optionel) |correspond au champ CMD du module _CMD et est exécuté pour tester si le service fonctionne correctement |
+
 ===== Recommandations =====
 
 Il est recommandé de construire des services avec la librairie ZeroMQ qui permet via des buffers de fonctionner plus souplement lorsque le serveur n'est pas encore initialisé.

@@ -1,0 +1,8 @@
+== Install
+
+In order to generate the application js file, you need to install (you may need to belong to sudo) : 
+- nodejs : https://nodejs.org/en/
+- gruntjs : http://gruntjs.com/getting-started
+
+Then after editing the source file just enter the command :
+grunt build_all

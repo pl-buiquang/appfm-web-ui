@@ -15,7 +15,7 @@ Just run :
 cpm
 </code>
 
-Some built in documentation exists within the command interface (available commands and description). Every command/subcommand have a ''--help'' documentation (some are empty).
+Some built in documentation exists within the command interface (available commands and description). Every command/subcommand have a ''–help'' documentation (some are empty).
 ===== Module Management =====
 
 - Reload the module definitions : (if modifications have been made on .module files)

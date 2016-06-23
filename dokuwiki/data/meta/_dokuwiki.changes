@@ -23,3 +23,8 @@
 1466695896	::1	E	web	admin		
 1466696029	::1	E	configuration	admin		
 1466697158	::1	E	install	admin		
+1465467534	127.0.0.1	E	docker		external edit	
+1466723999	::1	E	docker	admin		
+1465467534	127.0.0.1	E	cli		external edit	
+1466724312	::1	E	cli	admin		
+1466724912	::1	E	services	admin		

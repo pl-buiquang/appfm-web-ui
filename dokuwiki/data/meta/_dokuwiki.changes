@@ -1,16 +1,3 @@
-1465831500	::1	E	tutorials	admin		
-1465831896	::1	E	tutorials	admin		
-1465832766	::1	E	dev	admin		
-1465833074	::1	E	install	admin		
-1465833655	::1	E	install	admin		
-1465834483	::1	E	configuration	admin		
-1465835840	::1	E	spec_draft	admin		
-1465836269	::1	E	configuration	admin		
-1465836288	::1	E	configuration	admin		
-1465836369	::1	E	sidebar	admin		
-1465836794	::1	E	misc	admin		
-1465836828	::1	E	sidebar	admin		
-1465842786	::1	E	sidebar	admin		
 1465843139	::1	C	issues	admin	created	
 1465843224	::1	E	services	admin		
 1465843381	::1	E	arch	admin		
@@ -31,3 +18,8 @@
 1466609388	::1	E	services	admin		
 1466612168	::1	E	services	admin		
 1466629853	::1	E	spec_draft	admin		
+1466694692	::1	E	install	admin		
+1465467534	127.0.0.1	E	web		external edit	
+1466695896	::1	E	web	admin		
+1466696029	::1	E	configuration	admin		
+1466697158	::1	E	install	admin		

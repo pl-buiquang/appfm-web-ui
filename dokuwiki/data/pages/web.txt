@@ -1,13 +1,13 @@
-====== Web interface ======
+====== Interface web ======
 
-===== Features =====
+AppFM dispose d'un client graphique sous la forme d'une application web.
 
-- graphic pipeline creation / management
+Ce client permet de se connecter à différentes instances du kernel AppFM. Des [[:tutorials#web_ui|tutoriels vidéos]] présentent les fonctionnalités de bases offerte par cette interface.
 
-- graphic corpus management
+===== Installation =====
 
-- pipeline run management + view outputs
+Un exemple des commandes permettant l'installation du serveur web se trouve dans le fichier ''RACINE_INSTALLATION/scripts/bootsrap.sh'' utilisé pour l'installation dans une machine virtuelle basée sur debian jessie.
 
-- concordancier
+Les sections qui permettent l'installation du serveur web apache, de php et des autres dépendances se trouvent aux sections : ''#webserver (apache)'' et ''# zmq php bindings''
 
-- ...
+[[:configuration#webui|Voir plus d'information sur la configuration du serveur]].

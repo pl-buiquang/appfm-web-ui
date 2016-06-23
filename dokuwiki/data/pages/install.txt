@@ -1,21 +1,55 @@
 ====== Installation ======
 
-===== Installation facile (dans une machine virtuelle) =====
+===== Installation =====
 
-==== 0. Récupérer le code source ====
+==== 1. Récupérer le code source ====
 
-git clone git@github.limsi.fr:/appfm/base appfm\\
+Pour cela, il faut pouvoir accéder au serveur git du LIMSI (voir avec amic) et demander les droits d'accès au projet **appfm.**
+
+Installer "git" si ce n'est deja fait sur votre machine.
+
+<code>
+git clone git@github.limsi.fr:/appfm/base appfm
 cd appfm
+</code>
 
-==== 1. Installer vagrant (machine virtuelle) ====
-
-sudo apt-get install vagrant virtualbox
+Ce dépot contient les librairies et la structure globale contenant les différents sous [[:arch|projets qui compose AppFM]]
 
 ==== 2. Récupérer les sous projets : ====
 
-git submodule update –init –recursive
+<code>
+git submodule update --init –-recursive
+</code>
 
-==== 3. Configurer la machine virtuelle :  ====
+==== 3. Installation ====
+
+Si vous voulez isoler l'installation du reste de votre machine afin de simplement tester AppFM ou pour d'autres raison, suivez les étapes indiquées dans la partie **Installation avec Vagrant**. Cette installation installe aussi le client web.
+
+Lancer : ''sudo ./install.sh'' ou ''./install.sh'' (si des librairies manquent il vous sera demandé de les installer manuellement)
+
+L'installation peut prendre un peu plus d'une dizaine de minute.
+
+Cette installation ne concerne que le serveur AppFM, pour l'installation des clients (client-server web et ligne de commande) et leur utilisation aller dans la [[:clients|section clients]].
+
+==== 4. Configuration et premier lancement ====
+
+Il faut ensuite configurer le fichier [[:configuration#config.yml|config.yml]]
+
+Au premier lancement : ./appfm start
+
+Le serveur construit (si docker est installé) un conteuneur de base.
+
+===== Installation avec Vagrant =====
+
+Suivez les étapes d'installation précédentes jusqu'à l'étape 2
+
+==== 1. Installer le gestionnaire de machine virtuelles Vagrant ====
+
+<code>
+sudo apt-get install vagrant virtualbox virtualbox-dkms
+</code>
+
+==== 2. Configurer la machine virtuelle : ====
 
 Editer le fichier "Vagrantfile" :
 
@@ -29,13 +63,21 @@ ex. v.customize ["modifyvm", :id, "–memory","4096"])
 
 - ports
 
-==== 4. Installation (may take about 10~30 minutes) : ====
+Lors du lancement de la commande qui suit, il se peut que des problèmes arrivent, notamment :
+
+- box inexistante : pour cela installer la box debian/jessie à partir de vagrantbox.es : ''vagrant box add [[https://atlas.hashicorp.com/ARTACK/boxes/debian-jessie|https://atlas.hashicorp.com/ARTACK/boxes/debian-jessie]]''
+
+- conflits de ports déja utilisés
+
+- problème de création du disque virtuel : "VBoxManage: error: Could not find a controller named 'SATA Controller'" , pour cela décommenter la ligne " v.customize ["storagectl", :id, "–name", "SATA Controller", "–add", "sata"]" du fichier Vagrantfile, relancer la commande, puis recommenter la ligne.
+
+==== 3. Installation (peut prendre 10~30 minutes) : ====
 
 vagrant up\\
 vagrant ssh\\
 sudo /vagrant/install.sh
 
-==== 5. First run (takes a long the first time since it builds base containers): ====
+==== 4. First run (takes a long the first time since it builds base containers): ====
 
 cd /vagrant\\
 ./appfm start

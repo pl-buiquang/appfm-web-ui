@@ -39,6 +39,8 @@ Généré automatique lors de l'installation du client. Il spécifie l'hôte et 
 
 ==== web/.htaccess ====
 
+==== web/servers.info ====
+
 ===== Vagrant =====
 
 ==== Vagrantfile ====

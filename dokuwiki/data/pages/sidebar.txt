@@ -14,7 +14,6 @@
       * [[:arch|Architecture]]
       * [[:configuration|Configuration]]
       * [[:roadmap|Roadmap]]
-      * [[:kernel|Serveur/Kernel]]
       * [[:communication_system|Protocole de communication]]
   *  [[:misc|Instances LIMSI]]
       * [[:pulsar|Projet PULSAR]]

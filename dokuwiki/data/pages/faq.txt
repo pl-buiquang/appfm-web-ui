@@ -8,3 +8,7 @@ Uploadez votre corpus sur machine rscpm avec : ''scp -r /PATH/TO/CORPUS appfm@rs
 ===== Comment uploader les sources d'un module =====
 
 Uploadez votre corpus sur machine rscpm avec : scp -r /PATH/TO/MODULEDIRECTORY appfm@rscpm.limsi.fr:~/data/modules/custom , le mot de passe est appfm
+
+===== Comment éditer ce wiki =====
+
+Les informations permettant de ce connecter à ce wiki sont disponible dans le fichier README à la racine du projet web-ui

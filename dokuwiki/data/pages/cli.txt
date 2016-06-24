@@ -3,7 +3,7 @@
 ===== Installation =====
 
 <code>
-cd cli;
+cd RACINE_INTALLATION/cli;
 sh ./install.sh
 </code>
 

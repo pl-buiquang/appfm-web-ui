@@ -27,6 +27,8 @@ Si vous voulez isoler l'installation du reste de votre machine afin de simplemen
 
 Lancer : ''sudo ./install.sh'' ou ''./install.sh'' (si des librairies manquent il vous sera demandé de les installer manuellement)
 
+A noter que si vous utiliser "sudo", les futures installations / upgrades devront aussi l'utiliser ou il faudra supprimer les fichiers créés par l'installation (core/target/**)
+
 L'installation peut prendre un peu plus d'une dizaine de minute.
 
 Cette installation ne concerne que le serveur AppFM, pour l'installation des clients (client-server web et ligne de commande) et leur utilisation aller dans la [[:clients|section clients]].

@@ -151,7 +151,7 @@ Ce module permet tout simplement de lancer une commande, possiblement à l'inté
 
 |**Input** |||  |  |  |
 |  |**CMD**   |VAL |commande shell à executer |  |  |
-|  |**NTHREADS**   |VAL |//[optionel]// nombre de thread sur lequel s'exécute la commande  |indique si la commande est multithreadée nativement  |  |
+|  |**NTHREADS**   |VAL |//[optionel]// nombre de thread sur lequel s'exécute la commande  |indique si la commande est multithreadée nativement |  |
 |  |**DOCKERFILE**   |VAL |//[optionel] // Le nom ou chemin relatif du Dockerfile utilisé (ou false si pas de docker utilisé)  |indique si la commande doit s'éxécuter à l'intérieur d'un conteneur Docker définit par une Dockerfile |  |
 |  |**CONTAINED**   |VAL (true,false) |//[optionel]//   |indique si pour chaque execution un nouveau conteneur Docker est créé ou si une seule instance suffit |  |
 |  |**DOCKEROPTS**   |VAL |//[optionel] // options à passer au lancement du conteneur Docker  |  |  |
@@ -217,31 +217,5 @@ Le schema définit la sémantique d'une donnée. Par exemple : passage, depxml, 
 Cette typologie est définie par le créateur des modules et n'est actuellement pas prise en compte dans le lancement d'une chaine.
 
 ====   ====
-
-===== Gestion des dépendances =====
-
-- all in a folder static linking (big module in memory size.., possible redundance with other modules…)
-
-- compose your own docker (using the base one with cpm-process-shell as entrypoint)
-
-===== Modules supplémentaires / Addons modules =====
-
-toUTF8
-
-toLatin1
-
-jsonToXML
-
-XMLtoJSON
-
-xml_merger
-
-===== Examples =====
-
-à venir :
-
-- stanford-parser + wolf + unitex in parallel, merging job with xml_merger (basic use _map, _cmd, _filter, etc.)
-
-- chaine pulsar
 
 \\

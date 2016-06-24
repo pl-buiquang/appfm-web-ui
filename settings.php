@@ -4,9 +4,9 @@ define("DEBUG",true);
 define("LOG_HOME_PATH",'log/');
 define("PAGE_MAIN_TEMPLATE" ,"templates/html.tpl.php");
 define("TITLE","CPM");
-define("APP_HOME_ROUTE_FIX","");
-define("BASE_DIR","/vagrant/web/");
-$hostname = "http://localhost:8080/";
+define("APP_HOME_ROUTE_FIX","/cpm");
+define("BASE_DIR","/var/www/cpm/");
+$hostname = "http://localhost/";
 if(!empty($_SERVER["HTTP_HOST"])){
   $hostname = $_SERVER['REQUEST_SCHEME']."://".$_SERVER["HTTP_HOST"].APP_HOME_ROUTE_FIX."/";
 }

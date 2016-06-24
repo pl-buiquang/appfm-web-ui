@@ -1,34 +1,39 @@
 ====== Architecture ======
 
-{{https://versatile-world.net/tmp/macroarchitecture.jpg?nolink&800x487}}
+===== Informations générales =====
 
-===== Deploiement =====
+AppFM est construit sur un modèle client-serveur. Il est composé d'un kernel (projet /appfm/core), et deux deux interfaces client (projet /appfm/cli et /appfm/web-ui). Un dépot git global contient en sous projet ces différents composants (git@github.limsi.fr:/appfm/base) contenant notamment des scripts d'installation et certaines librairies nécessaire au projet /appfm/core.
 
-Dépendances :
+===== Kernel (Serveur) =====
 
-- zmq
+- Développé principalement en Scala
 
-- pyzmq + click (cpm-cli)
+- Dépend notamment de : ZMQ, Scala, Java8
 
-- java (jre 8)+ scala (2.11) + sbt (?)
+- Build tool : SBT
 
-scripts :
-
-  * install.sh : install vagrant and necessary libs (pyzmq), copy necessary libs, export path to bashrc
-  * start.sh (→ transform to init.d script) : start cpm-core (and webserver)
-
-===== Serveur =====
-
-**Serveur de commandes**
-
-**Gestionnaire de composants**
-
-**Gestionnaire de runs**
-
-====   ====
+- Nécessite une instance de mongodb
 
 ===== Clients =====
 
 **CLI**
 
+- Développé en python
+
+- Dépend notamment de : pyzmq, click
+
 **Web interface**
+
+- Développé principalement en javascript et php5
+
+- Dépend notamment de : zmq
+
+- Build tool (js) : gruntjs
+
+- Nécessite un serveur apache
+
+===== Schema déploiement =====
+
+{{https://versatile-world.net/tmp/macroarchitecture.jpg?nolink&800x487}}
+
+=====   =====

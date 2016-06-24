@@ -24,7 +24,7 @@ Les différences sont :
 
 ===== Recommandations =====
 
-Il est recommandé de construire des services avec la librairie ZeroMQ qui permet via des buffers de fonctionner plus souplement lorsque le serveur n'est pas encore initialisé.
+Il est recommandé de construire des services avec la librairie [[http://zeromq.org/|ZeroMQ]] qui permet via des buffers de fonctionner plus souplement lorsque le serveur n'est pas encore initialisé.
 
 Des exemples simples de construction de services (et de modules en architecture client-serveur) sont implémentés.
 
@@ -39,3 +39,5 @@ Spotlight (sans zmq)
 Brat (web application as a service)
 
 =====   =====
+
+\\

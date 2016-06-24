@@ -18,6 +18,7 @@ Pour intégrer une application il faut s'assurer que le programme fonctionne le 
 
 Dans tous les cas, la première étape est de préparer le dossier qui contiendra les fichiers nécessaires au fonctionnement de l'application. Pour cela il faut se connecter au serveur ([[:misc#rscpm|voir les informations relative à l'instance de démo du Limsi]]) et créer (de préférence dans un sous répertoire de "custom" si l'organisation de base est celle d'origine) un répertoire dans un des [[:configuration#configyml|répertoires de modules (modules_dir) du serveur AppFM]].
 
+Il faut ensuite recharger le cache des modules d'appfm avec la commande : ''cpm reload'' (en ligne de commande) ou ''reload'' dans la barre de commande de l'interface web.
 ==== Dépendances statiques ====
 
 Dans les cas où le programme ne nécéssite pas à priori l'installation de dépendance (scripts python utilisant les librairies de base, programme java). Il suffit de placer tous les fichiers dans le répertoire du module et créer le [[:spec_draft|fichier de définition du module]].
@@ -50,14 +51,18 @@ exec :
      CMD : $_DEF_DIR/monprogramme.sh $NOM_DE_VARIABLE_ENTREE> $_RUN_DIR/output
 </code>
 
-  Dans cet exemple le module représenté est une application qui prend en entrée un fichier et exécute le script "monprogramme.sh" avec en paramètre ce fichier d'entrée. La sortie standard est écrite dans le fichier "output" et la sortie d'erreur est gardée en mémoire en tant que valeur de sortie du module (à noter que la sortie d'erreur est automatiquement ajoutée au log du module accessible pour chaque exécution).
+Dans cet exemple le module représenté est une application qui prend en entrée un fichier et exécute le script "monprogramme.sh" avec en paramètre ce fichier d'entrée. La sortie standard est écrite dans le fichier "output" et la sortie d'erreur est gardée en mémoire en tant que valeur de sortie du module (à noter que la sortie d'erreur est automatiquement ajoutée au log du module accessible pour chaque exécution).
 
 Il est fortement recommandé de tester la commande directement sur le serveur afin de voir si aucune dépendance ne manque et que l'application fonctionne correctement.
 
 ==== Empaquetage avec Docker ====
 
+[[:docker|Voir la documentation]]
+
 ==== Schema client-serveur ====
 
-Attention, certains services prennent du temps avant d'être complètement initialisés et écouter sur leur socket. => Lancer au préalable le service et tester (test) sont état avant.
+Il peut être intéressant et parfois obligatoire (par exemple le module spotlight) de créer son module selon un schéma client-serveur. Pour cela il faut à la fois créer un [[:services|service]] qui jouera le rôle de serveur et un module qui sera le client.
 
-Sinon : utilisation de ZMQ => buffer
+Attention, certains services prennent du temps avant d'être complètement initialisés et écouter sur leur socket. ⇒ Lancer au préalable le service et tester (test) sont état avant. Sinon il est recommandé d'utiliser la librairie [[http://zeromq.org/|ZMQ]] qui palie à ce problème en améliorant les socket native avec nottament l'utilisation de tampons (buffer).
+
+Des exemples de ce schéma avec ou sans les socket ZMQ sont déjà implémentés (faire une recherche des fichiers .service qui correspondent aux [[:services#exemples|exemples cités]]).

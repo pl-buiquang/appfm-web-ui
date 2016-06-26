@@ -127,11 +127,14 @@ background: linear-gradient(180deg, rgb(54, 70, 94) 30%, rgb(78, 93, 116) 70%);
   font-size: 18px;
   cursor: pointer;
   height:38px;
-  /*-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  -moz-box-shadow:    0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  box-shadow:         0 1px 2px 0 rgba(0, 0, 0, 0.5);*/
   padding-left: 10px;
   padding-top: 12px;
+}
+
+#app-title:hover{
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow:    0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  box-shadow:         0 1px 2px 0 rgba(0, 0, 0, 0.5);
 }
 
 .menu-open{
@@ -182,19 +185,27 @@ ul.main-menu, .main-menu li{
 }
 
 ul.main-menu{
-  margin-top:8px;
-  margin-left:8px;
 }
 
 .main-menu li{
-  margin-bottom:10px;
+  padding-left:8px;
+  padding-top:4px;
+  padding-bottom: 4px;
 }
 
+.main-menu li:hover{
+  background-color: #687486;
+}
+
+.main-menu-active{
+  background-color: #687486;
+}
 
 
 .bottom-menu{
   position: absolute;
   bottom: 0;
+  width: 80px;
 }
 
 #menu-content-title{
@@ -202,9 +213,9 @@ ul.main-menu{
   background-color: #373E48;
   font-size: 24px;
   padding: 6px 12px;
-    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  /*  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   -moz-box-shadow:    0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  box-shadow:         0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  box-shadow:         0 1px 2px 0 rgba(0, 0, 0, 0.5);*/
   height: 38px;
   overflow: hidden;
   text-overflow:ellipsis;

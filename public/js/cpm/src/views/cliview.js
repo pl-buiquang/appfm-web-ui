@@ -65,6 +65,7 @@
 
     jQuery("#app-title").click(function(){
       me.toggleCLI(false);
+      me.setMenuActive(this);
       // set default menu if menu is to be opened and is empty
       if(me.model.activemenu =="default"){
         jQuery(".menu-open").switchClass("menu-open","menu-closed");
@@ -76,6 +77,7 @@
     });
 
     $(".main-menu-item").click(function(){
+      me.setMenuActive(this);
       if(me.model.activemenu == this.id){
         jQuery(".menu-open").switchClass("menu-open","menu-closed");
         jQuery(".menu-closed").switchClass("menu-closed","menu-open");
@@ -100,6 +102,26 @@
     jQuery("#cmd-bar-container").on("click",function(){
       me.toggleCLI(true);
     });
+  }
+
+  vw.cpm.CLIView.activeMenu = undefined;
+
+  vw.cpm.CLIView.prototype.setMenuActive = function(menubutton){
+    if(vw.cpm.CLIView.activeMenu){
+      var $activeli = $(vw.cpm.CLIView.activeMenu).parent("li");
+      if($activeli.length!=0){
+        $activeli.removeClass("main-menu-active");
+      }
+      if(menubutton.id == this.model.activemenu){
+        vw.cpm.CLIView.activeMenu = undefined;
+        return;
+      }
+    }
+    var $li = $(menubutton).parent("li");
+    vw.cpm.CLIView.activeMenu = menubutton;
+    if($li.length!=0){
+      $li.addClass("main-menu-active");
+    }
   }
 
   vw.cpm.CLIView.prototype.closeMenu = function(){

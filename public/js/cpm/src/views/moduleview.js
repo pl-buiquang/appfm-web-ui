@@ -11,6 +11,10 @@
   };
 
   vw.cpm.ModuleView.prototype.init=function(){
+  }
+
+
+  vw.cpm.ModuleView.prototype.render=function(){
     var me = this;
     this.$el.empty();
     this.$el.append(vw.cpm.ModuleView.template);
@@ -66,8 +70,6 @@
     this.$el.find(activemenuclass).addClass("active");
   }
 
-  vw.cpm.ModuleView.prototype.render=function(){
-  }
 
   vw.cpm.ModuleView.prototype.renderSource = function(){
     var me = this;

@@ -122,7 +122,7 @@
       inputs += "<li><span style=\"font-weight:bold;\">"+def[field][inputname]+"</span> : "+more+"</li>";
     }
     inputs += "</ul>";
-    return input;
+    return inputs;
   }
 
   vw.cpm.ModuleView.prototype.renderSource = function(){

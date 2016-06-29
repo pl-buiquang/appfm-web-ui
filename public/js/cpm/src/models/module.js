@@ -67,7 +67,7 @@
     });
   }
 
-  vw.cpm.Module.prototype.syncWarningOptions = function(modulelist,sucess,error){
+  vw.cpm.Module.prototype.syncWarningOptions = function(modulelist,success,error){
     var me = this;
     var modal = new vw.cpm.ui.Modal();
     $html = $(vw.cpm.ModuleView.templateWarningSave);
@@ -78,7 +78,14 @@
     });
     $html.find('.force-module-save').click(function(){
       modal.close();
-      me.sync(sucess,error,true);
+      me.sync(function(){
+        if(success){
+          success.call();  
+        }
+        me.app.cpmRawCall("reload",function(){
+          me.app.reload();  
+        });
+      },error,true);
     });
     $html.find('.abort-module-save').click(function(){
       modal.close();

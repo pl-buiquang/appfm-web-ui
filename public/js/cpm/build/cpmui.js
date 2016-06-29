@@ -461,12 +461,12 @@
         },
         {
           element: document.querySelector('#corpus-menu'),
-          intro: "There is 3 main menus. This first one show a list of all corpus handled by AppFM.",
+          intro: "There is 3 main menus. This first one shows a list of all corpus handled by AppFM.",
           position: 'right'
         },
         {
           element: document.querySelector('#module-menu'),
-          intro: "This one list the modules available that can be executed over the data available in the previous menu.",
+          intro: "This one lists the modules available that can be executed over the data available in the previous menu.",
           position: 'right'
         },
         {
@@ -481,7 +481,7 @@
         },
         {
           element: document.querySelector('#log-button'),
-          intro: "Clicking here will show you some logged informations.<br>The status button next to it should be green or yellow (in case optional websockets isn't supported by your browser or port is blocked)",
+          intro: "Clicking here will show you some logged information.<br>The status button next to it should be green or yellow (in case optional websockets isn't supported by your browser or port is blocked)",
           position: 'top'
         },
         {
@@ -1154,7 +1154,7 @@
     });
   }
 
-  vw.cpm.Module.prototype.syncWarningOptions = function(modulelist,sucess,error){
+  vw.cpm.Module.prototype.syncWarningOptions = function(modulelist,success,error){
     var me = this;
     var modal = new vw.cpm.ui.Modal();
     $html = $(vw.cpm.ModuleView.templateWarningSave);
@@ -1165,7 +1165,14 @@
     });
     $html.find('.force-module-save').click(function(){
       modal.close();
-      me.sync(sucess,error,true);
+      me.sync(function(){
+        if(success){
+          success.call();  
+        }
+        me.app.cpmRawCall("reload",function(){
+          me.app.reload();  
+        });
+      },error,true);
     });
     $html.find('.abort-module-save').click(function(){
       modal.close();
@@ -2907,6 +2914,10 @@
   };
 
   vw.cpm.ModuleView.prototype.init=function(){
+  }
+
+
+  vw.cpm.ModuleView.prototype.render=function(){
     var me = this;
     this.$el.empty();
     this.$el.append(vw.cpm.ModuleView.template);
@@ -2920,9 +2931,14 @@
     }
     me.setActiveMenu(".module-view-graphic");
     */
-   me.renderSource();
-   me.setActiveMenu(".module-view-source");
-   
+     me.renderInfo();
+     me.setActiveMenu(".module-view-info");
+     
+    this.$el.find(".module-view-info").on("click",function(){
+      me.$el.find(".module-content-view").empty();
+      me.renderInfo();
+      me.setActiveMenu(".module-view-info");
+    });
    
     this.$el.find(".module-view-source").on("click",function(){
       me.$el.find(".module-content-view").empty();
@@ -2962,7 +2978,54 @@
     this.$el.find(activemenuclass).addClass("active");
   }
 
-  vw.cpm.ModuleView.prototype.render=function(){
+
+  vw.cpm.ModuleView.prototype.renderInfo = function(){
+    var me = this;
+
+    var $info = $('<div></div>');
+
+    if(me.model.def.module){
+      var def = me.model.def.module;
+      $info.append('<div style="font-size:24px; font-weight:bold; color:#373e48;">'+def.name+'</div>');
+      if(def.desc){
+        $info.append('<div style="font-size:10px;">'+def.desc+'</div>');
+      }
+
+      var inputs = vw.cpm.ModuleView.printInfoInputOutput(def,"input");
+      var outputs = vw.cpm.ModuleView.printInfoInputOutput(def,"output");
+      $info.append('<table width="100%" style="margin-top:12px;"><tr><td width="42%">'+inputs+'</td><td width="6%">=&gt;</td><td width="42%">'+outputs+'</td></tr></table>');
+
+    }else{
+      $info.append("This module contains error. You have to fix the source.");
+    }
+
+
+    this.$el.find(".module-content-view").append($info);
+  }
+
+  vw.cpm.ModuleView.printInfoInputOutput = function(def,field){
+    var inputs = "<ul class=\"nostyle\">";
+    for (inputname in def[field]){
+      var format = "";
+      var moreinfo = false;
+      if(def[field][inputname].format){
+        moreinfo = true;
+        format = def[field][inputname].format;
+      }
+      var schema = " <span style=\"font-style:italic\">";
+      if(def[field][inputname].schema){
+        moreinfo = true;
+        schema += def[field][inputname].schema;
+      }
+      schema += "</span>";
+      var more = "";
+      if(moreinfo){
+        more = " ("+format+schema+")";
+      }
+      inputs += "<li><span style=\"font-weight:bold;\">"+inputname+"</span> : "+def[field][inputname].type+more+"</li>";
+    }
+    inputs += "</ul>";
+    return inputs;
   }
 
   vw.cpm.ModuleView.prototype.renderSource = function(){
@@ -3029,14 +3092,14 @@
       var conf = {}
       for(var inputname in inputs){
         var value = $form.find('input[name="'+inputname+'"]').val()
-        if(value.trim()!=""){
+        if(value && value.trim()!=""){
           conf[inputname] = value;
         }
       } 
       me.model.run(conf,function(){
         me.$el.find(".module-content-view").empty();
         me.renderSource();
-        me.setActiveMenu(".module-view-source");
+        me.setActiveMenu(".module-view-info");
       });
     })
   }
@@ -3269,6 +3332,7 @@
     '</div><div class="canvas-container"><div class="canvas-view"></div></div><div class="module-view-infos-panel"></div></div>';
 
   vw.cpm.ModuleView.template = '<div class="module-view-container"><div class="module-header">'+
+  '<span class="module-view-info module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">informations</span>'+
   '<span class="module-view-source module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">source</span>'+
   //'<span class="module-view-graphic module-header-item" style="float:left; margin-left:20px;">view</span>'+
   '<span class="module-save module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">save</span>'+

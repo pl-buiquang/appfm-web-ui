@@ -401,12 +401,12 @@
         },
         {
           element: document.querySelector('#corpus-menu'),
-          intro: "There is 3 main menus. This first one show a list of all corpus handled by AppFM.",
+          intro: "There is 3 main menus. This first one shows a list of all corpus handled by AppFM.",
           position: 'right'
         },
         {
           element: document.querySelector('#module-menu'),
-          intro: "This one list the modules available that can be executed over the data available in the previous menu.",
+          intro: "This one lists the modules available that can be executed over the data available in the previous menu.",
           position: 'right'
         },
         {
@@ -421,7 +421,7 @@
         },
         {
           element: document.querySelector('#log-button'),
-          intro: "Clicking here will show you some logged informations.<br>The status button next to it should be green or yellow (in case optional websockets isn't supported by your browser or port is blocked)",
+          intro: "Clicking here will show you some logged information.<br>The status button next to it should be green or yellow (in case optional websockets isn't supported by your browser or port is blocked)",
           position: 'top'
         },
         {

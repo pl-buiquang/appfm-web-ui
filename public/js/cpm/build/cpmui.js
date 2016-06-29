@@ -3028,7 +3028,7 @@
       var conf = {}
       for(var inputname in inputs){
         var value = $form.find('input[name="'+inputname+'"]').val()
-        if(value.trim()!=""){
+        if(value && value.trim()!=""){
           conf[inputname] = value;
         }
       } 

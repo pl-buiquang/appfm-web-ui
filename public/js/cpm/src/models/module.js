@@ -67,7 +67,7 @@
     });
   }
 
-  vw.cpm.Module.prototype.syncWarningOptions = function(modulelist,sucess,error){
+  vw.cpm.Module.prototype.syncWarningOptions = function(modulelist,success,error){
     var me = this;
     var modal = new vw.cpm.ui.Modal();
     $html = $(vw.cpm.ModuleView.templateWarningSave);

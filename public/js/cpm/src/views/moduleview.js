@@ -83,7 +83,7 @@
 
     if(me.model.def.module){
       var def = me.model.def.module;
-      $info.append('<div style="font-size:16px; font-weight:bold; color:#373e48;">'+def.name+'</div>');
+      $info.append('<div style="font-size:24px; font-weight:bold; color:#373e48;">'+def.name+'</div>');
       if(def.desc){
         $info.append('<div style="font-size:10px;">'+def.desc+'</div>');
       }
@@ -101,7 +101,7 @@
   }
 
   vw.cpm.ModuleView.printInfoInputOutput = function(def,field){
-    var inputs = "<ul>";
+    var inputs = "<ul class=\"nostyle\">";
     for (inputname in def[field]){
       var format = "";
       var moreinfo = false;
@@ -117,9 +117,9 @@
       schema += "</span>";
       var more = "";
       if(moreinfo){
-        more = "("+format+schema+")";
+        more = " ("+format+schema+")";
       }
-      inputs += "<li><span style=\"font-weight:bold;\">"+inputname+"</span> "+more+"</li>";
+      inputs += "<li><span style=\"font-weight:bold;\">"+inputname+"</span> : "+def[field][inputname].type+more+"</li>";
     }
     inputs += "</ul>";
     return inputs;

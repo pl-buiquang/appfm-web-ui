@@ -32,6 +32,16 @@
     panel.focus();
   }
 
+  vw.cpm.ServiceManager.prototype.hasService = function(servicename){
+    var me = this;
+    for (var i = me.services.length - 1; i >= 0; i--) {
+      if(me.services[i].name == servicename){
+        return true;
+      }
+    }
+    return false;
+  }
+
   vw.cpm.ServiceManager.prototype.testService = function(serviceview,$button){
     var me = this;
     vw.cpm.ui.AjaxButton.start($button);

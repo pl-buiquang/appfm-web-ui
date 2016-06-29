@@ -1,16 +1,14 @@
 (function(vw){
 
   vw.cpm.ProcessView = function(model,$el){
-    this.$el = $el || $('<div></div>');
-    this.el = this.$el[0];
+    this.$el = $el ;
     this.model = model;
     this.init();
   };
 
   vw.cpm.ProcessView.prototype.init=function(){
     var me = this;
-    this.$el.empty();
-    this.$el.append(vw.cpm.ProcessView.template);
+    
     
     this.shared = {};
     var panel = me.model.app.view.getPanelFromContent(this.$el);
@@ -24,7 +22,11 @@
   
   vw.cpm.ProcessView.prototype.refresh=function(){
     var me = this;
-    if(me.model.synced){
+
+    if(this.$el && me.model.synced){
+      this.$el.empty();
+      this.$el.append(vw.cpm.ProcessView.template);
+
       me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><div class="process-detailed-status"></div><button class="processresult-rerun" type="button">re-run</button><button class="processresult-refresh" type="button">refresh</button><button class="processresult-log" type="button">log</button><button class="processresult-delete" type="button">delete</button>');
       me.$el.find('.run-status .info-box-content .processresult-rerun').on("click",function(){
         me.model.rerun();

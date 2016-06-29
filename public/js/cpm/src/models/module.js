@@ -101,7 +101,7 @@
     return out;
   }
 
-  vw.cpm.Module.prototype.run = function(conf,success,error){
+  vw.cpm.Module.prototype.run = function(conf,success,error,silent){
     var me = this;
     $.ajax({
       type: "POST",
@@ -113,11 +113,13 @@
       dataType : "text",
       success: function(data, textStatus, jqXHR) {
         var runid = data;
-        me.app.processmanager.startedprocess.push(runid);
-        me.app.processmanager.showRun(me.def.modulename,runid);
-        me.app.processmanager.fetchAll(); // very unoptimized
+        if(!silent){
+          me.app.processmanager.startedprocess.push(runid);
+          me.app.processmanager.showRun(me.def.modulename,runid);
+          me.app.processmanager.fetchAll(); // very unoptimized          
+        }
         if(success){
-          success.call(me.view);
+          success.call(me.view,data);
         }
       },
       error:function(){

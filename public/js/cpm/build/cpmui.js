@@ -41,7 +41,7 @@
         }else if(me.data == "help"){
           app.helpmanager.displayCLIHelp();
         }else{
-          
+          me.registerMessage(app);
         }
       }else if(me.command == "l"){
         if(!app.servicemanager.showService(me.data)){
@@ -53,6 +53,12 @@
         app.logger.warn("unknown panel command : "+me.command+"("+me.data+")");
       }
     },1000)
+  }
+
+  vw.cpm.Command.prototype.registerMessage = function(app){
+    var me = this;
+    var panel = app.view.createPanel("Unkown Application","");
+    panel.focus();
   }
 
  
@@ -207,6 +213,9 @@
             me.processmanager.showRun(obj.more,obj.target);
             me.corpusmanager.refreshResults();
           }
+          if(Object.keys(me.processmanager.onStop).indexOf(obj.target)!=-1){
+            me.processmanager.onStop[obj.target].call(me,obj.more,obj.target);
+          }
         }else if(obj.type == "process-started"){
           me.processmanager.fetchAll();
         }else if(obj.type == "process-deleted"){
@@ -348,6 +357,11 @@
     command = command.trim();
 
 
+    if (command == "example"){
+      me.example();
+      return;
+    }
+
     if(command == "help"){
       me.helpmanager.displayCLIHelp();
       return;
@@ -434,6 +448,26 @@
 
   vw.cpm.CLI.prototype.cpmSettings = function(){
     
+  }
+
+  vw.cpm.CLI.prototype.example = function(){
+    var me = this;
+    var modal = new vw.cpm.ui.Modal();
+
+    var $choice_app = $('<div></div>');
+    $choice_app.append('<button id="test_app">Test_app</button>');
+    $choice_app.find("#test_app").click(function(){
+
+      modal.close();
+
+      var testapp = new vw.cpm.TestApp(me);
+      var panel = me.view.createPanel("Test App",testapp.view.$el,undefined,new vw.cpm.Command("s","testapp"));
+      testapp.view.show();
+
+      panel.focus();
+    })
+
+    modal.open($choice_app);
   }
 
   vw.cpm.CLI.prototype.demo = function(){
@@ -1188,7 +1222,7 @@
     return out;
   }
 
-  vw.cpm.Module.prototype.run = function(conf,success,error){
+  vw.cpm.Module.prototype.run = function(conf,success,error,silent){
     var me = this;
     $.ajax({
       type: "POST",
@@ -1200,11 +1234,13 @@
       dataType : "text",
       success: function(data, textStatus, jqXHR) {
         var runid = data;
-        me.app.processmanager.startedprocess.push(runid);
-        me.app.processmanager.showRun(me.def.modulename,runid);
-        me.app.processmanager.fetchAll(); // very unoptimized
+        if(!silent){
+          me.app.processmanager.startedprocess.push(runid);
+          me.app.processmanager.showRun(me.def.modulename,runid);
+          me.app.processmanager.fetchAll(); // very unoptimized          
+        }
         if(success){
-          success.call(me.view);
+          success.call(me.view,data);
         }
       },
       error:function(){
@@ -1511,7 +1547,7 @@
     this.synced = false;
   }
 
-  vw.cpm.Process.prototype.sync = function($button){
+  vw.cpm.Process.prototype.sync = function($button,success){
     var me = this;
     vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
@@ -1526,6 +1562,9 @@
         me.info = data;
         me.synced = true;
         me.view.refresh();
+        if(success){
+          success.call(this,data);
+        }
       },
       error:function(){
         vw.cpm.ui.AjaxButton.stop($button);
@@ -1614,6 +1653,7 @@
     this.init();
     this.startedprocess = []; // for websocket update only those
     this.runs = {};
+    this.onStop = {};
   }
 
   vw.cpm.ProcessManager.prototype.init = function(){
@@ -1726,6 +1766,16 @@
     panel.focus();
   }
 
+  vw.cpm.ServiceManager.prototype.hasService = function(servicename){
+    var me = this;
+    for (var i = me.services.length - 1; i >= 0; i--) {
+      if(me.services[i].name == servicename){
+        return true;
+      }
+    }
+    return false;
+  }
+
   vw.cpm.ServiceManager.prototype.testService = function(serviceview,$button){
     var me = this;
     vw.cpm.ui.AjaxButton.start($button);
@@ -1823,6 +1873,64 @@
 
 
 }(window.vw = window.vw || {}));
+(function(vw){
+
+  vw.cpm.TestApp = function(appfm){
+    this.appfm = appfm;
+    this.view = new vw.cpm.TestAppView(this);
+  };
+
+
+
+  /*********************************
+  *       View
+  * *********************************/
+
+  vw.cpm.TestAppView = function(model,$el){
+    this.model = model;
+    this.$el =  $el || $('<div></div>');
+  }
+
+  vw.cpm.TestAppView.prototype.show = function(){
+    var me = this;
+    this.$el.empty();
+    if (!Object.keys(this.model.appfm.modulesmanager.modules).indexOf("es-search") ||
+      !Object.keys(this.model.appfm.modulesmanager.modules).indexOf("elasticsearch-brat-index") ||
+      !this.model.appfm.servicemanager.hasService("elasticsearch")
+      ){
+      this.$el.append("missing some of the required modules/services..");
+    }else{
+      this.$el.append(vw.cpm.TestAppView.template);
+      this.$el.find("#testapp-submit").click(function(){
+        var moduledata = me.model.appfm.modulesmanager.modules["es-search"];
+        var module = new vw.cpm.Module(me.model.appfm,undefined,moduledata);
+        var conf = {
+          "NE": me.$el.find("#testapp-input").val()
+        }
+        module.run(conf,function(data){
+          var runid = data;
+          me.model.appfm.processmanager.onStop[runid]=function(){
+            var process = new vw.cpm.Process(me.model.appfm,undefined,{moduledef:me.model.appfm.modulesmanager.modules["es-search"].module,runconf:{},runid:runid});
+            process.sync(undefined,function(result){
+              var html = jQuery('<div />').text(result.env["_CMD.STDOUT"].value).html();
+              html = '<code><pre class="pre-wrapped">'+html+'</pre></code>';
+              me.$el.find('#testapp-results').html(html);
+              process.delete();
+            });
+          } 
+          
+        },undefined,true);
+      });
+    }
+
+  }
+
+  vw.cpm.TestAppView.template = '<div><input id="testapp-input" type="text"><br><button id="testapp-submit">Search</button><br><div id="testapp-results"></div></div>';
+
+ 
+
+}(window.vw = window.vw || {}));
+
 (function(vw){
 
   vw.cpm.CLIView = function(model,$el){
@@ -2073,6 +2181,9 @@
   }
 
   vw.cpm.CLIView.prototype.getPanelFromContent = function($el){
+    if(!$el){
+      return undefined;
+    }
     return this.getPanelFromUID($el.parents(".frame").attr("uid"));
   }
 
@@ -3667,16 +3778,14 @@
 (function(vw){
 
   vw.cpm.ProcessView = function(model,$el){
-    this.$el = $el || $('<div></div>');
-    this.el = this.$el[0];
+    this.$el = $el ;
     this.model = model;
     this.init();
   };
 
   vw.cpm.ProcessView.prototype.init=function(){
     var me = this;
-    this.$el.empty();
-    this.$el.append(vw.cpm.ProcessView.template);
+    
     
     this.shared = {};
     var panel = me.model.app.view.getPanelFromContent(this.$el);
@@ -3690,7 +3799,11 @@
   
   vw.cpm.ProcessView.prototype.refresh=function(){
     var me = this;
-    if(me.model.synced){
+
+    if(this.$el && me.model.synced){
+      this.$el.empty();
+      this.$el.append(vw.cpm.ProcessView.template);
+
       me.$el.find('.run-status .info-box-content').html('<div>'+me.model.info.status+'</div><div class="process-detailed-status"></div><button class="processresult-rerun" type="button">re-run</button><button class="processresult-refresh" type="button">refresh</button><button class="processresult-log" type="button">log</button><button class="processresult-delete" type="button">delete</button>');
       me.$el.find('.run-status .info-box-content .processresult-rerun').on("click",function(){
         me.model.rerun();

@@ -14,7 +14,7 @@
     this.synced = false;
   }
 
-  vw.cpm.Process.prototype.sync = function($button){
+  vw.cpm.Process.prototype.sync = function($button,success){
     var me = this;
     vw.cpm.ui.AjaxButton.start($button);
     $.ajax({
@@ -29,6 +29,9 @@
         me.info = data;
         me.synced = true;
         me.view.refresh();
+        if(success){
+          success.call(this,data);
+        }
       },
       error:function(){
         vw.cpm.ui.AjaxButton.stop($button);

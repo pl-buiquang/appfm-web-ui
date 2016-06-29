@@ -36,7 +36,7 @@
         }else if(me.data == "help"){
           app.helpmanager.displayCLIHelp();
         }else{
-          
+          me.registerMessage(app);
         }
       }else if(me.command == "l"){
         if(!app.servicemanager.showService(me.data)){
@@ -48,6 +48,12 @@
         app.logger.warn("unknown panel command : "+me.command+"("+me.data+")");
       }
     },1000)
+  }
+
+  vw.cpm.Command.prototype.registerMessage = function(app){
+    var me = this;
+    var panel = app.view.createPanel("Unkown Application","");
+    panel.focus();
   }
 
  

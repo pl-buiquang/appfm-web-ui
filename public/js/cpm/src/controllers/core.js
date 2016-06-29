@@ -147,6 +147,9 @@
             me.processmanager.showRun(obj.more,obj.target);
             me.corpusmanager.refreshResults();
           }
+          if(Object.keys(me.processmanager.onStop).indexOf(obj.target)!=-1){
+            me.processmanager.onStop[obj.target].call(me,obj.more,obj.target);
+          }
         }else if(obj.type == "process-started"){
           me.processmanager.fetchAll();
         }else if(obj.type == "process-deleted"){
@@ -288,6 +291,11 @@
     command = command.trim();
 
 
+    if (command == "example"){
+      me.example();
+      return;
+    }
+
     if(command == "help"){
       me.helpmanager.displayCLIHelp();
       return;
@@ -374,6 +382,26 @@
 
   vw.cpm.CLI.prototype.cpmSettings = function(){
     
+  }
+
+  vw.cpm.CLI.prototype.example = function(){
+    var me = this;
+    var modal = new vw.cpm.ui.Modal();
+
+    var $choice_app = $('<div></div>');
+    $choice_app.append('<button id="test_app">Test_app</button>');
+    $choice_app.find("#test_app").click(function(){
+
+      modal.close();
+
+      var testapp = new vw.cpm.TestApp(me);
+      var panel = me.view.createPanel("Test App",testapp.view.$el,undefined,new vw.cpm.Command("s","testapp"));
+      testapp.view.show();
+
+      panel.focus();
+    })
+
+    modal.open($choice_app);
   }
 
   vw.cpm.CLI.prototype.demo = function(){

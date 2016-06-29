@@ -248,6 +248,9 @@
   }
 
   vw.cpm.CLIView.prototype.getPanelFromContent = function($el){
+    if(!$el){
+      return undefined;
+    }
     return this.getPanelFromUID($el.parents(".frame").attr("uid"));
   }
 

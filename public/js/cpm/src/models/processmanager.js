@@ -8,6 +8,7 @@
     this.init();
     this.startedprocess = []; // for websocket update only those
     this.runs = {};
+    this.onStop = {};
   }
 
   vw.cpm.ProcessManager.prototype.init = function(){

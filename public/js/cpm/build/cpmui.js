@@ -2983,14 +2983,14 @@
 
     if(me.model.def.module){
       var def = me.model.def.module;
-      $info.append('<h1>'+def.name+'</h1>');
+      $info.append('<div style="font-size:16px; font-weight:bold; color:#373e48;">'+def.name+'</div>');
       if(def.desc){
         $info.append('<div style="font-size:10px;">'+def.desc+'</div>');
       }
 
       var inputs = vw.cpm.ModuleView.printInfoInputOutput(def,"input");
       var outputs = vw.cpm.ModuleView.printInfoInputOutput(def,"output");
-      $info.append('<table><tr><td width="42%">'+inputs+'</td><td width="6%">=&gt;</td><td width="42%">'+outputs+'</td></tr></table>');
+      $info.append('<table width="100%" style="margin-top:12px;"><tr><td width="42%">'+inputs+'</td><td width="6%">=&gt;</td><td width="42%">'+outputs+'</td></tr></table>');
 
     }else{
       $info.append("This module contains error. You have to fix the source.");
@@ -3019,7 +3019,7 @@
       if(moreinfo){
         more = "("+format+schema+")";
       }
-      inputs += "<li><span style=\"font-weight:bold;\">"+def[field][inputname]+"</span> : "+more+"</li>";
+      inputs += "<li><span style=\"font-weight:bold;\">"+inputname+"</span> "+more+"</li>";
     }
     inputs += "</ul>";
     return inputs;

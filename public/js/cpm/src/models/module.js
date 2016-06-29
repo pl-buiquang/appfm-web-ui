@@ -78,7 +78,14 @@
     });
     $html.find('.force-module-save').click(function(){
       modal.close();
-      me.sync(sucess,error,true);
+      me.sync(function(){
+        if(success){
+          success.call();  
+        }
+        me.app.cpmRawCall("reload",function(){
+          me.app.reload();  
+        });
+      },error,true);
     });
     $html.find('.abort-module-save').click(function(){
       modal.close();

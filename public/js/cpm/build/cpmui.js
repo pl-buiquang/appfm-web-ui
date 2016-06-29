@@ -1165,7 +1165,14 @@
     });
     $html.find('.force-module-save').click(function(){
       modal.close();
-      me.sync(sucess,error,true);
+      me.sync(function(){
+        if(success){
+          success.call();  
+        }
+        me.app.cpmRawCall("reload",function(){
+          me.app.reload();  
+        });
+      },error,true);
     });
     $html.find('.abort-module-save').click(function(){
       modal.close();
@@ -2921,9 +2928,14 @@
     }
     me.setActiveMenu(".module-view-graphic");
     */
-   me.renderSource();
-   me.setActiveMenu(".module-view-source");
-   
+     me.renderSource();
+     me.setActiveMenu(".module-view-info");
+     
+    this.$el.find(".module-view-info").on("click",function(){
+      me.$el.find(".module-content-view").empty();
+      me.renderInfo();
+      me.setActiveMenu(".module-view-info");
+    });
    
     this.$el.find(".module-view-source").on("click",function(){
       me.$el.find(".module-content-view").empty();
@@ -2963,6 +2975,55 @@
     this.$el.find(activemenuclass).addClass("active");
   }
 
+
+  vw.cpm.ModuleView.prototype.renderSource = function(){
+    var me = this;
+
+    var $info = $('<div></div>');
+
+    if(me.model.def.module){
+      var def = me.model.def.module;
+      $info.append('<h1>'+def.name+'</h1>');
+      if(def.desc){
+        $info.append('<div style="font-size:10px;">'+def.desc+'</div>');
+      }
+
+      var inputs = vw.cpm.ModuleView.printInfoInputOutput(def,"input");
+      var outputs = vw.cpm.ModuleView.printInfoInputOutput(def,"output");
+      $info.append('<table><tr><td width="42%">'+inputs+'</td><td width="6%">=&gt;</td><td width="42%">'+outputs+'</td></tr></table>');
+
+    }else{
+      $info.append("This module contains error. You have to fix the source.");
+    }
+
+
+    this.$el.find(".module-content-view").append($info);
+  }
+
+  vw.cpm.ModuleView.printInfoInputOutput = function(def,field){
+    var inputs = "<ul>";
+    for (inputname in def[field]){
+      var format = "";
+      var moreinfo = false;
+      if(def[field][inputname].format){
+        moreinfo = true;
+        format = def[field][inputname].format;
+      }
+      var schema = " <span style=\"font-style:italic\">";
+      if(def[field][inputname].schema){
+        moreinfo = true;
+        schema += def[field][inputname].schema;
+      }
+      schema += "</span>";
+      var more = "";
+      if(moreinfo){
+        more = "("+format+schema+")";
+      }
+      inputs += "<li><span style=\"font-weight:bold;\">"+def[field][inputname]+"</span> : "+more+"</li>";
+    }
+    inputs += "</ul>";
+    return input;
+  }
 
   vw.cpm.ModuleView.prototype.renderSource = function(){
     var me = this;
@@ -3035,7 +3096,7 @@
       me.model.run(conf,function(){
         me.$el.find(".module-content-view").empty();
         me.renderSource();
-        me.setActiveMenu(".module-view-source");
+        me.setActiveMenu(".module-view-info");
       });
     })
   }
@@ -3268,6 +3329,7 @@
     '</div><div class="canvas-container"><div class="canvas-view"></div></div><div class="module-view-infos-panel"></div></div>';
 
   vw.cpm.ModuleView.template = '<div class="module-view-container"><div class="module-header">'+
+  '<span class="module-view-info module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">informations</span>'+
   '<span class="module-view-source module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">source</span>'+
   //'<span class="module-view-graphic module-header-item" style="float:left; margin-left:20px;">view</span>'+
   '<span class="module-save module-header-item" style="float:left; margin-left:8px; text-shadow:1px 1px #999999">save</span>'+

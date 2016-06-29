@@ -2928,7 +2928,7 @@
     }
     me.setActiveMenu(".module-view-graphic");
     */
-     me.renderSource();
+     me.renderInfo();
      me.setActiveMenu(".module-view-info");
      
     this.$el.find(".module-view-info").on("click",function(){
@@ -2976,7 +2976,7 @@
   }
 
 
-  vw.cpm.ModuleView.prototype.renderSource = function(){
+  vw.cpm.ModuleView.prototype.renderInfo = function(){
     var me = this;
 
     var $info = $('<div></div>');

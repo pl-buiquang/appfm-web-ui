@@ -1,9 +1,0 @@
-====== Addons ======
-
-===== L'instance sur rscpm.limsi.fr =====
-
-Configuration (corpus/modules)
-
-===== Modules d'exemple =====
-
-frmg, bonsai, ...

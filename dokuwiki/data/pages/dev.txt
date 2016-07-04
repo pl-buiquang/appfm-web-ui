@@ -1,9 +1,0 @@
-====== Développement ======
-
-Le code source de la plate-forme AppFM est disponible sur le dépot git du limsi git@github.limsi.fr:/appfm/base et est composé de plusieurs projets séparés :
-
-  * core : git@github.limsi.fr:/appfm/core
-  * cli : git@github.limsi.fr:/appfm/cli
-  * web : git@github.limsi.fr:/appfm/web-ui
-
-[[:arch|Plus d'information sur les projets composant la plate-forme AppFM]]

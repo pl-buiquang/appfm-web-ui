@@ -1,7 +1,0 @@
-====== CLI ======
-
-@see : [[http://www.gnu.org/prep/standards/standards.html|http://www.gnu.org/prep/standards/standards.html]]
-
-===== Librairies =====
-
-Click : [[http://click.pocoo.org/5/quickstart|http://click.pocoo.org/5/quickstart]]

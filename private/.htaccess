@@ -1,4 +1,0 @@
-AuthName "Restricted access"
-AuthType Basic
-AuthUserFile "/vagrant/web/private/.htpasswd"
-Require valid-user

@@ -1,5 +1,6 @@
 # AppFM Web UI
 
+[Presentation](./public/doc/appfm-overview.pdf)
+
 ![screenshot](./public/img/screenshot.png)
 
-You can download the [pdf of the application overview](./public/doc/appfm-overview.pdf)
